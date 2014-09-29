@@ -26,9 +26,9 @@ xAct`xLightCone`$xTensorVersionExpected={"1.1.1",{2014,9,28}};
 xAct`xLightCone`$xPertVersionExpected={"1.0.5",{2014,9,28}};
 
 
-(* xPand: Cosmological perturbations about homogeneous space-times *)
+(* xLightCone:  *)
 
-(* Copyright (C) 2012-2013 Cyril Pitrou, Xavier Roy and Obinna Umeh *)
+(* Copyright (C) 2015- Obinna Umeh, Cyril Pitrou *)
 
 (* This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License as
@@ -49,7 +49,7 @@ You should have received a copy of the GNU General Public License
 
 (* :Title: xLightCone *)
 
-(* :Author: Obinna Umeh *)
+(* :Author: Obinna Umeh & Cyril Pitrou*)
 
 (* :Context: xAct`xLightCone` *)
 
@@ -85,7 +85,7 @@ Print["CopyRight (C) 2015-, Obinna Umeh under the General Public License."];
 
 
 Off[General::shdw]
-xAct`xPand`Disclaimer[]:=Print["These are points 11 and 12 of the General Public License:\n\nBECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM `AS IS\.b4 WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\nIN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES."]
+xAct`xLightCone`Disclaimer[]:=Print["These are points 11 and 12 of the General Public License:\n\nBECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM `AS IS\.b4 WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\nIN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES."]
 On[General::shdw]
 
 
@@ -102,25 +102,165 @@ Message[General::nostdvar,"$CovDFormat","Prefix"];
 
 (*** VERSIONS ***)
 
-$Version::usage="$Version is a global variable giving the version of the package xPand in use.";
+$Version::usage="$Version is a global variable giving the version of the package xLightCone in use.";
 
-$xTensorVersionExpected::usage="$xTensorVersionExpected is a global variable giving the oldest possible version of the package xTensor which is required by the version of the package xPand in use.";
+$xTensorVersionExpected::usage="$xTensorVersionExpected is a global variable giving the oldest possible version of the package xTensor which is required by the version of the package xLightCone in use.";
 
-$xPertVersionExpected::usage="$xPertVersionExpected is a global variable giving the oldest possible version of the package xPert which is required by the version of the package xPand in use.";
+$xPertVersionExpected::usage="$xPertVersionExpected is a global variable giving the oldest possible version of the package xPert which is required by the version of the package xLightCone in use.";
 
 
-DefMatterFields::usage =="";
+DefMatterFields::usage  = "";
 
-DefMetricFields::usage == "";
+DefMetricFields::usage = "";
 
-DefScreenProjecteTensor::usage == "";
+DefScreenProjecteTensor::usage = "";
 
-SetSlicingUpToScreenSpace::usage == "";
+SetSlicingUpToScreenSpace::usage = "";
 
 SplitMetric ::usage = "";
 
+ToLightConeFromRules::usage = "";
+
 
 Begin["xAct`xLightCone`Private`"]
+
+
+(***PRIVATE BOOLEAN FUNCTIONS***)(**Miscellaneous**)$DefInfoQ=True;
+(*If set to'False',the information messages are not printed.*)
+
+(**Testing expressions**)
+
+AnyIndicesListQ[inds_List]:=Cases[inds,AnyIndices[_]]=!={}
+(*If the list of indices contains the head'AnyIndices',then AnyIndicesListQ[inds] returns'True';otherwise it returns'False'.*)
+
+DefTensorQ[symb_]:=Cases[$Tensors,symb]==={symb}
+(*If'symb' has been defined as a tensor,then DefTensorQ[symb] returns'True';otherwise it returns'False'.*)
+
+GaugeQ[strg_]:=Cases[{"AnyGauge","ComovingGauge","FlatGauge","IsoDensityGauge","NewtonGauge","SynchronousGauge"},strg]==={strg}
+(*If'strg' matches one of the element in the list,then GaugeQ[strg] returns'True';otherwise it returns'False'.*)
+
+InducedMetricQ[symb_]:=If[MetricQ[symb],InducedFrom[symb]=!=Null,False]
+(*If'symb' is not defined as a metric,then InducedMetricQ[symb] returns'False'.Otherwise,it checks whether'symb' is an induced metric.If this is the case,then InducedMetricQ[symb] gives'True';otherwise it gives'False'.*)
+
+SpaceTimeQ[strg_]:=Cases[{"Anisotropic","BianchiB","BianchiA","BianchiI","FLCurved","FLFlat","Minkowski"},strg]==={strg}
+(*If'strg' matches one of the element of the list,then SpaceTimeQ[strg] returns'True';otherwise it returns'False'.*)
+
+TensorNullQ[tens_]:=If[Cases[SlotsOfTensor[tens],Labels]=!={},Print["** Warning: the function TensorNullQ is only suited to test tensors defined without label-indices. ",tens],With[{inds=DummyIn/@SlotsOfTensor[tens]},tens@@inds===0]]
+(*TensorNullQ[tens] returns'True' if'tens' is a null tensor and'False' otherwise.This function is not suited to test tensors defined with label-indices.*)
+
+(**Type of manifolds**)
+(* Will probably disappear since we will only do curved and flat FL *)
+
+BianchiBool[Spacetype_]:=(Spacetype==="BianchiB"||Spacetype==="BianchiA"||Spacetype==="BianchiI")
+FlatSpaceBool[Spacetype_]:=(Spacetype==="BianchiI"||Spacetype==="FLFlat"||Spacetype==="Minkowski")
+NoAnisotropyBool[Spacetype_]:=(Spacetype==="FLCurved"||Spacetype==="FLFlat"||Spacetype==="Minkowski")
+AnisotropyBool[Spacetype_]:=(Spacetype==="Anisotropic")
+(*The name'AnisotropyBool' should be changed.*)
+
+
+DirectionVectorQ[expr_]:=False;
+
+SetSlicingUpToScreenSpace[g_?MetricQ,u_,normu_:-1,h_,cd_,{cdpost_String,cdpre_String},n_,normn_:1,NSS_,cd2_,{cd2post_String,cd2pre_String}]:=Module[{m,p,q,DummyS,DummyV,DummyT,ui,indsdimminustwo,indsdim,dim,prot,Silenth},
+With[{Manifold=ManifoldOfCovD@CovDOfMetric[g],CD=CovDOfMetric[g]},
+dim=DimOfManifold[Manifold];
+
+With[{ind1=DummyIn[Tangent[Manifold]],ind2=DummyIn[Tangent[Manifold]],ind3=DummyIn[Tangent[Manifold]],ind4=DummyIn[Tangent[Manifold]],ind5=DummyIn[Tangent[Manifold]],ind6=DummyIn[Tangent[Manifold]],ind7=DummyIn[Tangent[Manifold]],i1=DummyIn[Tangent[Manifold]],i2=DummyIn[Tangent[Manifold]],i3=DummyIn[Tangent[Manifold]],i4=DummyIn[Tangent[Manifold]],i5=DummyIn[Tangent[Manifold]],dummy=DummyIn[Tangent[Manifold]]},
+
+
+
+DefTensor[u[-ind1],{Manifold},PrintAs->"\!\("<>ToString[ind1]<>"\&-\)"]
+        
+(*Induced Metric *)
+Off[DefMetric::old];
+DefMetric[1,h[-ind1,-ind2],cd,{cdpost,cdpre},InducedFrom->{g,u},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];
+(*Another induced metric, I used the cd for the angular derivative, it is cheating I will sort it later*)
+
+DefTensor[n[-ind1],{Manifold},OrthogonalTo->{u[ind1]},ProjectedWith->{h[ind1,-ind2]},PrintAs->"\!\("<>ToString[n]<>"\&-\)"];
+
+DirectionVectorQ[n]=True;
+
+DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom->{g,n},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];
+(* I use NSS as the screen space metric because the Silent metric is 3-D, I will clean up these later*)
+(* OK Obinna I see what you do !*)
+DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo->{u[ind1],u[ind2],n[ind1],n[ind2]},ProjectedWith->{h[ind1,-ind4],h[ind2,-ind5],Silenth[ind1,-ind4],Silenth[ind2,-ind5]},PrintAs->"\!\("<>ToString[NSS]<>"\&-\)"];
+
+(*I used AutomaticRule to assign rules to NSS...*)
+(* Well it doesn't work well*)
+(*NSS[-ind1,-ind2]^:=2/;ind1+ind2==0;
+NSS[-ind1,-ind2]NSS[ind1,ind2]^:=2;*)
+
+(*AutomaticRules[NSS,MakeRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-n[-ind1]n[-ind2]}]]*)AutomaticRules[NSS,MakeRule[{NSS[ind1,ind2] NSS[-ind2,-ind3],NSS[ind1,-ind3]}]];
+AutomaticRules[NSS,MakeRule[{NSS[-ind1,-ind2] NSS[ind2,ind3],NSS[-ind1,ind3]}]];
+AutomaticRules[NSS,MakeRule[{NSS[-ind1,ind1] ,dim-2}]];
+(* Who knows we might allow for 1+1+n splitting so here that should be n-2.*)
+
+On[DefMetric::old];
+(*We remove automatic Leibniz rule when there is a Scalar Head.This is to ensure that the induced derivative does not spoil an'InducedDecomposition'*)
+prot=Unprotect[cd];
+cd[a_][Scalar[expr_]]=.;
+cd2[a_][Scalar[expr_]]=.;
+Protect[prot];
+
+(* CP. Do you remember why we had this? *)
+$Rulecdh[h1_]:={
+h1[-a_,b_] cd[a_][expr1_]:>cd[b][expr1],
+h1[a_,b_] cd[-a_][expr1_]:>cd[b][expr1],
+h1[b_,-a_] cd[a_][expr1_]:>cd[b][expr1],
+h1[b_,a_] cd[-a_][expr1_]:>cd[b][expr1],
+h1[-a_,b_] cd[c_]@cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@cd[-a_][expr1_]:>cd[c]@cd[b][expr1],
+h1[b_,-a_] cd[c_]@cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@cd[-a_][expr1_]:>cd[c]@cd[b][expr1]};
+
+$Rulecdh[NSS1_]:={NSS1[-a_,b_] cd2[a_][expr1_]:>cd2[b][expr1],
+NSS[a_,b_] cd2[-a_][expr1_]:>cd2[b][expr1],
+NSS1[b_,-a_] cd2[a_][expr1_]:>cd2[b][expr1],
+NSS[b_,a_] cd2[-a_][expr1_]:>cd2[b][expr1],
+NSS1[-a_,b_] cd2[c_]@cd2[a_][expr1_]:>cd2[c]@cd2[b][expr1],NSS1[a_,b_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1],NSS1[b_,-a_] cd2[c_]@cd2[a_][expr1_]:>cd2[c]@cd2[b][expr1],NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1]};
+
+
+
+
+
+(*SpaceType[h]^=SpaceTimeType;*)
+
+(*The default positionof indices for the extrinsic curvature and the acceleration is down*)
+(* CP This could be rewritten in a more compact form gathering n and u, h and silenth*)
+
+(SlotsOfTensor[#]^:={-Tangent[Manifold],-Tangent[Manifold]})&/@{ExtrinsicK[h]};
+(SlotsOfTensor[#]^:={-Tangent[Manifold]})&/@{Acceleration[u]};
+
+
+(SlotsOfTensor[#]^:={-Tangent[Manifold],-Tangent[Manifold]})&/@{ExtrinsicK[Silenth]};
+(SlotsOfTensor[#]^:={-Tangent[Manifold]})&/@{Acceleration[n]};
+
+(*The acceleration should vanish for homogeneous spacetimes.*)
+
+Acceleration[u][ind1_]=0;
+AutomaticRules[u,MakeRule[{u[ind1] u[-ind1],normu}]];
+AutomaticRules[u,MakeRule[{u[-ind1] g[ind1,ind2],u[ind2]}]];
+(*AutomaticRules[u,MakeRule[{g[ind1,ind2] u[-ind2] u[-ind1],normu}]];*)
+
+
+(* CP Here it is because we assume non Binachi for n. Otherwise this is more general probably. Even if we now we specialize to FL, the 1+1+2 splitting would be great if it could be as general as possible. So here we should extend this definition and have it restricted to 0 only if the TypeOfPScaetime is non Bianchi.*)
+Acceleration[n][ind1_]=0;
+AutomaticRules[n,MakeRule[{n[ind1] n[-ind1],normn}]];
+AutomaticRules[n,MakeRule[{n[-ind1] g[ind1,ind2],n[ind2]}]];
+(*AutomaticRules[n,MakeRule[{g[ind1,ind2] n[-ind2] n[-ind1],normn}]];*)
+
+
+If[IntegerQ@dim&&dim>=2,indsdim=GetIndicesOfVBundle[Tangent@Manifold,dim,{ind5}];
+AutomaticRules[epsilon[g],MakeRule[Evaluate[{epsilon[g]@@indsdim u[-indsdim[[1]]] h[-indsdim[[2]],ind5],ReplaceIndex[Evaluate[epsilon[g]@@indsdim],indsdim[[2]]->ind5] u[-indsdim[[1]]]}]]];
+];
+]
+]
+];
+
+
+ToInducedDerivativeScreenSpace[expr_,supercd_,cd_]:=
+ToInducedDerivative[expr,supercd,cd];
+
+
+ToInducedDerivativeScreenSpace[expr_,supercd_,cd_,cd2_]:=expr/.supercd[ind_][expr1:(_?xTensorQ[___]|_?InertHeadQ[___]|cd[_][_]|LieD[_][_])]:>-cd[ind][expr1]+With[{frees=FindFreeIndices[expr1]},
+ToInducedDerivative[supercd[ind][expr1],supercd,cd]+ToInducedDerivative[cd[ind][expr1],cd,cd2]];
 
 
 Options[DefScreenProjecteTensor]={PrintAs->Identity,TensorProperties->{"SymmetricTensor","Traceless","Transverse"},SpaceTimesOfDefinition->{"Background","Perturbed"}};
@@ -132,9 +272,7 @@ InducedMetricOf[Name_]:={};
 (* Review all these properties.*)
 
 
-DefScreenProjecteTensor[Name_[inds___],h_?InducedMetricQ,n_?DirectionVectorQ,options___?OptionQ]:=
-(
-If[DefScreenProjectedTensorQ[Name,h],
+DefScreenProjecteTensor[Name_[inds___],h_?InducedMetricQ,n_?DirectionVectorQ,options___?OptionQ]:=(If[DefScreenProjectedTensorQ[Name,h],
 
 If[$DefInfoQ,
 Throw@Print["** DefScreenProjectedTensor: The projection properties on the hypersurfaces associated with the induced metric ", h," and direction vector", n," have already been defined for the tensor ", Name,"."],
@@ -147,13 +285,11 @@ If[DefScreenProjectedTensorQ[Name],
 If[$DefInfoQ,
 Print["** DefScreenProjectedTensor: Projection properties for the tensor ", Name," have been defined for another slicing. New projection properties on the hypersurfaces associated with the induced metric", h," and direction vector", n," are now added."]
 ];
-
 ];
+)
 
 
 (* etc... *)
-
-);
 
 SetNumberOfArguments[DefScreenProjectedTensor,{3,Infinity}]
 Protect[DefScreenProjectedTensor];
@@ -161,19 +297,20 @@ Protect[DefScreenProjectedTensor];
 
 DefinedPerturbationParameter[x_]:=False;
 
-DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=();
+
+DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
 
 SetNumberOfArguments[DefMetricFields,{4,5}];
 Protect[DefMetricFields];
 
 
-DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=();
+DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
 
 SetNumberOfArguments[DefMatterFields,{4,5}]
 Protect[DefMatterFields];
 
 
-SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,gauge_?GaugeQ]:=();
+SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,gauge_?GaugeQ]:=Print["Dobidoouah"];
 
 
 IndicesDown[expr_]:= Fold[SeparateMetric[First@$Metrics][#1,#2]&,expr,Select[IndicesOf[Up][expr],Not@LIndexQ[#]&]]
@@ -407,25 +544,24 @@ res2
 Conformal[metric1_?MetricQ,metric2_?MetricQ][expr_]:=Conformal[First@$Metrics][metric1,metric2][expr]
 
 
-SplitPerturbations[expr_,ListPairs_List,h_?InducedMetricQ,n_?DirectionVectorQ]:=();
-
+SplitPerturbations[expr_,ListPairs_List,h_?InducedMetricQ,n_?DirectionVectorQ]:=Print["Dobidoouah"];
 SplitPerturbations[expr_,h_?InducedMetricQ,n_?DirectionVectorQ]:=SplitPerturbations[expr,{},h,n]
 SetNumberOfArguments[SplitPerturbations,{3,4}]
 Protect[SplitPerturbations];
 
 
-ToxPandFromRules[expr_,RulesList_List,h_(*?InducedMetricQ*),n_?DirectionVectorQ,order_(*?IntegerQ*)]:=();
+ToLightConeFromRules[expr_,RulesList_List,h_?InducedMetricQ,n_?DirectionVectorQ,order_(*?IntegerQ*)]:=Print["Dobidoouah"];
 
-SetNumberOfArguments[ToxPandFromRules,{4,5}]
-Protect[ToxPandFromRules]
+SetNumberOfArguments[ToLightConeFromRules,{4,5}]
+Protect[ToLightConeFromRules]
 
 
-ExtractComponents[expr_,h_?InducedMetricQ,n_?DirectionVectorQ,roj_List,ListIndsToContract_List]:=();
+ExtractComponents[expr_,h_?InducedMetricQ,n_?DirectionVectorQ,roj_List,ListIndsToContract_List]:=Print["Dobidoouah"];
 
 SetNumberOfArguments[ExtractComponents,{3,5}];
 Protect[ExtractComponents];
 
-VisualizeTensor[expr_,h_?InducedMetricQ,n_?DirectionVectorQ]:=();
+VisualizeTensor[expr_,h_?InducedMetricQ,n_?DirectionVectorQ]:=Print["Dobidoouah"];
 
 SetNumberOfArguments[VisualizeTensor,3];
 Protect[VisualizeTensor];
