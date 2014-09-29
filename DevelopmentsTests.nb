@@ -867,71 +867,15 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"symmetric metric tensor \"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"xAct`xLightCone`Private`Silenth$1308", "[", 
+   "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
+   RowBox[{"S", "[", 
     RowBox[{
      RowBox[{"-", "\[Sigma]$1309"}], ",", 
      RowBox[{"-", "\[Sigma]$1310"}]}], "]"}], 
    "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "symmetric metric tensor ", 
-   xAct`xLightCone`Private`Silenth$1308[-$CellContext`\[Sigma]$1309, \
--$CellContext`\[Sigma]$1310], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"antisymmetric tensor \"\>", "\[InvisibleSpace]", 
-   
-   RowBox[{"epsilonxAct`xLightCone`Private`Silenth$1308", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "antisymmetric tensor ", 
-   epsilonxAct`xLightCone`Private`Silenth$1308[-$CellContext`\[Alpha], \
--$CellContext`\[Beta], -$CellContext`\[Gamma]], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"tetrametric \"\>", "\[InvisibleSpace]", 
-   RowBox[{"TetraxAct`xLightCone`Private`Silenth$1308", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}], ",", 
-     RowBox[{"-", "\[Lambda]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tetrametric ", 
-   TetraxAct`xLightCone`Private`Silenth$1308[-$CellContext`\[Alpha], \
--$CellContext`\[Beta], -$CellContext`\[Gamma], -$CellContext`\[Lambda]], ". ",
-    ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"tetrametric \"\>", "\[InvisibleSpace]", 
-   RowBox[{"TetraxAct`xLightCone`Private`Silenth\[Dagger]$1308", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}], ",", 
-     RowBox[{"-", "\[Lambda]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tetrametric ", 
-   TetraxAct`xLightCone`Private`Silenth\[Dagger]$1308[-$CellContext`\[Alpha], \
--$CellContext`\[Beta], -$CellContext`\[Gamma], -$CellContext`\[Lambda]], ". ",
-    ""],
+  SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
+   $CellContext`S[-$CellContext`\[Sigma]$1309, -$CellContext`\[Sigma]$1310], 
+   ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -992,20 +936,21 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"-", "\[Alpha]"}], ",", 
      RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}], ",", 
-     RowBox[{"-", "\[Lambda]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
+     RowBox[{"-", "\[Gamma]"}], ",", "\[Lambda]"}], "]"}], 
+   "\[InvisibleSpace]", "\<\". \"\>", 
+   "\[InvisibleSpace]", "\<\"Antisymmetric only in the first pair.\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefTensor, ": Defining ", "Riemann tensor ", 
    $CellContext`Riemannd[-$CellContext`\[Alpha], -$CellContext`\[Beta], \
--$CellContext`\[Gamma], -$CellContext`\[Lambda]], ". ", ""],
+-$CellContext`\[Gamma], $CellContext`\[Lambda]], ". ", 
+   "Antisymmetric only in the first pair."],
   Editable->False]], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"symmetric Ricci tensor \"\>", 
+   "\[InvisibleSpace]", "\<\"non-symmetric Ricci tensor \"\>", 
    "\[InvisibleSpace]", 
    RowBox[{"Riccid", "[", 
     RowBox[{
@@ -1013,273 +958,18 @@ Cell[BoxData[
      RowBox[{"-", "\[Beta]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "symmetric Ricci tensor ", 
+  "** ", xAct`xTensor`DefTensor, ": Defining ", "non-symmetric Ricci tensor ", 
    $CellContext`Riccid[-$CellContext`\[Alpha], -$CellContext`\[Beta]], ". ", 
    ""],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"** DefCovD:  Contractions of Riemann automatically replaced \
-by Ricci.\"\>"], "Print"],
+by Ricci.\"\>"], "Print"]
+}, Open  ]],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"Ricci scalar \"\>", "\[InvisibleSpace]", 
-   RowBox[{"RicciScalard", "[", "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "Ricci scalar ", 
-   $CellContext`RicciScalard[], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"** DefCovD:  Contractions of Ricci automatically replaced \
-by RicciScalar.\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"symmetric Einstein tensor \"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"Einsteind", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", 
-   "symmetric Einstein tensor ", 
-   $CellContext`Einsteind[-$CellContext`\[Alpha], -$CellContext`\[Beta]], 
-   ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"vanishing Weyl tensor \"\>", "\[InvisibleSpace]", 
-   RowBox[{"Weyld", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}], ",", 
-     RowBox[{"-", "\[Lambda]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "vanishing Weyl tensor ", 
-   $CellContext`Weyld[-$CellContext`\[Alpha], -$CellContext`\[Beta], \
--$CellContext`\[Gamma], -$CellContext`\[Lambda]], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"symmetric TFRicci tensor \"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"TFRiccid", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "symmetric TFRicci tensor ", 
-   $CellContext`TFRiccid[-$CellContext`\[Alpha], -$CellContext`\[Beta]], ". ",
-    ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"Kretschmann scalar \"\>", "\[InvisibleSpace]", 
-   RowBox[{"Kretschmannd", "[", "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "Kretschmann scalar ", 
-   $CellContext`Kretschmannd[], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** DefCovD:  Computing RiemannToWeylRules for dim \"\>", 
-   "\[InvisibleSpace]", "3"}],
-  SequenceForm["** DefCovD:  Computing RiemannToWeylRules for dim ", 3],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** DefCovD:  Computing RicciToTFRicci for dim \"\>", 
-   "\[InvisibleSpace]", "3"}],
-  SequenceForm["** DefCovD:  Computing RicciToTFRicci for dim ", 3],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** DefCovD:  Computing RicciToEinsteinRules for dim \"\>", 
-   "\[InvisibleSpace]", "3"}],
-  SequenceForm["** DefCovD:  Computing RicciToEinsteinRules for dim ", 3],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"weight +2 density \"\>", "\[InvisibleSpace]", 
-   RowBox[{"DetxAct`xLightCone`Private`Silenth$1308", "[", "]"}], 
-   "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"Determinant.\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "weight +2 density ", 
-   DetxAct`xLightCone`Private`Silenth$1308[], ". ", "Determinant."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"extrinsic curvature tensor \"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"ExtrinsicKxAct`xLightCone`Private`Silenth$1308", "[", 
-    RowBox[{"\[Alpha]", ",", "\[Beta]"}], "]"}], 
-   "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"Associated to vector n\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "extrinsic curvature tensor ", 
-   ExtrinsicKxAct`xLightCone`Private`Silenth$1308[$CellContext`\[Alpha], \
-$CellContext`\[Beta]], ". ", "Associated to vector n"],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"acceleration vector \"\>", "\[InvisibleSpace]", 
-   RowBox[{"Accelerationn", "[", "\[Alpha]", "]"}], 
-   "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"Associated to vector n\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "acceleration vector ", 
-   $CellContext`Accelerationn[$CellContext`\[Alpha]], ". ", 
-   "Associated to vector n"],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefInertHead", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"projector inert-head \"\>", "\[InvisibleSpace]", 
-   "ProjectorxAct`xLightCone`Private`Silenth$1308", 
-   "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefInertHead, ": Defining ", "projector inert-head ", 
-   ProjectorxAct`xLightCone`Private`Silenth$1308, ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
-   RowBox[{"S", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Sigma]$1309"}], ",", 
-     RowBox[{"-", "\[Sigma]$1310"}]}], "]"}], 
-   "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`S[-$CellContext`\[Sigma]$1309, -$CellContext`\[Sigma]$1310], 
-   ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"   Rules \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", ",", 
-     "8"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" have been declared as UpValues for \"\>", 
-   "\[InvisibleSpace]", "S", "\[InvisibleSpace]", "\<\".\"\>"}],
-  SequenceForm["   Rules ", 
-   Shallow[{1, 2, 3, 4, 5, 6, 7, 8}], 
-   " have been declared as UpValues for ", $CellContext`S, "."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"   Rules \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", ",", 
-     "8"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" have been declared as UpValues for \"\>", 
-   "\[InvisibleSpace]", "S", "\[InvisibleSpace]", "\<\".\"\>"}],
-  SequenceForm["   Rules ", 
-   Shallow[{1, 2, 3, 4, 5, 6, 7, 8}], 
-   " have been declared as UpValues for ", $CellContext`S, "."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"   Rules \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"1", ",", "2"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" have been declared as DownValues for \"\>", 
-   "\[InvisibleSpace]", "S", "\[InvisibleSpace]", "\<\".\"\>"}],
-  SequenceForm["   Rules ", 
-   Shallow[{1, 2}], " have been declared as DownValues for ", $CellContext`S, 
-   "."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"   Rules \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"1", ",", "2"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" have been declared as UpValues for \"\>", 
-   "\[InvisibleSpace]", "u", "\[InvisibleSpace]", "\<\".\"\>"}],
-  SequenceForm["   Rules ", 
-   Shallow[{1, 2}], " have been declared as UpValues for ", $CellContext`u, 
-   "."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"   Rules \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" have been declared as UpValues for \"\>", 
-   "\[InvisibleSpace]", "u", "\[InvisibleSpace]", "\<\".\"\>"}],
-  SequenceForm["   Rules ", 
-   Shallow[{1, 2, 3, 4}], 
-   " have been declared as UpValues for ", $CellContext`u, "."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"   Rules \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"1", ",", "2"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" have been declared as UpValues for \"\>", 
-   "\[InvisibleSpace]", "n", "\[InvisibleSpace]", "\<\".\"\>"}],
-  SequenceForm["   Rules ", 
-   Shallow[{1, 2}], " have been declared as UpValues for ", $CellContext`n, 
-   "."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"   Rules \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" have been declared as UpValues for \"\>", 
-   "\[InvisibleSpace]", "n", "\[InvisibleSpace]", "\<\".\"\>"}],
-  SequenceForm["   Rules ", 
-   Shallow[{1, 2, 3, 4}], 
-   " have been declared as UpValues for ", $CellContext`n, "."],
-  Editable->False]], "Print"]
-}, Open  ]]
+ RowBox[{"Hold", "[", 
+  RowBox[{"Throw", "[", "Null", "]"}], "]"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1299,6 +989,99 @@ Cell[BoxData[
    RowBox[{"{", "}"}], ",", "h", ",", "n", ",", "1"}], "]"}]], "Input"],
 
 Cell[BoxData["\<\"Dobidoouah\"\>"], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"S", "[", 
+   RowBox[{"\[Mu]", ",", "\[Nu]"}], "]"}], 
+  RowBox[{"n", "[", 
+   RowBox[{"-", "\[Mu]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"S", "[", 
+   RowBox[{"\[Mu]", ",", "\[Nu]"}], "]"}], 
+  RowBox[{"u", "[", 
+   RowBox[{"-", "\[Mu]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"S", "[", 
+   RowBox[{"\[Mu]", ",", 
+    RowBox[{"-", "\[Nu]"}]}], "]"}], 
+  RowBox[{"S", "[", 
+   RowBox[{"\[Nu]", ",", "\[Alpha]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"d", "[", 
+   RowBox[{"-", "\[Mu]"}], "]"}], "[", 
+  RowBox[{"S", "[", 
+   RowBox[{"\[Alpha]", ",", "\[Beta]"}], "]"}], "]"}]}], "Input"],
+
+Cell[BoxData["0"], "Output"],
+
+Cell[BoxData["0"], "Output"],
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   StyleBox[GridBox[{
+      {
+       OverscriptBox["S", "-"], 
+       StyleBox[GridBox[{
+          {"\[Mu]", " "},
+          {" ", "\[Nu]"}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+              Offset[0.]}}, "RowsIndexed" -> {}}],
+        FontSize->Rational[39, 4]]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.034999999999999996`]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`S[$CellContext`\[Mu], -$CellContext`\[Nu]],
+   Editable->False], " ", 
+  InterpretationBox[
+   StyleBox[GridBox[{
+      {
+       OverscriptBox["S", "-"], 
+       StyleBox[GridBox[{
+          {"\[Nu]", "\[Alpha]"},
+          {" ", " "}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+              Offset[0.]}}, "RowsIndexed" -> {}}],
+        FontSize->Rational[39, 4]]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.034999999999999996`]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`S[$CellContext`\[Nu], $CellContext`\[Alpha]],
+   Editable->False]}]], "Output"],
+
+Cell[BoxData["0"], "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

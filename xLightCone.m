@@ -179,10 +179,21 @@ DefTensor[n[-ind1],{Manifold},OrthogonalTo->{u[ind1]},ProjectedWith->{h[ind1,-in
 
 DirectionVectorQ[n]=True;
 
-DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom->{g,n},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];
+
 (* I use NSS as the screen space metric because the Silent metric is 3-D, I will clean up these later*)
-(* OK Obinna I see what you do !*)
-DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo->{u[ind1],u[ind2],n[ind1],n[ind2]},ProjectedWith->{h[ind1,-ind4],h[ind2,-ind5],Silenth[ind1,-ind4],Silenth[ind2,-ind5]},PrintAs->"\!\("<>ToString[NSS]<>"\&-\)"];
+(* CP: OK Obinna I see what you do !*)
+DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo->{u[ind1],u[ind2],n[ind1],n[ind2]},ProjectedWith->{h[ind1,-ind4],h[ind2,-ind5](*,NSS[ind1,-ind4],NSS[ind2,-ind5]*)},PrintAs->"\!\("<>ToString[NSS]<>"\&-\)"];
+
+(* So let me try to define separately the CovD, So That I suppress this definition *)
+(*DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom->{g,n},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];*)
+
+(* CP: Let me try this implementation for the CovD twice projected*)
+(* This seems cleaner than to define a Silent Metric.*)
+
+DefCovD[cd2[-ind1],{cd2post,cd2pre}];
+cd2[ind1_][NSS[ind2_,ind3_]]:=0;
+AutomaticRules[NSS,MakeRule[{NSS[ind1,ind2] n[-ind2],0}]];
+AutomaticRules[NSS,MakeRule[{NSS[ind1,ind2] u[-ind2],0}]];
 
 (*I used AutomaticRule to assign rules to NSS...*)
 (* Well it doesn't work well*)
