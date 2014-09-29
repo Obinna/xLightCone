@@ -158,6 +158,472 @@ AnisotropyBool[Spacetype_]:=(Spacetype==="Anisotropic")
 (*The name'AnisotropyBool' should be changed.*)
 
 
+DefScreenSpaceMetric[metric_[inda_, indb_], Manifold_, 
+  cd2_, {cdpost_String, cdpre_String}, InducedHypersurface_, 
+  options_] :=
+ 
+ Module[{u = First@Rest@InducedFrom[First@InducedHypersurface],
+   vbundle = VBundleOfIndex[inda],
+   h = First@InducedHypersurface,
+   n = Last@InducedHypersurface,
+    dim = DimOfManifold[Manifold],
+   indexlist = GetIndicesOfVBundle[VBundleOfIndex[inda], 3]}, With[{
+    ind1 = indexlist[[1]],
+    ind2 = indexlist[[2]], ind3 = indexlist[[3]]},
+   
+   DefTensor[metric[-inda, -indb], Manifold, 
+    If[$TorsionSign === 1, Symmetric[{-inda, -indb}], {}], 
+    OrthogonalTo -> {u[inda], u[indb], n[inda], n[indb]}, 
+    ProjectedWith -> {h[inda, -ind1], h[indb, -ind1]}, options];
+   
+   DefCovD[cd2[inda], vbundle, {cdpost, cdpre}, 
+    OrthogonalTo -> {u[inda], n[inda]}, 
+    ProjectedWith -> {h[inda, -ind2], metric[inda, -ind2]}];
+   
+   RadialVectOrthToTheScreenSpace[metric] := 
+    RadialVectOrthToTheScreenSpace[metric] = n;
+   
+   OrthogonalVectors[x_] := 
+    If[x === h, Rest@InducedFrom[h], 
+     If[x === metric, Flatten[{Rest@InducedFrom[h], Rest@{h, n}}], 
+      "\!\(" <> ToString[x] <> 
+       "\&-\) do not have orthogonal vectors "]];
+   
+   InducedFromHyperSurface[x_] := 
+    InducedFromHyperSurface[x] = 
+     If[x === h, InducedFrom[h], 
+      If[x === metric, {h, n}, 
+       "\!\(" <> ToString[x] <> "\&-\) is not an induced metric"]];
+   
+   (*AutomaticRules[NSS,MakeRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-
+   n[-ind1]n[-ind2]}]]*)
+   AutomaticRules[metric, 
+    MakeRule[{metric[inda, ind1] metric[-inda, -ind1], 
+      metric[ind1, -ind1]}]];
+   AutomaticRules[metric, 
+    MakeRule[{metric[-inda, -indb] metric[inda, ind1], 
+      metric[ind1, -indb]}, MetricOn -> All]];
+   AutomaticRules[metric, MakeRule[{metric[-ind1, ind1] , 2}]];
+   AutomaticRules[metric, 
+    MakeRule[{cd2[inda][metric[ind1, ind2] ], 0}]];
+   
+(*This line assign further properties to the metric and the radial vector, I am basically following xTensor. 
+It is still being tested*)
+   PropertiesOfInducedScreenSpaceMetric[metric[inda, indb], Manifold, 
+    cd2, {n, h, CovDOfMetric[h]}];
+
+
+   (*It complanins about metric incompatibility*)
+   (*Off[
+   ToCanonical::cmods]*)
+   metric /: metric[-a_, b_] cd2[a_][expr1_] := cd2[b][expr1];
+   metric /: metric[-a_, -b_] cd2[a_][expr1_] := cd2[-b][expr1];
+   metric /: metric[b_, a_] cd2[-a_][expr1_] := cd2[b][expr1];
+   metric /: metric[a_, b_] cd2[c_]@cd2[-a_][expr1_] := 
+    cd2[c]@cd2[b][expr1];
+   metric /: metric[b_, -a_] cd2[c_]@cd2[a_][expr1_] := 
+    cd2[c]@cd2[b][expr1];
+   metric /: metric[b_, -a_] cd2[c_]@cd2[a_][expr1_] := 
+    cd2[c]@cd2[b][expr1];
+   (*On[ToCanonical::cmods]*)
+   
+   ]]
+
+
+(*I am not quite sure for now about the sign of ExtrinsicKSign on the \
+screeen space, so i have defined the following for now, we may end up \
+maerging with xTensor*)
+$ExtrinsicKOnSSSign = 1;
+$AccelerationOfnSign = 1;
+OToVcheck[vector_, expr_, inds_List] := 
+  And @@ Map[ContractMetric@GradNormalToExtrinsicK[#] === 0 &, 
+    expr (vector /@ ChangeIndex /@ Select[inds, EIndexQ])];
+(*Variant added by Thomas*)
+
+HasOrthogonalIndexQ[expr_, vector_[ind_]] := 
+  And[MemberQ[FindFreeIndices[expr], -ind, 1], 
+   OToVcheck[vector, expr, {-ind}]];
+PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_], 
+   dependencies_, covd_, {vector_, supermetric_, superCD_}] := 
+  With[{vbundle = VBundleOfIndex[ind1]},
+   With[{extrinsicKname = GiveSymbol[ExtrinsicK, metric],
+     accelerationname = GiveSymbol[Acceleration, vector],
+     projectorname = GiveSymbol[Projector, metric],
+     epsilonname = GiveSymbol[epsilon, metric],
+     superepsilonname = GiveSymbol[epsilon, supermetric],
+     proj = ProjectWith[metric], 
+     norm = Scalar@
+       Simplify@
+        ContractMetric[
+         supermetric[-ind1, -ind2] vector[ind1] vector[ind2], 
+         supermetric], indexlist = GetIndicesOfVBundle[vbundle, 3]},
+    
+    With[{i1 = indexlist[[1]], i2 = indexlist[[2]], 
+      i3 = indexlist[[3]]},(*Register pair metric/vector*)
+     xUpSet[VectorOfInducedMetric[metric], vector];
+     
+     (*Define associated tensors*)
+     
+     DefTensor[extrinsicKname[i1, i2], dependencies, 
+      Symmetric[{1, 2}], 
+      PrintAs :> GiveOutputString[ExtrinsicK, metric], 
+      OrthogonalTo -> {vector[-i1]}, 
+      ProjectedWith -> {metric[i3, -i2]}, ProtectNewSymbol -> False, 
+      Master -> metric, 
+      DefInfo -> {"extrinsic curvature tensor", 
+        "Associated to vector " <> ToString[vector]}, 
+      TensorID -> {ExtrinsicK, metric}];
+     
+     DefTensor[accelerationname[i1], dependencies, 
+      PrintAs :> GiveOutputString[Acceleration, vector], 
+      OrthogonalTo -> {vector[-i1]}, 
+      ProjectedWith -> {metric[i2, -i1]}, ProtectNewSymbol -> False, 
+      Master -> metric, 
+      DefInfo -> {"acceleration vector", 
+        "Associated to vector " <> ToString[vector]}, 
+      TensorID -> {Acceleration, vector}];
+     
+     (*Relations among them and the derivatives.Improved by Thomas,
+     to use HasOrthogonalIndexQ*)
+     GradNormalToExtrinsicKRules[
+       metric] = {superCD[a_][
+         vector[b_]] :> $ExtrinsicKOnSSSign extrinsicKname[a, b]
+         + $AccelerationOfnSign vector[a] accelerationname[b], 
+       vector[-a_] superCD[b_][
+          expr_] :> -superCD[b][vector[-a]] expr /; 
+         HasOrthogonalIndexQ[expr, vector[-a]], 
+       vector[a_] superCD[b_][expr_] :> -superCD[b][vector[a]] expr /;
+          HasOrthogonalIndexQ[expr, vector[a]], 
+       LieD[vector[_]][
+          expr_] vector[-a_] :> -$AccelerationOfnSign norm \
+accelerationname[-a] expr /; HasOrthogonalIndexQ[expr, vector[-a]](*,
+       LieD[vector[_]][expr_]vector[a_]\[RuleDelayed]0/;
+       HasOrthogonalIndexQ[expr,vector[a]]*)};
+     
+     ExtrinsicKToGradNormalRules[metric] = 
+      extrinsicKname[a_, b_] :> 
+       Module[{c = 
+          DummyIn@vbundle}, $ExtrinsicKOnSSSign (supermetric[a, 
+             c] superCD[-c][vector[b]] - $AccelerationOfnSign vector[
+             a] accelerationname[b])];
+     
+     
+     (*Projectors and metrics*)
+     
+     ProjectorToMetricRules[metric] = 
+      metric[i1_, i2_] -> 
+       supermetric[i1, i2] - vector[i1] vector[i2]/norm;
+     MetricToProjectorRules[metric] = 
+      supermetric[i1_, i2_] -> 
+       metric[i1, i2] + vector[i1] vector[i2]/norm;
+     (*Define projector inert-head*)
+     
+     DefInertHead[projectorname, LinearQ -> True, Master -> metric, 
+      PrintAs :> GiveOutputString[Projector, metric], 
+      ProtectNewSymbol -> False, 
+      DefInfo -> {"projector inert-head", ""}];
+     
+     projectorname[supermetric[a_, b_]] := metric[a, b];
+     (*The metric,but not the supermetric,
+     can be contracted through the projector*)
+     
+     xTagSet[{projectorname, ContractThroughQ[projectorname, metric]},
+       True];
+     (*The supermetric is converted into metric when contracted with \
+the projector or covd*)
+     xTagSetDelayed[{projectorname, 
+       supermetric[i1_, i2_] projectorname[expr_]}, 
+      metric[i1, i2] projectorname[expr] /; 
+       Or[IsIndexOf[expr, -i1, metric], IsIndexOf[expr, -i2, metric]]];
+     
+     xTagSetDelayed[{covd, supermetric[i1_, i2_] covd[i3_][expr_]}, 
+      metric[i1, i2] covd[i3][expr] /; 
+       Or[IsIndexOf[covd[i3][expr], -i1, metric], 
+        IsIndexOf[covd[i3][expr], -i2, metric]]];
+     
+     (*Projection rule with vector*)
+     
+     xTagSetDelayed[{projectorname, vector[i_] projectorname[expr_]}, 
+      0 /; IsIndexOf[expr, -i, metric]];
+     (*Particular cases*)
+     
+     projectorname[1] := 1;
+     projectorname[rest_. x_?ScalarQ] := Scalar[x] projectorname[rest];
+     projectorname[vector[i_] expr_.] := 
+      0 /; Not@IsIndexOf[expr, -i, supermetric];
+     projectorname[projectorname[expr_]] := projectorname[expr];
+     projectorname[tensor_?xTensorQ[inds__]] := 
+      tensor[inds] /; OrthogonalToVectorQ[vector][tensor];
+     projectorname[covd[k_][expr_]] := covd[k][expr];
+     
+     ProjectDerivativeRules[
+       covd] = {covd[i_][expr_] :> 
+        If[IsIndexOf[expr, -i], 
+         With[{dummy = DummyAs[i]}, 
+          metric[i, -dummy] projectorname[superCD[dummy][expr]]], 
+         projectorname[superCD[i][expr]]]};
+     
+     Module[{prot = 
+        Unprotect[covd]},(*Leibnitz rule.Three cases considered*)
+      covd[i1_][x_Scalar y_Scalar] := x covd[i1][y] + y covd[i1][x];
+      (*Special definitions suggested by Cyril*)
+      covd[i1_][supermetric[a_?AIndexQ, b_?AIndexQ]] := 0;
+      (*Cyril suggests removing the OrthogonalToVectorQ check to \
+handle the many-supermetrics case*)
+      covd[i1_][x_ supermetric[a_?AIndexQ, b_?AIndexQ]] := 
+       metric[a, b] covd[i1][x] /; OrthogonalToVectorQ[vector][x];
+      covd[i1_][x_ delta[a_?AIndexQ, b_?AIndexQ]] := 
+       metric[a, b] covd[i1][x] /; OrthogonalToVectorQ[vector][x];
+      covd[i1_][vector[a_?AIndexQ] vector[b_?AIndexQ] x_.] := 
+       0 /; And[! IsIndexOf[x, ChangeIndex@a], ! 
+          IsIndexOf[x, ChangeIndex@b], ! PairQ[a, b]];
+      (*Product of two,perhaps contracted,expressions*)
+      covd[i1_][x_ y_] := 
+       Module[{res}, 
+        res = Which[(*Both are orthogonal in all their indices.We can \
+use the Leibnitz rule*)
+          OrthogonalToVectorQ[vector][x] && 
+           OrthogonalToVectorQ[vector][y], 
+          covd[i1][x] y + 
+           covd[i1][y] x,(*The expression is not globally orthogonal:
+          complain and return unevaluated*)
+          Not@OrthogonalToVectorQ[vector][x y], 
+          Message[Validate::nonproj, 
+           x y]; $Failed,(*Expression is orthogonal,
+          but factors are not.Avoid infinite recursion with this hack*)
+          FreeQ[{x, y}, vector], 
+          covd[i1][
+           Expand@GradNormalToExtrinsicK@
+             Expand[InducedDecomposition[
+                x, {metric, vector}] InducedDecomposition[
+                y, {metric, vector}]]],(*This should never happen*)
+          True, $Failed];
+        res /; res =!= $Failed];
+      (*Induced derivatives of non-spatial objects are not accepted,
+      not even divergencies*)
+      covd[_?GIndexQ][expr_] := $Failed /; 
+        Head[expr] =!= Times && 
+         Not@OrthogonalToVectorQ[vector][expr] && 
+         Message[Validate::nonproj, expr];
+      Protect[Evaluate[prot]];];
+     (*Special definitions*)
+     metric /: 
+      LieD[vector[_]][
+       metric[-a_Symbol, -b_Symbol]] := $ExtrinsicKOnSSSign \
+(extrinsicKname[-a, -b] + extrinsicKname[-b, -a]);
+     metric /: 
+      LieD[vector[_]][
+       metric[a_Symbol, -b_Symbol]] := -$AccelerationOfnSign \
+accelerationname[-b] vector[a];
+     metric /: 
+      LieD[vector[_]][
+       metric[-a_Symbol, 
+        b_Symbol]] := -$AccelerationOfnSign accelerationname[-a] \
+vector[b];
+     metric /: 
+      LieD[vector[_]][
+       metric[a_Symbol, 
+        b_Symbol]] := -$ExtrinsicKOnSSSign (extrinsicKname[a, b] + 
+          extrinsicKname[b, 
+           a]) - $AccelerationOfnSign (vector[a] accelerationname[b] +
+           vector[b] accelerationname[a]);
+     vector /: LieD[vector[_]][vector[a_Symbol]] := 0;
+     vector /: 
+      LieD[vector[_]][
+       vector[-a_Symbol]] := $AccelerationOfnSign norm \
+accelerationname[-a];
+     Module[{prot = Unprotect[{superepsilonname, epsilonname}]}, 
+      superepsilonname /: 
+       LieD[vector[_]][superepsilonname[inds__?DownIndexQ]] := 
+       Module[{dummy = 
+          DummyIn[vbundle]}, $ExtrinsicKOnSSSign extrinsicKname[
+          dummy, -dummy] superepsilonname[inds]];
+      superepsilonname /: 
+       LieD[vector[_]][superepsilonname[inds__?UpIndexQ]] := 
+       Module[{dummy = DummyIn[vbundle], 
+         first = First[{inds}]}, -$ExtrinsicKOnSSSign extrinsicKname[
+          dummy, -dummy] superepsilonname[inds]];
+      epsilonname /: LieD[vector[_]][epsilonname[inds__?DownIndexQ]] :=
+        Module[{dummy = 
+          DummyIn[vbundle]}, $ExtrinsicKOnSSSign extrinsicKname[
+          dummy, -dummy] epsilonname[inds]];
+      epsilonname /: LieD[vector[_]][epsilonname[inds__?UpIndexQ]] := 
+       Module[{dummy = DummyIn[vbundle], 
+         first = First[{inds}]}, -$ExtrinsicKOnSSSign extrinsicKname[
+           dummy, -dummy] epsilonname[
+           inds] + $AccelerationOfnSign norm accelerationname[-dummy] \
+superepsilonname[dummy, inds]];
+      Protect[Evaluate[prot]]];];
+    (*Gauss Codazzi rule,
+    for abstract indices.Only for Riemann.Norms are wrong*)
+    With[{riemann = Riemann[covd], superRiemann = Riemann[superCD], 
+      superRicci = Ricci[superCD], 
+      superRicciScalar = RicciScalar[superCD], K = extrinsicKname, 
+      AA = accelerationname}, 
+     GaussCodazziRules[
+       metric] := {superRiemann[a_?AIndexQ, b_?AIndexQ, c_?AIndexQ, 
+         d_?AIndexQ] :> 
+        Module[{e = DummyIn@vbundle, PDK}, 
+         PDK[x_, y_] := projectorname[vector[e] superCD[-e]@K[x, y]];
+         riemann[a, b, c, 
+           d] + $RiemannSign (-K[a, c] K[b, d]/norm + 
+             K[a, d] K[b, c]/norm - 
+             AA[b] AA[d] vector[a] vector[c]/norm - 
+             K[b, e] K[d, -e] vector[a] vector[c]/norm^2 + 
+             AA[a] AA[d] vector[b] vector[c]/norm + 
+             K[a, e] K[d, -e] vector[b] vector[c]/norm^2 + 
+             AA[b] AA[c] vector[a] vector[d]/norm + 
+             K[b, e] K[c, -e] vector[a] vector[d]/norm^2 - 
+             AA[a] AA[c] vector[b] vector[d]/norm - 
+             K[a, e] K[c, -e] vector[b] vector[d]/
+               norm^2 + $ExtrinsicKOnSSSign (vector[b] vector[
+                  c] PDK[a, d]/norm^2 + 
+                vector[a] vector[d] PDK[b, c]/norm^2 - 
+                vector[a] vector[c] PDK[b, d]/norm^2 - 
+                vector[b] vector[d] PDK[a, c]/norm^2 + 
+                vector[d] covd[a]@K[b, c]/norm - 
+                vector[c] covd[a]@K[b, d]/norm - 
+                vector[d] covd[b]@K[a, c]/norm + 
+                vector[c] covd[b]@K[a, d]/norm + 
+                vector[b] covd[c]@K[a, d]/norm - 
+                vector[a] covd[c]@K[b, d]/norm - 
+                vector[b] covd[d]@K[a, c]/norm + 
+                vector[a] covd[d]@K[b, c]/
+                  norm) + $AccelerationOfnSign (vector[b] vector[
+                  d] covd[c]@AA[a]/norm - 
+                vector[a] vector[d] covd[c]@AA[b]/norm - 
+                vector[b] vector[c] covd[d]@AA[a]/norm + 
+                vector[a] vector[c] covd[d]@AA[b]/norm))], 
+       superRicci[a_?AIndexQ, b_?AIndexQ] :> 
+        Module[{c = DummyIn@vbundle}, 
+         ReleaseHold[
+          Hold[superRiemann[a, -c, b, c]] /. 
+           GaussCodazziRules[metric]]], 
+       superRicciScalar[] :> 
+        Module[{a = DummyIn@vbundle, b = DummyIn@vbundle}, 
+         Expand[(metric[a, b] + vector[a] vector[b]/norm) ReleaseHold[
+            Hold[superRicci[-a, -b]] /. GaussCodazziRules[metric]]]]}];
+    If[$ProtectNewSymbols, 
+     Protect[extrinsicKname, accelerationname, projectorname]];]];
+(*VectorOfInducedScreenSpaceMetric[metric_Symbol?MetricQ]:=Null;
+VectorOfInducedScreenSpaceMetric[x_]:=Throw@Message[\
+VectorOfInducedScreenSpaceMetric::unknown,"induced metric",x];
+SetNumberOfArguments[VectorOfInducedScreenSpaceMetric,1];
+Protect[VectorOfInducedScreenSpaceMetric];*)
+
+
+SetSlicingUpToScreenSpaceObinna[g_?MetricQ, u_, normu_: - 1, h_, 
+  cd_, {cdpost_String, cdpre_String}, n_, normn_: 1, NSS_, 
+  cd2_, {cd2post_String, cd2pre_String}, options_] := 
+ Module[{m, p, q, DummyS, DummyV, DummyT, ui, indsdimminustwo, 
+   indsdim, dim, prot, Silenth},
+  With[{Manifold = ManifoldOfCovD@CovDOfMetric[g], 
+    CD = CovDOfMetric[g]},
+   dim = DimOfManifold[Manifold];
+   
+   With[{ind1 = DummyIn[Tangent[Manifold]], 
+     ind2 = DummyIn[Tangent[Manifold]], 
+     ind3 = DummyIn[Tangent[Manifold]], 
+     ind4 = DummyIn[Tangent[Manifold]], 
+     ind5 = DummyIn[Tangent[Manifold]], 
+     ind6 = DummyIn[Tangent[Manifold]], 
+     ind7 = DummyIn[Tangent[Manifold]], 
+     i1 = DummyIn[Tangent[Manifold]], i2 = DummyIn[Tangent[Manifold]],
+      i3 = DummyIn[Tangent[Manifold]], 
+     i4 = DummyIn[Tangent[Manifold]], i5 = DummyIn[Tangent[Manifold]],
+      dummy = DummyIn[Tangent[Manifold]]},
+    DefTensor[u[-ind1], {Manifold}, 
+      PrintAs -> "\!\(" <> ToString[ind1] <> "\&-\)"]
+             (*Induced Metric *)
+     Off[DefMetric::old];
+    DefMetric[1, h[-ind1, -ind2], cd, {cdpost, cdpre}, 
+     InducedFrom -> {g, u}, 
+     PrintAs -> "\!\(" <> ToString[h] <> "\&-\)"];
+    (*Another induced metric, 
+    I used the cd for the angular derivative, 
+    it is cheating I will sort it later*)
+    
+    DefTensor[n[-ind1], {Manifold}, OrthogonalTo -> {u[ind1]}, 
+      ProjectedWith -> {h[ind1, -ind2]}, 
+      PrintAs -> "\!\(" <> ToString[n] <> "\&-\)"]
+     
+     
+     (*DefTensor[NSS[-ind1,-ind2],{Manifold},If[$TorsionSign\[Equal]1,
+     Symmetric[{-ind1,-ind2}],{}],OrthogonalTo\[Rule]{u[ind1],u[ind2],
+     n[ind1],n[ind2]},ProjectedWith\[Rule]{h[ind1,-ind4],h[
+     ind2,-ind5]},PrintAs\[Rule]"\!\("<>ToString[NSS]<>"\&-\)"];
+     DefCovD[cd2[ind1],{cd2post,cd2pre},OrthogonalTo\[Rule]{u[ind1],n[
+     ind1]},ProjectedWith\[Rule]{h[ind1,-ind2],NSS[
+     ind1,-ind2]}];*)
+     
+     DefScreenSpaceMetric[NSS[-ind1, -ind2], Manifold, 
+      cd2, {cd2post, cd2pre}, {h, n}, options]
+     
+     (*VectorOfInducedScreenSpaceMetric[NSS]\[RuleDelayed] n;*)
+     
+     
+     (*Protect[InducedFromHypersurface];*)
+     
+     On[DefMetric::old];
+    (*We remove automatic Leibniz rule when there is a Scalar \
+Head.This is to ensure that the induced derivative does not spoil \
+an'InducedDecomposition'*)
+    prot = Unprotect[cd];
+    cd[a_][Scalar[expr_]] =.;
+    cd2[a_][Scalar[expr_]] =.;
+    Protect[prot];
+    (*$Rulecdh[h1_]:={h1[-a_,b_] cd[a_][expr1_]\[RuleDelayed]cd[b][
+    expr1],h1[a_,b_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],h1[
+    b_,-a_] cd[a_][expr1_]\[RuleDelayed]cd[b][expr1],h1[b_,
+    a_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],h1[-a_,b_] cd[c_]@
+    cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@
+    cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[b_,-a_] cd[c_]@
+    cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@
+    cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1]};*)
+    
+    
+    
+    
+    (*The default positionof indices for the extrinsic curvature and \
+the acceleration is down*)
+    (SlotsOfTensor[#] ^:= {-Tangent[
+           Manifold], -Tangent[Manifold]}) & /@ {ExtrinsicK[h]};
+    (SlotsOfTensor[#] ^:= {-Tangent[Manifold]}) & /@ {Acceleration[u]};
+    
+    
+    (*(SlotsOfTensor[#]^:={-Tangent[Manifold],-Tangent[
+    Manifold]})&/@{ExtrinsicK[NSS]};
+    (SlotsOfTensor[#]^:={-Tangent[Manifold]})&/@{Acceleration[
+    n]};*)
+    
+    (*The acceleration should vanish for homogeneous spacetimes.*)
+    
+    Acceleration[u][ind1_] = 0;
+    AutomaticRules[u, MakeRule[{u[ind1] u[-ind1], normu}]];
+    AutomaticRules[u, MakeRule[{u[-ind1] g[ind1, ind2], u[ind2]}]];
+    (*AutomaticRules[u,MakeRule[{g[ind1,ind2] u[-ind2] u[-ind1],
+    normu}]];*)
+    
+    Acceleration[n][ind1_] = 0;
+    AutomaticRules[n, MakeRule[{n[ind1] n[-ind1], normn}]];
+    AutomaticRules[n, MakeRule[{n[-ind1] g[ind1, ind2], n[ind2]}]];
+    (*AutomaticRules[n,MakeRule[{g[ind1,ind2] n[-ind2] n[-ind1],
+    normn}]];*)
+    
+    
+    If[IntegerQ@dim && dim >= 2, 
+      indsdim = GetIndicesOfVBundle[Tangent@Manifold, dim, {ind5}];
+      AutomaticRules[epsilon[g], 
+       MakeRule[
+        Evaluate[{epsilon[g] @@ 
+            indsdim u[-indsdim[[1]]] h[-indsdim[[2]], ind5], 
+          ReplaceIndex[Evaluate[epsilon[g] @@ indsdim], 
+            indsdim[[2]] -> ind5] u[-indsdim[[1]]]}]]];];]]]
+
+
+
+
+
 DirectionVectorQ[expr_]:=False;
 
 SetSlicingUpToScreenSpace[g_?MetricQ,u_,normu_:-1,h_,cd_,{cdpost_String,cdpre_String},n_,normn_:1,NSS_,cd2_,{cd2post_String,cd2pre_String}]:=Module[{m,p,q,DummyS,DummyV,DummyT,ui,indsdimminustwo,indsdim,dim,prot,Silenth},
@@ -185,7 +651,7 @@ DirectionVectorQ[n]=True;
 DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo->{u[ind1],u[ind2],n[ind1],n[ind2]},ProjectedWith->{h[ind1,-ind4],h[ind2,-ind5](*,NSS[ind1,-ind4],NSS[ind2,-ind5]*)},PrintAs->"\!\("<>ToString[NSS]<>"\&-\)"];
 
 (* So let me try to define separately the CovD, So That I suppress this definition *)
-(*DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom->{g,n},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];*)
+(*DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom\[Rule]{g,n},PrintAs\[Rule]"\!\("<>ToString[h]<>"\&-\)"];*)
 
 (* CP: Let me try this implementation for the CovD twice projected*)
 (* This seems cleaner than to define a Silent Metric.*)
@@ -197,7 +663,7 @@ AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] u[-ind2],0}]];
 
 (*I used AutomaticRule to assign rules to NSS...*)
 (* Well it doesn't work well*)
-(*NSS[-ind1,-ind2]^:=2/;ind1+ind2==0;
+(*NSS[-ind1,-ind2]^:=2/;ind1+ind2\[Equal]0;
 NSS[-ind1,-ind2]NSS[ind1,ind2]^:=2;*)
 
 (*AutomaticRules[NSS,BuildRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-n[-ind1]n[-ind2]}]]*)AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] NSS[-ind2,-ind3],NSS[ind1,-ind3]}]];

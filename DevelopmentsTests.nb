@@ -1,7 +1,7 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Set up", "Section"],
+Cell["Set up\[LineSeparator]", "Section"],
 
 Cell[CellGroupData[{
 
@@ -10,9 +10,7 @@ Cell["Loading the package", "Subsubsection"],
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"Needs", "[", "\"\<xAct`xLightCone`\>\"", "]"}], 
-  "\[IndentingNewLine]"}]], "Input"],
+ RowBox[{"<<", "xAct/xLightCone.m"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -33,7 +31,7 @@ Cell[BoxData[
 Cell[BoxData["\<\"CopyRight (C) 2003-2014, Jose M. Martin-Garcia, under the \
 General Public License.\"\>"], "Print"],
 
-Cell[BoxData["\<\"Connecting to external mac executable...\"\>"], "Print"],
+Cell[BoxData["\<\"Connecting to external linux executable...\"\>"], "Print"],
 
 Cell[BoxData["\<\"Connection established.\"\>"], "Print"],
 
@@ -153,7 +151,12 @@ details.\"\>"], "Print"],
 Cell[BoxData["\<\"------------------------------------------------------------\
 \"\>"], "Print"]
 }, Open  ]]
-}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<xAct`xLightCone`\>\"", "]"}], 
+  "\[IndentingNewLine]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -533,10 +536,10 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"u", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1246"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`u[-$CellContext`\[Sigma]$1309], ". ", ""],
+   $CellContext`u[-$CellContext`\[Sigma]$1246], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -547,12 +550,12 @@ Cell[BoxData[
    "\[InvisibleSpace]", 
    RowBox[{"h", "[", 
     RowBox[{
-     RowBox[{"-", "\[Sigma]$1309"}], ",", 
-     RowBox[{"-", "\[Sigma]$1310"}]}], "]"}], 
+     RowBox[{"-", "\[Sigma]$1246"}], ",", 
+     RowBox[{"-", "\[Sigma]$1247"}]}], "]"}], 
    "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefTensor, ": Defining ", "symmetric metric tensor ", 
-   $CellContext`h[-$CellContext`\[Sigma]$1309, -$CellContext`\[Sigma]$1310], 
+   $CellContext`h[-$CellContext`\[Sigma]$1246, -$CellContext`\[Sigma]$1247], 
    ". ", ""],
   Editable->False]], "Print"],
 
@@ -616,11 +619,11 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"covariant derivative \"\>", "\[InvisibleSpace]", 
    
    RowBox[{"cd", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1246"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefCovD, ": Defining ", "covariant derivative ", 
-   $CellContext`cd[-$CellContext`\[Sigma]$1309], ". ", ""],
+   $CellContext`cd[-$CellContext`\[Sigma]$1246], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -857,10 +860,10 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"n", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1246"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`n[-$CellContext`\[Sigma]$1309], ". ", ""],
+   $CellContext`n[-$CellContext`\[Sigma]$1246], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -870,11 +873,11 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"S", "[", 
     RowBox[{
-     RowBox[{"-", "\[Sigma]$1309"}], ",", 
-     RowBox[{"-", "\[Sigma]$1310"}]}], "]"}], 
+     RowBox[{"-", "\[Sigma]$1246"}], ",", 
+     RowBox[{"-", "\[Sigma]$1247"}]}], "]"}], 
    "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`S[-$CellContext`\[Sigma]$1309, -$CellContext`\[Sigma]$1310], 
+   $CellContext`S[-$CellContext`\[Sigma]$1246, -$CellContext`\[Sigma]$1247], 
    ". ", ""],
   Editable->False]], "Print"],
 
@@ -885,11 +888,11 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"covariant derivative \"\>", "\[InvisibleSpace]", 
    
    RowBox[{"d", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1246"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefCovD, ": Defining ", "covariant derivative ", 
-   $CellContext`d[-$CellContext`\[Sigma]$1309], ". ", ""],
+   $CellContext`d[-$CellContext`\[Sigma]$1246], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -968,8 +971,63 @@ by Ricci.\"\>"], "Print"]
 }, Open  ]],
 
 Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"ExtrinsicK", "::", "unknown"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Unknown \[NoBreak]\\!\\(\\\"induced \
+metric\\\"\\)\[NoBreak] \
+\[NoBreak]\\!\\(xAct`xLightCone`Private`Silenth$1245\\)\[NoBreak].\"\>"}]], \
+"Message", "MSG"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[Null]\\)\[NoBreak] returned \
+to top level. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", ButtonNote -> \
+\\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG"],
+
+Cell[BoxData[
  RowBox[{"Hold", "[", 
   RowBox[{"Throw", "[", "Null", "]"}], "]"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetSlicingUpToScreenSpaceObinna", "[", 
+  RowBox[{"g", ",", "h", ",", "cd", ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<|\>\"", ",", "\"\<\\!\\(\\*OverscriptBox[\\(D\\), \\(_\\)]\\)\>\""}],
+     "}"}], ",", "n", ",", "NSS", ",", "cd2", ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<|\>\"", ",", 
+     "\"\<\\!\\(\\*SubscriptBox[\\(\[Del]\\), \\(\[UpTee]\\)]\\)\>\""}], 
+    "}"}], ",", 
+   RowBox[{"PrintAs", "\[Rule]", 
+    RowBox[{"\"\<\\!\\(\>\"", "<>", 
+     RowBox[{"ToString", "[", "N", "]"}], "<>", "\"\<\\&-\\)\>\""}]}]}], 
+  "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"SetSlicingUpToScreenSpaceObinna", "[", 
+  RowBox[{"g", ",", "h", ",", "cd", ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"|\"\>", 
+     ",", "\<\"\\!\\(\\*OverscriptBox[\\(D\\), \\(_\\)]\\)\"\>"}], "}"}], ",",
+    "n", ",", "NSS", ",", "cd2", ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"|\"\>", 
+     ",", "\<\"\\!\\(\\*SubscriptBox[\\(\[Del]\\), \\(\[UpTee]\\)]\\)\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"PrintAs", "\[Rule]", "\<\"\\!\\(N\\&-\\)\"\>"}]}], 
+  "]"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1087,8 +1145,8 @@ Cell[BoxData["0"], "Output"]
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1224, 756},
-WindowMargins->{{28, Automatic}, {Automatic, 5}},
+WindowSize->{836, 571},
+WindowMargins->{{15, Automatic}, {Automatic, 10}},
 Visible->True,
 DockedCells->{
   Cell[
@@ -1141,8 +1199,7 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1,
-FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
-2012)",
+FrontEndVersion->"9.0 for Linux x86 (32-bit) (February 7, 2013)",
 StyleDefinitions->FrontEnd`FileName[{"Creative"}, "PastelColor.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
