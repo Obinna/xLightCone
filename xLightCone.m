@@ -19,11 +19,11 @@
 
 
 
-xAct`xLightCone`$Version={"0.0.1",{2014,09,25}};
+xAct`xLightCone`$Version={"0.0.1",{2014,09,29}};
 
 
-xAct`xLightCone`$xTensorVersionExpected={"1.0.5",{2013,1,27}};
-xAct`xLightCone`$xPertVersionExpected={"1.0.3",{2013,1,27}};
+xAct`xLightCone`$xTensorVersionExpected={"1.1.1",{2014,9,28}};
+xAct`xLightCone`$xPertVersionExpected={"1.0.5",{2014,9,28}};
 
 
 (* xPand: Cosmological perturbations about homogeneous space-times *)
@@ -53,7 +53,7 @@ You should have received a copy of the GNU General Public License
 
 (* :Context: xAct`xLightCone` *)
 
-(* :Copyright: Obinna Umeh (2015-) *)
+(* :Copyright: Obinna Umeh & Cyril Pitrou (2015-) *)
 
 (* :Keywords: *)
 
@@ -109,7 +109,326 @@ $xTensorVersionExpected::usage="$xTensorVersionExpected is a global variable giv
 $xPertVersionExpected::usage="$xPertVersionExpected is a global variable giving the oldest possible version of the package xPert which is required by the version of the package xPand in use.";
 
 
+DefMatterFields::usage =="";
+
+DefMetricFields::usage == "";
+
+DefScreenProjecteTensor::usage == "";
+
+SetSlicingUpToScreenSpace::usage == "";
+
+SplitMetric ::usage = "";
+
+
 Begin["xAct`xLightCone`Private`"]
+
+
+Options[DefScreenProjecteTensor]={PrintAs->Identity,TensorProperties->{"SymmetricTensor","Traceless","Transverse"},SpaceTimesOfDefinition->{"Background","Perturbed"}};
+
+DefScreenProjecteTensorQ[Name_,h___]:=False;
+PropertiesList[Name_]:={};
+InducedMetricOf[Name_]:={};
+
+(* Review all these properties.*)
+
+
+DefScreenProjecteTensor[Name_[inds___],h_?InducedMetricQ,n_?DirectionVectorQ,options___?OptionQ]:=
+(
+If[DefScreenProjectedTensorQ[Name,h],
+
+If[$DefInfoQ,
+Throw@Print["** DefScreenProjectedTensor: The projection properties on the hypersurfaces associated with the induced metric ", h," and direction vector", n," have already been defined for the tensor ", Name,"."],
+Throw[Null]
+];
+];
+
+If[DefScreenProjectedTensorQ[Name],
+
+If[$DefInfoQ,
+Print["** DefScreenProjectedTensor: Projection properties for the tensor ", Name," have been defined for another slicing. New projection properties on the hypersurfaces associated with the induced metric", h," and direction vector", n," are now added."]
+];
+
+];
+
+
+(* etc... *)
+
+);
+
+SetNumberOfArguments[DefScreenProjectedTensor,{3,Infinity}]
+Protect[DefScreenProjectedTensor];
+
+
+DefinedPerturbationParameter[x_]:=False;
+
+DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=();
+
+SetNumberOfArguments[DefMetricFields,{4,5}];
+Protect[DefMetricFields];
+
+
+DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=();
+
+SetNumberOfArguments[DefMatterFields,{4,5}]
+Protect[DefMatterFields];
+
+
+SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,gauge_?GaugeQ]:=();
+
+
+IndicesDown[expr_]:= Fold[SeparateMetric[First@$Metrics][#1,#2]&,expr,Select[IndicesOf[Up][expr],Not@LIndexQ[#]&]]
+IndicesUp[expr_]:= Fold[SeparateMetric[First@$Metrics][#1,#2]&,expr,Select[IndicesOf[Down][expr],Not@LIndexQ[#]&]]
+
+
+IndicesDown[0]:=0 ;(* This is to avoid bugs...*)
+IndicesUp[0]:=0 ;
+
+
+ConformalMetricName[g_?MetricQ,1]:=g;
+ConformalMetricName[g_?MetricQ,conffactor_]:=SymbolJoin[g,conffactor,2];
+
+
+DefConformalMetric[g_?MetricQ,conffactor_]:=Module[{n,q},Catch@With[{M=ManifoldOfCovD@CovDOfMetric@g,CD=CovDOfMetric@g},
+With[{i1=DummyIn[Tangent[M]],i2=DummyIn[Tangent[M]],sy1=SymbolOfCovD[CD][[1]],sy2=SymbolOfCovD[CD][[2]],metlist=Select[$Metrics,InducedFrom[#]===Null&]},
+
+
+If[Not@DefTensorQ[conffactor],DefTensor[conffactor[LI[n],LI[q]],{M},PrintAs->ToString[conffactor]]];
+
+
+Off[DefMetric::old];(* Annoying message turned off*)
+If[Not[DefTensorQ[ConformalMetricName[g,conffactor]]],
+
+
+DefMetric[-1,ConformalMetricName[g,conffactor][-i1,-i2],SymbolJoin[CD,conffactor,2],{":",StringJoin[sy2,ToString[conffactor],ToString[2]]},PrintAs->StringJoin["[",PrintAs[g],"\!\("<>PrintAs[conffactor]<>"\^2\)","]"(*ToString[conffactor],ToString[2]*)],ConformalTo->{g[-i1,-i2],conffactor[LI[0],LI[0]]^2}];
+
+];
+On[DefMetric::old];
+
+(* We have to ensure it is safe*)
+Perturbation[conffactor[LI[0],LI[q_],indices___],n_]^:=0/;n>=1;
+
+
+Off[ConformalRules::unknown];
+(* We use the error sent by ConformalRules to chekc whether or not the metric in the list metlist is conformallyr elated to the metric g.
+If it is the case we enforce transitivity of the conformal relations.*)
+If[Catch@ConformalRules[g,#]=!=Null,
+SetConformalTo[SymbolJoin[g,conffactor,2][-i1,-i2], {#[-i1, -i2],ConformalFactor[g,#]* conffactor[LI[0],LI[0]]^2}]]&/@metlist;
+On[ConformalRules::unknown];
+
+]
+]
+]
+
+SetNumberOfArguments[DefConformalMetric,2]
+Protect[DefConformalMetric];
+
+
+ConfHead[_,_][delta[\[Mu]_,\[Nu]_]]:=delta[\[Mu],\[Nu]](* Because I know that when there is delta function in an expression, it is always with one index up and one down...so this should be fine.*)
+
+ 
+ConfHead[metric1_?MetricQ,metric2_?MetricQ][ConfHead[metric2_?MetricQ,metric1_?MetricQ][expr_]]:=expr (* Not necessary *)
+ConfHead[metric1_?MetricQ,metric1_?MetricQ][expr_]:=expr
+ConfHead[metric2_?MetricQ,metric3_?MetricQ][ConfHead[metric1_?MetricQ,metric2_?MetricQ][expr_]]:=ConfHead[metric1,metric3][expr]
+
+
+(* Thanks to Jolyon and Leo Stein, the definition below should be much more general. *)
+(* The main reason is that the delta tensor is greedy and wants to contract through expressions like
+ConfHead[...][f[Scalar[phi[]]]].*)
+ConfHead/:IsIndexOf[ConfHead[_,_][_],_,delta]:=False;
+
+
+$BoolBasicConformalWeight=True;
+
+WeightOfIndicesList[indices_List]:=With[{aindex=Select[indices,Not[LIndexQ[#]]&]},Length@Select[aindex,DownIndexQ]-Length@Select[aindex,UpIndexQ]]
+
+(* Conformal weight of a tensor *)
+ConformalWeight[tens_?xTensorQ]:=0;
+ConformalWeight[tens_?xTensorQ[indices___]]:=ConformalWeight[tens]+WeightOfIndicesList[{indices}]
+
+ConformalWeight[f_?ScalarFunctionQ]:=0;
+
+MyChangeChristoffel[expr_,cd_,cd_]:=expr
+
+MyChangeChristoffel[expr_,cd2list_List,cd1_]:=Fold[MyChangeChristoffel[#1,#2,cd1]&,expr,cd2list]
+
+MyChangeChristoffel[expr_,cd2_,cd1_]:=With[{vb=Tangent[ManifoldOfCovD[cd1]]},With[{chr1=Head[(Christoffel[cd1])[DummyIn[vb],-DummyIn[vb],-DummyIn[vb]]],chr2=Head[(Christoffel[cd2])[DummyIn[vb],-DummyIn[vb],-DummyIn[vb]]],chr21=Head[(Christoffel@@Sort[{cd2,cd1}])[DummyIn[vb],-DummyIn[vb],-DummyIn[vb]]],sign=Order[cd2,cd1]},
+expr/.chr2[i1_,i2_,i3_]:>chr1[i1,i2,i3]+sign*chr21[i1,i2,i3]
+]
+]
+
+
+ExistInertHead[head_]:=Length@Cases[$InertHeads,head]>0
+
+RulesConf[metric1_?MetricQ,metric2_?MetricQ]:=(
+Module[{cd1,cd2,confa2,confa,M,res,inds},cd1=CovDOfMetric[metric1];cd2=CovDOfMetric[metric2];
+
+
+confa2=ConformalFactor[metric2,metric1];
+confa=Sqrt[ConformalFactor[metric2,metric1]]/.Sqrt[x_^n_?EvenQ]:>x^(n/2);
+(*In principle this should give a or 1/a depending if we go from metric1 to metric2 or metric2 to metric1*)
+
+M=ManifoldOfCovD[cd1];
+inds=DummyIn/@Table[Tangent[M],{Range[4]}];
+With[{i1=inds[[1]],i2=inds[[2]],i3=inds[[3]],i4=inds[[4]]},
+
+(* Once confheads are put on expression (as a result of a formal conformal transformation) then we remove them by expressing what they mean in function of the original tensors and the scale factor *)
+res=
+{RuleDelayed@@Hold[ConfHead[metric1,metric2][(Riemann@cd1)[i1_,i2_,i3_,i4_]],confa^(WeightOfIndicesList[{i1,i2,i3,i4}]-2)(Riemann@cd2)[i1,i2,i3,i4]],
+RuleDelayed@@Hold[ConfHead[metric1,metric2][(Ricci@cd1)[i1_,i2_]],confa^(WeightOfIndicesList[{i1,i2}]-2)(Ricci@cd2)[i1,i2]],
+RuleDelayed@@Hold[ConfHead[metric1,metric2][(RicciScalar@cd1)[]],(RicciScalar@cd2)[]],
+RuleDelayed@@Hold[ConfHead[metric1,metric2][(Christoffel@cd1)[i1_,i2_,i3_]],confa^(WeightOfIndicesList[{i1,i2,i3}]-1)*(Christoffel@cd2)[i1,i2,i3]],
+RuleDelayed@@Hold[ConfHead[metric1,metric2][(Determinant[metric1,AIndex])[]],(* This is removed because now xTensor is patched confa2^DimOfManifold[M]. Thanks to Leo Stein.*)(Determinant[metric2,AIndex])[]],
+
+(* This line below is not working well.  The problem should be considered later when xTensor knows how to handle the epsilon of a frozen metric. So this really works only when metric1 is the ambient metric... *)
+RuleDelayed@@Hold[ConfHead[metric1,metric2][(epsilon@metric1)[inds__?(Length[{#}]===DimOfManifold[M]&)]],(*confa2^(DimOfManifold[M]/2)*)confa^(WeightOfIndicesList[{inds}])(epsilon@metric1)[inds]],
+
+(* Not really satisfactory but minimalist for scalar functions *)
+(* Following Leo Stein suggestion, we allow the scalar function to have several arguments *)
+ConfHead[metric1,metric2][f_?ScalarFunctionQ[arg___]]:>Simplify[confa2^((ConformalWeight[f])/2),Assumptions->confa>0]f[arg],
+
+ConfHead[metric1,metric2][tens_?xTensorQ[indss___]]:>Simplify[confa2^(ConformalWeight[tens[indss]]/2),Assumptions->confa>0]tens[indss]
+};
+
+res
+]
+]
+)
+
+
+RemoveInducedDerivative[expr_,cd_]:=Module[{res},With[{h=MetricOfCovD@cd},
+If[InducedFrom@h===Null,expr,
+With[{g=First@InducedFrom@h},
+With[{CD=CovDOfMetric@g},
+res=(expr//.cd[ind_][Expr___]:>Projector[h][CD[ind][Expr]])/.Projector[h]->ProjectWith[h];
+If[res=!=expr,Print["** Warning: you are using ToMetric or Conformal with induced covariant derivatives. \nThese induced derivatives are first expressed in function of the covariant derivative form which they are induced since we do not know very well how to handle that. **"];];
+res
+]
+]
+]
+]
+];
+
+RemoveAllInducedDerivatives[expr_]:=With[{InducedMetrics=Select[$Metrics,InducedFrom[#]=!=Null&]},
+Fold[RemoveInducedDerivative[#1,CovDOfMetric[#2]]&,expr,InducedMetrics]
+];
+
+
+ToMetric[expr_,metric1_?MetricQ]:=If[InducedFrom@metric1=!=Null,expr,
+Module[{res,preexpression},
+Off[ConformalRules::unknown];
+With[{cd1=CovDOfMetric[metric1],$CovDsNotInduced=Select[Rest@$CovDs,InducedFrom[MetricOfCovD[#]]===Null&]},
+With[{$CovDsNotInducedRelatedTocd1=Select[$CovDsNotInduced,(Catch@ConformalRules[metric1,MetricOfCovD[#]]=!=Null)&]},
+
+preexpression=(RemoveAllInducedDerivatives[expr]//ProjectorToMetric//EinsteinToRicci//WeylToRiemann//ContractMetric//ToCanonical);
+
+res=ChangeCovD[#,$CovDsNotInduced,cd1]&@
+ChristoffelToGradConformal[#,$CovDsNotInducedRelatedTocd1,cd1]&@
+MyChangeChristoffel[#,$CovDsNotInducedRelatedTocd1,cd1]&@
+ChangeCovD[#,$CovDsNotInduced,cd1]&@
+ChangeCurvature[#,$CovDsNotInduced,cd1]&@preexpression;
+Off[ConformalRules::unknown];
+
+Fold[(#1/.ConformalRules[MetricOfCovD[#2],metric1])&,res,$CovDsNotInducedRelatedTocd1]
+]
+]
+]
+];
+
+ToMetric[expr_]:=ToMetric[expr,First@$Metrics];
+
+SetNumberOfArguments[ToMetric,{1,2}]
+Protect[ToMetric];
+
+
+InverseMetricQ[x_?xTensorQ]:=With[{tid=TensorID@x},(Length@tid>0)&&(tid[[1]]===xAct`xTensor`Private`InvMetric)]
+InverseMetricQ[_]:=False
+
+
+SeparateIndicesDownOfInverseMetric[invmetric_?InverseMetricQ][expr_]:=Fold[SeparateMetric[First@$Metrics][#1,#2]&,expr,IndicesOf[Down,invmetric][expr]];
+SeparateIndicesDownOfInverseMetric[_][expr_]:=expr
+
+
+Conformal[metricbase_?MetricQ][metric1_?MetricQ,metric2_?MetricQ][expr_]:=Module[{cdb,cd1,cd2,res,res2,(*oldpre,*)resbis,exprnoproj,M,i1,i2,beforeputtingconfheads,IDInvMetric},
+(* The conflict with CreenDollarIndicea has now been solved. So there is no need to redefine tempararoly $PrePrint*)
+(*oldpre=$PrePrint;$PrePrint=Identity;*)
+
+(* we define the Covds associated with the metric. The starting metric is metric1, the conformally transformed metric is metric2, and metricbase i the base metric for raising and lowering indiced. It might be one of the other two, but it might not be...*)
+cdb=CovDOfMetric[metricbase];
+cd1=CovDOfMetric[metric1];Off[ConformalFactor::"unknown"];
+cd2=CovDOfMetric[metric2];
+
+exprnoproj=expr//ProjectorToMetric;
+M=ManifoldOfCovD[cd1];
+i1=DummyIn[Tangent[M]];
+i2=DummyIn[Tangent[M]];
+
+IDInvMetric=SeparateIndicesDownOfInverseMetric[Inv[metric1]];
+
+beforeputtingconfheads=IDInvMetric[(IndicesDown@ToMetric[exprnoproj,metric1])
+/.Scalar[ex_]:>Scalar[IndicesDown[ex]]/.sf_?ScalarFunctionQ[args___]:>sf@@IndicesDown/@{args}]
+/.Scalar[ex_]:>Scalar[IDInvMetric[ex]]/.sf_?ScalarFunctionQ[args___]:>sf@@IDInvMetric/@{args};
+(* Above we make sure that IndicesDown and SeparateIndicesDownOfInverseMetric goes inside the scalar Head*)
+
+(*We use ToMetric to have only references to the metric1 and its associated CovD and curvature tensors *)
+(*Print["beforeputtingconfheads ",beforeputtingconfheads];*)
+
+(* Then we place the ConfHead on every expression to perform formally the conformal transformation. *)
+res=(beforeputtingconfheads
+(* Dirty case of scalar functions *)
+/.f_?ScalarFunctionQ[ex___]:>ConfHead[metric1,metric2][f[ex]]
+(* tensors *)
+/.tens_?xTensorQ[inds___]:>ConfHead[metric1,metric2][tens[inds]]
+(* Covariant derivatives *)
+/.cd1[i1_?DownIndexQ]:>cd2[i1]
+(* Now that we have ConfHead everywhere we need to remove the head by specifying the change*)
+(* First Obvious rules for metric and inverse metric*)
+/.ConfHead[metric1,metric2][metric1[i1_?DownIndexQ,i2_?DownIndexQ]]:>metric2[i1,i2]
+/.ConfHead[metric1,metric2][Inv[metric1][i1_?UpIndexQ,i2_?UpIndexQ]]:>Inv[metric2][i1,i2]);
+
+(* And then all other rules to remove the ConfHead*)
+
+resbis=res//.RulesConf[metric1,metric2];
+
+
+(* So here we have conformally transformed the expression, but now we want to express it in function of the original metric and orginal covD etc...
+Indeed at that point, we still have the second metric, and the Riemann of the second metric for instance. SO we use again ToMetric*)
+
+(*$PrePrint=oldpre;*)
+
+On[ConformalFactor::"unknown"];
+Off[ToCanonical::"cmods"];
+
+res2=ToCanonical@ContractMetric@NoScalar[ToMetric[resbis,metricbase]];
+On[ToCanonical::"cmods"];
+res2
+]
+
+(* In case the base metric is unspecified, it is the base metric of course...*)
+Conformal[metric1_?MetricQ,metric2_?MetricQ][expr_]:=Conformal[First@$Metrics][metric1,metric2][expr]
+
+
+SplitPerturbations[expr_,ListPairs_List,h_?InducedMetricQ,n_?DirectionVectorQ]:=();
+
+SplitPerturbations[expr_,h_?InducedMetricQ,n_?DirectionVectorQ]:=SplitPerturbations[expr,{},h,n]
+SetNumberOfArguments[SplitPerturbations,{3,4}]
+Protect[SplitPerturbations];
+
+
+ToxPandFromRules[expr_,RulesList_List,h_(*?InducedMetricQ*),n_?DirectionVectorQ,order_(*?IntegerQ*)]:=();
+
+SetNumberOfArguments[ToxPandFromRules,{4,5}]
+Protect[ToxPandFromRules]
+
+
+ExtractComponents[expr_,h_?InducedMetricQ,n_?DirectionVectorQ,roj_List,ListIndsToContract_List]:=();
+
+SetNumberOfArguments[ExtractComponents,{3,5}];
+Protect[ExtractComponents];
+
+VisualizeTensor[expr_,h_?InducedMetricQ,n_?DirectionVectorQ]:=();
+
+SetNumberOfArguments[VisualizeTensor,3];
+Protect[VisualizeTensor];
 
 
 On[RuleDelayed::rhs];
