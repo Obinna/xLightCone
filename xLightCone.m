@@ -192,17 +192,17 @@ DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo->{u[
 
 DefCovD[cd2[-ind1],{cd2post,cd2pre}];
 cd2[ind1_][NSS[ind2_,ind3_]]:=0;
-AutomaticRules[NSS,MakeRule[{NSS[ind1,ind2] n[-ind2],0}]];
-AutomaticRules[NSS,MakeRule[{NSS[ind1,ind2] u[-ind2],0}]];
+AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] n[-ind2],0}]];
+AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] u[-ind2],0}]];
 
 (*I used AutomaticRule to assign rules to NSS...*)
 (* Well it doesn't work well*)
 (*NSS[-ind1,-ind2]^:=2/;ind1+ind2==0;
 NSS[-ind1,-ind2]NSS[ind1,ind2]^:=2;*)
 
-(*AutomaticRules[NSS,MakeRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-n[-ind1]n[-ind2]}]]*)AutomaticRules[NSS,MakeRule[{NSS[ind1,ind2] NSS[-ind2,-ind3],NSS[ind1,-ind3]}]];
-AutomaticRules[NSS,MakeRule[{NSS[-ind1,-ind2] NSS[ind2,ind3],NSS[-ind1,ind3]}]];
-AutomaticRules[NSS,MakeRule[{NSS[-ind1,ind1] ,dim-2}]];
+(*AutomaticRules[NSS,BuildRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-n[-ind1]n[-ind2]}]]*)AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] NSS[-ind2,-ind3],NSS[ind1,-ind3]}]];
+AutomaticRules[NSS,BuildRule[{NSS[-ind1,-ind2] NSS[ind2,ind3],NSS[-ind1,ind3]}]];
+AutomaticRules[NSS,BuildRule[{NSS[-ind1,ind1] ,dim-2}]];
 (* Who knows we might allow for 1+1+n splitting so here that should be n-2.*)
 
 On[DefMetric::old];
@@ -246,20 +246,20 @@ NSS1[-a_,b_] cd2[c_]@cd2[a_][expr1_]:>cd2[c]@cd2[b][expr1],NSS1[a_,b_] cd2[c_]@c
 (*The acceleration should vanish for homogeneous spacetimes.*)
 
 Acceleration[u][ind1_]=0;
-AutomaticRules[u,MakeRule[{u[ind1] u[-ind1],normu}]];
-AutomaticRules[u,MakeRule[{u[-ind1] g[ind1,ind2],u[ind2]}]];
-(*AutomaticRules[u,MakeRule[{g[ind1,ind2] u[-ind2] u[-ind1],normu}]];*)
+AutomaticRules[u,BuildRule[{u[ind1] u[-ind1],normu}]];
+AutomaticRules[u,BuildRule[{u[-ind1] g[ind1,ind2],u[ind2]}]];
+(*AutomaticRules[u,BuildRule[{g[ind1,ind2] u[-ind2] u[-ind1],normu}]];*)
 
 
 (* CP Here it is because we assume non Binachi for n. Otherwise this is more general probably. Even if we now we specialize to FL, the 1+1+2 splitting would be great if it could be as general as possible. So here we should extend this definition and have it restricted to 0 only if the TypeOfPScaetime is non Bianchi.*)
 Acceleration[n][ind1_]=0;
-AutomaticRules[n,MakeRule[{n[ind1] n[-ind1],normn}]];
-AutomaticRules[n,MakeRule[{n[-ind1] g[ind1,ind2],n[ind2]}]];
-(*AutomaticRules[n,MakeRule[{g[ind1,ind2] n[-ind2] n[-ind1],normn}]];*)
+AutomaticRules[n,BuildRule[{n[ind1] n[-ind1],normn}]];
+AutomaticRules[n,BuildRule[{n[-ind1] g[ind1,ind2],n[ind2]}]];
+(*AutomaticRules[n,BuildRule[{g[ind1,ind2] n[-ind2] n[-ind1],normn}]];*)
 
 
 If[IntegerQ@dim&&dim>=2,indsdim=GetIndicesOfVBundle[Tangent@Manifold,dim,{ind5}];
-AutomaticRules[epsilon[g],MakeRule[Evaluate[{epsilon[g]@@indsdim u[-indsdim[[1]]] h[-indsdim[[2]],ind5],ReplaceIndex[Evaluate[epsilon[g]@@indsdim],indsdim[[2]]->ind5] u[-indsdim[[1]]]}]]];
+AutomaticRules[epsilon[g],BuildRule[Evaluate[{epsilon[g]@@indsdim u[-indsdim[[1]]] h[-indsdim[[2]],ind5],ReplaceIndex[Evaluate[epsilon[g]@@indsdim],indsdim[[2]]->ind5] u[-indsdim[[1]]]}]]];
 ];
 ]
 ]
@@ -297,6 +297,9 @@ If[$DefInfoQ,
 Print["** DefScreenProjectedTensor: Projection properties for the tensor ", Name," have been defined for another slicing. New projection properties on the hypersurfaces associated with the induced metric", h," and direction vector", n," are now added."]
 ];
 ];
+
+(* And here we should put all the rules of splitting *)
+
 )
 
 

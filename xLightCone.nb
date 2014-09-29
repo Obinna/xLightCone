@@ -1343,7 +1343,7 @@ Cell[BoxData[{
             "\[IndentingNewLine]", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"NSS", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1354,7 +1354,7 @@ Cell[BoxData[{
             "]"}], ";", "\[IndentingNewLine]", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"NSS", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1396,7 +1396,7 @@ Cell[BoxData[{
            RowBox[{"(*", 
             RowBox[{"AutomaticRules", "[", 
              RowBox[{"NSS", ",", 
-              RowBox[{"MakeRule", "[", 
+              RowBox[{"BuildRule", "[", 
                RowBox[{"{", 
                 RowBox[{
                  RowBox[{"NSS", "[", 
@@ -1416,7 +1416,7 @@ Cell[BoxData[{
              "*)"}], 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"NSS", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1432,7 +1432,7 @@ Cell[BoxData[{
            ";", "\[IndentingNewLine]", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"NSS", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1448,7 +1448,7 @@ Cell[BoxData[{
               "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"NSS", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{"NSS", "[", 
@@ -1799,7 +1799,7 @@ Cell[BoxData[{
             "=", "0"}], ";", "\n", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"u", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1809,7 +1809,7 @@ Cell[BoxData[{
               "]"}]}], "]"}], ";", "\n", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"u", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1823,7 +1823,7 @@ Cell[BoxData[{
             RowBox[{
              RowBox[{"AutomaticRules", "[", 
               RowBox[{"u", ",", 
-               RowBox[{"MakeRule", "[", 
+               RowBox[{"BuildRule", "[", 
                 RowBox[{"{", 
                  RowBox[{
                   RowBox[{
@@ -1865,7 +1865,7 @@ Cell[BoxData[{
             "=", "0"}], ";", "\n", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"n", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1875,7 +1875,7 @@ Cell[BoxData[{
               "]"}]}], "]"}], ";", "\n", 
            RowBox[{"AutomaticRules", "[", 
             RowBox[{"n", ",", 
-             RowBox[{"MakeRule", "[", 
+             RowBox[{"BuildRule", "[", 
               RowBox[{"{", 
                RowBox[{
                 RowBox[{
@@ -1889,7 +1889,7 @@ Cell[BoxData[{
             RowBox[{
              RowBox[{"AutomaticRules", "[", 
               RowBox[{"n", ",", 
-               RowBox[{"MakeRule", "[", 
+               RowBox[{"BuildRule", "[", 
                 RowBox[{"{", 
                  RowBox[{
                   RowBox[{
@@ -1916,7 +1916,7 @@ Cell[BoxData[{
               RowBox[{"AutomaticRules", "[", 
                RowBox[{
                 RowBox[{"epsilon", "[", "g", "]"}], ",", 
-                RowBox[{"MakeRule", "[", 
+                RowBox[{"BuildRule", "[", 
                  RowBox[{"Evaluate", "[", 
                   RowBox[{"{", 
                    RowBox[{
@@ -2099,8 +2099,13 @@ properties on the hypersurfaces associated with the induced metric\>\"", ",",
             " ", "h", ",", "\"\< and direction vector\>\"", ",", " ", "n", 
             ",", "\"\< are now added.\>\""}], "]"}]}], "\[IndentingNewLine]", 
          "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
-    "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "And", " ", "here", " ", "we", " ", "should", " ", "put", " ", "all", 
+      " ", "the", " ", "rules", " ", "of", " ", "splitting"}], " ", "*)"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", ")"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{"etc", "..."}], " ", "*)"}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
