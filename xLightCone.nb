@@ -149,7 +149,7 @@ Cell[BoxData[
  InitializationCell->True],
 
 Cell["", "Text"]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -179,7 +179,7 @@ Cell["\<\
  InitializationCell->True],
 
 Cell["", "Text"]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -705,7 +705,7 @@ Cell[BoxData[
      RowBox[{"NoScalar", "@", "expr"}], "]"}]}], "\n", 
    RowBox[{
     RowBox[{"Protect", "[", "xAct`xTensor`NoScalar", "]"}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", 
     RowBox[{
     "*", "To", " ", "avoid", " ", "complaints", " ", "from", " ", "MakeRule", 
@@ -860,11 +860,15 @@ Cell[BoxData[
      RowBox[{
      "the", " ", "information", " ", "messages", " ", "are", " ", "not", " ", 
       
-      RowBox[{"printed", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+      RowBox[{"printed", "."}]}]}], "*)"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", 
+<<<<<<< HEAD
     RowBox[{"*", "Testing", " ", "expressions"}], "**)"}], "\n", 
    "\[IndentingNewLine]", 
+=======
+    RowBox[{"*", "Testing", " ", "expressions"}], "**)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+>>>>>>> ae94e32904172474947ec91c63521d718a5e2fd7
    RowBox[{
     RowBox[{"AnyIndicesListQ", "[", "inds_List", "]"}], ":=", 
     RowBox[{
@@ -888,7 +892,11 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+<<<<<<< HEAD
    "\[IndentingNewLine]", 
+=======
+   "\n", 
+>>>>>>> ae94e32904172474947ec91c63521d718a5e2fd7
    RowBox[{
     RowBox[{"DefTensorQ", "[", "symb_", "]"}], ":=", 
     RowBox[{
@@ -910,7 +918,11 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+<<<<<<< HEAD
    "\[IndentingNewLine]", 
+=======
+   "\n", 
+>>>>>>> ae94e32904172474947ec91c63521d718a5e2fd7
    RowBox[{
     RowBox[{"GaugeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -938,7 +950,11 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+<<<<<<< HEAD
    "\[IndentingNewLine]", 
+=======
+   "\n", 
+>>>>>>> ae94e32904172474947ec91c63521d718a5e2fd7
    RowBox[{
     RowBox[{"InducedMetricQ", "[", "symb_", "]"}], ":=", 
     RowBox[{"If", "[", 
@@ -972,7 +988,11 @@ Cell[BoxData[
        RowBox[{"gives", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+<<<<<<< HEAD
    "\[IndentingNewLine]", 
+=======
+   "\n", 
+>>>>>>> ae94e32904172474947ec91c63521d718a5e2fd7
    RowBox[{
     RowBox[{"SpaceTimeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -1000,7 +1020,11 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+<<<<<<< HEAD
    "\[IndentingNewLine]", 
+=======
+   "\n", 
+>>>>>>> ae94e32904172474947ec91c63521d718a5e2fd7
    RowBox[{
     RowBox[{"TensorNullQ", "[", "tens_", "]"}], ":=", 
     RowBox[{"If", "[", 
@@ -1038,7 +1062,11 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
       RowBox[{"otherwise", ".", "This"}], " ", "function", " ", "is", " ", 
       "not", " ", "suited", " ", "to", " ", "test", " ", "tensors", " ", 
       "defined", " ", "with", " ", "label"}], "-", 
+<<<<<<< HEAD
      RowBox[{"indices", "."}]}], "*)"}], "\[IndentingNewLine]", "\n", 
+=======
+     RowBox[{"indices", "."}]}], "*)"}], "\n", "\[IndentingNewLine]", 
+>>>>>>> ae94e32904172474947ec91c63521d718a5e2fd7
    RowBox[{"(*", 
     RowBox[{"*", "Type", " ", "of", " ", "manifolds"}], "**)"}], 
    "\[IndentingNewLine]", 
@@ -1345,7 +1373,9 @@ Cell[BoxData[
            RowBox[{"CovDOfMetric", "[", "h", "]"}]}], "}"}]}], "]"}], ";", 
        "\n", "\n", 
        RowBox[{"(*", " ", 
-        RowBox[{"Hello", " ", "Cyril"}], " ", "*)"}], "\n", "\n", "   ", 
+        RowBox[{"Hello", " ", "Cyril"}], " ", "*)"}], "\n", 
+       RowBox[{"(*", " ", 
+        RowBox[{"Hello", " ", "Obinna"}], " ", "*)"}], "\n", "\n", "   ", 
        RowBox[{"(*", 
         RowBox[{
         "It", " ", "complanins", " ", "about", " ", "metric", " ", 
@@ -4454,7 +4484,7 @@ Cell[BoxData[{
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"DefScreenProjecteTensor", "[", 
+   RowBox[{"DefScreenProjectedTensor", "[", 
     RowBox[{
      RowBox[{"Name_", "[", "inds___", "]"}], ",", 
      RowBox[{"h_", "?", "InducedMetricQ"}], ",", 
@@ -6105,7 +6135,8 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1,
-FrontEndVersion->"9.0 for Linux x86 (32-bit) (February 7, 2013)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
+2012)",
 StyleDefinitions->FrontEnd`FileName[{"Creative"}, "PastelColor.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
