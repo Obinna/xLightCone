@@ -31,7 +31,7 @@ Cell[BoxData[
 Cell[BoxData["\<\"CopyRight (C) 2003-2014, Jose M. Martin-Garcia, under the \
 General Public License.\"\>"], "Print"],
 
-Cell[BoxData["\<\"Connecting to external mac executable...\"\>"], "Print"],
+Cell[BoxData["\<\"Connecting to external linux executable...\"\>"], "Print"],
 
 Cell[BoxData["\<\"Connection established.\"\>"], "Print"],
 
@@ -511,17 +511,30 @@ Cell[BoxData[
 }, Open  ]]
 }, Open  ]],
 
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"SetSlicingUpToScreenSpace", "[", 
+   RowBox[{"g", ",", "u", ",", 
+    RowBox[{"-", "1"}], ",", "h", ",", "cd", ",", 
+    RowBox[{"{", 
+     RowBox[{"\"\<|\>\"", ",", "\"\<D\>\""}], "}"}], ",", "n", ",", "1", ",", 
+    "S", ",", "d", ",", 
+    RowBox[{"{", 
+     RowBox[{"\"\<:\>\"", ",", "\"\<d\>\""}], "}"}]}], "]"}], 
+  "*)"}]], "Input"],
+
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"SetSlicingUpToScreenSpace", "[", 
+ RowBox[{"SetSlicingUpToScreenSpaceObinna", "[", 
   RowBox[{"g", ",", "u", ",", 
    RowBox[{"-", "1"}], ",", "h", ",", "cd", ",", 
    RowBox[{"{", 
-    RowBox[{"\"\<|\>\"", ",", "\"\<D\>\""}], "}"}], ",", "n", ",", "1", ",", 
-   "S", ",", "d", ",", 
+    RowBox[{"\"\<|\>\"", ",", "\"\<D\>\""}], "}"}], ",", "n", ",", "NSS", ",",
+    "cd2", ",", 
    RowBox[{"{", 
-    RowBox[{"\"\<:\>\"", ",", "\"\<d\>\""}], "}"}]}], "]"}]], "Input"],
+    RowBox[{"\"\<|\>\"", ",", "\"\<\[Del]\>\""}], "}"}], ",", 
+   RowBox[{"PrintAs", "\[Rule]", "\"\<N\>\""}]}], "]"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -531,10 +544,10 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"u", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1315"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`u[-$CellContext`\[Sigma]$1309], ". ", ""],
+   $CellContext`u[-$CellContext`\[Sigma]$1315], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -545,12 +558,12 @@ Cell[BoxData[
    "\[InvisibleSpace]", 
    RowBox[{"h", "[", 
     RowBox[{
-     RowBox[{"-", "\[Sigma]$1309"}], ",", 
-     RowBox[{"-", "\[Sigma]$1310"}]}], "]"}], 
+     RowBox[{"-", "\[Sigma]$1315"}], ",", 
+     RowBox[{"-", "\[Sigma]$1316"}]}], "]"}], 
    "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefTensor, ": Defining ", "symmetric metric tensor ", 
-   $CellContext`h[-$CellContext`\[Sigma]$1309, -$CellContext`\[Sigma]$1310], 
+   $CellContext`h[-$CellContext`\[Sigma]$1315, -$CellContext`\[Sigma]$1316], 
    ". ", ""],
   Editable->False]], "Print"],
 
@@ -609,16 +622,16 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefCovD", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
+  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefCovD", "\[InvisibleSpace]", 
+   "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"covariant derivative \"\>", "\[InvisibleSpace]", 
    
    RowBox[{"cd", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1315"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefCovD, ": Defining ", "covariant derivative ", 
-   $CellContext`cd[-$CellContext`\[Sigma]$1309], ". ", ""],
+   $CellContext`cd[-$CellContext`\[Sigma]$1315], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -855,135 +868,11 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"n", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1315"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`n[-$CellContext`\[Sigma]$1309], ". ", ""],
+   $CellContext`n[-$CellContext`\[Sigma]$1315], ". ", ""],
   Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
-   RowBox[{"S", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Sigma]$1309"}], ",", 
-     RowBox[{"-", "\[Sigma]$1310"}]}], "]"}], 
-   "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`S[-$CellContext`\[Sigma]$1309, -$CellContext`\[Sigma]$1310], 
-   ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefCovD", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"covariant derivative \"\>", "\[InvisibleSpace]", 
-   
-   RowBox[{"d", "[", 
-    RowBox[{"-", "\[Sigma]$1309"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefCovD, ": Defining ", "covariant derivative ", 
-   $CellContext`d[-$CellContext`\[Sigma]$1309], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"vanishing torsion tensor \"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"Torsiond", "[", 
-    RowBox[{"\[Alpha]", ",", 
-     RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "vanishing torsion tensor ", 
-   $CellContext`Torsiond[$CellContext`\[Alpha], -$CellContext`\[Beta], \
--$CellContext`\[Gamma]], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"symmetric Christoffel tensor \"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"Christoffeld", "[", 
-    RowBox[{"\[Alpha]", ",", 
-     RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", 
-   "symmetric Christoffel tensor ", 
-   $CellContext`Christoffeld[$CellContext`\[Alpha], -$CellContext`\[Beta], \
--$CellContext`\[Gamma]], ". ", ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"Riemann tensor \"\>", "\[InvisibleSpace]", 
-   RowBox[{"Riemannd", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}], ",", 
-     RowBox[{"-", "\[Gamma]"}], ",", "\[Lambda]"}], "]"}], 
-   "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"Antisymmetric only in the first pair.\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "Riemann tensor ", 
-   $CellContext`Riemannd[-$CellContext`\[Alpha], -$CellContext`\[Beta], \
--$CellContext`\[Gamma], $CellContext`\[Lambda]], ". ", 
-   "Antisymmetric only in the first pair."],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
-   "\[InvisibleSpace]", "\<\": Defining \"\>", 
-   "\[InvisibleSpace]", "\<\"non-symmetric Ricci tensor \"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"Riccid", "[", 
-    RowBox[{
-     RowBox[{"-", "\[Alpha]"}], ",", 
-     RowBox[{"-", "\[Beta]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
-   "\[InvisibleSpace]", "\<\"\"\>"}],
-  SequenceForm[
-  "** ", xAct`xTensor`DefTensor, ": Defining ", "non-symmetric Ricci tensor ", 
-   $CellContext`Riccid[-$CellContext`\[Alpha], -$CellContext`\[Beta]], ". ", 
-   ""],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"** DefCovD:  Contractions of Riemann automatically replaced \
-by Ricci.\"\>"], "Print"]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{"Hold", "[", 
-  RowBox[{"Throw", "[", "Null", "]"}], "]"}]], "Output"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"SetSlicingUpToScreenSpaceObinna", "[", 
-  RowBox[{"g", ",", "u", ",", 
-   RowBox[{"-", "1"}], ",", "h", ",", "cd", ",", 
-   RowBox[{"{", 
-    RowBox[{"\"\<|\>\"", ",", "\"\<D\>\""}], "}"}], ",", "n", ",", "NSS", ",",
-    "cd2", ",", 
-   RowBox[{"{", 
-    RowBox[{"\"\<|\>\"", ",", "\"\<\[Del]\>\""}], "}"}], ",", 
-   RowBox[{"PrintAs", "\[Rule]", "\"\<N\>\""}]}], "]"}]], "Input"],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  InterpretationBox[
@@ -991,10 +880,10 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"NSS", "[", 
-    RowBox[{"\[Sigma]$4029", ",", "\[Sigma]$4030"}], "]"}], 
+    RowBox[{"\[Sigma]$1315", ",", "\[Sigma]$1316"}], "]"}], 
    "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`NSS[$CellContext`\[Sigma]$4029, $CellContext`\[Sigma]$4030], 
+   $CellContext`NSS[$CellContext`\[Sigma]$1315, $CellContext`\[Sigma]$1316], 
    ". ", ""],
   Editable->False]], "Print"],
 
@@ -1005,11 +894,11 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"covariant derivative \"\>", "\[InvisibleSpace]", 
    
    RowBox[{"cd2", "[", 
-    RowBox[{"-", "\[Sigma]$4029"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$1315"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefCovD, ": Defining ", "covariant derivative ", 
-   $CellContext`cd2[-$CellContext`\[Sigma]$4029], ". ", ""],
+   $CellContext`cd2[-$CellContext`\[Sigma]$1315], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -1245,6 +1134,15 @@ Cell[BoxData["\<\"Dobidoouah\"\>"], "Print"]
 Cell[CellGroupData[{
 
 Cell[BoxData[
+ RowBox[{"xAct`xLightCone`Private`DirectionVectorQ", "[", "n", 
+  "]"}]], "Input"],
+
+Cell[BoxData["True"], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
  RowBox[{"ToLightConeFromRules", "[", 
   RowBox[{"3", ",", 
    RowBox[{"{", "}"}], ",", "h", ",", "n", ",", "1"}], "]"}]], "Input"],
@@ -1256,25 +1154,25 @@ Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"S", "[", 
+  RowBox[{"NSS", "[", 
    RowBox[{"\[Mu]", ",", "\[Nu]"}], "]"}], 
   RowBox[{"n", "[", 
    RowBox[{"-", "\[Mu]"}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"S", "[", 
+  RowBox[{"NSS", "[", 
    RowBox[{"\[Mu]", ",", "\[Nu]"}], "]"}], 
   RowBox[{"u", "[", 
    RowBox[{"-", "\[Mu]"}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"S", "[", 
+  RowBox[{"NSS", "[", 
    RowBox[{"\[Mu]", ",", 
     RowBox[{"-", "\[Nu]"}]}], "]"}], 
-  RowBox[{"S", "[", 
+  RowBox[{"NSS", "[", 
    RowBox[{"\[Nu]", ",", "\[Alpha]"}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"d", "[", 
+  RowBox[{"cd", "[", 
    RowBox[{"-", "\[Mu]"}], "]"}], "[", 
-  RowBox[{"S", "[", 
+  RowBox[{"NSS", "[", 
    RowBox[{"\[Alpha]", ",", "\[Beta]"}], "]"}], "]"}]}], "Input"],
 
 Cell[BoxData["0"], "Output"],
@@ -1282,42 +1180,43 @@ Cell[BoxData["0"], "Output"],
 Cell[BoxData["0"], "Output"],
 
 Cell[BoxData[
- RowBox[{
-  InterpretationBox[
-   StyleBox[GridBox[{
-      {
-       OverscriptBox["S", "-"], 
+ InterpretationBox[
+  StyleBox[GridBox[{
+     {"N", 
+      StyleBox[GridBox[{
+         {"\[Mu]", "\[Alpha]"},
+         {" ", " "}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.], {
+             Offset[0.034999999999999996`]}, 
+            Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+             Offset[0.]}}, "RowsIndexed" -> {}}],
+       FontSize->Rational[39, 4]]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.034999999999999996`]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   ShowAutoStyles->False,
+   AutoSpacing->False],
+  $CellContext`NSS[$CellContext`\[Mu], $CellContext`\[Alpha]],
+  Editable->False]], "Output"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   RowBox[{
+    SubscriptBox["D", "\[Mu]"], GridBox[{
+      {"N", 
        StyleBox[GridBox[{
-          {"\[Mu]", " "},
-          {" ", "\[Nu]"}
-         },
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-              Offset[0.]}}, "RowsIndexed" -> {}}],
-        FontSize->Rational[39, 4]]}
-     },
-     GridBoxAlignment->{
-      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
-       "RowsIndexed" -> {}},
-     GridBoxSpacings->{"Columns" -> {
-         Offset[0.27999999999999997`], {
-          Offset[0.034999999999999996`]}, 
-         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-         Offset[0.2], {
-          Offset[0.4]}, 
-         Offset[0.2]}, "RowsIndexed" -> {}}],
-    ShowAutoStyles->False,
-    AutoSpacing->False],
-   $CellContext`S[$CellContext`\[Mu], -$CellContext`\[Nu]],
-   Editable->False], " ", 
-  InterpretationBox[
-   StyleBox[GridBox[{
-      {
-       OverscriptBox["S", "-"], 
-       StyleBox[GridBox[{
-          {"\[Nu]", "\[Alpha]"},
+          {"\[Alpha]", "\[Beta]"},
           {" ", " "}
          },
          GridBoxSpacings->{"Columns" -> {
@@ -1336,13 +1235,12 @@ Cell[BoxData[
          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
          Offset[0.2], {
           Offset[0.4]}, 
-         Offset[0.2]}, "RowsIndexed" -> {}}],
-    ShowAutoStyles->False,
-    AutoSpacing->False],
-   $CellContext`S[$CellContext`\[Nu], $CellContext`\[Alpha]],
-   Editable->False]}]], "Output"],
-
-Cell[BoxData["0"], "Output"]
+         Offset[0.2]}, "RowsIndexed" -> {}}]}],
+   ShowAutoStyles->False,
+   AutoSpacing->False],
+  $CellContext`cd[-$CellContext`\[Mu]][
+   $CellContext`NSS[$CellContext`\[Alpha], $CellContext`\[Beta]]],
+  Editable->False]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1363,6 +1261,47 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
    $CellContext`Test[-$CellContext`\[Alpha]], ". ", ""],
+  Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DefTensor", "[", 
+  RowBox[{
+   RowBox[{"BB", "[", 
+    RowBox[{"-", "\[Mu]"}], "]"}], ",", 
+   RowBox[{"{", "M", "}"}], ",", 
+   RowBox[{"OrthogonalTo", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"u", "[", "\[Mu]", "]"}], ",", 
+      RowBox[{"n", "[", "\[Mu]", "]"}]}], "}"}]}], ",", 
+   RowBox[{"ProjectedWith", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"h", "[", 
+       RowBox[{"\[Mu]", ",", 
+        RowBox[{"-", "\[Alpha]"}]}], "]"}], ",", 
+      RowBox[{"NSS", "[", 
+       RowBox[{"\[Mu]", ",", 
+        RowBox[{"-", "\[Alpha]"}]}], "]"}]}], "}"}]}], ",", 
+   RowBox[{
+   "PrintAs", "\[Rule]", 
+    "\"\<\\!\\(\\*SubscriptBox[\\(B\\), \\(\[UpTee]\\)]\\)\>\""}]}], 
+  "]"}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
+   "\[InvisibleSpace]", "\<\": Defining \"\>", 
+   "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
+   RowBox[{"BB", "[", 
+    RowBox[{"-", "\[Mu]"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+   "\[InvisibleSpace]", "\<\"\"\>"}],
+  SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
+   $CellContext`BB[-$CellContext`\[Mu]], ". ", ""],
   Editable->False]], "Print"]
 }, Open  ]],
 
@@ -1416,17 +1355,19 @@ Cell[BoxData[
      RowBox[{"-", "\[Nu]"}]}], "]"}], 
    RowBox[{
     RowBox[{"cd2", "[", "\[Nu]", "]"}], "[", 
-    RowBox[{"Test", "[", "\[Alpha]", "]"}], "]"}]}], "//", 
+    RowBox[{"BB", "[", "\[Alpha]", "]"}], "]"}]}], "//", 
   "ToCanonical"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{
-  InterpretationBox[
-   StyleBox[GridBox[{
-      {"N", 
+ InterpretationBox[
+  StyleBox[
+   RowBox[{
+    SuperscriptBox["\[Del]", "\[Mu]"], GridBox[{
+      {
+       SubscriptBox["B", "\[UpTee]"], 
        StyleBox[GridBox[{
-          {"\[Mu]", " "},
-          {" ", "\[Nu]"}
+          {"\[Alpha]"},
+          {" "}
          },
          GridBoxSpacings->{"Columns" -> {
              Offset[0.], {
@@ -1444,42 +1385,12 @@ Cell[BoxData[
          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
          Offset[0.2], {
           Offset[0.4]}, 
-         Offset[0.2]}, "RowsIndexed" -> {}}],
-    ShowAutoStyles->False,
-    AutoSpacing->False],
-   $CellContext`NSS[$CellContext`\[Mu], -$CellContext`\[Nu]],
-   Editable->False], " ", 
-  InterpretationBox[
-   StyleBox[
-    RowBox[{
-     SuperscriptBox["\[Del]", "\[Nu]"], GridBox[{
-       {"Test", 
-        StyleBox[GridBox[{
-           {"\[Alpha]"},
-           {" "}
-          },
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-               Offset[0.]}}, "RowsIndexed" -> {}}],
-         FontSize->Rational[39, 4]]}
-      },
-      GridBoxAlignment->{
-       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
-        "RowsIndexed" -> {}},
-      GridBoxSpacings->{"Columns" -> {
-          Offset[0.27999999999999997`], {
-           Offset[0.034999999999999996`]}, 
-          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-          Offset[0.2], {
-           Offset[0.4]}, 
-          Offset[0.2]}, "RowsIndexed" -> {}}]}],
-    ShowAutoStyles->False,
-    AutoSpacing->False],
-   $CellContext`cd2[$CellContext`\[Nu]][
-    $CellContext`Test[$CellContext`\[Alpha]]],
-   Editable->False]}]], "Output"]
+         Offset[0.2]}, "RowsIndexed" -> {}}]}],
+   ShowAutoStyles->False,
+   AutoSpacing->False],
+  $CellContext`cd2[$CellContext`\[Mu]][
+   $CellContext`BB[$CellContext`\[Alpha]]],
+  Editable->False]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1687,12 +1598,1149 @@ $CellContext`Test[-$CellContext`\[Alpha]]],
 Cell[CellGroupData[{
 
 Cell[BoxData[
+ RowBox[{"ToInducedDerivativeScreenSpace", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CD", "[", 
+     RowBox[{"-", "\[Alpha]"}], "]"}], "[", 
+    RowBox[{"BB", "[", "\[Mu]", "]"}], "]"}], ",", "CD", ",", "cd", ",", 
+   "cd2"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {
+         SubscriptBox["B", "\[UpTee]"], 
+         StyleBox[GridBox[{
+            {"\[Beta]"},
+            {" "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`BB[$CellContext`\[Beta]],
+     Editable->False]}], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"KN", 
+        StyleBox[GridBox[{
+           {" ", " "},
+           {"\[Alpha]", "\[Beta]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`ExtrinsicKNSS[-$CellContext`\[Alpha], -$CellContext`\[Beta]],
+    
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["n", "-"], 
+        StyleBox[GridBox[{
+           {"\[Mu]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`n[$CellContext`\[Mu]],
+    Editable->False]}], "+", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        SubscriptBox["B", "\[UpTee]"], 
+        StyleBox[GridBox[{
+           {"\[Beta]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`BB[$CellContext`\[Beta]],
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        RowBox[{"K", 
+         OverscriptBox["h", "-"]}], 
+        StyleBox[GridBox[{
+           {" ", " "},
+           {"\[Alpha]", "\[Beta]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`ExtrinsicKh[-$CellContext`\[Alpha], -$CellContext`\[Beta]],
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["u", "-"], 
+        StyleBox[GridBox[{
+           {"\[Mu]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`u[$CellContext`\[Mu]],
+    Editable->False]}], "+", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["n", "-"], 
+        StyleBox[GridBox[{
+           {" "},
+           {"\[Alpha]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`n[-$CellContext`\[Alpha]],
+    Editable->False], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Beta]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`BB[$CellContext`\[Beta]],
+       Editable->False], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        StyleBox[
+         RowBox[{
+          SubscriptBox["D", "\[Beta]"], GridBox[{
+            {
+             OverscriptBox["n", "-"], 
+             StyleBox[GridBox[{
+                {"\[Mu]"},
+                {" "}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                   Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+              FontSize->Rational[39, 4]]}
+           },
+           
+           GridBoxAlignment->{
+            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.4]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}]}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`cd[-$CellContext`\[Beta]][
+         $CellContext`n[$CellContext`\[Mu]]],
+        Editable->False], ")"}]}], "+", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           OverscriptBox["n", "-"], 
+           StyleBox[GridBox[{
+              {"\[Gamma]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`n[$CellContext`\[Gamma]],
+       Editable->False], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        StyleBox[
+         RowBox[{
+          SubscriptBox["D", "\[Gamma]"], GridBox[{
+            {
+             SubscriptBox["B", "\[UpTee]"], 
+             StyleBox[GridBox[{
+                {"\[Mu]"},
+                {" "}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                   Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+              FontSize->Rational[39, 4]]}
+           },
+           
+           GridBoxAlignment->{
+            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.4]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}]}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`cd[-$CellContext`\[Gamma]][
+         $CellContext`BB[$CellContext`\[Mu]]],
+        Editable->False], ")"}]}], "-", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Lambda]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`BB[$CellContext`\[Lambda]],
+       Editable->False], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        StyleBox[
+         RowBox[{
+          SubscriptBox["D", "\[Lambda]"], GridBox[{
+            {
+             OverscriptBox["n", "-"], 
+             StyleBox[GridBox[{
+                {"\[Mu]"},
+                {" "}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                   Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+              FontSize->Rational[39, 4]]}
+           },
+           
+           GridBoxAlignment->{
+            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.4]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}]}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`cd[-$CellContext`\[Lambda]][
+         $CellContext`n[$CellContext`\[Mu]]],
+        Editable->False], ")"}]}]}], ")"}]}], "+", 
+  InterpretationBox[
+   StyleBox[
+    RowBox[{
+     SubscriptBox["\[Del]", "\[Alpha]"], GridBox[{
+       {
+        SubscriptBox["B", "\[UpTee]"], 
+        StyleBox[GridBox[{
+           {"\[Mu]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`cd2[-$CellContext`\[Alpha]][
+    $CellContext`BB[$CellContext`\[Mu]]],
+   Editable->False], "-", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["u", "-"], 
+        StyleBox[GridBox[{
+           {" "},
+           {"\[Alpha]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`u[-$CellContext`\[Alpha]],
+    Editable->False], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Beta]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`BB[$CellContext`\[Beta]],
+       Editable->False], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        StyleBox[
+         RowBox[{
+          SubscriptBox[
+           OverscriptBox["\[Del]", "_"], "\[Beta]"], GridBox[{
+            {
+             OverscriptBox["u", "-"], 
+             StyleBox[GridBox[{
+                {"\[Mu]"},
+                {" "}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                   Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+              FontSize->Rational[39, 4]]}
+           },
+           
+           GridBoxAlignment->{
+            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.4]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}]}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`CD[-$CellContext`\[Beta]][
+         $CellContext`u[$CellContext`\[Mu]]],
+        Editable->False], ")"}]}], "+", 
+     InterpretationBox[
+      StyleBox[
+       RowBox[{
+        SubscriptBox["\[ScriptCapitalL]", 
+         OverscriptBox["u", "-"]], GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Mu]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}],
+       ShowAutoStyles->False,
+       AutoSpacing->False],
+      xAct`xTensor`LieD[
+       $CellContext`u[$CellContext`\[Alpha]]][
+       $CellContext`BB[$CellContext`\[Mu]]],
+      Editable->False]}], ")"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"%", "//", "GradNormalToExtrinsicK"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {
+         SubscriptBox["B", "\[UpTee]"], 
+         StyleBox[GridBox[{
+            {"\[Beta]"},
+            {" "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`BB[$CellContext`\[Beta]],
+     Editable->False]}], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"KN", 
+        StyleBox[GridBox[{
+           {" ", " "},
+           {"\[Alpha]", "\[Beta]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`ExtrinsicKNSS[-$CellContext`\[Alpha], -$CellContext`\[Beta]],
+    
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["n", "-"], 
+        StyleBox[GridBox[{
+           {"\[Mu]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`n[$CellContext`\[Mu]],
+    Editable->False]}], "+", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        SubscriptBox["B", "\[UpTee]"], 
+        StyleBox[GridBox[{
+           {"\[Beta]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`BB[$CellContext`\[Beta]],
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        RowBox[{"K", 
+         OverscriptBox["h", "-"]}], 
+        StyleBox[GridBox[{
+           {" ", " "},
+           {"\[Alpha]", "\[Beta]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`ExtrinsicKh[-$CellContext`\[Alpha], -$CellContext`\[Beta]],
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["u", "-"], 
+        StyleBox[GridBox[{
+           {"\[Mu]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`u[$CellContext`\[Mu]],
+    Editable->False]}], "+", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["n", "-"], 
+        StyleBox[GridBox[{
+           {" "},
+           {"\[Alpha]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`n[-$CellContext`\[Alpha]],
+    Editable->False], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Beta]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`BB[$CellContext`\[Beta]],
+       Editable->False], " ", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"KN", 
+           StyleBox[GridBox[{
+              {" ", "\[Mu]"},
+              {"\[Beta]", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`ExtrinsicKNSS[-$CellContext`\[Beta], $CellContext`\[Mu]],
+       Editable->False]}], "-", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Lambda]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`BB[$CellContext`\[Lambda]],
+       Editable->False], " ", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"KN", 
+           StyleBox[GridBox[{
+              {" ", "\[Mu]"},
+              {"\[Lambda]", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`ExtrinsicKNSS[-$CellContext`\[Lambda], $CellContext`\[Mu]],
+       Editable->False]}], "+", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           OverscriptBox["n", "-"], 
+           StyleBox[GridBox[{
+              {"\[Gamma]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`n[$CellContext`\[Gamma]],
+       Editable->False], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        StyleBox[
+         RowBox[{
+          SubscriptBox["D", "\[Gamma]"], GridBox[{
+            {
+             SubscriptBox["B", "\[UpTee]"], 
+             StyleBox[GridBox[{
+                {"\[Mu]"},
+                {" "}
+               },
+               GridBoxSpacings->{"Columns" -> {
+                   Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                   Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+              FontSize->Rational[39, 4]]}
+           },
+           
+           GridBoxAlignment->{
+            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.27999999999999997`], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+               Offset[0.2], {
+                Offset[0.4]}, 
+               Offset[0.2]}, "RowsIndexed" -> {}}]}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`cd[-$CellContext`\[Gamma]][
+         $CellContext`BB[$CellContext`\[Mu]]],
+        Editable->False], ")"}]}]}], ")"}]}], "+", 
+  InterpretationBox[
+   StyleBox[
+    RowBox[{
+     SubscriptBox["\[Del]", "\[Alpha]"], GridBox[{
+       {
+        SubscriptBox["B", "\[UpTee]"], 
+        StyleBox[GridBox[{
+           {"\[Mu]"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`cd2[-$CellContext`\[Alpha]][
+    $CellContext`BB[$CellContext`\[Mu]]],
+   Editable->False], "-", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {
+        OverscriptBox["u", "-"], 
+        StyleBox[GridBox[{
+           {" "},
+           {"\[Alpha]"}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`u[-$CellContext`\[Alpha]],
+    Editable->False], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Beta]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`BB[$CellContext`\[Beta]],
+       Editable->False], " ", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {
+           RowBox[{"K", 
+            OverscriptBox["h", "-"]}], 
+           StyleBox[GridBox[{
+              {" ", "\[Mu]"},
+              {"\[Beta]", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`ExtrinsicKh[-$CellContext`\[Beta], $CellContext`\[Mu]],
+       Editable->False]}], "+", 
+     InterpretationBox[
+      StyleBox[
+       RowBox[{
+        SubscriptBox["\[ScriptCapitalL]", 
+         OverscriptBox["u", "-"]], GridBox[{
+          {
+           SubscriptBox["B", "\[UpTee]"], 
+           StyleBox[GridBox[{
+              {"\[Mu]"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}]}],
+       ShowAutoStyles->False,
+       AutoSpacing->False],
+      xAct`xTensor`LieD[
+       $CellContext`u[$CellContext`\[Alpha]]][
+       $CellContext`BB[$CellContext`\[Mu]]],
+      Editable->False]}], ")"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
  RowBox[{"?", "NSS"}]], "Input"],
 
 Cell[CellGroupData[{
 
 Cell["Global`NSS", "Print", "PrintUsage",
- CellTags->"Info3621056902-8362211"],
+ CellTags->"Info3621075385-2139455"],
 
 Cell[BoxData[
  InterpretationBox[GridBox[{
@@ -1729,6 +2777,16 @@ Cell[BoxData[
              AutoSpacing->False],
             $CellContext`TangentM,
             Editable->False]}], "}"}]}]},
+       {" "},
+       {
+        RowBox[{
+         RowBox[{"InducedFrom", "[", "NSS", "]"}], "^=", 
+         RowBox[{"{", 
+          RowBox[{"h", ",", "n"}], "}"}]}]},
+       {" "},
+       {
+        RowBox[{
+         RowBox[{"MetricQ", "[", "NSS", "]"}], "^=", "True"}]},
        {" "},
        {
         RowBox[{
@@ -1783,6 +2841,16 @@ Cell[BoxData[
        {" "},
        {
         RowBox[{
+         RowBox[{"VBundleOfMetric", "[", "NSS", "]"}], "^=", 
+         InterpretationBox[
+          StyleBox["\[DoubleStruckCapitalT]M",
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`TangentM,
+          Editable->False]}]},
+       {" "},
+       {
+        RowBox[{
          RowBox[{"VectorOfInducedMetric", "[", "NSS", "]"}], "^=", "n"}]},
        {" "},
        {
@@ -1790,6 +2858,12 @@ Cell[BoxData[
          RowBox[{"xTensorQ", "[", "NSS", "]"}], "^:=", "True"}]},
        {" "},
        {
+        RowBox[{
+         RowBox[{
+          RowBox[{"OrthogonalToVectorQ", "[", "u", "]"}], "[", "NSS", "]"}], "^=",
+          "True"}]},
+       {" "},
+       {
         RowBox[{"NSS", "/:", 
          RowBox[{
           InterpretationBox[
@@ -1798,9 +2872,9 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -1826,21 +2900,21 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
            StyleBox[GridBox[{
               {
-               OverscriptBox["\[Sigma]$1309", "-"], 
+               OverscriptBox["u", "-"], 
                StyleBox[GridBox[{
                   {" "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -1864,7 +2938,7 @@ Cell[BoxData[
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`u[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -1880,10 +2954,10 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -1907,20 +2981,20 @@ Cell[BoxData[
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
            StyleBox[GridBox[{
               {
-               OverscriptBox["\[Sigma]$1309", "-"], 
+               OverscriptBox["u", "-"], 
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -1946,7 +3020,7 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`u[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -1962,9 +3036,9 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -1990,21 +3064,21 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
            StyleBox[GridBox[{
               {
-               OverscriptBox["\[Sigma]$1309", "-"], 
+               OverscriptBox["u", "-"], 
                StyleBox[GridBox[{
                   {" "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2028,7 +3102,7 @@ Cell[BoxData[
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`u[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2044,10 +3118,10 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2072,19 +3146,19 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
            StyleBox[GridBox[{
               {
-               OverscriptBox["\[Sigma]$1309", "-"], 
+               OverscriptBox["u", "-"], 
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2110,7 +3184,7 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`u[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2126,9 +3200,9 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2154,10 +3228,10 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -2168,7 +3242,7 @@ Cell[BoxData[
                   {" "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2192,7 +3266,7 @@ Cell[BoxData[
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`n[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2208,10 +3282,10 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2235,10 +3309,10 @@ Cell[BoxData[
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -2248,7 +3322,7 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2274,7 +3348,7 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`n[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2290,9 +3364,9 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2318,10 +3392,10 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -2332,7 +3406,7 @@ Cell[BoxData[
                   {" "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2356,7 +3430,7 @@ Cell[BoxData[
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`n[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2372,10 +3446,10 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2400,9 +3474,9 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -2412,7 +3486,7 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2438,7 +3512,7 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`n[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2458,7 +3532,7 @@ Cell[BoxData[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2482,7 +3556,7 @@ Cell[BoxData[
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`h[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -2494,9 +3568,9 @@ Cell[BoxData[
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2522,10 +3596,10 @@ Cell[BoxData[
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2535,7 +3609,7 @@ Cell[BoxData[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -2560,7 +3634,7 @@ Cell[BoxData[
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -2573,7 +3647,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -2601,7 +3675,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`h[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -2613,10 +3687,10 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2640,10 +3714,10 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2653,7 +3727,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -2678,7 +3752,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -2694,7 +3768,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2718,7 +3792,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`h[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -2730,9 +3804,9 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2758,10 +3832,10 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2771,7 +3845,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -2796,7 +3870,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -2809,7 +3883,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -2821,6 +3895,7 @@ $CellContext`\[Sigma]$4030],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
+             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -2836,7 +3911,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`h[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -2848,10 +3923,10 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2876,9 +3951,9 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -2888,7 +3963,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -2913,7 +3988,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -2929,7 +4004,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -2956,7 +4031,7 @@ $CellContext`\[Sigma]$4030],
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -2965,9 +4040,9 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -2993,10 +4068,10 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -3006,7 +4081,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -3016,6 +4091,7 @@ $CellContext`\[Sigma]$4030],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                  FontSize->Rational[39, 4]]}
               },
+              
               GridBoxAlignment->{
                "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                 "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -3030,7 +4106,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3045,7 +4121,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -3074,7 +4150,7 @@ $CellContext`\[Sigma]$4030],
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -3083,10 +4159,10 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3110,10 +4186,10 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -3123,7 +4199,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -3148,7 +4224,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3164,7 +4240,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3191,7 +4267,7 @@ $CellContext`\[Sigma]$4030],
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -3200,9 +4276,9 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -3228,10 +4304,10 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -3241,7 +4317,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -3266,7 +4342,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3281,7 +4357,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -3310,7 +4386,7 @@ $CellContext`\[Sigma]$4030],
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -3319,10 +4395,10 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3347,9 +4423,9 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], ":=", 
          RowBox[{"Module", "[", 
@@ -3359,7 +4435,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -3384,7 +4460,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3399,7 +4475,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3423,7 +4499,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -3435,7 +4511,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
@@ -3463,20 +4539,20 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3499,8 +4575,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3512,7 +4588,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -3540,7 +4616,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -3553,7 +4629,7 @@ $CellContext`\[Sigma]$4030],
                   {" ", " "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
                  },
@@ -3579,20 +4655,20 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3615,8 +4691,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3629,7 +4705,7 @@ $CellContext`\[Sigma]$4030],
                   {" ", " "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
                  },
@@ -3655,7 +4731,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
@@ -3666,7 +4742,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -3694,7 +4770,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -3702,13 +4778,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3731,8 +4807,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3744,7 +4820,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
@@ -3772,7 +4848,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
@@ -3786,7 +4862,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3810,7 +4886,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -3818,13 +4894,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3847,8 +4923,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3863,7 +4939,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3887,7 +4963,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -3899,7 +4975,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
@@ -3927,20 +5003,20 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -3963,8 +5039,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -3976,7 +5052,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -4004,7 +5080,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -4017,7 +5093,7 @@ $CellContext`\[Sigma]$4030],
                   {" ", " "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
                  },
@@ -4043,20 +5119,20 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4079,8 +5155,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4093,7 +5169,7 @@ $CellContext`\[Sigma]$4030],
                   {" ", " "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
                  },
@@ -4119,7 +5195,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
@@ -4130,7 +5206,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -4158,7 +5234,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -4166,13 +5242,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4195,8 +5271,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4208,7 +5284,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
@@ -4236,7 +5312,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
@@ -4250,7 +5326,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4274,7 +5350,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -4282,13 +5358,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4311,8 +5387,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4327,7 +5403,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4354,7 +5430,7 @@ $CellContext`\[Sigma]$4030],
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
               Blank[Symbol]], TangentM`Q], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -4363,7 +5439,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
@@ -4391,20 +5467,20 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4427,8 +5503,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4442,7 +5518,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -4471,7 +5547,7 @@ $CellContext`\[Sigma]$4030],
              Pattern[$CellContext`\[Alpha], 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -4481,7 +5557,7 @@ $CellContext`\[Sigma]$4030],
                   {" ", " "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
                  },
@@ -4507,20 +5583,20 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4543,8 +5619,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4559,7 +5635,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4585,7 +5661,7 @@ $CellContext`\[Sigma]$4030],
            $CellContext`NSS[-PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -4594,7 +5670,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -4622,7 +5698,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -4630,13 +5706,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4659,8 +5735,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4672,7 +5748,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "}
@@ -4702,7 +5778,7 @@ $CellContext`\[Sigma]$4030],
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -4714,7 +5790,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4738,7 +5814,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -4746,13 +5822,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4775,8 +5851,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4791,7 +5867,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4818,7 +5894,7 @@ $CellContext`\[Sigma]$4030],
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
               Blank[Symbol]], TangentM`Q], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -4827,7 +5903,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
@@ -4855,20 +5931,20 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -4891,8 +5967,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -4906,7 +5982,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -4935,7 +6011,7 @@ $CellContext`\[Sigma]$4030],
              Pattern[$CellContext`\[Alpha], 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -4945,7 +6021,7 @@ $CellContext`\[Sigma]$4030],
                   {" ", " "},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]}
                  },
@@ -4971,20 +6047,20 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], -PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5007,8 +6083,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -5023,7 +6099,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5049,7 +6125,7 @@ $CellContext`\[Sigma]$4030],
            $CellContext`NSS[-PatternTest[
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -5058,7 +6134,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -5086,7 +6162,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -5094,13 +6170,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5123,8 +6199,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -5136,7 +6212,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "}
@@ -5166,7 +6242,7 @@ $CellContext`\[Sigma]$4030],
               Pattern[$CellContext`\[Alpha], 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False], " ", 
           InterpretationBox[
@@ -5178,7 +6254,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5202,7 +6278,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -5210,13 +6286,13 @@ $CellContext`\[Sigma]$4030],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
           RowBox[{
-           RowBox[{"{", "\[Sigma]$7840", "}"}], ",", 
+           RowBox[{"{", "\[Sigma]$2456", "}"}], ",", 
            InterpretationBox[
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Sigma]$7840", " "},
-                   {" ", "\[Sigma]$7840"}
+                   {"\[Sigma]$2456", " "},
+                   {" ", "\[Sigma]$2456"}
                   },
                   GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5239,8 +6315,8 @@ $CellContext`\[Sigma]$4030],
                   Offset[0.2]}, "RowsIndexed" -> {}}],
              ShowAutoStyles->False,
              AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Sigma]$7840, -$CellContext`\
-\[Sigma]$7840],
+            $CellContext`NSS[$CellContext`\[Sigma]$2456, -$CellContext`\
+\[Sigma]$2456],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -5252,9 +6328,9 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -5280,10 +6356,10 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -5295,7 +6371,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5319,7 +6395,7 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -5332,7 +6408,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -5357,7 +6433,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -5369,10 +6445,10 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5396,10 +6472,10 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -5408,241 +6484,7 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
-                   UnderscriptBox[
-                    UnderscriptBox["\[Alpha]", "_"], "_"]},
-                  {" ", " "}
-                 },
-                 GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                FontSize->Rational[39, 4]]}
-             },
-             
-             GridBoxAlignment->{
-              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.27999999999999997`], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {
-                 Offset[0.2], {
-                  Offset[0.4]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}],
-            ShowAutoStyles->False,
-            AutoSpacing->False],
-           $CellContext`NSS[
-            PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
-              Blank[Symbol]], TangentM`Q], 
-            PatternTest[
-             Pattern[$CellContext`\[Alpha], 
-              Blank[]], TangentM`pmQ]],
-           Editable->False]}], "^:=", 
-         RowBox[{"Module", "[", 
-          RowBox[{
-           RowBox[{"{", "}"}], ",", 
-           InterpretationBox[
-            StyleBox[GridBox[{
-               {"N", 
-                StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
-                   {" ", " "}
-                  },
-                  GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                 FontSize->Rational[39, 4]]}
-              },
-              
-              GridBoxAlignment->{
-               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.27999999999999997`], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-                "Rows" -> {
-                  Offset[0.2], {
-                   Offset[0.4]}, 
-                  Offset[0.2]}, "RowsIndexed" -> {}}],
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
-            Editable->False]}], "]"}]}]},
-       {" "},
-       {
-        RowBox[{
-         RowBox[{
-          InterpretationBox[
-           StyleBox[GridBox[{
-              {"N", 
-               StyleBox[GridBox[{
-                  {
-                   UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
-                   UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
-                  {" ", " "}
-                 },
-                 GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                FontSize->Rational[39, 4]]}
-             },
-             
-             GridBoxAlignment->{
-              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.27999999999999997`], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {
-                 Offset[0.2], {
-                  Offset[0.4]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}],
-            ShowAutoStyles->False,
-            AutoSpacing->False],
-           $CellContext`NSS[
-            PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
-              Blank[Symbol]], TangentM`Q], 
-            PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
-              Blank[]], TangentM`pmQ]],
-           Editable->False], " ", 
-          InterpretationBox[
-           StyleBox[GridBox[{
-              {"N", 
-               StyleBox[GridBox[{
-                  {" ", 
-                   UnderscriptBox[
-                    UnderscriptBox["\[Alpha]", "_"], "_"]},
-                  {
-                   UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
-                 },
-                 GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                FontSize->Rational[39, 4]]}
-             },
-             
-             GridBoxAlignment->{
-              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.27999999999999997`], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {
-                 Offset[0.2], {
-                  Offset[0.4]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}],
-            ShowAutoStyles->False,
-            AutoSpacing->False],
-           $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
-               Blank[Symbol]], TangentM`Q], 
-            PatternTest[
-             Pattern[$CellContext`\[Alpha], 
-              Blank[]], TangentM`pmQ]],
-           Editable->False]}], "^:=", 
-         RowBox[{"Module", "[", 
-          RowBox[{
-           RowBox[{"{", "}"}], ",", 
-           InterpretationBox[
-            StyleBox[GridBox[{
-               {"N", 
-                StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
-                   {" ", " "}
-                  },
-                  GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                 FontSize->Rational[39, 4]]}
-              },
-              
-              GridBoxAlignment->{
-               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.27999999999999997`], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-                "Rows" -> {
-                  Offset[0.2], {
-                   Offset[0.4]}, 
-                  Offset[0.2]}, "RowsIndexed" -> {}}],
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
-            Editable->False]}], "]"}]}]},
-       {" "},
-       {
-        RowBox[{
-         RowBox[{
-          InterpretationBox[
-           StyleBox[GridBox[{
-              {"N", 
-               StyleBox[GridBox[{
-                  {" ", 
-                   UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
-                  {
-                   UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
-                 },
-                 GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                FontSize->Rational[39, 4]]}
-             },
-             
-             GridBoxAlignment->{
-              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.27999999999999997`], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-               "Rows" -> {
-                 Offset[0.2], {
-                  Offset[0.4]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}],
-            ShowAutoStyles->False,
-            AutoSpacing->False],
-           $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
-               Blank[Symbol]], TangentM`Q], 
-            PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
-              Blank[]], TangentM`pmQ]],
-           Editable->False], " ", 
-          InterpretationBox[
-           StyleBox[GridBox[{
-              {"N", 
-               StyleBox[GridBox[{
-                  {
-                   UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"]},
                   {" ", " "}
@@ -5670,7 +6512,7 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
@@ -5683,7 +6525,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -5708,7 +6550,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -5720,9 +6562,9 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -5748,10 +6590,244 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
+              Blank[]], TangentM`pmQ]],
+           Editable->False], " ", 
+          InterpretationBox[
+           StyleBox[GridBox[{
+              {"N", 
+               StyleBox[GridBox[{
+                  {" ", 
+                   UnderscriptBox[
+                    UnderscriptBox["\[Alpha]", "_"], "_"]},
+                  {
+                   UnderscriptBox[
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+                FontSize->Rational[39, 4]]}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.4]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}],
+            ShowAutoStyles->False,
+            AutoSpacing->False],
+           $CellContext`NSS[-PatternTest[
+              Pattern[$CellContext`\[Sigma]$1315, 
+               Blank[Symbol]], TangentM`Q], 
+            PatternTest[
+             Pattern[$CellContext`\[Alpha], 
+              Blank[]], TangentM`pmQ]],
+           Editable->False]}], "^:=", 
+         RowBox[{"Module", "[", 
+          RowBox[{
+           RowBox[{"{", "}"}], ",", 
+           InterpretationBox[
+            StyleBox[GridBox[{
+               {"N", 
+                StyleBox[GridBox[{
+                   {"\[Alpha]", "\[Sigma]$1316"},
+                   {" ", " "}
+                  },
+                  GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+                 FontSize->Rational[39, 4]]}
+              },
+              
+              GridBoxAlignment->{
+               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.4]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}],
+             ShowAutoStyles->False,
+             AutoSpacing->False],
+            $CellContext`NSS[$CellContext`\[Alpha], \
+$CellContext`\[Sigma]$1316],
+            Editable->False]}], "]"}]}]},
+       {" "},
+       {
+        RowBox[{
+         RowBox[{
+          InterpretationBox[
+           StyleBox[GridBox[{
+              {"N", 
+               StyleBox[GridBox[{
+                  {" ", 
+                   UnderscriptBox[
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
+                  {
+                   UnderscriptBox[
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+                FontSize->Rational[39, 4]]}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.4]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}],
+            ShowAutoStyles->False,
+            AutoSpacing->False],
+           $CellContext`NSS[-PatternTest[
+              Pattern[$CellContext`\[Sigma]$1315, 
+               Blank[Symbol]], TangentM`Q], 
+            PatternTest[
+             Pattern[$CellContext`\[Sigma]$1316, 
+              Blank[]], TangentM`pmQ]],
+           Editable->False], " ", 
+          InterpretationBox[
+           StyleBox[GridBox[{
+              {"N", 
+               StyleBox[GridBox[{
+                  {
+                   UnderscriptBox[
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
+                   UnderscriptBox[
+                    UnderscriptBox["\[Alpha]", "_"], "_"]},
+                  {" ", " "}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+                FontSize->Rational[39, 4]]}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.4]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}],
+            ShowAutoStyles->False,
+            AutoSpacing->False],
+           $CellContext`NSS[
+            PatternTest[
+             Pattern[$CellContext`\[Sigma]$1315, 
+              Blank[Symbol]], TangentM`Q], 
+            PatternTest[
+             Pattern[$CellContext`\[Alpha], 
+              Blank[]], TangentM`pmQ]],
+           Editable->False]}], "^:=", 
+         RowBox[{"Module", "[", 
+          RowBox[{
+           RowBox[{"{", "}"}], ",", 
+           InterpretationBox[
+            StyleBox[GridBox[{
+               {"N", 
+                StyleBox[GridBox[{
+                   {"\[Alpha]", "\[Sigma]$1316"},
+                   {" ", " "}
+                  },
+                  GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+                 FontSize->Rational[39, 4]]}
+              },
+              
+              GridBoxAlignment->{
+               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.4]}, 
+                  Offset[0.2]}, "RowsIndexed" -> {}}],
+             ShowAutoStyles->False,
+             AutoSpacing->False],
+            $CellContext`NSS[$CellContext`\[Alpha], \
+$CellContext`\[Sigma]$1316],
+            Editable->False]}], "]"}]}]},
+       {" "},
+       {
+        RowBox[{
+         RowBox[{
+          InterpretationBox[
+           StyleBox[GridBox[{
+              {"N", 
+               StyleBox[GridBox[{
+                  {
+                   UnderscriptBox[
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
+                   UnderscriptBox[
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
+                  {" ", " "}
+                 },
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+                FontSize->Rational[39, 4]]}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.4]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}],
+            ShowAutoStyles->False,
+            AutoSpacing->False],
+           $CellContext`NSS[
+            PatternTest[
+             Pattern[$CellContext`\[Sigma]$1315, 
+              Blank[Symbol]], TangentM`Q], 
+            PatternTest[
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -5763,7 +6839,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5790,7 +6866,7 @@ $CellContext`\[Sigma]$4030],
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
@@ -5800,7 +6876,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -5825,7 +6901,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -5837,10 +6913,10 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -5864,10 +6940,10 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -5878,7 +6954,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -5907,7 +6983,7 @@ $CellContext`\[Sigma]$4030],
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
@@ -5917,7 +6993,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -5942,7 +7018,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -5954,9 +7030,9 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], 
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -5982,10 +7058,10 @@ $CellContext`\[Sigma]$4030],
             AutoSpacing->False],
            $CellContext`NSS[
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -5997,7 +7073,7 @@ $CellContext`\[Sigma]$4030],
                     UnderscriptBox["\[Alpha]", "_"], "_"], " "},
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -6024,7 +7100,7 @@ $CellContext`\[Sigma]$4030],
             PatternTest[
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], -PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
@@ -6034,7 +7110,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -6059,7 +7135,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -6071,10 +7147,10 @@ $CellContext`\[Sigma]$4030],
                StyleBox[GridBox[{
                   {" ", 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4030", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1316", "_"], "_"]},
                   {
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"], " "}
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"], " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
                     Offset[0.], {
@@ -6098,10 +7174,10 @@ $CellContext`\[Sigma]$4030],
             ShowAutoStyles->False,
             AutoSpacing->False],
            $CellContext`NSS[-PatternTest[
-              Pattern[$CellContext`\[Sigma]$4029, 
+              Pattern[$CellContext`\[Sigma]$1315, 
                Blank[Symbol]], TangentM`Q], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4030, 
+             Pattern[$CellContext`\[Sigma]$1316, 
               Blank[]], TangentM`pmQ]],
            Editable->False], " ", 
           InterpretationBox[
@@ -6112,7 +7188,7 @@ $CellContext`\[Sigma]$4030],
                    UnderscriptBox[
                     UnderscriptBox["\[Alpha]", "_"], "_"], 
                    UnderscriptBox[
-                    UnderscriptBox["\[Sigma]$4029", "_"], "_"]},
+                    UnderscriptBox["\[Sigma]$1315", "_"], "_"]},
                   {" ", " "}
                  },
                  GridBoxSpacings->{"Columns" -> {
@@ -6141,7 +7217,7 @@ $CellContext`\[Sigma]$4030],
              Pattern[$CellContext`\[Alpha], 
               Blank[]], TangentM`pmQ], 
             PatternTest[
-             Pattern[$CellContext`\[Sigma]$4029, 
+             Pattern[$CellContext`\[Sigma]$1315, 
               Blank[Symbol]], TangentM`Q]],
            Editable->False]}], "^:=", 
          RowBox[{"Module", "[", 
@@ -6151,7 +7227,7 @@ $CellContext`\[Sigma]$4030],
             StyleBox[GridBox[{
                {"N", 
                 StyleBox[GridBox[{
-                   {"\[Alpha]", "\[Sigma]$4030"},
+                   {"\[Alpha]", "\[Sigma]$1316"},
                    {" ", " "}
                   },
                   GridBoxSpacings->{"Columns" -> {
@@ -6176,7 +7252,7 @@ $CellContext`\[Sigma]$4030],
              ShowAutoStyles->False,
              AutoSpacing->False],
             $CellContext`NSS[$CellContext`\[Alpha], \
-$CellContext`\[Sigma]$4030],
+$CellContext`\[Sigma]$1316],
             Editable->False]}], "]"}]}]},
        {" "},
        {
@@ -6186,7 +7262,7 @@ $CellContext`\[Sigma]$4030],
            RowBox[{
             SuperscriptBox["\[Del]", 
              UnderscriptBox[
-              UnderscriptBox["\[Sigma]$4029", "_"], "_"]], GridBox[{
+              UnderscriptBox["\[Sigma]$1315", "_"], "_"]], GridBox[{
               {"N", 
                StyleBox[GridBox[{
                   {
@@ -6219,7 +7295,7 @@ $CellContext`\[Sigma]$4030],
            AutoSpacing->False],
           $CellContext`cd2[
            PatternTest[
-            Pattern[$CellContext`\[Sigma]$4029, 
+            Pattern[$CellContext`\[Sigma]$1315, 
              Blank[]], TangentM`pmQ]][
            $CellContext`NSS[
             PatternTest[
@@ -7248,7 +8324,7 @@ $CellContext`\[Sigma]$4030],
      "RowsIndexed" -> {}}],
   Definition[$CellContext`NSS],
   Editable->False]], "Print",
- CellTags->"Info3621056902-8362211"]
+ CellTags->"Info3621075385-2139455"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -7256,7 +8332,7 @@ $CellContext`\[Sigma]$4030],
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1228, 756},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowMargins->{{Automatic, 7}, {Automatic, 102}},
 Visible->True,
 DockedCells->{
   Cell[
@@ -7306,11 +8382,10 @@ DockedCells->{
           RowBox[{#, ",", #2, ",", #3, ",", #4, ",", #5, ",", #6, ",", #7}], 
           "}"}], "]"}]& )]], "DockedCell"]},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
-ShowSelection->True,
+ShowSelection->False,
 TrackCellChangeTimes->False,
 Magnification->1,
-FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
-2012)",
+FrontEndVersion->"9.0 for Linux x86 (32-bit) (February 7, 2013)",
 StyleDefinitions->FrontEnd`FileName[{"Creative"}, "PastelColor.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
