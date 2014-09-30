@@ -248,6 +248,7 @@ OToVcheck[vector_, expr_, inds_List] :=
 HasOrthogonalIndexQ[expr_, vector_[ind_]] := 
   And[MemberQ[FindFreeIndices[expr], -ind, 1], 
    OToVcheck[vector, expr, {-ind}]];
+
 PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_], 
    dependencies_, covd_, {vector_, supermetric_, superCD_}] := 
   With[{vbundle = VBundleOfIndex[ind1]},
@@ -789,10 +790,10 @@ SetNumberOfArguments[DefMetricFields,{4,5}];
 Protect[DefMetricFields];
 
 
-DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
+(*DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
 
 SetNumberOfArguments[DefMatterFields,{4,5}]
-Protect[DefMatterFields];
+Protect[DefMatterFields];*)
 
 
 SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,gauge_?GaugeQ]:=Print["Dobidoouah"];

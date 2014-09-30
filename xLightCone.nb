@@ -1508,7 +1508,8 @@ Cell[BoxData[
        RowBox[{"OToVcheck", "[", 
         RowBox[{"vector", ",", " ", "expr", ",", " ", 
          RowBox[{"{", 
-          RowBox[{"-", "ind"}], "}"}]}], "]"}]}], "]"}]}], ";"}], "\n", 
+          RowBox[{"-", "ind"}], "}"}]}], "]"}]}], "]"}]}], ";"}], "\n", "\n", 
+   
    RowBox[{
     RowBox[{
      RowBox[{"PropertiesOfInducedScreenSpaceMetric", "[", 
@@ -4519,8 +4520,8 @@ Cell[BoxData[{
   RowBox[{"Protect", "[", "DefMetricFields", "]"}], ";"}]}], "Input",
  InitializationCell->True],
 
-Cell[BoxData[{
- RowBox[{
+Cell[BoxData[
+ RowBox[{"(*", 
   RowBox[{
    RowBox[{
     RowBox[{"DefMatterFields", "[", 
@@ -4528,14 +4529,15 @@ Cell[BoxData[{
       RowBox[{"h_", "?", "InducedMetricQ"}], ",", 
       RowBox[{"n_", "?", "DirectionVectorQ"}], ",", " ", 
       RowBox[{"PerturbParameter_:", "\[Epsilon]"}]}], "]"}], ":=", 
-    RowBox[{"Print", "[", "\"\<Dobidoouah\>\"", "]"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{"SetNumberOfArguments", "[", 
-  RowBox[{"DefMatterFields", ",", 
-   RowBox[{"{", 
-    RowBox[{"4", ",", "5"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Protect", "[", "DefMatterFields", "]"}], ";"}]}], "Input",
+    RowBox[{"Print", "[", "\"\<Dobidoouah\>\"", "]"}]}], ";", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetNumberOfArguments", "[", 
+     RowBox[{"DefMatterFields", ",", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "5"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+    RowBox[{"Protect", "[", "DefMatterFields", "]"}]}], ";"}], 
+  "*)"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
