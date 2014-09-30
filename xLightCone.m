@@ -116,9 +116,7 @@ DefMetricFields::usage = "";
 DefScreenProjecteTensor::usage = "";
 
 SetSlicingUpToScreenSpace::usage = "";
-
 SetSlicingUpToScreenSpaceObinna::usage = "";
-
 SplitMetric ::usage = "";
 
 ToLightConeFromRules::usage = "";
@@ -206,9 +204,6 @@ DefScreenSpaceMetric[metric_[inda_, indb_], Manifold_,
     MakeRule[{metric[-inda, -indb] metric[inda, ind1], 
       metric[ind1, -indb]}, MetricOn -> All]];
    AutomaticRules[metric, MakeRule[{metric[-ind1, ind1] , dim-2}]];
-(* CP: I put dim -2 because i want this to be general 1+1+(n-1) splitting. *)
-(* CP: Please use BuildRule instead of MakeRule.*)
-
    AutomaticRules[metric, 
     MakeRule[{cd2[inda][metric[ind1, ind2] ], 0}]];
    
@@ -217,8 +212,9 @@ It is still being tested*)
    PropertiesOfInducedScreenSpaceMetric[metric[inda, indb], Manifold, 
     cd2, {n, h, CovDOfMetric[h]}];
 
+(* Hello Cyril *)
 
-   (*It complains about metric incompatibility*)
+   (*It complanins about metric incompatibility*)
    (*Off[
    ToCanonical::cmods]*)
    metric /: metric[-a_, b_] cd2[a_][expr1_] := cd2[b][expr1];
@@ -248,7 +244,6 @@ OToVcheck[vector_, expr_, inds_List] :=
 HasOrthogonalIndexQ[expr_, vector_[ind_]] := 
   And[MemberQ[FindFreeIndices[expr], -ind, 1], 
    OToVcheck[vector, expr, {-ind}]];
-
 PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_], 
    dependencies_, covd_, {vector_, supermetric_, superCD_}] := 
   With[{vbundle = VBundleOfIndex[ind1]},
@@ -303,7 +298,7 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
        LieD[vector[_]][
           expr_] vector[-a_] :> -$AccelerationOfnSign norm \
 accelerationname[-a] expr /; HasOrthogonalIndexQ[expr, vector[-a]](*,
-       LieD[vector[_]][expr_]vector[a_]:>0/;
+       LieD[vector[_]][expr_]vector[a_]\[RuleDelayed]0/;
        HasOrthogonalIndexQ[expr,vector[a]]*)};
      
      ExtrinsicKToGradNormalRules[metric] = 
@@ -554,18 +549,18 @@ SetSlicingUpToScreenSpaceObinna[g_?MetricQ, u_, normu_: - 1, h_,
       PrintAs -> "\!\(" <> ToString[n] <> "\&-\)"]
      
      
-     (*DefTensor[NSS[-ind1,-ind2],{Manifold},If[$TorsionSign==1,
-     Symmetric[{-ind1,-ind2}],{}],OrthogonalTo->{u[ind1],u[ind2],
-     n[ind1],n[ind2]},ProjectedWith->{h[ind1,-ind4],h[
-     ind2,-ind5]},PrintAs->"\!\("<>ToString[NSS]<>"\&-\)"];
-     DefCovD[cd2[ind1],{cd2post,cd2pre},OrthogonalTo->{u[ind1],n[
-     ind1]},ProjectedWith->{h[ind1,-ind2],NSS[
+     (*DefTensor[NSS[-ind1,-ind2],{Manifold},If[$TorsionSign\[Equal]1,
+     Symmetric[{-ind1,-ind2}],{}],OrthogonalTo\[Rule]{u[ind1],u[ind2],
+     n[ind1],n[ind2]},ProjectedWith\[Rule]{h[ind1,-ind4],h[
+     ind2,-ind5]},PrintAs\[Rule]"\!\("<>ToString[NSS]<>"\&-\)"];
+     DefCovD[cd2[ind1],{cd2post,cd2pre},OrthogonalTo\[Rule]{u[ind1],n[
+     ind1]},ProjectedWith\[Rule]{h[ind1,-ind2],NSS[
      ind1,-ind2]}];*)
      
      DefScreenSpaceMetric[NSS[-ind1, -ind2], Manifold, 
       cd2, {cd2post, cd2pre}, {h, n}, options]
      
-     (*VectorOfInducedScreenSpaceMetric[NSS]:> n;*)
+     (*VectorOfInducedScreenSpaceMetric[NSS]\[RuleDelayed] n;*)
      
      
      (*Protect[InducedFromHypersurface];*)
@@ -578,14 +573,14 @@ an'InducedDecomposition'*)
     cd[a_][Scalar[expr_]] =.;
     cd2[a_][Scalar[expr_]] =.;
     Protect[prot];
-    (*$Rulecdh[h1_]:={h1[-a_,b_] cd[a_][expr1_]:>cd[b][
-    expr1],h1[a_,b_] cd[-a_][expr1_]:>cd[b][expr1],h1[
-    b_,-a_] cd[a_][expr1_]:>cd[b][expr1],h1[b_,
-    a_] cd[-a_][expr1_]:>cd[b][expr1],h1[-a_,b_] cd[c_]@
-    cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@
-    cd[-a_][expr1_]:>cd[c]@cd[b][expr1],h1[b_,-a_] cd[c_]@
-    cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@
-    cd[-a_][expr1_]:>cd[c]@cd[b][expr1]};*)
+    (*$Rulecdh[h1_]:={h1[-a_,b_] cd[a_][expr1_]\[RuleDelayed]cd[b][
+    expr1],h1[a_,b_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],h1[
+    b_,-a_] cd[a_][expr1_]\[RuleDelayed]cd[b][expr1],h1[b_,
+    a_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],h1[-a_,b_] cd[c_]@
+    cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@
+    cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[b_,-a_] cd[c_]@
+    cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@
+    cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1]};*)
     
     
     
@@ -657,7 +652,7 @@ DirectionVectorQ[n]=True;
 DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo->{u[ind1],u[ind2],n[ind1],n[ind2]},ProjectedWith->{h[ind1,-ind4],h[ind2,-ind5](*,NSS[ind1,-ind4],NSS[ind2,-ind5]*)},PrintAs->"\!\("<>ToString[NSS]<>"\&-\)"];
 
 (* So let me try to define separately the CovD, So That I suppress this definition *)
-(*DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom->{g,n},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];*)
+(*DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom\[Rule]{g,n},PrintAs\[Rule]"\!\("<>ToString[h]<>"\&-\)"];*)
 
 (* CP: Let me try this implementation for the CovD twice projected*)
 (* This seems cleaner than to define a Silent Metric.*)
@@ -669,7 +664,7 @@ AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] u[-ind2],0}]];
 
 (*I used AutomaticRule to assign rules to NSS...*)
 (* Well it doesn't work well*)
-(*NSS[-ind1,-ind2]^:=2/;ind1+ind2==0;
+(*NSS[-ind1,-ind2]^:=2/;ind1+ind2\[Equal]0;
 NSS[-ind1,-ind2]NSS[ind1,ind2]^:=2;*)
 
 (*AutomaticRules[NSS,BuildRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-n[-ind1]n[-ind2]}]]*)AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] NSS[-ind2,-ind3],NSS[ind1,-ind3]}]];
@@ -790,10 +785,10 @@ SetNumberOfArguments[DefMetricFields,{4,5}];
 Protect[DefMetricFields];
 
 
-(*DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
+DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
 
 SetNumberOfArguments[DefMatterFields,{4,5}]
-Protect[DefMatterFields];*)
+Protect[DefMatterFields];
 
 
 SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,gauge_?GaugeQ]:=Print["Dobidoouah"];
