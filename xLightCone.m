@@ -751,7 +751,7 @@ InducedMetricOf[Name_]:={};
 (* Review all these properties.*)
 
 
-DefScreenProjecteTensor[Name_[inds___],h_?InducedMetricQ,n_?DirectionVectorQ,options___?OptionQ]:=(If[DefScreenProjectedTensorQ[Name,h],
+DefScreenProjectedTensor[Name_[inds___],h_?InducedMetricQ,n_?DirectionVectorQ,options___?OptionQ]:=(If[DefScreenProjectedTensorQ[Name,h],
 
 If[$DefInfoQ,
 Throw@Print["** DefScreenProjectedTensor: The projection properties on the hypersurfaces associated with the induced metric ", h," and direction vector", n," have already been defined for the tensor ", Name,"."],
