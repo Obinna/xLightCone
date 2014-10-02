@@ -716,7 +716,7 @@ Cell[BoxData[
      " ", "when", " ", "the", " ", "rule", " ", "has", " ", "already", " ", 
      "been", " ", "defined", " ", "and", " ", "the", " ", "lhs", " ", "is", 
      " ", 
-     RowBox[{"zero", "."}]}], "**)"}], "\[IndentingNewLine]", 
+     RowBox[{"zero", "."}]}], "**)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -754,8 +754,8 @@ Cell[BoxData[
        "more", " ", "polite", " ", "way", " ", "to", " ", "modify", " ", 
       "the", " ", "behaviour", " ", "of", " ", 
       RowBox[{"xTensor", ".", "This"}], " ", "method", " ", "was", " ", 
-      "advised", " ", "by", " ", "Leo", " ", "Stein"}]}], "**)"}], "\n", 
-   "\[IndentingNewLine]", 
+      "advised", " ", "by", " ", "Leo", " ", "Stein"}]}], "**)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"SetAttributes", "[", 
     RowBox[{"BuildRule", ",", "HoldFirst"}], "]"}], "\n", 
    RowBox[{
@@ -828,8 +828,8 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"$PrePrint", "=", "ScreenDollarIndices"}], ";"}], "\n", 
    RowBox[{
-    RowBox[{"$SortCovDAutomatic", "=", "True"}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+    RowBox[{"$SortCovDAutomatic", "=", "True"}], ";"}], "\[IndentingNewLine]",
+    "\n", 
    RowBox[{
     RowBox[{"Off", "[", 
      RowBox[{"RuleDelayed", "::", "rhs"}], "]"}], ";"}]}]}]], "Input"]
@@ -864,11 +864,10 @@ Cell[BoxData[
      RowBox[{
      "the", " ", "information", " ", "messages", " ", "are", " ", "not", " ", 
       
-      RowBox[{"printed", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+      RowBox[{"printed", "."}]}]}], "*)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"*", "Testing", " ", "expressions"}], "**)"}], 
-   "\[IndentingNewLine]", "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"AnyIndicesListQ", "[", "inds_List", "]"}], ":=", 
     RowBox[{
@@ -1042,8 +1041,7 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
       RowBox[{"otherwise", ".", "This"}], " ", "function", " ", "is", " ", 
       "not", " ", "suited", " ", "to", " ", "test", " ", "tensors", " ", 
       "defined", " ", "with", " ", "label"}], "-", 
-     RowBox[{"indices", "."}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+     RowBox[{"indices", "."}]}], "*)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"*", "Type", " ", "of", " ", "manifolds"}], "**)"}], 
    "\[IndentingNewLine]", 
@@ -1051,7 +1049,7 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
     RowBox[{
     "Will", " ", "probably", " ", "disappear", " ", "since", " ", "we", " ", 
      "will", " ", "only", " ", "do", " ", "curved", " ", "and", " ", "flat", 
-     " ", "FL"}], " ", "*)"}], "\n", "\[IndentingNewLine]", 
+     " ", "FL"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"BianchiBool", "[", "Spacetype_", "]"}], ":=", 
     RowBox[{"(", 
@@ -1083,7 +1081,7 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
      RowBox[{"AnisotropyBool", "'"}], " ", "should", " ", "be", " ", 
      RowBox[{"changed", "."}]}], "*)"}]}]}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1150,15 +1148,18 @@ Cell[BoxData[
          RowBox[{"{", "\n", "    ", 
           RowBox[{
            RowBox[{"ind1", " ", "=", " ", 
-            RowBox[{"indexlist", "[", 
-             RowBox[{"[", "1", "]"}], "]"}]}], ",", "\n", "    ", 
-           RowBox[{"ind2", " ", "=", " ", 
-            RowBox[{"indexlist", "[", 
-             RowBox[{"[", "2", "]"}], "]"}]}], ",", " ", 
+            RowBox[{"DummyIn", "[", 
+             RowBox[{"Tangent", "[", "Manifold", "]"}], "]"}]}], ",", " ", 
+           RowBox[{"ind2", " ", "=", " ", "\n", " ", 
+            RowBox[{"DummyIn", "[", 
+             RowBox[{"Tangent", "[", "Manifold", "]"}], "]"}]}], ",", " ", 
            RowBox[{"ind3", " ", "=", " ", 
-            RowBox[{"indexlist", "[", 
-             RowBox[{"[", "3", "]"}], "]"}]}]}], "}"}], ",", "\n", "   ", 
-         "\n", "   ", 
+            RowBox[{"DummyIn", "[", 
+             RowBox[{"Tangent", "[", "Manifold", "]"}], "]"}]}], ",", " ", 
+           RowBox[{"ind4", " ", "=", "\n", "  ", 
+            RowBox[{"DummyIn", "[", 
+             RowBox[{"Tangent", "[", "Manifold", "]"}], "]"}]}]}], "}"}], ",",
+          "\n", "   ", "\n", "   ", 
          RowBox[{
           RowBox[{"DefTensor", "[", 
            RowBox[{
@@ -1390,6 +1391,17 @@ Cell[BoxData[
           RowBox[{"metric", " ", "/:", " ", 
            RowBox[{
             RowBox[{"metric", "[", 
+             RowBox[{"b_", ",", " ", 
+              RowBox[{"-", "a_"}]}], "]"}], " ", 
+            RowBox[{
+             RowBox[{"cd2", "[", "a_", "]"}], "[", "expr1_", "]"}]}], " ", ":=",
+            " ", 
+           RowBox[{
+            RowBox[{"cd2", "[", "b", "]"}], "[", "expr1", "]"}]}], ";", "\n", 
+          "   ", 
+          RowBox[{"metric", " ", "/:", " ", 
+           RowBox[{
+            RowBox[{"metric", "[", 
              RowBox[{
               RowBox[{"-", "a_"}], ",", " ", 
               RowBox[{"-", "b_"}]}], "]"}], " ", 
@@ -1476,12 +1488,20 @@ Cell[BoxData[
            RowBox[{"MetricQ", "[", "metric", "]"}], " ", "^=", " ", "True"}], 
           ";", "\n", 
           RowBox[{
-           RowBox[{"InducedMetricQ", "[", "metric", "]"}], "^=", " ", 
-           "True"}], ";", "\n", 
+           RowBox[{
+           "xAct`xLightCone`Private`InducedMetricQ", "[", "metric", "]"}], "^=",
+            " ", "True"}], ";", "\n", 
           RowBox[{
            RowBox[{"CovDOfMetric", "[", "metric", "]"}], " ", "^=", " ", 
-           "cd2"}], ";"}]}], "\n", "   ", "\n", "   ", "]"}]}], "]"}], ",", 
-     "\n", "  ", 
+           "cd2"}], ";"}]}], "\n", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"OrthogonalToVectorQ", "[", "n", "]"}], "[", 
+            RowBox[{
+             RowBox[{"cd2", "[", "ind1", "]"}], "[", "_", "]"}], "]"}], "^=", 
+           "True"}], ";"}], "*)"}], "]"}]}], "]"}], ",", "\n", "  ", 
      RowBox[{
      "Print", "[", 
       "\"\<** DefMetric:: You have to ensure first that the following objects \
@@ -2562,11 +2582,11 @@ Cell[BoxData[
               RowBox[{"K", " ", "=", " ", "extrinsicKname"}], ",", " ", "\n", 
               "      ", 
               RowBox[{"AA", " ", "=", " ", "accelerationname"}]}], "}"}], ",",
-             " ", "\n", "     ", 
+             " ", "\n", "      ", 
             RowBox[{
              RowBox[{
-             "GaussCodazziRules", "[", "\n", "       ", "metric", "]"}], " ", 
-             ":=", " ", 
+             "xAct`xTensor`Private`GaussCodazziRules", "[", "\n", "       ", 
+              "metric", "]"}], " ", ":=", " ", 
              RowBox[{"{", 
               RowBox[{
                RowBox[{
@@ -2831,9 +2851,9 @@ Cell[BoxData[
                     RowBox[{"covd", "[", "d", "]"}], "@", 
                     RowBox[{"AA", "[", "b", "]"}]}], "/", "norm"}]}]}], 
                     ")"}]}]}], ")"}]}]}]}]}], "]"}]}], ",", " ", "\n", 
-               "       ", 
+               "        ", 
                RowBox[{
-                RowBox[{"superRicci", "[", 
+                RowBox[{"xAct`xTensor`Private`superRicci", "[", 
                  RowBox[{
                   RowBox[{"a_", "?", "AIndexQ"}], ",", " ", 
                   RowBox[{"b_", "?", "AIndexQ"}]}], "]"}], " ", ":>", " ", 
@@ -4596,7 +4616,7 @@ Cell[BoxData[{
       RowBox[{"SpaceTimesOfDefinition", "\[Rule]", 
        RowBox[{"{", 
         RowBox[{"\"\<Background\>\"", ",", "\"\<Perturbed\>\""}], "}"}]}]}], 
-     "}"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+     "}"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DefScreenProjectedTensorQ", "[", 
@@ -4609,7 +4629,7 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"InducedMetricOf", "[", "Name_", "]"}], ":=", 
-    RowBox[{"{", "}"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+    RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", "\n", 
   RowBox[{"(*", 
    RowBox[{"Review", " ", "all", " ", "these", " ", 
     RowBox[{"properties", "."}]}], "*)"}], 
@@ -4619,7 +4639,7 @@ Cell[BoxData[{
    RowBox[{"DefScreenProjectedTensor", "[", 
     RowBox[{
      RowBox[{"Name_", "[", "inds___", "]"}], ",", 
-     RowBox[{"N_", "?", "InducedMetricQ"}], ",", 
+     RowBox[{"N_", "?", "xAct`xLightCone`Private`InducedMetricQ"}], ",", 
      RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
    RowBox[{"Catch", "@", 
     RowBox[{"Module", "[", 
@@ -4643,15 +4663,17 @@ Cell[BoxData[{
           RowBox[{"n", "=", 
            RowBox[{"Last", "@", 
             RowBox[{"InducedFrom", "[", "N", "]"}]}]}], ",", 
+          "\[IndentingNewLine]", 
           RowBox[{"u", "=", 
            RowBox[{"Last", "@", 
             RowBox[{"InducedFrom", "@", 
              RowBox[{"First", "@", 
               RowBox[{"InducedFrom", "@", "N"}]}]}]}]}], ",", 
+          "\[IndentingNewLine]", 
           RowBox[{"h", "=", 
            RowBox[{"First", "@", 
-            RowBox[{"InducedFrom", "@", "N"}]}]}]}], "\[IndentingNewLine]", 
-         "\[IndentingNewLine]", "}"}], ",", 
+            RowBox[{"InducedFrom", "@", "N"}]}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
         RowBox[{"With", "[", 
          RowBox[{
           RowBox[{"{", "\[IndentingNewLine]", 
@@ -4786,25 +4808,21 @@ projection properties on the hypersurfaces associated with the induced metric\
                   "\"\< already exists. The projection properties on the \
 hypersurfaces associated with the induced metric \>\"", ",", "N", ",", 
                   "\"\< are now defined.\>\""}], "]"}]}], "]"}], ",", 
-              RowBox[{"(*", 
-               RowBox[{"DefTensor", "[", 
-                RowBox[{
-                 RowBox[{"Name", "[", 
-                  RowBox[{
-                   RowBox[{"LI", "[", "p", "]"}], ",", 
-                   RowBox[{"LI", "[", "q", "]"}], ",", 
-                   RowBox[{"LI", "[", "r", "]"}], ",", 
-                   RowBox[{"IndsNoLI", "/.", 
-                    RowBox[{"List", "\[Rule]", "Sequence"}]}]}], "]"}], ",", 
-                 "M", ",", 
-                 RowBox[{"Symmetric", "[", "IndsNoLI", "]"}], ",", 
-                 RowBox[{"OrthogonalTo", "\[Rule]", 
-                  RowBox[{"{", 
-                   RowBox[{
-                    RowBox[{"u", "[", "\[Mu]", "]"}], ",", 
-                    RowBox[{"n", "[", "\[Mu]", "]"}]}], "}"}]}], ",", 
-                 RowBox[{"PrintAs", "\[Rule]", "PrAs"}]}], "]"}], "*)"}], 
               "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{"DefTensor", "[", 
+               RowBox[{
+                RowBox[{"Name", "[", 
+                 RowBox[{
+                  RowBox[{"LI", "[", "p", "]"}], ",", 
+                  RowBox[{"LI", "[", "q", "]"}], ",", 
+                  RowBox[{"LI", "[", "r", "]"}], ",", 
+                  RowBox[{"IndsNoLI", "/.", 
+                   RowBox[{"List", "\[Rule]", "Sequence"}]}]}], "]"}], ",", 
+                "M", ",", 
+                RowBox[{"Symmetric", "[", "IndsNoLI", "]"}], ",", 
+                RowBox[{"PrintAs", "\[Rule]", "PrAs"}]}], "]"}]}], 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"(*", 
               RowBox[{"If", "[", 
                RowBox[{
                 RowBox[{
@@ -4816,9 +4834,7 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
                    RowBox[{
                     RowBox[{"LI", "[", "p", "]"}], ",", 
                     RowBox[{"LI", "[", "q", "]"}], ",", 
-                    RowBox[{"LI", "[", "r", "]"}], ",", 
-                    RowBox[{"IndsNoLI", "/.", 
-                    RowBox[{"List", "\[Rule]", "Sequence"}]}]}], "]"}], ",", 
+                    RowBox[{"LI", "[", "r", "]"}]}], "]"}], ",", 
                   "\[IndentingNewLine]", "M", ",", 
                   RowBox[{"PrintAs", "\[Rule]", "PrAs"}]}], "]"}], ",", 
                 "\[IndentingNewLine]", " ", 
@@ -4834,8 +4850,7 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
                     RowBox[{"LI", "[", "p", "]"}], ",", 
                     RowBox[{"LI", "[", "q", "]"}], ",", 
                     RowBox[{"LI", "[", "r", "]"}], ",", 
-                    RowBox[{"IndsNoLI", "/.", 
-                    RowBox[{"List", "\[Rule]", "Sequence"}]}]}], "]"}], ",", 
+                    RowBox[{"First", "[", "IndsNoLI", "]"}]}], "]"}], ",", 
                     "M", ",", 
                     RowBox[{"Symmetric", "[", "IndsNoLI", "]"}], ",", 
                     RowBox[{"OrthogonalTo", "\[Rule]", 
@@ -4889,7 +4904,8 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
                     RowBox[{"n", "[", 
                     RowBox[{"First", "@", 
                     RowBox[{"Rest", "[", "IndsNoLI", "]"}]}], "]"}]}], 
-                    "}"}]}], ",", 
+                    "}"}]}], ",", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"ProjectedWith", "\[Rule]", 
                     RowBox[{"{", 
                     RowBox[{
@@ -4902,6 +4918,7 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
                     RowBox[{"First", "@", 
                     RowBox[{"Rest", "[", "IndsNoLI", "]"}]}], ",", 
                     RowBox[{"-", "Dummy2"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"N", "[", 
                     RowBox[{
                     RowBox[{"First", "[", "IndsNoLI", "]"}], ",", 
@@ -4912,8 +4929,8 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
                     RowBox[{"Rest", "[", "IndsNoLI", "]"}]}], ",", 
                     RowBox[{"-", "Dummy2"}]}], "]"}]}], "}"}]}], ",", 
                     RowBox[{"PrintAs", "\[Rule]", "PrAs"}]}], "]"}]}], 
-                   "]"}]}], "]"}]}], "]"}]}], "]"}], ";", 
-            "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                   "\[IndentingNewLine]", "]"}]}], "]"}]}], "]"}], "*)"}], 
+             "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
             "\[IndentingNewLine]", 
             RowBox[{"(*", 
              RowBox[{
@@ -4935,10 +4952,11 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
              RowBox[{"(*", 
               RowBox[{"DefProjectedTensorPropertiesAnyIndices", "[", 
                RowBox[{"Name", ",", "N", ",", "TensProp", ",", "SpaTimeDef"}],
-                "]"}], "*)"}], "]"}], ";"}], ")"}]}], "]"}]}], "]"}]}], 
+                "]"}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             "]"}], ";"}], "\[IndentingNewLine]", ")"}]}], "]"}]}], "]"}]}], 
      "]"}]}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", 
-   RowBox[{"etc", "..."}], "*)"}], "\n"}], "\[IndentingNewLine]", 
+   RowBox[{"etc", "..."}], "*)"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{"SetNumberOfArguments", "[", 
   RowBox[{"DefScreenProjectedTensor", ",", 
    RowBox[{"{", 
@@ -4957,8 +4975,8 @@ Cell[BoxData[
    RowBox[{"DefProjectedTensorProperties", "[", 
     RowBox[{"Name_", ",", 
      RowBox[{"inds___", "?", "DownIndexQ"}], ",", 
-     RowBox[{"N_", "?", "InducedMetricQ"}], ",", "Properties_List", ",", 
-     "Spacetimes_List"}], "]"}], ":=", 
+     RowBox[{"N_", "?", "xAct`xLightCone`Private`InducedMetricQ"}], ",", 
+     "Properties_List", ",", "Spacetimes_List"}], "]"}], ":=", 
    RowBox[{"Catch", "@", 
     RowBox[{"Module", "[", 
      RowBox[{
@@ -7830,8 +7848,8 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}],
                     RowBox[{
                     RowBox[{"{", "indices1", "}"}], ",", 
                     RowBox[{"{", "indices2", "}"}], ",", 
-                    RowBox[{"{", "indices3", "}"}]}], "]"}], "]"}], "+", "2"}]
-                    , "===", 
+                    RowBox[{"{", "indices3", "}"}]}], "]"}], "]"}], "+", 
+                    "2"}], "===", 
                     RowBox[{"Length", "[", 
                     RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";", 
                  "\[IndentingNewLine]", 
@@ -8708,7 +8726,7 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{"MyChangeChristoffel", "[", 
        RowBox[{"#1", ",", "#2", ",", "cd1"}], "]"}], "&"}], ",", "expr", ",", 
-     "cd2list"}], "]"}]}], "\n"}], "\[IndentingNewLine]", 
+     "cd2list"}], "]"}]}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{"MyChangeChristoffel", "[", 
    RowBox[{"expr_", ",", "cd2_", ",", "cd1_"}], "]"}], ":=", 
@@ -9149,7 +9167,7 @@ since we do not know very well how to handle that. **\>\"", "]"}], ";"}]}],
                 "]"}], ";", "\[IndentingNewLine]", "res"}]}], 
              "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
-     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -9786,7 +9804,7 @@ Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], "Output"]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{887, 809},
-WindowMargins->{{-48, Automatic}, {Automatic, 21}},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

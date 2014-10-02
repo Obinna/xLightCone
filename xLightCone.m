@@ -175,8 +175,9 @@ u = First@Rest@InducedFrom[First@InducedHypersurface],
 
 
 With[{
-    ind1 = indexlist[[1]],
-    ind2 = indexlist[[2]], ind3 = indexlist[[3]]},
+    ind1 = DummyIn[Tangent[Manifold]], ind2 = 
+ DummyIn[Tangent[Manifold]], ind3 = DummyIn[Tangent[Manifold]], ind4 =
+  DummyIn[Tangent[Manifold]]},
    
    DefTensor[metric[-inda, -indb], Manifold, 
     If[$TorsionSign === 1, Symmetric[{-inda, -indb}], {}], 
@@ -225,6 +226,7 @@ It is still being tested*)
    (*Off[
    ToCanonical::cmods]*)
    metric /: metric[-a_, b_] cd2[a_][expr1_] := cd2[b][expr1];
+   metric /: metric[b_, -a_] cd2[a_][expr1_] := cd2[b][expr1];
    metric /: metric[-a_, -b_] cd2[a_][expr1_] := cd2[-b][expr1];
    metric /: metric[b_, a_] cd2[-a_][expr1_] := cd2[b][expr1];
    metric /: metric[a_, b_] cd2[c_]@cd2[-a_][expr1_] := 
@@ -241,10 +243,9 @@ VBundleOfMetric[metric] ^= VBundleOfMetric[g];
 MetricOfCovD[cd2] ^= metric;
 AppendTo[$Metrics, metric];
 MetricQ[metric] ^= True;
-InducedMetricQ[metric]^= True;
+xAct`xLightCone`Private`InducedMetricQ[metric]^= True;
 CovDOfMetric[metric] ^= cd2;
-   
-   ]],
+(*OrthogonalToVectorQ[n][cd2[ind1][_]]^=True;*)]],
   Print["** DefMetric:: You have to ensure first that the following objects are defined:  metric induced from \
 the super metric, a hypersurface specifying  four vector  and a \
 screen space specifying vector"]];
@@ -483,7 +484,7 @@ superepsilonname[dummy, inds]];
       superRicci = Ricci[superCD], 
       superRicciScalar = RicciScalar[superCD], K = extrinsicKname, 
       AA = accelerationname}, 
-     GaussCodazziRules[
+      xAct`xTensor`Private`GaussCodazziRules[
        metric] := {superRiemann[a_?AIndexQ, b_?AIndexQ, c_?AIndexQ, 
          d_?AIndexQ] :> 
         Module[{e = DummyIn@vbundle, PDK}, 
@@ -517,7 +518,7 @@ superepsilonname[dummy, inds]];
                 vector[a] vector[d] covd[c]@AA[b]/norm - 
                 vector[b] vector[c] covd[d]@AA[a]/norm + 
                 vector[a] vector[c] covd[d]@AA[b]/norm))], 
-       superRicci[a_?AIndexQ, b_?AIndexQ] :> 
+        xAct`xTensor`Private`superRicci[a_?AIndexQ, b_?AIndexQ] :> 
         Module[{c = DummyIn@vbundle}, 
          ReleaseHold[
           Hold[superRiemann[a, -c, b, c]] /. 
@@ -777,9 +778,10 @@ InducedMetricOf[Name_]:={};
 
 (*Review all these properties.*)
 
-DefScreenProjectedTensor[Name_[inds___],N_?InducedMetricQ,options___?OptionQ]:=Catch@Module[{IndsNoLI,p,q,r,PrAs,SpaTimeDef,TensProp},With[{M=ManifoldOfCovD@CovDOfMetric[First@InducedFrom@First@InducedFrom[N]],n=Last@InducedFrom[N],u=Last@InducedFrom@First@InducedFrom@N,h=First@InducedFrom@N
-
-},With[{
+DefScreenProjectedTensor[Name_[inds___],N_?xAct`xLightCone`Private`InducedMetricQ,options___?OptionQ]:=Catch@Module[{IndsNoLI,p,q,r,PrAs,SpaTimeDef,TensProp},With[{M=ManifoldOfCovD@CovDOfMetric[First@InducedFrom@First@InducedFrom[N]],n=Last@InducedFrom[N],
+u=Last@InducedFrom@First@InducedFrom@N,
+h=First@InducedFrom@N},
+With[{
 Dummy1=DummyIn[Tangent[M]],Dummy2=DummyIn[Tangent[M]]},
 (If[DefScreenProjectedTensorQ[Name,N],If[$DefInfoQ,Throw@Print["** DefScreenProjectedTensor: The projection properties on the Screen space associated with the induced metric ",N," and direction vector",n," have already been defined for the tensor ",Name,"."],Throw[Null]];];
 If[DefScreenProjectedTensorQ[Name],If[$DefInfoQ,Print["** DefScreenProjectedTensor: Projection properties for the tensor ",Name," have been defined for another slicing. New projection properties on the hypersurfaces associated with the induced metric",N," and direction vector",n," are now added."]];];
@@ -789,15 +791,24 @@ IndsNoLI=Select[{inds},Not@LIndexQ[#]&];
 PrAs=PrintAs/.CheckOptions[options]/.Options[DefScreenProjectedTensorQ];
 SpaTimeDef=SpaceTimesOfDefinition/.CheckOptions[options]/.Options[DefScreenProjectedTensorQ];
 TensProp=TensorProperties/.CheckOptions[options]/.Options[DefScreenProjectedTensorQ];
-If[DefScreenProjectedTensorQ[Name]||DefTensorQ[Name],If[$DefInfoQ,Print["** DefScreenProjectedTensor: The tensor ",Name," already exists. The projection properties on the hypersurfaces associated with the induced metric ",N," are now defined."]],(*DefTensor[Name[LI[p],LI[q],LI[r],IndsNoLI/.List\[Rule]Sequence],M,Symmetric[IndsNoLI],OrthogonalTo\[Rule]{u[\[Mu]],n[\[Mu]]},PrintAs\[Rule]PrAs]*)
+If[DefScreenProjectedTensorQ[Name]||DefTensorQ[Name],If[$DefInfoQ,Print["** DefScreenProjectedTensor: The tensor ",Name," already exists. The projection properties on the hypersurfaces associated with the induced metric ",N," are now defined."]],
 
-If[Length[IndsNoLI]===0,DefTensor[Name[LI[p],LI[q],LI[r],IndsNoLI/.List->Sequence],
-M,PrintAs->PrAs],
- If[Length[IndsNoLI]===1,DefTensor[Name[LI[p],LI[q],LI[r],IndsNoLI/.List->Sequence],M,Symmetric[IndsNoLI],OrthogonalTo->{u[First[IndsNoLI]],n[First[IndsNoLI]]},ProjectedWith->{h[First[IndsNoLI],-Dummy1],N[First[IndsNoLI],-Dummy1]},PrintAs->PrAs] ,
-If[Length[IndsNoLI]===2,DefTensor[Name[LI[p],LI[q],LI[r],First[IndsNoLI],First@Rest[IndsNoLI]],M,Symmetric[IndsNoLI],OrthogonalTo->{u[First[IndsNoLI]],u[First@Rest[IndsNoLI]],n[First[IndsNoLI]],n[First@Rest[IndsNoLI]]},ProjectedWith->{h[First[IndsNoLI],-Dummy1],h[First@Rest[IndsNoLI],-Dummy2],N[First[IndsNoLI],-Dummy1],N[First@Rest[IndsNoLI],-Dummy2]},PrintAs->PrAs]]]]];
+DefTensor[Name[LI[p],LI[q],LI[r],IndsNoLI/.List->Sequence],M,Symmetric[IndsNoLI],PrintAs->PrAs]
+
+(*If[Length[IndsNoLI]===0,DefTensor[Name[LI[p],LI[q],LI[r]],
+M,PrintAs\[Rule]PrAs],
+ If[Length[IndsNoLI]===1,DefTensor[Name[LI[p],LI[q],LI[r],First[IndsNoLI]],M,Symmetric[IndsNoLI],OrthogonalTo\[Rule]{u[First[IndsNoLI]],n[First[IndsNoLI]]},ProjectedWith\[Rule]{h[First[IndsNoLI],-Dummy1],N[First[IndsNoLI],-Dummy1]},PrintAs\[Rule]PrAs] ,
+If[Length[IndsNoLI]===2,DefTensor[Name[LI[p],LI[q],LI[r],First[IndsNoLI],First@Rest[IndsNoLI]],M,Symmetric[IndsNoLI],OrthogonalTo\[Rule]{u[First[IndsNoLI]],u[First@Rest[IndsNoLI]],n[First[IndsNoLI]],n[First@Rest[IndsNoLI]]},
+
+ProjectedWith\[Rule]{h[First[IndsNoLI],-Dummy1],h[First@Rest[IndsNoLI],-Dummy2],
+N[First[IndsNoLI],-Dummy1],N[First@Rest[IndsNoLI],-Dummy2]},PrintAs\[Rule]PrAs]
+]]]*)];
 
 
-(*Definition of the projection properties for the tensor'Name'.*)If[Not@AnyIndicesListQ[IndsNoLI],DefProjectedTensorProperties[Name,IndsNoLI/.List->Sequence,N,TensProp,SpaTimeDef],{}(*DefProjectedTensorPropertiesAnyIndices[Name,N,TensProp,SpaTimeDef]*)];)]]]
+(*Definition of the projection properties for the tensor'Name'.*)If[Not@AnyIndicesListQ[IndsNoLI],DefProjectedTensorProperties[Name,IndsNoLI/.List->Sequence,N,TensProp,SpaTimeDef],{}(*DefProjectedTensorPropertiesAnyIndices[Name,N,TensProp,SpaTimeDef]*)
+
+];
+)]]]
 
 (*etc...*)
 
@@ -805,7 +816,7 @@ SetNumberOfArguments[DefScreenProjectedTensor,{3,Infinity}]
 Protect[DefScreenProjectedTensor];
 
 
-(***MODULE:DefProjectedTensorProperties***)DefProjectedTensorProperties[Name_,inds___?DownIndexQ,N_?InducedMetricQ,Properties_List,Spacetimes_List]:=Catch@Module[{prot,Lengthindices},With[{h=First@InducedFrom@N,g=First@InducedFrom@First@InducedFrom@N,u=Last@InducedFrom@First@InducedFrom@N,n=Last@InducedFrom@N},With[{cd1=CovDOfMetric[h],cd2=CovDOfMetric[N],M=ManifoldOfCovD[CovDOfMetric[g]],SymmetricBool=(Cases[Properties,"SymmetricTensor"]==={"SymmetricTensor"}),TracelessBool=(Cases[Properties,"Traceless"]==={"Traceless"}),TransverseBool=(Cases[Properties,"Transverse"]==={"Transverse"}),BackgroundBool=(Cases[Spacetimes,"Background"]==={"Background"}),PerturbedBool=(Cases[Spacetimes,"Perturbed"]==={"Perturbed"}),ToCan=ToCanonical[#,UseMetricOnVBundle->None]&},If[Not[SymmetricBool]&&(Length[{inds}]>=2),Throw@Message[DefProjectedTensorProperties::symmetrictensors]];
+(***MODULE:DefProjectedTensorProperties***)DefProjectedTensorProperties[Name_,inds___?DownIndexQ,N_?xAct`xLightCone`Private`InducedMetricQ,Properties_List,Spacetimes_List]:=Catch@Module[{prot,Lengthindices},With[{h=First@InducedFrom@N,g=First@InducedFrom@First@InducedFrom@N,u=Last@InducedFrom@First@InducedFrom@N,n=Last@InducedFrom@N},With[{cd1=CovDOfMetric[h],cd2=CovDOfMetric[N],M=ManifoldOfCovD[CovDOfMetric[g]],SymmetricBool=(Cases[Properties,"SymmetricTensor"]==={"SymmetricTensor"}),TracelessBool=(Cases[Properties,"Traceless"]==={"Traceless"}),TransverseBool=(Cases[Properties,"Transverse"]==={"Transverse"}),BackgroundBool=(Cases[Spacetimes,"Background"]==={"Background"}),PerturbedBool=(Cases[Spacetimes,"Perturbed"]==={"Perturbed"}),ToCan=ToCanonical[#,UseMetricOnVBundle->None]&},If[Not[SymmetricBool]&&(Length[{inds}]>=2),Throw@Message[DefProjectedTensorProperties::symmetrictensors]];
 DefScreenProjectedTensorQ[Name,N]^=True;
 InducedMetricOf[Name]^=N;
 If[DefScreenProjectedTensorQ[Name]===False,PropertiesList[Name]^=Join[Properties,Which[Length[{inds}]===0,{"Scalar"},Length[{inds}]===1,{"Vector"},Length[{inds}]>=2,{"Tensor"}]];
