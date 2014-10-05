@@ -900,8 +900,64 @@ g[IndexUp,Dum] LieD[u[Dummy1]][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]+L
 DefinedPerturbationParameter[x_]:=False;
 
 
-DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
+(*DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];*)
 
+DefMetricFields[g_?MetricQ, dg_, N_?InducedMetricQ,n_?DirectionVectorQ, 
+  PerturbParameter_: \[Epsilon]] := 
+ Module[{Zn}, 
+  With[{M = ManifoldOfCovD@CovDOfMetric@g, cd = CovDOfMetric@N}, 
+   Block[{\[Mu], \[Nu]}, {\[Mu], \[Nu]} = 
+     GetIndicesOfVBundle[Tangent@M, 2];
+    If[Not[DefTensorQ[dg]], 
+     DefMetricPerturbation[g, dg, 
+      Evaluate[
+       If[DefinedPerturbationParameter[$PerturbationParameter], \
+$PerturbationParameter, PerturbParameter]]];
+     DefinedPerturbationParameter[$PerturbationParameter] = True;
+     PrintAs[dg] ^= "\[Delta]" <> ToString[g];
+     dg[LI[Zn_], \[Mu]_, \[Nu]_] := 
+      0 /; Zn > 1 && BackgroundFieldMethod;
+     dg[\[Mu]_?AIndexQ, \[Nu]_?AIndexQ] := dg[LI[0], \[Mu], \[Nu]];, 
+     If[$DefInfoQ, 
+       Print["** Warning: Metric perturbation already defined. This \
+cannot be redefined without undefining it. **"];];];
+    (*Defining some tensors we shall need \
+anyway*)(DefScreenProjectedTensor[#[[1]], h, 
+        TensorProperties -> {"Traceless", "Transverse", 
+          "SymmetricTensor"}, SpaceTimesOfDefinition -> {"Perturbed"},
+         PrintAs -> #[[2]]]) & /@ $ListFieldsPerturbedOnly[N];
+    Evaluate[\[Phi][N]]::usage = \[Phi]::usage;
+    Evaluate[Bs[N]]::usage = Bs::usage;
+    Evaluate[Bvp[N]]::usage = 
+\!\(\*SubscriptBox[\(Bv\), \(||\)]\)::usage;
+    Evaluate[Bvt[N]]::usage =  
+\!\(\*SubscriptBox[\(Bv\), \(\[UpTee]\)]\)::usage;
+    Evaluate[\[Psi][N]]::usage = \[Psi]::usage;
+    Evaluate[Es[N]]::usage = Es::usage;
+    Evaluate[Evp[N]]::usage = 
+\!\(\*SubscriptBox[\(Ev\), \(||\)]\)::usage;
+    Evaluate[Evt[N]]::usage = 
+\!\(\*SubscriptBox[\(Ev\), \(\[UpTee]\)]\)::usage;
+    Evaluate[Etp[N]]::usage = 
+\!\(\*SubscriptBox[\(Et\), \(||\)]\)::usage;
+    Evaluate[Etpt[N]]::usage = 
+\!\(\*SubscriptBox[\(Et\), \(\(\[UpTee]\)\(|\)\)]\)::usage;
+    Evaluate[Ett[N]]::usage = 
+\!\(\*SubscriptBox[\(Et\), \(\[UpTee]\)]\)::usage;
+    
+    Evaluate[T[N]]::usage = T::usage;
+    Evaluate[Ls[N]]::usage = Ls::usage;
+    Evaluate[Lv[N]]::usage = 
+\!\(\*SubscriptBox[\(Lv\), \(||\)]\)::usage;
+    Evaluate[Lv[N]]::usage = 
+\!\(\*SubscriptBox[\(Lv\), \(\[UpTee]\)]\)::usage;
+    (*If we want a nice output for the perturbation parameter,,*)
+    MakeBoxes[PerturbParameter, StandardForm] := 
+     StyleBox[ToString[$PerturbationParameter], 
+      FontColor -> RGBColor[0.3, 0.8, 0.8]]]]]
+
+SetNumberOfArguments[DefMetricFields, {3, 4}];
+Protect[DefMetricFields];
 SetNumberOfArguments[DefMetricFields,{4,5}];
 Protect[DefMetricFields];
 
