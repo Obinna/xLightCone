@@ -770,7 +770,7 @@ ToInducedDerivativeScreenSpace[expr_,supercd_,cd_,cd2_]:=expr/.supercd[ind_][exp
 
 
 
-Options[DefScreenProjecteTensor]={PrintAs->Identity,TensorProperties->{"SymmetricTensor","Traceless","Transverse"},SpaceTimesOfDefinition->{"Background","Perturbed"}};
+Options[DefScreenProjectedTensor]={PrintAs->Identity,TensorProperties->{"SymmetricTensor","Traceless","Transverse"},SpaceTimesOfDefinition->{"Background","Perturbed"}};
 
 DefScreenProjectedTensorQ[Name_,N___]:=False;
 PropertiesList[Name_]:={};
@@ -787,10 +787,10 @@ Dummy1=DummyIn[Tangent[M]],Dummy2=DummyIn[Tangent[M]]},
 If[DefScreenProjectedTensorQ[Name],If[$DefInfoQ,Print["** DefScreenProjectedTensor: Projection properties for the tensor ",Name," have been defined for another slicing. New projection properties on the hypersurfaces associated with the induced metric",N," and direction vector",n," are now added."]];];
 IndsNoLI=Select[{inds},Not@LIndexQ[#]&];
 (*And here we should put all the rules of splitting*)If[(Length[IndsNoLI]>=1)&&(Not@AnyIndicesListQ[IndsNoLI])&&(Select[IndsNoLI,UpIndexQ]=!={}),Throw[Message[DefScreenProjecteTensor::notdownindices,Name]]];
-(**********The following Message is not yet defined.**********)If[(Length[IndsNoLI]>=2)&&(AnyIndicesListQ[IndsNoLI]),Throw[Message[DefScreenProjectedTensorQ::invalidanyindices,Name]]];
+(**********The following Message is not yet defined.**********)If[(Length[IndsNoLI]>=2)&&(AnyIndicesListQ[IndsNoLI]),Throw[Message[DefScreenProjectedTensor::invalidanyindices,Name]]];
 PrAs=PrintAs/.CheckOptions[options]/.Options[DefScreenProjectedTensorQ];
-SpaTimeDef=SpaceTimesOfDefinition/.CheckOptions[options]/.Options[DefScreenProjectedTensorQ];
-TensProp=TensorProperties/.CheckOptions[options]/.Options[DefScreenProjectedTensorQ];
+SpaTimeDef=SpaceTimesOfDefinition/.CheckOptions[options]/.Options[DefScreenProjectedTensor];
+TensProp=TensorProperties/.CheckOptions[options]/.Options[DefScreenProjectedTensor];
 If[DefScreenProjectedTensorQ[Name]||DefTensorQ[Name],If[$DefInfoQ,Print["** DefScreenProjectedTensor: The tensor ",Name," already exists. The projection properties on the hypersurfaces associated with the induced metric ",N," are now defined."]],
 
 DefTensor[Name[LI[p],LI[q],LI[r],IndsNoLI/.List->Sequence],M,Symmetric[IndsNoLI],PrintAs->PrAs]
@@ -805,7 +805,12 @@ N[First[IndsNoLI],-Dummy1],N[First@Rest[IndsNoLI],-Dummy2]},PrintAs->PrAs]
 ]]]*)];
 
 
-(*Definition of the projection properties for the tensor'Name'.*)If[Not@AnyIndicesListQ[IndsNoLI],DefProjectedTensorProperties[Name,IndsNoLI/.List->Sequence,N,TensProp,SpaTimeDef],{}(*DefProjectedTensorPropertiesAnyIndices[Name,N,TensProp,SpaTimeDef]*)
+(*Definition of the projection properties for the tensor'Name'.*)
+Print[Not@AnyIndicesListQ[IndsNoLI]];
+Print[IndsNoLI];
+Print[DefProjectedTensorProperties[Name,IndsNoLI/.List->Sequence,N,TensProp,SpaTimeDef]];
+
+If[Not@AnyIndicesListQ[IndsNoLI],DefProjectedTensorProperties[Name,IndsNoLI/.List->Sequence,N,TensProp,SpaTimeDef],{}(*DefProjectedTensorPropertiesAnyIndices[Name,N,TensProp,SpaTimeDef]*)
 
 ];
 Name/:OrthogonalToVectorQ[n][Name]=True;
@@ -817,7 +822,11 @@ SetNumberOfArguments[DefScreenProjectedTensor,{3,Infinity}]
 Protect[DefScreenProjectedTensor];
 
 
-(***MODULE:DefProjectedTensorProperties***)DefProjectedTensorProperties[Name_,inds___?DownIndexQ,N_?xAct`xLightCone`Private`InducedMetricQ,Properties_List,Spacetimes_List]:=Catch@Module[{prot,Lengthindices},With[{h=First@InducedFrom@N,g=First@InducedFrom@First@InducedFrom@N,u=Last@InducedFrom@First@InducedFrom@N,n=Last@InducedFrom@N},With[{cd1=CovDOfMetric[h],cd2=CovDOfMetric[N],M=ManifoldOfCovD[CovDOfMetric[g]],SymmetricBool=(Cases[Properties,"SymmetricTensor"]==={"SymmetricTensor"}),TracelessBool=(Cases[Properties,"Traceless"]==={"Traceless"}),TransverseBool=(Cases[Properties,"Transverse"]==={"Transverse"}),BackgroundBool=(Cases[Spacetimes,"Background"]==={"Background"}),PerturbedBool=(Cases[Spacetimes,"Perturbed"]==={"Perturbed"}),ToCan=ToCanonical[#,UseMetricOnVBundle->None]&},If[Not[SymmetricBool]&&(Length[{inds}]>=2),Throw@Message[DefProjectedTensorProperties::symmetrictensors]];
+(***MODULE:DefProjectedTensorProperties***)DefProjectedTensorProperties[Name_,inds___?DownIndexQ,N_?InducedMetricQ,Properties_List,Spacetimes_List]:=Catch@Module[{prot,Lengthindices},With[{h=First@InducedFrom@N,g=First@InducedFrom@First@InducedFrom@N,u=Last@InducedFrom@First@InducedFrom@N,n=Last@InducedFrom@N},With[{cd1=CovDOfMetric[h],cd2=CovDOfMetric[N],M=ManifoldOfCovD[CovDOfMetric[g]],SymmetricBool=(Cases[Properties,"SymmetricTensor"]==={"SymmetricTensor"}),TracelessBool=(Cases[Properties,"Traceless"]==={"Traceless"}),TransverseBool=(Cases[Properties,"Transverse"]==={"Transverse"}),BackgroundBool=(Cases[Spacetimes,"Background"]==={"Background"}),PerturbedBool=(Cases[Spacetimes,"Perturbed"]==={"Perturbed"}),ToCan=ToCanonical[#,UseMetricOnVBundle->None]&},
+
+Print["Calling DefProjectedTensorProperties"];
+
+If[Not[SymmetricBool]&&(Length[{inds}]>=2),Throw@Message[DefProjectedTensorProperties::symmetrictensors]];
 DefScreenProjectedTensorQ[Name,N]^=True;
 InducedMetricOf[Name]^=N;
 If[DefScreenProjectedTensorQ[Name]===False,PropertiesList[Name]^=Join[Properties,Which[Length[{inds}]===0,{"Scalar"},Length[{inds}]===1,{"Vector"},Length[{inds}]>=2,{"Tensor"}]];
