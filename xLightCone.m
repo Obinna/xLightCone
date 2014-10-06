@@ -808,6 +808,7 @@ N[First[IndsNoLI],-Dummy1],N[First@Rest[IndsNoLI],-Dummy2]},PrintAs\[Rule]PrAs]
 (*Definition of the projection properties for the tensor'Name'.*)If[Not@AnyIndicesListQ[IndsNoLI],DefProjectedTensorProperties[Name,IndsNoLI/.List->Sequence,N,TensProp,SpaTimeDef],{}(*DefProjectedTensorPropertiesAnyIndices[Name,N,TensProp,SpaTimeDef]*)
 
 ];
+Name/:OrthogonalToVectorQ[n][Name]=True;
 )]]]
 
 (*etc...*)
@@ -928,29 +929,20 @@ anyway*)(DefScreenProjectedTensor[#[[1]], h,
          PrintAs -> #[[2]]]) & /@ $ListFieldsPerturbedOnly[N];
     Evaluate[\[Phi][N]]::usage = \[Phi]::usage;
     Evaluate[Bs[N]]::usage = Bs::usage;
-    Evaluate[Bvp[N]]::usage = 
-\!\(\*SubscriptBox[\(Bv\), \(||\)]\)::usage;
-    Evaluate[Bvt[N]]::usage =  
-\!\(\*SubscriptBox[\(Bv\), \(\[UpTee]\)]\)::usage;
+    Evaluate[Bvp[N]]::usage =Bvp::usage;
+    Evaluate[Bvt[N]]::usage =Bvt::usage;
     Evaluate[\[Psi][N]]::usage = \[Psi]::usage;
     Evaluate[Es[N]]::usage = Es::usage;
-    Evaluate[Evp[N]]::usage = 
-\!\(\*SubscriptBox[\(Ev\), \(||\)]\)::usage;
-    Evaluate[Evt[N]]::usage = 
-\!\(\*SubscriptBox[\(Ev\), \(\[UpTee]\)]\)::usage;
-    Evaluate[Etp[N]]::usage = 
-\!\(\*SubscriptBox[\(Et\), \(||\)]\)::usage;
-    Evaluate[Etpt[N]]::usage = 
-\!\(\*SubscriptBox[\(Et\), \(\(\[UpTee]\)\(|\)\)]\)::usage;
-    Evaluate[Ett[N]]::usage = 
-\!\(\*SubscriptBox[\(Et\), \(\[UpTee]\)]\)::usage;
+    Evaluate[Evp[N]]::usage = Evp::usage;
+    Evaluate[Evt[N]]::usage = Evt::usage;
+    Evaluate[Etp[N]]::usage = Subscript[Et, p]::usage;
+    Evaluate[Etpt[N]]::usage = Etpt::usage;
+    Evaluate[Ett[N]]::usage = Ett::usage;
     
     Evaluate[T[N]]::usage = T::usage;
     Evaluate[Ls[N]]::usage = Ls::usage;
-    Evaluate[Lv[N]]::usage = 
-\!\(\*SubscriptBox[\(Lv\), \(||\)]\)::usage;
-    Evaluate[Lv[N]]::usage = 
-\!\(\*SubscriptBox[\(Lv\), \(\[UpTee]\)]\)::usage;
+    Evaluate[Lv[N]]::usage = Lvp::usage;
+    Evaluate[Lvt[N]]::usage = Lvt::usage;
     (*If we want a nice output for the perturbation parameter,,*)
     MakeBoxes[PerturbParameter, StandardForm] := 
      StyleBox[ToString[$PerturbationParameter], 

@@ -1336,19 +1336,37 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"ToCanonical", "::", "cmods"}], "MessageName"], ":", 
-  " ", "\<\"Detected metric-incompatible derivatives \[NoBreak]\\!\\({cdtest}\
-\\)\[NoBreak].\"\>"}]], "Message", "MSG"],
+   RowBox[{"ToCanonical", "::", "cmods"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Detected metric-incompatible derivatives \
+\[NoBreak]\\!\\({cdtest}\\)\[NoBreak].\"\>"}]], "Message", "MSG"],
 
 Cell[BoxData[
- RowBox[{
-  InterpretationBox[
-   StyleBox[GridBox[{
+ InterpretationBox[
+  RowBox[{"\<\"** \"\>", "\[InvisibleSpace]", "DefTensor", 
+   "\[InvisibleSpace]", "\<\": Defining \"\>", 
+   "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
+   RowBox[{"ChristoffelCDcdtest", "[", 
+    RowBox[{"\[Alpha]", ",", 
+     RowBox[{"-", "\[Beta]"}], ",", 
+     RowBox[{"-", "\[Gamma]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+   "\[InvisibleSpace]", "\<\"\"\>"}],
+  SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
+   $CellContext`ChristoffelCDcdtest[$CellContext`\[Alpha], -$CellContext`\
+\[Beta], -$CellContext`\[Gamma]], ". ", ""],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   RowBox[{
+    SuperscriptBox[
+     SubscriptBox["\[Del]", "\[UpTee]"], "\[Mu]"], GridBox[{
       {
-       OverscriptBox["H", "-"], 
+       SubscriptBox["v", "\[UpTee]"], 
        StyleBox[GridBox[{
-          {"\[Mu]", " "},
-          {" ", "\[Alpha]"}
+          {" "},
+          {"\[Nu]"}
          },
          GridBoxSpacings->{"Columns" -> {
              Offset[0.], {
@@ -1366,45 +1384,12 @@ Cell[BoxData[
          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
          Offset[0.2], {
           Offset[0.4]}, 
-         Offset[0.2]}, "RowsIndexed" -> {}}],
-    ShowAutoStyles->False,
-    AutoSpacing->False],
-   $CellContext`Ntest[$CellContext`\[Mu], -$CellContext`\[Alpha]],
-   Editable->False], " ", 
-  RowBox[{"(", 
-   InterpretationBox[
-    StyleBox[
-     RowBox[{
-      SuperscriptBox[
-       SubscriptBox["\[Del]", "\[UpTee]"], "\[Alpha]"], GridBox[{
-        {
-         SubscriptBox["v", "\[UpTee]"], 
-         StyleBox[GridBox[{
-            {" "},
-            {"\[Nu]"}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}]}],
-     ShowAutoStyles->False,
-     AutoSpacing->False],
-    $CellContext`cdtest[$CellContext`\[Alpha]][
-     $CellContext`Vv[-$CellContext`\[Nu]]],
-    Editable->False], ")"}]}]], "Output"]
+         Offset[0.2]}, "RowsIndexed" -> {}}]}],
+   ShowAutoStyles->False,
+   AutoSpacing->False],
+  $CellContext`cdtest[$CellContext`\[Mu]][
+   $CellContext`Vv[-$CellContext`\[Nu]]],
+  Editable->False]], "Output"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -1443,10 +1428,10 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"u", "[", 
-    RowBox[{"-", "\[Sigma]$1320"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$5818"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`u[-$CellContext`\[Sigma]$1320], ". ", ""],
+   $CellContext`u[-$CellContext`\[Sigma]$5818], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -1457,12 +1442,12 @@ Cell[BoxData[
    "\[InvisibleSpace]", 
    RowBox[{"h", "[", 
     RowBox[{
-     RowBox[{"-", "\[Sigma]$1320"}], ",", 
-     RowBox[{"-", "\[Sigma]$1321"}]}], "]"}], 
+     RowBox[{"-", "\[Sigma]$5818"}], ",", 
+     RowBox[{"-", "\[Sigma]$5819"}]}], "]"}], 
    "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefTensor, ": Defining ", "symmetric metric tensor ", 
-   $CellContext`h[-$CellContext`\[Sigma]$1320, -$CellContext`\[Sigma]$1321], 
+   $CellContext`h[-$CellContext`\[Sigma]$5818, -$CellContext`\[Sigma]$5819], 
    ". ", ""],
   Editable->False]], "Print"],
 
@@ -1526,11 +1511,11 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"covariant derivative \"\>", "\[InvisibleSpace]", 
    
    RowBox[{"cd", "[", 
-    RowBox[{"-", "\[Sigma]$1320"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$5818"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefCovD, ": Defining ", "covariant derivative ", 
-   $CellContext`cd[-$CellContext`\[Sigma]$1320], ". ", ""],
+   $CellContext`cd[-$CellContext`\[Sigma]$5818], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -1767,10 +1752,10 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"n", "[", 
-    RowBox[{"-", "\[Sigma]$1320"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$5818"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`n[-$CellContext`\[Sigma]$1320], ". ", ""],
+   $CellContext`n[-$CellContext`\[Sigma]$5818], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -1779,10 +1764,10 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\": Defining \"\>", 
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"NSS", "[", 
-    RowBox[{"\[Sigma]$1320", ",", "\[Sigma]$1321"}], "]"}], 
+    RowBox[{"\[Sigma]$5818", ",", "\[Sigma]$5819"}], "]"}], 
    "\[InvisibleSpace]", "\<\". \"\>", "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
-   $CellContext`NSS[$CellContext`\[Sigma]$1320, $CellContext`\[Sigma]$1321], 
+   $CellContext`NSS[$CellContext`\[Sigma]$5818, $CellContext`\[Sigma]$5819], 
    ". ", ""],
   Editable->False]], "Print"],
 
@@ -1793,11 +1778,11 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"covariant derivative \"\>", "\[InvisibleSpace]", 
    
    RowBox[{"cd2", "[", 
-    RowBox[{"-", "\[Sigma]$1320"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
+    RowBox[{"-", "\[Sigma]$5818"}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm[
   "** ", xAct`xTensor`DefCovD, ": Defining ", "covariant derivative ", 
-   $CellContext`cd2[-$CellContext`\[Sigma]$1320], ". ", ""],
+   $CellContext`cd2[-$CellContext`\[Sigma]$5818], ". ", ""],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -2277,16 +2262,16 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"tensor \"\>", "\[InvisibleSpace]", 
    RowBox[{"V1", "[", 
     RowBox[{
-     RowBox[{"LI", "[", "xAct`xLightCone`Private`p$2829", "]"}], ",", 
-     RowBox[{"LI", "[", "xAct`xLightCone`Private`q$2829", "]"}], ",", 
-     RowBox[{"LI", "[", "xAct`xLightCone`Private`r$2829", "]"}], ",", 
+     RowBox[{"LI", "[", "xAct`xLightCone`Private`p$7366", "]"}], ",", 
+     RowBox[{"LI", "[", "xAct`xLightCone`Private`q$7366", "]"}], ",", 
+     RowBox[{"LI", "[", "xAct`xLightCone`Private`r$7366", "]"}], ",", 
      RowBox[{"-", "\[Nu]"}]}], "]"}], "\[InvisibleSpace]", "\<\". \"\>", 
    "\[InvisibleSpace]", "\<\"\"\>"}],
   SequenceForm["** ", xAct`xTensor`DefTensor, ": Defining ", "tensor ", 
    $CellContext`V1[
-    xAct`xTensor`LI[xAct`xLightCone`Private`p$2829], 
-    xAct`xTensor`LI[xAct`xLightCone`Private`q$2829], 
-    xAct`xTensor`LI[xAct`xLightCone`Private`r$2829], -$CellContext`\[Nu]], 
+    xAct`xTensor`LI[xAct`xLightCone`Private`p$7366], 
+    xAct`xTensor`LI[xAct`xLightCone`Private`q$7366], 
+    xAct`xTensor`LI[xAct`xLightCone`Private`r$7366], -$CellContext`\[Nu]], 
    ". ", ""],
   Editable->False]], "Print"]
 }, Open  ]],
@@ -2319,6 +2304,21 @@ RowAlignments -> Center], Rule[AutoSpacing, False], Rule[ShowAutoStyles, \
 False]], V1[LI[1], LI[0], \\\\[Alpha]], Rule[Editable, \
 False]]\\)\[NoBreak].\"\>"}]], "Message", "MSG"],
 
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Induced derivative acting on the non-projected expression \
+\[NoBreak]\\!\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\\\\!\\\\(\\\\*\
+SubscriptBox[\\\\(V\\\\), \\\\(\[UpTee]\\\\)]\\\\)\\\", StyleBox[GridBox[{{\\\
+\"1\\\", \\\"0\\\", \\\"\[Alpha]\\\"}, {\\\" \\\", \\\" \\\", \\\" \\\"}}, \
+RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, \
+0}}], Rule[FontSize, Rational[39, 4]]]}}, ColumnSpacings -> 0.05, \
+RowAlignments -> Center], Rule[AutoSpacing, False], Rule[ShowAutoStyles, \
+False]], V1[LI[1], LI[0], \\\\[Alpha]], Rule[Editable, \
+False]]\\)\[NoBreak].\"\>"}]], "Message", "MSG"],
+
 Cell[BoxData["True"], "Output"]
 }, Open  ]],
 
@@ -2334,21 +2334,6 @@ Cell[BoxData[
      RowBox[{"LI", "[", "1", "]"}], ",", 
      RowBox[{"LI", "[", "0", "]"}], ",", "\[Alpha]"}], "]"}], "]"}], 
   "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Induced derivative acting on the non-projected expression \
-\[NoBreak]\\!\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\\\\!\\\\(\\\\*\
-SubscriptBox[\\\\(V\\\\), \\\\(\[UpTee]\\\\)]\\\\)\\\", StyleBox[GridBox[{{\\\
-\"1\\\", \\\"0\\\", \\\"\[Alpha]\\\"}, {\\\" \\\", \\\" \\\", \\\" \\\"}}, \
-RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, \
-0}}], Rule[FontSize, Rational[39, 4]]]}}, ColumnSpacings -> 0.05, \
-RowAlignments -> Center], Rule[AutoSpacing, False], Rule[ShowAutoStyles, \
-False]], V1[LI[1], LI[0], \\\\[Alpha]], Rule[Editable, \
-False]]\\)\[NoBreak].\"\>"}]], "Message", "MSG"],
 
 Cell[BoxData["False"], "Output"]
 }, Open  ]],
@@ -2743,10 +2728,9 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"ToCanonical", "::", "cmods"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Detected metric-incompatible derivatives \
-\[NoBreak]\\!\\({cd2}\\)\[NoBreak].\"\>"}]], "Message", "MSG"],
+   RowBox[{"ToCanonical", "::", "cmods"}], "MessageName"], ":", 
+  " ", "\<\"Detected metric-incompatible derivatives \[NoBreak]\\!\\({cd2}\\)\
+\[NoBreak].\"\>"}]], "Message", "MSG"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2991,9 +2975,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Induced derivative acting on the non-projected expression \
+   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], ":", 
+  " ", "\<\"Induced derivative acting on the non-projected expression \
 \[NoBreak]\\!\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\\\\!\\\\(\\\\*\
 SubscriptBox[\\\\(B1\\\\), \\\\(\[UpTee]\\\\)]\\\\)\\\", \
 StyleBox[GridBox[{{\\\" \\\"}, {\\\"\[Alpha]\\\"}}, RowSpacings -> 0, \
@@ -3005,9 +2988,8 @@ Rule[AutoSpacing, False], Rule[ShowAutoStyles, False]], BB1[Times[-1, \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Induced derivative acting on the non-projected expression \
+   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], ":", 
+  " ", "\<\"Induced derivative acting on the non-projected expression \
 \[NoBreak]\\!\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\\\\!\\\\(\\\\*\
 SubscriptBox[\\\\(B1\\\\), \\\\(\[UpTee]\\\\)]\\\\)\\\", \
 StyleBox[GridBox[{{\\\" \\\"}, {\\\"\[Alpha]\\\"}}, RowSpacings -> 0, \
@@ -3019,9 +3001,8 @@ Rule[AutoSpacing, False], Rule[ShowAutoStyles, False]], BB1[Times[-1, \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Induced derivative acting on the non-projected expression \
+   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], ":", 
+  " ", "\<\"Induced derivative acting on the non-projected expression \
 \[NoBreak]\\!\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\\\\!\\\\(\\\\*\
 SubscriptBox[\\\\(B1\\\\), \\\\(\[UpTee]\\\\)]\\\\)\\\", \
 StyleBox[GridBox[{{\\\" \\\"}, {\\\"\[Alpha]\\\"}}, RowSpacings -> 0, \
@@ -3033,11 +3014,10 @@ Rule[AutoSpacing, False], Rule[ShowAutoStyles, False]], BB1[Times[-1, \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Validate \
-:: nonproj\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during \
-this calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+   RowBox[{"General", "::", "stop"}], "MessageName"], ":", 
+  " ", "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Validate :: \
+nonproj\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
 \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG"],
@@ -3091,9 +3071,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Induced derivative acting on the non-projected expression \
+   RowBox[{"Validate", "::", "nonproj"}], "MessageName"], ":", 
+  " ", "\<\"Induced derivative acting on the non-projected expression \
 \[NoBreak]\\!\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\\\\!\\\\(\\\\*\
 SubscriptBox[\\\\(B1\\\\), \\\\(\[UpTee]\\\\)]\\\\)\\\", \
 StyleBox[GridBox[{{\\\" \\\"}, {\\\"\[Alpha]\\\"}}, RowSpacings -> 0, \
@@ -10604,7 +10583,7 @@ $CellContext`\[Sigma]$8204],
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{682, 674},
-WindowMargins->{{Automatic, 59}, {-4, Automatic}},
+WindowMargins->{{Automatic, 51}, {-7, Automatic}},
 Visible->True,
 DockedCells->{
   Cell[
