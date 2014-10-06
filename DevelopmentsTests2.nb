@@ -1,0 +1,272 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9685,        263]
+NotebookOptionsPosition[      6476,        182]
+NotebookOutlinePosition[      8872,        238]
+CellTagsIndexPosition[      8829,        235]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<xAct`xLightCone`\>\"", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package xAct`xPerm`  version \"\>", 
+   "\[InvisibleSpace]", "\<\"1.2.2\"\>", "\[InvisibleSpace]", "\<\", \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"2014", ",", "9", ",", "28"}], "}"}]}],
+  SequenceForm["Package xAct`xPerm`  version ", "1.2.2", ", ", {2014, 9, 28}],
+  
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"CopyRight (C) 2003-2014, Jose M. Martin-Garcia, under the \
+General Public License.\"\>"], "Print"],
+
+Cell[BoxData["\<\"Connecting to external mac executable...\"\>"], "Print"],
+
+Cell[BoxData["\<\"Connection established.\"\>"], "Print"],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package xAct`xTensor`  version \"\>", 
+   "\[InvisibleSpace]", "\<\"1.1.1\"\>", "\[InvisibleSpace]", "\<\", \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"2014", ",", "9", ",", "28"}], "}"}]}],
+  SequenceForm[
+  "Package xAct`xTensor`  version ", "1.1.1", ", ", {2014, 9, 28}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"CopyRight (C) 2002-2014, Jose M. Martin-Garcia, under the \
+General Public License.\"\>"], "Print"],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package xAct`xPert`  version \"\>", 
+   "\[InvisibleSpace]", "\<\"1.0.5\"\>", "\[InvisibleSpace]", "\<\", \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"2014", ",", "9", ",", "28"}], "}"}]}],
+  SequenceForm["Package xAct`xPert`  version ", "1.0.5", ", ", {2014, 9, 28}],
+  
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"CopyRight (C) 2005-2014, David Brizuela, Jose M. \
+Martin-Garcia and Guillermo A. Mena Marugan, under the General Public \
+License.\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"** Variable \"\>", "\[InvisibleSpace]", "$PrePrint", 
+   "\[InvisibleSpace]", "\<\" assigned value \"\>", "\[InvisibleSpace]", 
+   "ScreenDollarIndices"}],
+  SequenceForm[
+  "** Variable ", $PrePrint, " assigned value ", 
+   xAct`xTensor`ScreenDollarIndices],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"** Variable \"\>", "\[InvisibleSpace]", "$CovDFormat", 
+   "\[InvisibleSpace]", "\<\" changed from \"\>", 
+   "\[InvisibleSpace]", "\<\"Prefix\"\>", "\[InvisibleSpace]", "\<\" to \"\>",
+    "\[InvisibleSpace]", "\<\"Postfix\"\>"}],
+  SequenceForm[
+  "** Variable ", xAct`xTensor`$CovDFormat, " changed from ", "Prefix", 
+   " to ", "Postfix"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"** Option \"\>", "\[InvisibleSpace]", "AllowUpperDerivatives", 
+   "\[InvisibleSpace]", "\<\" of \"\>", "\[InvisibleSpace]", "ContractMetric",
+    "\[InvisibleSpace]", "\<\" changed from \"\>", "\[InvisibleSpace]", 
+   "False", "\[InvisibleSpace]", "\<\" to \"\>", "\[InvisibleSpace]", "True"}],
+  SequenceForm[
+  "** Option ", xAct`xTensor`AllowUpperDerivatives, " of ", 
+   xAct`xTensor`ContractMetric, " changed from ", False, " to ", True],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"** Option \"\>", "\[InvisibleSpace]", "MetricOn", 
+   "\[InvisibleSpace]", "\<\" of \"\>", "\[InvisibleSpace]", "MakeRule", 
+   "\[InvisibleSpace]", "\<\" changed from \"\>", "\[InvisibleSpace]", "None",
+    "\[InvisibleSpace]", "\<\" to \"\>", "\[InvisibleSpace]", "All"}],
+  SequenceForm[
+  "** Option ", xAct`xTensor`MetricOn, " of ", xAct`xTensor`MakeRule, 
+   " changed from ", None, " to ", All],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"** Option \"\>", "\[InvisibleSpace]", "ContractMetrics", 
+   "\[InvisibleSpace]", "\<\" of \"\>", "\[InvisibleSpace]", "MakeRule", 
+   "\[InvisibleSpace]", "\<\" changed from \"\>", "\[InvisibleSpace]", 
+   "False", "\[InvisibleSpace]", "\<\" to \"\>", "\[InvisibleSpace]", "True"}],
+  SequenceForm[
+  "** Option ", xAct`xTensor`ContractMetrics, " of ", xAct`xTensor`MakeRule, 
+   " changed from ", False, " to ", True],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package xAct`xLight`  version \"\>", 
+   "\[InvisibleSpace]", "\<\"0.0.1\"\>", "\[InvisibleSpace]", "\<\", \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"2014", ",", "9", ",", "29"}], "}"}]}],
+  SequenceForm["Package xAct`xLight`  version ", "0.0.1", ", ", {2014, 9, 29}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"CopyRight (C) 2015-, Obinna Umeh under the General Public \
+License.\"\>"], "Print"],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+\"\>"], "Print"],
+
+Cell[BoxData["\<\"These packages come with ABSOLUTELY NO WARRANTY; for \
+details type Disclaimer[]. This is free software, and you are welcome to \
+redistribute it under certain conditions. See the General Public License for \
+details.\"\>"], "Print"],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+\"\>"], "Print"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"org", "[", "expr_", "]"}], ":=", 
+  RowBox[{"NoScalar", "@", 
+   RowBox[{"Collect", "[", 
+    RowBox[{
+     RowBox[{"ContractMetric", "[", "expr", "]"}], ",", 
+     "$PerturbationParameter", ",", "ToCanonical"}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"collect", "[", "expr_", "]"}], ":=", 
+  RowBox[{"NoScalar", "@", 
+   RowBox[{"Collect", "[", 
+    RowBox[{"expr", ",", "$PerturbationParameter", ",", "Identity"}], 
+    "]"}]}]}]}], "Input"]
+},
+WindowSize->{740, 656},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+DockedCells->{
+  Cell[
+   BoxData[
+    TemplateBox[{
+      ButtonBox[
+      "\"\[Dagger]\"", ButtonFunction :> Exit[], Appearance -> Automatic, 
+       Evaluator -> Automatic, Method -> "Preemptive"], 
+      ButtonBox[
+      "\"\[RightTriangle]\"", ButtonFunction :> FrontEnd`FrontEndExecute[
+         FrontEnd`FrontEndToken["EvaluatorStart"]], Evaluator -> None, 
+       Appearance -> Automatic, Method -> "Preemptive"], 
+      ButtonBox[
+      "\"\[RightTriangle]\[RightTriangle]\"", ButtonFunction :> 
+       FrontEnd`FrontEndExecute[
+         FrontEnd`FrontEndToken["EvaluateNotebook"]], Evaluator -> None, 
+       Appearance -> Automatic, Method -> "Preemptive"], 
+      ButtonBox["\"EvalInit\"", ButtonFunction :> FrontEnd`FrontEndExecute[
+         FrontEnd`FrontEndToken["EvaluateInitialization"]], Evaluator -> None,
+        Appearance -> Automatic, Method -> "Preemptive"], 
+      ButtonBox[
+      "\"Init\"", 
+       ButtonFunction :> (Module[{Utility`Toolbar`cell = NotebookSelection[
+             SelectedNotebook[]], Utility`Toolbar`isInit}, 
+          Utility`Toolbar`isInit = ReplaceAll[InitializationCell, 
+             Options[Utility`Toolbar`cell, InitializationCell]]; If[
+            TrueQ[
+             Or[
+             Utility`Toolbar`isInit == True, Utility`Toolbar`isInit == On]], 
+            SetOptions[Utility`Toolbar`cell, InitializationCell -> False], 
+            SetOptions[Utility`Toolbar`cell, InitializationCell -> True]]]; 
+        Null), Appearance -> Automatic, Evaluator -> Automatic, Method -> 
+       "Preemptive"], 
+      ButtonBox["\"DeInit\"", ButtonFunction :> SetOptions[
+         NotebookSelection[
+          SelectedNotebook[]], InitializationCell -> False], Appearance -> 
+       Automatic, Evaluator -> Automatic, Method -> "Preemptive"], 
+      ButtonBox["\"\[DeleteKey]\"", ButtonFunction :> FrontEnd`FrontEndExecute[
+         FrontEnd`FrontEndToken["DeleteGeneratedCells"]], Evaluator -> None, 
+       Appearance -> Automatic, Method -> "Preemptive"]}, "RowDefault"]], 
+   "DockedCell"]},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
+2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 81, 1, 28, "Input"],
+Cell[CellGroupData[{
+Cell[685, 27, 96, 1, 21, "Print"],
+Cell[784, 30, 368, 9, 22, "Print"],
+Cell[1155, 41, 117, 1, 22, "Print"],
+Cell[1275, 44, 74, 0, 22, "Print"],
+Cell[1352, 46, 57, 0, 21, "Print"],
+Cell[1412, 48, 96, 1, 21, "Print"],
+Cell[1511, 51, 372, 9, 22, "Print"],
+Cell[1886, 62, 117, 1, 22, "Print"],
+Cell[2006, 65, 96, 1, 21, "Print"],
+Cell[2105, 68, 368, 9, 22, "Print"],
+Cell[2476, 79, 165, 2, 38, "Print"],
+Cell[2644, 83, 338, 8, 22, "Print"],
+Cell[2985, 93, 422, 9, 22, "Print"],
+Cell[3410, 104, 523, 9, 22, "Print"],
+Cell[3936, 115, 481, 9, 22, "Print"],
+Cell[4420, 126, 499, 9, 22, "Print"],
+Cell[4922, 137, 96, 1, 21, "Print"],
+Cell[5021, 140, 367, 8, 22, "Print"],
+Cell[5391, 150, 102, 1, 22, "Print"],
+Cell[5496, 153, 96, 1, 21, "Print"],
+Cell[5595, 156, 251, 3, 54, "Print"],
+Cell[5849, 161, 96, 1, 21, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[5972, 166, 500, 14, 63, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
