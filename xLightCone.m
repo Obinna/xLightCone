@@ -139,6 +139,21 @@ $ConformalTime::usage ="";
 Begin["xAct`xLightCone`Private`"]
 
 
+(**Why a scalar head inside a scalar function?**)(**We choose that the Scalar head should be removed**)Unprotect[xAct`xTensor`NoScalar];
+xAct`xTensor`NoScalar[f_?ScalarFunctionQ[expr_]]:=f[NoScalar@expr]
+Protect[xAct`xTensor`NoScalar];
+
+(**To avoid complaints from MakeRule when the rule has already been defined and the lhs is zero.**)
+(*xAct`xTensor`MakeRule[{lhs_?(Evaluate[#]===0&),rhs_,conditions___},options:OptionsPattern[]]:={};*)
+
+(*We create our own function based on MakeRule,but separating the special problematic case.This avoids overloading a definition from xTensor.It does not change the way xLightCone works,but that way,the code is clearly separated from xTensor.This is a much more polite way to modify the behaviour of xTensor.This method was advised by Leo Stein**)
+
+SetAttributes[BuildRule,HoldFirst]
+BuildRule[{lhs_?(Evaluate[#]===0&),rhs_,conditions___},options:OptionsPattern[]]:={};
+BuildRule[{lhs_,rhs_,conditions___}]:=MakeRule[{lhs,rhs,conditions}];
+BuildRule[{lhs_,rhs_,conditions___},options:OptionsPattern[]]:=MakeRule[{lhs,rhs,conditions},options];
+
+
 (* Wrong *)
 (*Unprotect[OrthogonalToVectorQ];
 OrthogonalToVectorQ[vector_][LieD[vector_?xTensorQ[i_]][expr_]]=.
@@ -229,19 +244,18 @@ With[{ind1 = DummyIn[Tangent[Manifold]], ind2 = DummyIn[Tangent[Manifold]], ind3
 
 (* We need to stecify that the trace of the screen space metric is not dim but dim-2.*)
 (* We also ensure automatic contraction of the metric with itself *)
-
-   AutomaticRules[metric, MakeRule[{metric[ind3, ind1] metric[-ind3, -ind1], metric[ind1, -ind1]}]];
-   AutomaticRules[metric, MakeRule[{metric[-ind3, -indb] metric[ind3, ind1], metric[ind1, -indb]}, MetricOn -> All]];
+   AutomaticRules[metric, BuildRule[{metric[ind3, ind1] metric[-ind3, -ind1], metric[ind1, -ind1]}]];
+   AutomaticRules[metric, BuildRule[{metric[-ind3, -indb] metric[ind3, ind1], metric[ind1, -indb]}, MetricOn -> All]];
   
-   AutomaticRules[metric, MakeRule[{metric[-ind1, ind1] , dim-2}]];
+   AutomaticRules[metric, BuildRule[{metric[-ind1, ind1] , dim-2}]];
   
 (* Finally we ensure that the covd d2 we have define is the Levi Civita derivative associated woth the screen space metric*)
-   AutomaticRules[metric, MakeRule[{cd2[ind3][metric[ind1, ind2] ], 0}]];
-
+   AutomaticRules[metric, BuildRule[{cd2[ind3][metric[ind1, ind2] ], 0}]];
    
 (*This line assigns further properties to the metric and the radial vector, We are following xTensor. *)
 (* It calls a function which is implemented below*)
 PropertiesOfInducedScreenSpaceMetric[metric[inda, indb], Manifold, cd2, {n, h, CovDOfMetric[h]}];
+
 
 (*We need a series of obvious upvalues for the screen space metric. *)
 (* These relations are to explain that the screen space metric is induced from the space and to say that it has a covariant derivative cd2*)
@@ -250,8 +264,18 @@ VBundleOfMetric[metric] ^= VBundleOfMetric[g];
 MetricOfCovD[cd2] ^= metric;
 AppendTo[$Metrics, metric];
 MetricQ[metric] ^= True;
-xAct`xLightCone`Private`InducedMetricQ[metric]^= True;
+InducedMetricQ[metric]^= True;
 CovDOfMetric[metric] ^= cd2;
+
+(* Ad hoc rule for OrthogonalToVectorQ. Not working TODO*)
+Unprotect[OrthogonalToVectorQ];
+OrthogonalToVectorQ[u][Evaluate[Projector[metric]][expr_]]:=True;
+Protect[OrthogonalToVectorQ];
+
+(* We also need to say that cd2 applied on the time vector is null*)
+(* I have tried to build this rule with AutomaticRule/MakeRule but it fails...*)
+(* Anyway this is an adhoc patch but if things were done correctly we would never have to put this rule*)
+cd2[ind1_][u[ind2_]]:=0;
 
 (* A series of rules which states taht the derivative cd2 is induced (orthogonality to n of a cd2 applied to a prokected tensor)*)
 (* These rules are implemented in xTensor and called when we define an induced derivative. 
@@ -261,8 +285,7 @@ xAct`xTensor`Private`MakeProjectedDerivative[cd2,metric[inda, -ind2],n[inda]];
 
 ]],
 
-  Print["** DefMetric:: You have to ensure first that the following objects are defined:  metric induced from \
-the super metric, a hypersurface specifying  four vector  and a \
+  Print["** DefMetric:: You have to ensure first that the following objects are defined:  metric induced from the super metric, a hypersurface specifying  four vector  and a \
 screen space specifying vector"]];
 
 
@@ -293,6 +316,7 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
       i3 = indexlist[[3]]},(*Register pair metric/vector*)
 
      xUpSet[VectorOfInducedMetric[metric], vector];     
+
 
 (* Definition of extrinsic curvature *)     
      DefTensor[extrinsicKname[i1, i2], dependencies, 
@@ -581,6 +605,10 @@ NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1]};
     (* And similarly for n where the norm should also be unity or the one specified.*)
     AutomaticRules[n, MakeRule[{n[ind1] n[-ind1], normn}]];
     AutomaticRules[n, MakeRule[{n[-ind1] g[ind1, ind2], n[ind2]}]];
+
+    (* The acceleration of the background n should vanish as well*)
+    Acceleration[n][ind1_] = 0;
+
    
     (*Rules for the antisymmetric tensor and its projected version *)
     (* Currently not implemented on the sphere, but we should ! TODO*)  
@@ -658,9 +686,33 @@ ExtrinsicK[h][i1_,i2_]:=If[$ConformalTime,1,a[h][]]*K[h][LI[0],LI[0],LI[0],i1,i2
 ExtrinsicK[h][i1_,i2_]=0;
 Evaluate[K[h]][LI[0],LI[0],i1_,i2_]=0;
 
+
+(* A role to force the natural appearance of the extrinsic curvature of the direction vector*)
+CD[ind1_][n[ind2_]]:=cd[ind1][n[ind2]];
+
+(* This should be checked. I am not sure this is correct. It is probably correct. TODO CHECK THIS !*)
+(* My intuition is that this involves acceleration of n  and extrinsic curvature so that's why it is zero*)
+CD/:Evaluate[n[ind3_]CD[-ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
+CD/:Evaluate[n[-ind3_]CD[ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
+
+cd/:Evaluate[n[ind3_]cd[-ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
+cd/:Evaluate[n[-ind3_]cd[ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
+
+(* The extrinsic curvature of n should be spatial. This is enforced*)
+AutomaticRules[Evaluate[ExtrinsicK[NSS]],BuildRule[Evaluate[{ExtrinsicK[NSS][ind1,ind2]u[-ind2],0}]]];
+
+
+Unprotect[LieD];
+
+(*Again a special case for a FL spacetime*)
+(* Again this works only for FL since ther is no extrinsic curvature for u and since the extrinsic curvature of n is spacelike.*)
+LieD[u[ind1_]][n[ind2_]]:=0;
+LieD[n[ind1_]][u[ind2_]]:=0;
+(* Maybe these rules should be put somewhere else. TODO*)
+
+
 (* Commutation of Lie and Partial derivatives. Very important here. See draft for the formula which is implemented...*)
 (* But for FL it is ultra trivial*)
-Unprotect[LieD];
 
 (* First the case with cd. It is useless since we will always use cd2 and nearly never cd. Because we go from 4 to 1+1+2.*)
 LieD[u[ind1_]][cd[ind2_][cd[-ind2_][expr1_]]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
@@ -707,6 +759,17 @@ With[{frees=FindFreeIndices[expr1]},ToCanonical[
 +cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
 -cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
+
+(* Obinna has showd that the Directional Lie derivative and the induced derivative should commute. But When indices are down.*)
+LieD[n[ind1_]][cd2[ind2_][expr1_]]:=LieD[n[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&OrthogonalToVectorQ[n][expr1]&&Abs[n[ind1]n[-ind1]]===1;
+
+LieD[n[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
+With[{frees=FindFreeIndices[expr1]},ToCanonical[
+(cd2[ind2][LieD[n[ind1]][expr1]](* Here this should be something else which is by the way zero...+$ExtrinsicKSign *Plus@@(
+(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
++cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
+-cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
+/;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[n][expr1]&&Abs[n[ind1]n[-ind1]]===1;
 
 Protect[LieD];
 
@@ -827,7 +890,9 @@ ToInducedDerivativeScreenSpace[expr_,supercd_,cd_]:=ToInducedDerivative[expr,sup
 
 ToInducedDerivativeScreenSpace[expr_,supercd_,cd_,cd2_]:=expr/.supercd[ind_][expr1:(_?xTensorQ[___]|_?InertHeadQ[___]|cd[_][_]|LieD[_][_])]:>-cd[ind][expr1]+
 With[{frees=FindFreeIndices[expr1],n=Last@InducedFrom[MetricOfCovD[cd2]]},ToInducedDerivative[supercd[ind][expr1],supercd,cd]+ToInducedDerivative[cd[ind][expr1],cd,cd2]
-/.LieD[n[a_]][expr1]:>LieDToCovD[LieD[n[a]][expr1],cd]
+(*/.LieD[n[a_]][expr1]:>LieDToCovD[LieD[n[a]][expr1],supercd]*)
+(* Even though the third label index is a directional derivative, it proves easier to perform the splitting with the Lie Derivative. And then only to use the directional derivative when implementing the incrementation of the label index*)
+
 ]
 
 
@@ -980,6 +1045,13 @@ PropertiesList[Name]^=Join[PropertiesList[Name],Which[Length[{inds}]===1&&Transv
 (*The Lie derivative for tensors with indices down is represented by the second label-index.*)Name/:LieD[u[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=
 If[$ConformalTime,1,a[h][]]*Name[LI[p],LI[q+1],LI[r],indices]/;(Length[{indices}]===Length[{inds}]);
 
+
+(* However, the third index is the directional derivative in the direction of n. *)
+(* One could even remove the assumptions that the indices are down here.*)
+n/:n[Dum_]cd1[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}]);
+
+
+
 (*(*For tensors of rank larger than or equal to 1,*)
 If[Length[{inds}]>=1,Name/:OrthogonalToVectorQ[u][Name]=True;
 (* Already set above *)
@@ -1064,6 +1136,7 @@ Identity@Identity[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[Dum][Name[LI
 
 (*and the second rule:Subscript[D,a] Subscript[\[ScriptCapitalL],n]Subscript[T^a,...]=Subscript[\[ScriptCapitalL],n](D^aSubscript[T,a...])-Subscript[\[ScriptCapitalL],n](g^ab)Subscript[D,b]Subscript[Subscript[T,a],...]+(g^ab)[Subscript[D,b],Subscript[\[ScriptCapitalL],n]]Subscript[T,a...]*)Name/:cd2[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices1___?DownIndexQ,Dum_,indices2___?DownIndexQ]]:=Module[{Dummy1,Dummy2},Dummy1=DummyIn[Tangent[M]];
 Dummy2=DummyIn[Tangent[M]];
+
 Identity@Identity[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[Dum][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]-ToCan[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][g[Dum,Dummy2]] cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]//MetricToProjector[#,h]&]+g[Dum,Dummy2] ToCan[cd2[-Dummy2][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]-If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]]]]/;(Length[Join[{indices1},{indices2}]]+1===Length[{inds}]);
 
 
