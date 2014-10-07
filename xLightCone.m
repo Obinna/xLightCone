@@ -270,7 +270,7 @@ screen space specifying vector"]];
 screeen space, so i have defined the following for now, we may end up \
 merging with xTensor*)
 $ExtrinsicKOnSSSign = $ExtrinsicKSign;
-$AccelerationOfnSign = $ExtrinsicKSign;
+$AccelerationOfnSign = $AccelerationSign;
 
 
 (*This function is called in DefScreenSpaceMetric and sets various properties for the screen space metric. It is adapted from xTensor*)
@@ -579,7 +579,6 @@ NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1]};
    
     
     (* And similarly for n where the norm should also be unity or the one specified.*)
-    Acceleration[n][ind1_] = 0;
     AutomaticRules[n, MakeRule[{n[ind1] n[-ind1], normn}]];
     AutomaticRules[n, MakeRule[{n[-ind1] g[ind1, ind2], n[ind2]}]];
    
@@ -634,7 +633,6 @@ AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[-ind1,-ind2]],LieD[u[dummy
 
 Which[
 FlatSpaceBool[SpaceTimeType],
-CSh[ind1_,ind2_,ind3_]=0;
 Riemann[cd][i1_,i2_,i3_,i4_]=0;
 Ricci[cd][i1_,i2_]=0;
 RicciScalar[cd][]=0;,
@@ -642,7 +640,7 @@ RicciScalar[cd][]=0;,
 CurvedSpaceBool[SpaceTimeType],
 DefTensor[\[ScriptK][h][],{Manifold},PrintAs->StringJoin["\[ScriptK]"(*,ToString[h]*)]];
 
-CD[ind1_][\[ScriptK][h][]]:=-1*(-2/3)*u[ind1]\[ScriptK][h][]CD[-ind2][u[ind2]]; (* This is because Subscript[\[ScriptCapitalL], u](\[ScriptK]^(1/2) Subscript[\[Epsilon]^\[Mu], \[Nu]\[Sigma]]) must be zero since Subscript[\[ScriptCapitalL], u](Subscript[C^\[Mu], \[Nu]\[Sigma]])=0*)
+CD[ind1_][\[ScriptK][h][]]:=0(*-1*(-2/3)*u[ind1]\[ScriptK][h][]CD[-ind2][u[ind2]]*); (* This is because Subscript[\[ScriptCapitalL], u](\[ScriptK]^(1/2) Subscript[\[Epsilon]^\[Mu], \[Nu]\[Sigma]]) must be zero since Subscript[\[ScriptCapitalL], u](Subscript[C^\[Mu], \[Nu]\[Sigma]])=0*)
 (* Given that we first work on the conformal metric where the trace of the extrinsic curvature is 0, then this point does not matter at all for us.*)
 cd[ind1_][\[ScriptK][h][]]=0;
 If[SpaceTimeType==="FLCurved",

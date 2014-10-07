@@ -1564,8 +1564,8 @@ Cell[BoxData[
     RowBox[{"$ExtrinsicKOnSSSign", " ", "=", " ", "$ExtrinsicKSign"}], ";"}], 
    "\n", 
    RowBox[{
-    RowBox[{"$AccelerationOfnSign", " ", "=", " ", "$ExtrinsicKSign"}], ";"}],
-    "\n", "\n", "\n", 
+    RowBox[{"$AccelerationOfnSign", " ", "=", " ", "$AccelerationSign"}], 
+    ";"}], "\n", "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{
     "This", " ", "function", " ", "is", " ", "called", " ", "in", " ", 
@@ -3428,10 +3428,6 @@ Cell[BoxData[{
             "the", " ", "norm", " ", "should", " ", "also", " ", "be", " ", 
             "unity", " ", "or", " ", "the", " ", "one", " ", 
             RowBox[{"specified", "."}]}], "*)"}], "\n", "    ", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"Acceleration", "[", "n", "]"}], "[", "ind1_", "]"}], " ",
-            "=", " ", "0"}], ";", "\n", "    ", 
           RowBox[{"AutomaticRules", "[", 
            RowBox[{"n", ",", " ", 
             RowBox[{"MakeRule", "[", 
@@ -3811,10 +3807,6 @@ Cell[BoxData[{
             "\[IndentingNewLine]", 
             RowBox[{
              RowBox[{
-              RowBox[{"CSh", "[", 
-               RowBox[{"ind1_", ",", "ind2_", ",", "ind3_"}], "]"}], "=", 
-              "0"}], ";", "\[IndentingNewLine]", 
-             RowBox[{
               RowBox[{
                RowBox[{"Riemann", "[", "cd", "]"}], "[", 
                RowBox[{"i1_", ",", "i2_", ",", "i3_", ",", "i4_"}], "]"}], 
@@ -3846,7 +3838,9 @@ Cell[BoxData[{
               RowBox[{
                RowBox[{"CD", "[", "ind1_", "]"}], "[", 
                RowBox[{
-                RowBox[{"\[ScriptK]", "[", "h", "]"}], "[", "]"}], "]"}], ":=", 
+                RowBox[{"\[ScriptK]", "[", "h", "]"}], "[", "]"}], "]"}], ":=",
+               "0"}], 
+             RowBox[{"(*", 
               RowBox[{
                RowBox[{"-", "1"}], "*", 
                RowBox[{"(", 
@@ -3858,7 +3852,7 @@ Cell[BoxData[{
                RowBox[{
                 RowBox[{"CD", "[", 
                  RowBox[{"-", "ind2"}], "]"}], "[", 
-                RowBox[{"u", "[", "ind2", "]"}], "]"}]}]}], ";", " ", 
+                RowBox[{"u", "[", "ind2", "]"}], "]"}]}], "*)"}], ";", " ", 
              RowBox[{"(*", " ", 
               RowBox[{
                RowBox[{"This", " ", "is", " ", "because", " ", 
@@ -3953,13 +3947,13 @@ Cell[BoxData[{
                     RowBox[{"i3", ",", 
                     RowBox[{"-", "i3"}]}], "]"}], "-", "1"}], ")"}]}]}], 
                  "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], "\n", 
-           "]"}], ";", "\n", "\n", 
+           "]"}], ";", "\n", "\[IndentingNewLine]", 
           RowBox[{"(*", " ", 
            RowBox[{
            "We", " ", "replace", " ", "the", " ", "extrinsic", " ", 
             "curvature", " ", "with", " ", "an", " ", "adhoc", " ", "tensor", 
             " ", "which", " ", "can", " ", "have", " ", "derivatives", " ", 
-            "label", " ", "indices"}], "*)"}], "\[IndentingNewLine]", 
+            "label", " ", "indices"}], "*)"}], "\n", 
           RowBox[{"DefScreenProjectedTensor", "[", 
            RowBox[{
             RowBox[{
@@ -4018,11 +4012,11 @@ Cell[BoxData[{
              RowBox[{"derivatives", ".", " ", "Very"}], " ", "important", " ", 
              RowBox[{"here", ".", " ", "See"}], " ", "draft", " ", "for", " ",
               "the", " ", "formula", " ", "which", " ", "is", " ", 
-             "implemented"}], "..."}], "*)"}], "\n", 
+             "implemented"}], "..."}], "*)"}], "\[IndentingNewLine]", 
           RowBox[{"(*", " ", 
            RowBox[{
            "But", " ", "for", " ", "FL", " ", "it", " ", "is", " ", "ultra", 
-            " ", "trivial"}], "*)"}], "\[IndentingNewLine]", 
+            " ", "trivial"}], "*)"}], "\n", 
           RowBox[{"Unprotect", "[", "LieD", "]"}], ";", "\n", "\n", 
           RowBox[{"(*", " ", 
            RowBox[{
@@ -4477,24 +4471,25 @@ Cell[BoxData[{
                     RowBox[{"-", "dum"}]}]}], "]"}]}]}], ")"}], "&"}], "/@", 
                     "frees"}], ")"}]}]}]}], "*)"}], ")"}], ",", 
                    RowBox[{"UseMetricOnVBundle", "\[Rule]", "None"}]}], 
-                  "]"}]}], "]"}]}]}], "]"}], "\n", "/;", 
-            RowBox[{
+                  "]"}]}], "]"}]}]}], "]"}], "\n", 
+            RowBox[{"/;", 
              RowBox[{
-              RowBox[{"Length", "[", 
-               RowBox[{
-                RowBox[{"IndicesOf", "[", 
-                 RowBox[{"Free", ",", "Up"}], "]"}], "[", "expr1", "]"}], 
-               "]"}], "===", "0"}], "&&", 
-             RowBox[{
-              RowBox[{"OrthogonalToVectorQ", "[", "u", "]"}], "[", "expr1", 
-              "]"}], "&&", 
-             RowBox[{
-              RowBox[{"Abs", "[", 
-               RowBox[{
-                RowBox[{"u", "[", "ind1", "]"}], 
-                RowBox[{"u", "[", 
-                 RowBox[{"-", "ind1"}], "]"}]}], "]"}], "===", "1"}]}]}]}], 
-          ";", "\n", "\n", 
+              RowBox[{
+               RowBox[{"Length", "[", 
+                RowBox[{
+                 RowBox[{"IndicesOf", "[", 
+                  RowBox[{"Free", ",", "Up"}], "]"}], "[", "expr1", "]"}], 
+                "]"}], "===", "0"}], "&&", 
+              RowBox[{
+               RowBox[{"OrthogonalToVectorQ", "[", "u", "]"}], "[", "expr1", 
+               "]"}], "&&", 
+              RowBox[{
+               RowBox[{"Abs", "[", 
+                RowBox[{
+                 RowBox[{"u", "[", "ind1", "]"}], 
+                 RowBox[{"u", "[", 
+                  RowBox[{"-", "ind1"}], "]"}]}], "]"}], "===", "1"}]}]}]}]}],
+           ";", "\n", "\n", 
           RowBox[{"Protect", "[", "LieD", "]"}], ";"}]}], "\n", "\n", 
         RowBox[{"(*", " ", 
          RowBox[{
@@ -11517,7 +11512,7 @@ Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], "Output"]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1227, 756},
-WindowMargins->{{Automatic, 80}, {Automatic, 15}},
+WindowMargins->{{Automatic, 172}, {Automatic, 23}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
