@@ -28,7 +28,7 @@ xAct`xLightCone`$xPertVersionExpected={"1.0.5",{2014,9,28}};
 
 (* xLightCone:  *)
 
-(* Copyright (C) 2015- Obinna Umeh, Cyril Pitrou *)
+(* Copyright (C) 2014- Obinna Umeh, Cyril Pitrou *)
 
 (* This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License as
@@ -53,7 +53,7 @@ You should have received a copy of the GNU General Public License
 
 (* :Context: xAct`xLightCone` *)
 
-(* :Copyright: Obinna Umeh & Cyril Pitrou (2015-) *)
+(* :Copyright: Obinna Umeh & Cyril Pitrou (2014-) *)
 
 (* :Keywords: *)
 
@@ -80,7 +80,7 @@ If[Not@OrderedQ@Map[Last,{$xPertVersionExpected,xAct`xPert`$Version}],Throw@Mess
 
 
 Print[xAct`xCore`Private`bars];
-Print["Package xAct`xLight`  version ",$Version[[1]],", ",$Version[[2]]];
+Print["Package xAct`xLightCone`  version ",$Version[[1]],", ",$Version[[2]]];
 Print["CopyRight (C) 2015-, Obinna Umeh under the General Public License."];
 
 
@@ -116,8 +116,11 @@ DefMetricFields::usage = "";
 DefScreenProjectedTensor::usage = "";
 
 DefScreenSpaceMetric::usage = "";
+
 SetSlicingUpToScreenSpace::usage = "";
+
 SetSlicingUpToScreenSpaceObinna::usage = "";
+
 SplitMetric ::usage = "";
 
 ToInducedDerivativeScreenSpace::usage="";
@@ -163,47 +166,35 @@ AnisotropyBool[Spacetype_]:=(Spacetype==="Anisotropic")
 (*The name'AnisotropyBool' should be changed.*)
 
 
-DefScreenSpaceMetric[metric_[inda_, indb_], Manifold_, 
-  cd2_, {cdpost_String, cdpre_String}, InducedHypersurface_, 
-  options_] :=
+(* ::Code:: *)
+DefScreenSpaceMetric[metric_[inda_, indb_], Manifold_, cd2_, {cdpost_String, cdpre_String}, InducedHypersurface_, options_] :=
  If[(MetricQ[First@InducedHypersurface]) && (xTensorQ[Last@InducedHypersurface]),
- Module[{g = First@InducedFrom[First@InducedHypersurface],
-u = First@Rest@InducedFrom[First@InducedHypersurface],
+  Module[{g = First@InducedFrom[First@InducedHypersurface],u = First@Rest@InducedFrom[First@InducedHypersurface],
    vbundle = VBundleOfIndex[inda],
    h = First@InducedHypersurface,
    n = Last@InducedHypersurface,
-    dim = DimOfManifold[Manifold],
+   dim = DimOfManifold[Manifold],
    indexlist = GetIndicesOfVBundle[VBundleOfIndex[inda], 3]}, 
 
 
-With[{
-    ind1 = DummyIn[Tangent[Manifold]], ind2 = 
- DummyIn[Tangent[Manifold]], ind3 = DummyIn[Tangent[Manifold]], ind4 =
-  DummyIn[Tangent[Manifold]]},
+With[{ind1 = DummyIn[Tangent[Manifold]], ind2 = DummyIn[Tangent[Manifold]], ind3 = DummyIn[Tangent[Manifold]], ind4 = DummyIn[Tangent[Manifold]]},
    
-   DefTensor[metric[-inda, -indb], Manifold, 
-    If[$TorsionSign === 1, Symmetric[{-inda, -indb}], {}], 
-    OrthogonalTo -> {u[inda], u[indb], n[inda], n[indb]}, 
-    ProjectedWith -> {h[inda, -ind1], h[indb, -ind1]}, options];
+   DefTensor[metric[-inda, -indb], Manifold, If[$TorsionSign === 1, Symmetric[{-inda, -indb}], {}], 
+    OrthogonalTo -> {u[inda], u[indb], n[inda], n[indb]}, ProjectedWith -> {h[inda, -ind1], h[indb, -ind1]}, options];
    
-   DefCovD[cd2[inda], vbundle, {cdpost, cdpre}, 
-    OrthogonalTo -> {u[inda], n[inda]}, 
-    ProjectedWith -> {h[inda, -ind2], metric[inda, -ind2]}];
+   DefCovD[cd2[inda], vbundle, {cdpost, cdpre}, OrthogonalTo -> {u[inda], n[inda]}, ProjectedWith -> {h[inda, -ind2], metric[inda, -ind2]}];
    
-   RadialVectOrthToTheScreenSpace[metric] := 
-    RadialVectOrthToTheScreenSpace[metric] = n;
+   RadialVectOrthToTheScreenSpace[metric] := RadialVectOrthToTheScreenSpace[metric] = n;
    
+
+(* Warning and Error messages*)
    OrthogonalVectors[x_] := 
     If[x === h, Rest@InducedFrom[h], 
-     If[x === metric, Flatten[{Rest@InducedFrom[h], Rest@{h, n}}], 
-      "\!\(" <> ToString[x] <> 
-       "\&-\) do not have orthogonal vectors "]];
+     If[x === metric, Flatten[{Rest@InducedFrom[h], Rest@{h, n}}],"\!\(" <> ToString[x] <>"\&-\) do not have orthogonal vectors "]];
    
-   InducedFromHyperSurface[x_] := 
-    InducedFromHyperSurface[x] = 
+   InducedFromHyperSurface[x_] :=InducedFromHyperSurface[x] = 
      If[x === h, InducedFrom[h], 
-      If[x === metric, {h, n}, 
-       "\!\(" <> ToString[x] <> "\&-\) is not an induced metric"]];
+      If[x === metric, {h, n},"\!\(" <> ToString[x] <> "\&-\) is not an induced metric"]];
    
    (*AutomaticRules[NSS,MakeRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-
    n[-ind1]n[-ind2]}]]*)
@@ -257,6 +248,7 @@ xAct`xTensor`Private`MakeOrthogonalDerivative[cd2,metric[inda, -ind2],n[inda]];
 xAct`xTensor`Private`MakeProjectedDerivative[cd2,metric[inda, -ind2],n[inda]];
 
 (*OrthogonalToVectorQ[n][cd2[ind1][_]]^=True;*)]],
+
   Print["** DefMetric:: You have to ensure first that the following objects are defined:  metric induced from \
 the super metric, a hypersurface specifying  four vector  and a \
 screen space specifying vector"]];
