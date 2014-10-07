@@ -5264,7 +5264,7 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                   RowBox[{"Catch", "@", 
                    RowBox[{"Module", "[", 
                     RowBox[{
-                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
                     RowBox[{
                     RowBox[{"If", "[", 
                     RowBox[{
@@ -5278,7 +5278,7 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                     RowBox[{
                     "\"\<** Warning: The number of indices for the tensor \
 \>\"", ",", "Name", ",", "\"\< is incorrect.\>\""}], "]"}], "]"}]}], "]"}], 
-                    ";", "\[IndentingNewLine]", 
+                    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
@@ -5293,6 +5293,7 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                     "\"\<** Warning: The indices of the tensor \>\"", ",", 
                     "Name", ",", "\"\< have to be abstract indices.\>\""}], 
                     "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
@@ -5311,14 +5312,16 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                     RowBox[{
                     "Print", "[", 
                     "\"\<** Warning: The label-indices have to be positive \
-integers.\>\"", "]"}], "]"}], "]"}], "*)"}], 
+integers.\>\"", "]"}], "]"}], "]"}], "*)"}], "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
                     RowBox[{"NumericQ", "[", "p", "]"}], "&&", 
                     RowBox[{"NumericQ", "[", "q", "]"}]}], ",", 
                     RowBox[{"Throw", "[", 
-                    RowBox[{"Print", "[", 
+                    RowBox[{
+                    "Print", "[", 
                     "\"\<** Warning: The label-indices have to be positive \
 integers.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";", 
                  "\[IndentingNewLine]", "\[IndentingNewLine]", 
@@ -5384,7 +5387,7 @@ integers.\>\"", "]"}], "]"}]}], "]"}]}]}], ";", "\[IndentingNewLine]",
                   RowBox[{"Catch", "@", 
                    RowBox[{"Module", "[", 
                     RowBox[{
-                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
                     RowBox[{
                     RowBox[{"If", "[", 
                     RowBox[{
@@ -5395,6 +5398,7 @@ integers.\>\"", "]"}], "]"}]}], "]"}]}]}], ";", "\[IndentingNewLine]",
                     "Print", "[", 
                     "\"\<** Warning: The order of the perturbation has to be \
 an integer.\>\"", "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
@@ -5447,7 +5451,7 @@ integers.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}], ";",
                   RowBox[{"Catch", "@", 
                    RowBox[{"Module", "[", 
                     RowBox[{
-                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
                     RowBox[{
                     RowBox[{"If", "[", 
                     RowBox[{
@@ -5461,7 +5465,7 @@ integers.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}], ";",
                     RowBox[{
                     "\"\<** Warning: The number of indices for the tensor \
 \>\"", ",", "Name", ",", "\"\< is incorrect.\>\""}], "]"}], "]"}]}], "]"}], 
-                    ";", "\[IndentingNewLine]", 
+                    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
@@ -5488,6 +5492,7 @@ integers.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}], ";",
                     "Print", "[", 
                     "\"\<** Warning: The second label-index has to be a \
 positive integer.\>\"", "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{"PertOrder", "===", "0"}], ",", 
@@ -5522,7 +5527,7 @@ a positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                   RowBox[{"Catch", "@", 
                    RowBox[{"Module", "[", 
                     RowBox[{
-                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
                     RowBox[{
                     RowBox[{"If", "[", 
                     RowBox[{
@@ -5536,7 +5541,7 @@ a positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                     RowBox[{
                     "\"\<** Warning: The number of indices for the tensor \
 \>\"", ",", "Name", ",", "\"\< is incorrect.\>\""}], "]"}], "]"}]}], "]"}], 
-                    ";", "\[IndentingNewLine]", 
+                    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
@@ -5551,6 +5556,7 @@ a positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                     "\"\<** Warning: The indices of the tensor \>\"", ",", 
                     "Name", ",", "\"\< have to be abstract indices.\>\""}], 
                     "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
@@ -5561,6 +5567,7 @@ a positive integer.\>\"", "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}]}]}], ";",
                     "Print", "[", 
                     "\"\<** Warning: The second label-index has to be a \
 positive integer.\>\"", "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
                     RowBox[{"If", "[", 
                     RowBox[{
                     RowBox[{
@@ -5803,7 +5810,8 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}],
                     RowBox[{"IntegerQ", "[", "#", "]"}], "&&", 
                     RowBox[{"#", "\[GreaterEqual]", "0"}]}], ")"}], "&"}], 
                     ")"}]}], "]"}]}], "]"}], ",", 
-               RowBox[{"indices___", "?", "DownIndexQ"}]}], "]"}], "]"}], ":=", 
+               RowBox[{"indices___", "?", "DownIndexQ"}]}], "]"}], "]"}], ":=",
+             "\[IndentingNewLine]", 
             RowBox[{
              RowBox[{
               RowBox[{"If", "[", 
@@ -7674,7 +7682,7 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}],
                     "2"}], "===", 
                     RowBox[{"Length", "[", 
                     RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";", 
-                 "\[IndentingNewLine]", 
+                 "\[IndentingNewLine]", "\[IndentingNewLine]", 
                  RowBox[{"Name", "/:", 
                   RowBox[{
                    RowBox[{"cd2", "[", "Dum_", "]"}], "[", 
@@ -7744,7 +7752,7 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}],
                     "2"}], "===", 
                     RowBox[{"Length", "[", 
                     RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";", 
-                 "\[IndentingNewLine]", 
+                 "\[IndentingNewLine]", "\[IndentingNewLine]", 
                  RowBox[{"Name", "/:", 
                   RowBox[{
                    RowBox[{"cd2", "[", 
@@ -7814,7 +7822,7 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}], "]"}],
                     "2"}], "===", 
                     RowBox[{"Length", "[", 
                     RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";", 
-                 "\[IndentingNewLine]", 
+                 "\[IndentingNewLine]", "\[IndentingNewLine]", 
                  RowBox[{"Name", "/:", 
                   RowBox[{
                    RowBox[{"cd2", "[", 
@@ -8465,6 +8473,7 @@ Cell[BoxData[
               RowBox[{
                RowBox[{"Etpt", "[", "N", "]"}], "[", 
                RowBox[{"-", "\[Mu]"}], "]"}], ",", 
+              
               "\"\<\\!\\(\\*SubscriptBox[\\(E\\), \\(t ||  \[UpTee] \\)]\\)\>\
 \""}], "}"}], ",", 
             RowBox[{"{", 

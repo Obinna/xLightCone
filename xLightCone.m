@@ -774,26 +774,40 @@ If[(IntegerQ[q]&&q>=0),0,(*Throw[Print["** Warning: The second label-index has t
 If[(IntegerQ[r]&&r>=0),0,If[NumericQ[r],Throw[Print["** Warning: The Third label-index has to be a positive integer."]]]]];
 
 
-(*TO DO:Here,we have to comment on the commutation between perturbing and Lie deriving.This commutation stems from the fact that the Lie derivative is a background Lie derivative.*)If[PerturbedBool,(*For any perturbed tensors,we have:*)PerturbationOrder[Name[LI[p_],LI[q_],LI[r_],indices___]]^:=Catch@Module[{},If[Length[{indices}]=!=Length[{inds}],Throw[Print["** Warning: The number of indices for the tensor ",Name," is incorrect."]]];
+(*TO DO:Here,we have to comment on the commutation between perturbing and Lie deriving.This commutation stems from the fact that the Lie derivative is a background Lie derivative.*)If[PerturbedBool,(*For any perturbed tensors,we have:*)PerturbationOrder[Name[LI[p_],LI[q_],LI[r_],indices___]]^:=Catch@Module[{},
+If[Length[{indices}]=!=Length[{inds}],Throw[Print["** Warning: The number of indices for the tensor ",Name," is incorrect."]]];
+
 If[Cases[AIndexQ/@{indices},False]=!={},Throw[Print["** Warning: The indices of the tensor ",Name," have to be abstract indices."]]];
-If[(IntegerQ[p]&&p>=1)&&(IntegerQ[q]&&q>=0),p,(*Throw[Print["** Warning: The label-indices have to be positive integers."]]]*)If[NumericQ[p]&&NumericQ[q],Throw[Print["** Warning: The label-indices have to be positive integers."]]]]];
+
+If[(IntegerQ[p]&&p>=1)&&(IntegerQ[q]&&q>=0),p,(*Throw[Print["** Warning: The label-indices have to be positive integers."]]]*)
+
+If[NumericQ[p]&&NumericQ[q],Throw[Print["** Warning: The label-indices have to be positive integers."]]]]];
 
 (*(the rule for'p=0' is defined above)*)(*and for perturbed scalar quantities,we have:*)Perturbation[Name[LI[p_],LI[q_],LI[r_]]]^:=Catch@If[(IntegerQ[p]&&p>=0)&&(IntegerQ[q]&&q>=0)&&(IntegerQ[r]&&r>=0),Name[LI[p+1],LI[q],LI[r]],Throw[Print["** Warning: The label-indices have to be positive integers."]]];
 
-Perturbation[Name[LI[p_],LI[q_],LI[r_]],PertOrder_]^:=Catch@Module[{},If[Not[IntegerQ[PertOrder]],Throw[Print["** Warning: The order of the perturbation has to be an integer."]]];
+Perturbation[Name[LI[p_],LI[q_],LI[r_]],PertOrder_]^:=Catch@Module[{},
+If[Not[IntegerQ[PertOrder]],Throw[Print["** Warning: The order of the perturbation has to be an integer."]]];
+
 If[(IntegerQ[p]&&p>=0)&&(IntegerQ[q]&&q>=0)&&(IntegerQ[r]&&r>=0),Name[LI[p+PertOrder],LI[q],LI[r]],Throw[Print["** Warning: The label-indices have to be positive integers."]]]];];
 
 
-(*For tensors living on the background only, we have:*)If[BackgroundBool&&Not[PerturbedBool],Perturbation[Name[LI[0],LI[q_],LI[r_],indices___],PertOrder_]^:=Catch@Module[{},If[Length[{indices}]=!=Length[{inds}],Throw[Print["** Warning: The number of indices for the tensor ",Name," is incorrect."]]];
+(*For tensors living on the background only, we have:*)If[BackgroundBool&&Not[PerturbedBool],Perturbation[Name[LI[0],LI[q_],LI[r_],indices___],PertOrder_]^:=Catch@Module[{},
+If[Length[{indices}]=!=Length[{inds}],Throw[Print["** Warning: The number of indices for the tensor ",Name," is incorrect."]]];
+
 If[Cases[AIndexQ/@{indices},False]=!={},Throw[Print["** Warning: The indices of the tensor ",Name," have to be abstract indices."]]];
 
 If[Not[IntegerQ[q]&&q>=0],Throw[Print["** Warning: The second label-index has to be a positive integer."]]];
+
 If[PertOrder===0,Name[LI[0],LI[q],LI[r],indices],If[(IntegerQ[PertOrder]&&PertOrder>=1),0,Throw[Print["** Warning: The order of the perturbation has to be a positive integer."]]]]];
 
 
-Perturbation[Name[LI[0],LI[q_],LI[r_],indices___]]^:=Catch@Module[{},If[Length[{indices}]=!=Length[{inds}],Throw[Print["** Warning: The number of indices for the tensor ",Name," is incorrect."]]];
+Perturbation[Name[LI[0],LI[q_],LI[r_],indices___]]^:=Catch@Module[{},
+If[Length[{indices}]=!=Length[{inds}],Throw[Print["** Warning: The number of indices for the tensor ",Name," is incorrect."]]];
+
 If[Cases[AIndexQ/@{indices},False]=!={},Throw[Print["** Warning: The indices of the tensor ",Name," have to be abstract indices."]]];
+
 If[IntegerQ[q]&&q>=0,0,Throw[Print["** Warning: The second label-index has to be a positive integer."]]];
+
 If[IntegerQ[r]&&r>=0,0,Throw[Print["** Warning: The second label-index has to be a positive integer."]]]];];
 
 
@@ -811,7 +825,8 @@ PropertiesList[Name]^=Join[PropertiesList[Name],Which[Length[{inds}]===1&&Transv
 
 (*'SVT-Vector' is a vector satisfying the SVT-decomposition properties (hence it is transverse).'SVT-Tensor' is a tensor satisfying the SVT-decomposition properties (hence it is symmetric,traceless and transverse).*)
 
-(*The Lie derivative for tensors with indices down is represented by the second label-index.*)Name/:LieD[u[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&),LI[r_?((IntegerQ[#]&&#>=0)&)]],indices___?DownIndexQ]]:=If[$ConformalTime,1,a[h][]]*Name[LI[p],LI[q+1],LI[r],indices]/;(Length[{indices}]===Length[{inds}]);
+(*The Lie derivative for tensors with indices down is represented by the second label-index.*)Name/:LieD[u[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&),LI[r_?((IntegerQ[#]&&#>=0)&)]],indices___?DownIndexQ]]:=
+If[$ConformalTime,1,a[h][]]*Name[LI[p],LI[q+1],LI[r],indices]/;(Length[{indices}]===Length[{inds}]);
 
 (*For tensors of rank larger than or equal to 1,*)
 If[Length[{inds}]>=1,Name/:OrthogonalToVectorQ[u][Name]=True;
@@ -901,10 +916,13 @@ ToCan@ContractMetric[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[Dum][Name
 
 Name/:cd2[Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices1___,indup_?UpIndexQ,indices3___,-Dum_,indices2___]]:=Module[{Dummy},Dummy=DummyIn[Tangent[M]];
 g[indup,Dummy] cd2[Dum][Name[LI[p],LI[q],LI[r],indices1,-Dummy,indices3,-Dum,indices2]]]/;(Length[Join[{indices1},{indices2},{indices3}]]+2===Length[{inds}]);
+
 Name/:cd2[Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices1___,-Dum_,indices3___,indup_?UpIndexQ,indices2___]]:=Module[{Dummy},Dummy=DummyIn[Tangent[M]];
 g[indup,Dummy] cd2[Dum][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices3,-Dummy,indices2]]]/;(Length[Join[{indices1},{indices2},{indices3}]]+2===Length[{inds}]);
+
 Name/:cd2[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices1___,indup_?UpIndexQ,indices3___,Dum_,indices2___]]:=Module[{Dummy},Dummy=DummyIn[Tangent[M]];
 g[indup,Dummy] cd2[-Dum][Name[LI[p],LI[q],LI[r],indices1,-Dummy,indices3,Dum,indices2]]]/;(Length[Join[{indices1},{indices2},{indices3}]]+2===Length[{inds}]);
+
 Name/:cd2[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices1___,Dum_,indices3___,indup_?UpIndexQ,indices2___]]:=Module[{Dummy},Dummy=DummyIn[Tangent[M]];
 g[indup,Dummy] cd2[-Dum][Name[LI[p],LI[q],LI[r],indices1,Dum,indices3,-Dummy,indices2]]]/;(Length[Join[{indices1},{indices2},{indices3}]]+2===Length[{inds}]);];];
 
