@@ -139,6 +139,14 @@ $ConformalTime::usage ="";
 Begin["xAct`xLightCone`Private`"]
 
 
+(* Wrong *)
+(*Unprotect[OrthogonalToVectorQ];
+OrthogonalToVectorQ[vector_][LieD[vector_?xTensorQ[i_]][expr_]]=.
+
+OrthogonalToVectorQ[vector_][LieD[vector2_?xTensorQ[i_]][expr_]]:=OrthogonalToVectorQ[vector][expr]&&(IndicesOf[Free,xAct`xTensor`Up][expr]===IndexList[]||LieD[vector[i]][vector2[-i]]===0);
+Protect[OrthogonalToVectorQ];*)
+
+
 (***DEFAULT OPTIONS AND PROTECTED NAMES***)
 (* We should clean that to make sure there are no usueless definitions *)
 BackgroundFieldMethod=False;
@@ -278,11 +286,7 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
      epsilonname = GiveSymbol[epsilon, metric],
      superepsilonname = GiveSymbol[epsilon, supermetric],
      proj = ProjectWith[metric], 
-     norm = Scalar@
-       Simplify@
-        ContractMetric[
-         supermetric[-ind1, -ind2] vector[ind1] vector[ind2], 
-         supermetric], indexlist = GetIndicesOfVBundle[vbundle, 3]},  
+     norm = Scalar@Simplify@ContractMetric[supermetric[-ind1, -ind2] vector[ind1] vector[ind2],supermetric], indexlist = GetIndicesOfVBundle[vbundle, 3]},  
 
   
     With[{i1 = indexlist[[1]], i2 = indexlist[[2]], 
@@ -315,18 +319,13 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
    
 (*Relations among them and the derivatives.Improved by Thomas,
      to use HasOrthogonalIndexQ*)
-     xAct`xTensor`Private`GradNormalToExtrinsicKRules[
-       metric] = {superCD[a_][
-         vector[b_]] :> $ExtrinsicKOnSSSign extrinsicKname[a, b]
+     xAct`xTensor`Private`GradNormalToExtrinsicKRules[metric] = {superCD[a_][vector[b_]] :> $ExtrinsicKOnSSSign extrinsicKname[a, b]
          + $AccelerationOfnSign vector[a] accelerationname[b], 
-       vector[-a_] superCD[b_][
-          expr_] :> -superCD[b][vector[-a]] expr /; 
+       vector[-a_] superCD[b_][expr_] :> -superCD[b][vector[-a]] expr /; 
          xAct`xTensor`Private`HasOrthogonalIndexQ[expr, vector[-a]], 
        vector[a_] superCD[b_][expr_] :> -superCD[b][vector[a]] expr /;
           xAct`xTensor`Private`HasOrthogonalIndexQ[expr, vector[a]], 
-       LieD[vector[_]][
-          expr_] vector[-a_] :> -$AccelerationOfnSign norm \
-accelerationname[-a] expr /; xAct`xTensor`Private`HasOrthogonalIndexQ[expr, vector[-a]](*,
+       LieD[vector[_]][expr_] vector[-a_] :> -$AccelerationOfnSign norm accelerationname[-a] expr /; xAct`xTensor`Private`HasOrthogonalIndexQ[expr, vector[-a]](*,
        LieD[vector[_]][expr_]vector[a_]:>0/;
        HasOrthogonalIndexQ[expr,vector[a]]*)};
 
@@ -665,6 +664,7 @@ Evaluate[K[h]][LI[0],LI[0],i1_,i2_]=0;
 (* But for FL it is ultra trivial*)
 Unprotect[LieD];
 
+(* First the case with cd. It is useless since we will always use cd2 and nearly never cd. Because we go from 4 to 1+1+2.*)
 LieD[u[ind1_]][cd[ind2_][cd[-ind2_][expr1_]]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 ContractMetric[LieD[u[ind1]][g[dum,ind2]]cd[-dum][cd[-ind2][expr1]]
 +g[dum,ind2]LieD[u[ind1]][cd[-dum][cd[-ind2][expr1]]]]
@@ -687,8 +687,30 @@ ToCanonical[
 -cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
-Protect[LieD];
+(* And now if we put the cd2 induced metric ? To Check that this leads correct results below*)
+(* For the moment it does not work really well so I cheat *)
+(* TODO do it correctly *)
+LieD[u[ind1_]][cd2[ind2_][cd2[-ind2_][expr1_]]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
+ContractMetric[LieD[u[ind1]][g[dum,ind2]]cd2[-dum][cd2[-ind2][expr1]]
++g[dum,ind2]LieD[u[ind1]][cd2[-dum][cd2[-ind2][expr1]]]]
+];
 
+LieD[u[ind1_]][cd2[-ind2_][cd2[ind2_][expr1_]]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
+ContractMetric[LieD[u[ind1]][g[dum,ind2]]cd2[-dum][cd2[-ind2][expr1]]
++g[dum,ind2]LieD[u[ind1]][cd2[-dum][cd2[-ind2][expr1]]]]
+];
+
+LieD[u[ind1_]][cd2[ind2_][expr1_]]:=LieD[u[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
+
+LieD[u[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
+With[{frees=FindFreeIndices[expr1]},ToCanonical[
+(cd2[ind2][LieD[u[ind1]][expr1]](* Here this should be something else which is by the way zero...+$ExtrinsicKSign *Plus@@(
+(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
++cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
+-cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
+/;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
+
+Protect[LieD];
 
 (* TODO Clean abive and keep only the stuff which is necessary *)
 
@@ -957,7 +979,7 @@ PropertiesList[Name]^=Join[PropertiesList[Name],Which[Length[{inds}]===1&&Transv
 
 (*'SVT-Vector' is a vector satisfying the SVT-decomposition properties (hence it is transverse).'SVT-Tensor' is a tensor satisfying the SVT-decomposition properties (hence it is symmetric,traceless and transverse).*)
 
-(*The Lie derivative for tensors with indices down is represented by the second label-index.*)Name/:LieD[u[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&),LI[r_?((IntegerQ[#]&&#>=0)&)]],indices___?DownIndexQ]]:=
+(*The Lie derivative for tensors with indices down is represented by the second label-index.*)Name/:LieD[u[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=
 If[$ConformalTime,1,a[h][]]*Name[LI[p],LI[q+1],LI[r],indices]/;(Length[{indices}]===Length[{inds}]);
 
 (*(*For tensors of rank larger than or equal to 1,*)
@@ -1039,12 +1061,12 @@ Name/:cd2[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[0],LI[0],indices1___,Dum_
 
 Name/:cd2[Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices1___?DownIndexQ,-Dum_,indices2___?DownIndexQ]]:=Module[{Dummy1,Dummy2},Dummy1=DummyIn[Tangent[M]];Dummy2=DummyIn[Tangent[M]];
 
-ToCan@ContractMetric[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[Dum][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]-ToCan[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][g[Dum,Dummy2]] cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]//MetricToProjector[#,h]&//MetricToProjector[#,N]&]+g[Dum,Dummy2] ToCan[cd2[-Dummy2][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]-If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]]]]/;(Length[Join[{indices1},{indices2}]]+1===Length[{inds}]);
+Identity@Identity[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[Dum][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]-ToCan[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][g[Dum,Dummy2]] cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]//MetricToProjector[#,h]&]+g[Dum,Dummy2] ToCan[cd2[-Dummy2][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]-If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]]]]/;(Length[Join[{indices1},{indices2}]]+1===Length[{inds}]);
 
 
 (*and the second rule:Subscript[D,a] Subscript[\[ScriptCapitalL],n]Subscript[T^a,...]=Subscript[\[ScriptCapitalL],n](D^aSubscript[T,a...])-Subscript[\[ScriptCapitalL],n](g^ab)Subscript[D,b]Subscript[Subscript[T,a],...]+(g^ab)[Subscript[D,b],Subscript[\[ScriptCapitalL],n]]Subscript[T,a...]*)Name/:cd2[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices1___?DownIndexQ,Dum_,indices2___?DownIndexQ]]:=Module[{Dummy1,Dummy2},Dummy1=DummyIn[Tangent[M]];
 Dummy2=DummyIn[Tangent[M]];
-ToCan@ContractMetric[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[Dum][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]-ToCan[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][g[Dum,Dummy2]] cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]//MetricToProjector[#,h]&//MetricToProjector[#,N]&]+g[Dum,Dummy2] ToCan[cd2[-Dummy2][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]-If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]]]]/;(Length[Join[{indices1},{indices2}]]+1===Length[{inds}]);
+Identity@Identity[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[Dum][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]-ToCan[If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][g[Dum,Dummy2]] cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]//MetricToProjector[#,h]&]+g[Dum,Dummy2] ToCan[cd2[-Dummy2][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]-If[$ConformalTime,1,1/a[h][]]*LieD[u[Dummy1]][cd2[-Dummy2][Name[LI[p],LI[q-1],LI[r],indices1,-Dum,indices2]]]]]]/;(Length[Join[{indices1},{indices2}]]+1===Length[{inds}]);
 
 
 (*If the indices are not down,we separate them.In practice this happens almost never...*)(*This is for the case where we have at least one derivative,for which the meaning is only when the index is down.*)
