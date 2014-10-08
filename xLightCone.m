@@ -710,8 +710,18 @@ Kh/:Kh[ind1_,ind2_]=0;
 (* My intuition is that this involves acceleration of n  and extrinsic curvature so that's why it is zero*)
 (* Probably correct up to sign conventions...Maybe if we build with Make Rule (and using Projector to metric) then it would be cleaner.*)
 
-KNSS/:CD[ind3_]@KNSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
-KNSS/:cd[ind3_]@KNSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
+NSS/:CD[ind3_]@NSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
+NSS/:cd[ind3_]@NSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
+NSS/:cd2[ind3_]@NSS[ind1_,ind2_]:= 0;
+
+(*This is correct given that there is no extrinsic curvature. This is not index dependent in that case.*)
+(* TODO have a cleaner implementation *)
+NSS/:LieD[u[dummy_]][NSS[ind1_,ind2_]]=0;
+
+
+(* TODO This is wrong!!!! PUT THE CORRECT EVOLUTION OF THE TRACE OF EXTRINSIC CURVATURE ! TODO TODO !*)
+KNSS/:CD[ind3_]@KNSS[ind1_,ind2_]:= 0;
+KNSS/:cd[ind3_]@KNSS[ind1_,ind2_]:= 0;
 KNSS/:cd2[ind3_]@KNSS[ind1_,ind2_]:= 0;
 
 (* The extrinsic curvature of n should be spatial. This is enforced*)
@@ -749,11 +759,11 @@ LieD[u[ind1_]][cd[ind2_][expr1_]]:=LieD[u[ind1]][IndicesDown[cd[ind2][expr1] ] ]
 LieD[u[ind1_]][cd[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 With[{frees=FindFreeIndices[expr1]},
 ToCanonical[
-(cd[ind2][LieD[u[ind1]][expr1]]
+(cd[ind2][LieD[u[ind1]][expr1]](*
 +$ExtrinsicKSign *Plus@@(
 (-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
 +cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
--cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)),UseMetricOnVBundle->None]]]
+-cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
 (* And now if we put the cd2 induced metric ? To Check that this leads correct results below*)
@@ -779,7 +789,7 @@ With[{frees=FindFreeIndices[expr1]},ToCanonical[
 -cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
-(* Obinna has showd that the Directional Lie derivative and the induced derivative should commute. But When indices are down.*)
+(* Obinna has showed that the Directional Lie derivative and the induced derivative should commute. But When indices are down.*)
 LieD[n[ind1_]][cd2[ind2_][expr1_]]:=LieD[n[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&OrthogonalToVectorQ[n][expr1]&&Abs[n[ind1]n[-ind1]]===1;
 
 LieD[n[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
