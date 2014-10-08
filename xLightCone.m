@@ -154,12 +154,14 @@ BuildRule[{lhs_,rhs_,conditions___}]:=MakeRule[{lhs,rhs,conditions}];
 BuildRule[{lhs_,rhs_,conditions___},options:OptionsPattern[]]:=MakeRule[{lhs,rhs,conditions},options];
 
 
-(* Wrong *)
-(*Unprotect[OrthogonalToVectorQ];
+(*IN our case this definition is much better as we know there is no acceleration on the background. Careful this is valid only in FL*)
+Unprotect[OrthogonalToVectorQ];
 OrthogonalToVectorQ[vector_][LieD[vector_?xTensorQ[i_]][expr_]]=.
 
-OrthogonalToVectorQ[vector_][LieD[vector2_?xTensorQ[i_]][expr_]]:=OrthogonalToVectorQ[vector][expr]&&(IndicesOf[Free,xAct`xTensor`Up][expr]===IndexList[]||LieD[vector[i]][vector2[-i]]===0);
-Protect[OrthogonalToVectorQ];*)
+OrthogonalToVectorQ[vector_][LieD[vector2_?xTensorQ[i_]][expr_]]:=OrthogonalToVectorQ[vector][expr]&&((*IndicesOf[Free,xAct`xTensor`Up][expr]===IndexList[]||*)LieD[vector[i]][vector2[-i]]===0);
+Protect[OrthogonalToVectorQ];
+
+
 
 
 (***DEFAULT OPTIONS AND PROTECTED NAMES***)
@@ -210,7 +212,7 @@ CurvedSpaceBool[Spacetype_]:=(Spacetype==="FLCurved")
 DefScreenSpaceMetric[metric_[inda_, indb_], Manifold_, cd2_, {cdpost_String, cdpre_String}, InducedHypersurface_, SpaceTimeType_?SpaceTimeQ] :=
 (* Extracting the specifications of the problem (metric manifold normal vector etc...)*) 
 If[(MetricQ[First@InducedHypersurface]) && (xTensorQ[Last@InducedHypersurface]),
-  Module[{g = First@InducedFrom[First@InducedHypersurface],u = First@Rest@InducedFrom[First@InducedHypersurface],
+  Module[{
    vbundle = VBundleOfIndex[inda],
    h = First@InducedHypersurface,
    n = Last@InducedHypersurface,
@@ -218,7 +220,8 @@ If[(MetricQ[First@InducedHypersurface]) && (xTensorQ[Last@InducedHypersurface]),
    indexlist = GetIndicesOfVBundle[VBundleOfIndex[inda], 3]}, 
 
 
-With[{ind1 = DummyIn[Tangent[Manifold]], ind2 = DummyIn[Tangent[Manifold]], ind3 = DummyIn[Tangent[Manifold]], ind4 = DummyIn[Tangent[Manifold]]},
+With[{g = First@InducedFrom[First@InducedHypersurface],u = First@Rest@InducedFrom[First@InducedHypersurface],
+ind1 = DummyIn[Tangent[Manifold]], ind2 = DummyIn[Tangent[Manifold]], ind3 = DummyIn[Tangent[Manifold]], ind4 = DummyIn[Tangent[Manifold]]},
    
 (* Definition of the screen-space metric. Projected orthogonally to u and n.*)
    DefTensor[metric[inda, indb], Manifold, If[$TorsionSign === 1, Symmetric[{inda, indb}], {}], 
@@ -256,6 +259,13 @@ With[{ind1 = DummyIn[Tangent[Manifold]], ind2 = DummyIn[Tangent[Manifold]], ind3
 (* It calls a function which is implemented below*)
 PropertiesOfInducedScreenSpaceMetric[metric[inda, indb], Manifold, cd2, {n, h, CovDOfMetric[h]}];
 
+(* A few other automatic contractions *)
+AutomaticRules[metric, BuildRule[{metric[ind3, ind2] g[-ind3, ind1], metric[ind1, ind2]}, MetricOn -> All]];
+
+With[{KNSS=GiveSymbol[ExtrinsicK,metric]},
+AutomaticRules[KNSS, BuildRule[{KNSS[ind3, ind2] g[-ind3, ind1], KNSS[ind1, ind2]}, MetricOn -> All]];
+AutomaticRules[KNSS, BuildRule[{KNSS[ind3, ind2] g[ind1,-ind3], KNSS[ind1, ind2]}, MetricOn -> All]];
+];
 
 (*We need a series of obvious upvalues for the screen space metric. *)
 (* These relations are to explain that the screen space metric is induced from the space and to say that it has a covariant derivative cd2*)
@@ -309,6 +319,7 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
      epsilonname = GiveSymbol[epsilon, metric],
      superepsilonname = GiveSymbol[epsilon, supermetric],
      proj = ProjectWith[metric], 
+     u=Last@InducedFrom@supermetric,
      norm = Scalar@Simplify@ContractMetric[supermetric[-ind1, -ind2] vector[ind1] vector[ind2],supermetric], indexlist = GetIndicesOfVBundle[vbundle, 3]},  
 
   
@@ -322,8 +333,8 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
      DefTensor[extrinsicKname[i1, i2], dependencies, 
       Symmetric[{1, 2}], 
       PrintAs :> GiveOutputString[ExtrinsicK, metric], 
-      OrthogonalTo -> {vector[-i1]}, 
-      ProjectedWith -> {metric[i3, -i2]}, ProtectNewSymbol -> False, 
+      OrthogonalTo -> {vector[-i1], u[-i1](* I add this as well*)}, 
+      ProjectedWith -> {metric[i3, -i2], supermetric[i3,-i2](*Here I add this*)}, ProtectNewSymbol -> False, 
       Master -> metric, 
       DefInfo -> {"extrinsic curvature tensor", 
         "Associated to vector " <> ToString[vector]}, 
@@ -653,10 +664,15 @@ Howeverm it is ano rule attached to it, so it can be perturbed. Its perturbation
 (* See the section devoted to the perturbation of the normal vector for more explanations*)
 Perturbation[u[ind1_],ni_]^:=0/;ni>=1;
 
+(* A rule to force the natural appearance of the extrinsic curvature of the direction vector*)
+CD[ind1_][n[ind2_]]:=cd[ind1][n[ind2]];
 
 (* Lie Derivatives of metric with up indices should be automatic*)
-AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[ind1,ind2]],LieD[u[dummy]][g[ind1,ind2]]//MetricToProjector[#,h]&}],MetricOn->None]];
-AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[-ind1,-ind2]],LieD[u[dummy]][g[-ind1,-ind2]]//MetricToProjector[#,h]&}],MetricOn->None]];
+(*AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[ind1,ind2]],LieD[u[dummy]][g[ind1,ind2]]//MetricToProjector//ToCanonical}],MetricOn->None]];*)
+AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[-ind1,-ind2]],LieD[u[dummy]][g[-ind1,-ind2]]//MetricToProjector//ToCanonical}],MetricOn->None]];
+
+(*AutomaticRules[g,BuildRule[Evaluate[{LieD[n[dummy]][g[ind1,ind2]],LieDToCovD[LieD[n[dummy]][g[ind1,ind2]],CD]//GradNormalToExtrinsicK//ToCanonical}],MetricOn->None]];*)
+AutomaticRules[g,BuildRule[Evaluate[{LieD[n[dummy]][g[-ind1,-ind2]],LieDToCovD[LieD[n[dummy]][g[-ind1,-ind2]],CD]//GradNormalToExtrinsicK//ToCanonical}],MetricOn->None]];
 
 
 Which[
@@ -678,28 +694,31 @@ IndexSet[RicciScalar[cd][],\[ScriptK][h][]h[i1,-i1](h[i3,-i3]-1)];
 ];
 ];
 
+
 (* We replace the extrinsic curvature with an adhoc tensor which can have derivatives label indices*)
-DefScreenProjectedTensor[K[h][-ind1,-ind2],NSS,TensorProperties->{"SymmetricTensor","Traceless"},SpaceTimesOfDefinition->{"Background"},PrintAs->"K"];
-ExtrinsicK[h][i1_,i2_]:=If[$ConformalTime,1,a[h][]]*K[h][LI[0],LI[0],LI[0],i1,i2];
+(*DefScreenProjectedTensor[K[h][-ind1,-ind2],NSS,TensorProperties->{"SymmetricTensor","Traceless"},SpaceTimesOfDefinition->{"Background"},PrintAs->"K"];*)
 
+(*ExtrinsicK[h][i1_,i2_]:=If[$ConformalTime,1,a[h][]]*K[h][LI[0],LI[0],LI[0],i1,i2];*)
+
+(* In FL the eextrinsic curvature is zero because there is an outside conformal transformation*)
 (*But what we do is that we set it to zero automatically ! SO this is ridiculous TODO clean*)
-ExtrinsicK[h][i1_,i2_]=0;
-Evaluate[K[h]][LI[0],LI[0],i1_,i2_]=0;
+With[{Kh=Evaluate[ExtrinsicK[h]],KNSS=Evaluate[ExtrinsicK[NSS]]},
 
-
-(* A role to force the natural appearance of the extrinsic curvature of the direction vector*)
-CD[ind1_][n[ind2_]]:=cd[ind1][n[ind2]];
+Kh/:Kh[ind1_,ind2_]=0;
 
 (* This should be checked. I am not sure this is correct. It is probably correct. TODO CHECK THIS !*)
 (* My intuition is that this involves acceleration of n  and extrinsic curvature so that's why it is zero*)
-CD/:Evaluate[n[ind3_]CD[-ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
-CD/:Evaluate[n[-ind3_]CD[ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
+(* Probably correct up to sign conventions...Maybe if we build with Make Rule (and using Projector to metric) then it would be cleaner.*)
 
-cd/:Evaluate[n[ind3_]cd[-ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
-cd/:Evaluate[n[-ind3_]cd[ind3_]@ExtrinsicK[NSS][ind1_,ind2_]]:=0;
+KNSS/:CD[ind3_]@KNSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
+KNSS/:cd[ind3_]@KNSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
+KNSS/:cd2[ind3_]@KNSS[ind1_,ind2_]:= 0;
 
 (* The extrinsic curvature of n should be spatial. This is enforced*)
-AutomaticRules[Evaluate[ExtrinsicK[NSS]],BuildRule[Evaluate[{ExtrinsicK[NSS][ind1,ind2]u[-ind2],0}]]];
+(* Obsolete as now this is part of the DefScreenSpaceMetricProperties function*)
+(*AutomaticRules[KNSS,BuildRule[{KNSS[ind1,ind2]u[-ind2],0}]];*)
+
+];
 
 
 Unprotect[LieD];
