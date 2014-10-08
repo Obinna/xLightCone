@@ -386,6 +386,9 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
       PrintAs :> GiveOutputString[Projector, metric], 
       ProtectNewSymbol -> False, 
       DefInfo -> {"projector inert-head", ""}];
+
+(* Creates problems of infinite recursion. I remove*)
+(*     projectorname/:ContractThroughQ[projectorname,supermetric]=True;*)
      
      projectorname[supermetric[a_, b_]] := metric[a, b];
      (*The metric,but not the supermetric,
@@ -410,6 +413,14 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
       0 /; IsIndexOf[expr, -i, metric]];
 
      xTagSetDelayed[{projectorname,vector[i_]projectorname[expr_]},0/;IsIndexOf[expr,-i,metric]];
+
+
+(* CP We add the orthogonality with respect to the master vector u*)  
+     xTagSetDelayed[{projectorname, u[i_] projectorname[expr_]}, 
+      0 /; IsIndexOf[expr, -i, metric]];
+
+     xTagSetDelayed[{projectorname,u[i_]projectorname[expr_]},0/;IsIndexOf[expr,-i,metric]];
+(*This should be checked that it works. TODO*)
      
 (*Particular cases*)
      projectorname[1] := 1;
