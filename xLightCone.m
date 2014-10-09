@@ -387,8 +387,8 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
       ProtectNewSymbol -> False, 
       DefInfo -> {"projector inert-head", ""}];
 
-(* Creates problems of infinite recursion. I remove*)
-(*     projectorname/:ContractThroughQ[projectorname,supermetric]=True;*)
+(* I add this contraction of the screen proector with h*)
+     xTagSet[{projectorname, ContractThroughQ[projectorname, supermetric]},True];
      
      projectorname[supermetric[a_, b_]] := metric[a, b];
      (*The metric,but not the supermetric,
@@ -641,7 +641,7 @@ NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1]};
                   ReplaceIndex[Evaluate[epsilon[g] @@ indsdim],indsdim[[2]] -> ind5] u[-indsdim[[1]]]}]
      ]];];
 
-(*We specify the spacetime. Here it is stollent from basic 1+3*)
+(*We specify the spacetime. Here it is stollen from basic 1+3*)
 
 (DefScreenProjectedTensor[#[[1]],NSS,SpaceTimesOfDefinition->{"Background"},TensorProperties->{"Traceless","Transverse","SymmetricTensor"},PrintAs->#[[2]]])&/@$ListFieldsBackgroundOnly[h];
 
@@ -721,8 +721,9 @@ Kh/:Kh[ind1_,ind2_]=0;
 (* My intuition is that this involves acceleration of n  and extrinsic curvature so that's why it is zero*)
 (* Probably correct up to sign conventions...Maybe if we build with Make Rule (and using Projector to metric) then it would be cleaner.*)
 
-NSS/:CD[ind3_]@NSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
-NSS/:cd[ind3_]@NSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];
+(* It is not good to have these rules automatic even if they are correct*)
+(*NSS/:CD[ind3_]@NSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];*)
+(*NSS/:cd[ind3_]@NSS[ind1_,ind2_]:= -cd[ind3][n[ind1]]n[ind2]-cd[ind3][n[ind2]]n[ind1];*)
 NSS/:cd2[ind3_]@NSS[ind1_,ind2_]:= 0;
 
 (*This is correct given that there is no extrinsic curvature. This is not index dependent in that case.*)
