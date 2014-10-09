@@ -125,6 +125,8 @@ DefScreenProjectedTensor::usage = "";
 
 DefScreenSpaceMetric::usage = "";
 
+InducedDecompositionLightCone::usage = "";
+
 SetSlicingUpToScreenSpace::usage = "";
 
 SetSlicingUpToScreenSpaceObinna::usage = "";
@@ -946,16 +948,6 @@ AutomaticRules[epsilon[g],BuildRule[Evaluate[{epsilon[g]@@indsdim u[-indsdim[[1]
 *)
 
 
-ToInducedDerivativeScreenSpace[expr_,supercd_,cd_]:=ToInducedDerivative[expr,supercd,cd]
-
-ToInducedDerivativeScreenSpace[expr_,supercd_,cd_,cd2_]:=expr/.supercd[ind_][expr1:(_?xTensorQ[___]|_?InertHeadQ[___]|cd[_][_]|LieD[_][_])]:>-cd[ind][expr1]+
-With[{frees=FindFreeIndices[expr1],n=Last@InducedFrom[MetricOfCovD[cd2]]},ToInducedDerivative[supercd[ind][expr1],supercd,cd]+ToInducedDerivative[cd[ind][expr1],cd,cd2]
-(*/.LieD[n[a_]][expr1]:>LieDToCovD[LieD[n[a]][expr1],supercd]*)
-(* Even though the third label index is a directional derivative, it proves easier to perform the splitting with the Lie Derivative. And then only to use the directional derivative when implementing the incrementation of the label index*)
-
-]
-
-
 Options[DefScreenProjectedTensor]={PrintAs->Identity,TensorProperties->{"SymmetricTensor","Traceless","Transverse"},SpaceTimesOfDefinition->{"Background","Perturbed"}};
 
 DefScreenProjectedTensorQ[Name_,N___]:=False;
@@ -1226,6 +1218,35 @@ ToCan[Plus@@((-Connection[h][Dummy1,Dummy2,#]ReplaceIndex[Evaluate[Name[LI[0],LI
 Name/:LieD[u[Dummy1_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices1___?AIndexQ,IndexUp_?UpIndexQ,indices2___?AIndexQ]]:=Module[{Dum},Dum=DummyIn[Tangent[M]];
 g[IndexUp,Dum] LieD[u[Dummy1]][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]+LieD[u[Dummy1]][g[IndexUp,Dum]] Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]/;(Length[Join[{indices1},{indices2}]]+1===Length[{inds}]);]]
 ]
+
+
+(* We will replace Scalar Heads by this head to prevent the Leibniz rule to spoil the induced decomposition.*)
+DefInertHead[ProtectMyScalar];
+
+(* When there is imbriaction of preojectors we can remove the inner projector (to be manipulated with care...)*)
+SimplifyImbricatedProjectors[expr_,{projh_,projNSS_}]:=expr/.stuff1_[expr1___   stuff2_[expr2_]]:>stuff1[expr1  expr2]/;stuff2===projh&&stuff1===projNSS/.stuff1_[stuff2_[expr2_]]:>stuff1[expr2]/;stuff1===projNSS&&stuff2===projh;
+
+InducedDecompositionLightCone[expression_,{h_,u_},{NSS_,n_}]:=(SimplifyImbricatedProjectors[(InducedDecomposition[expression,{h,u}]/.Projector[h][exp_]:>InducedDecomposition[Projector[h][exp],{NSS,n}]),
+{Projector[h],Projector[NSS]}]/.Scalar[scalex_]:>ProtectMyScalar[scalex/.Projector[h]->ProjectWith[h]]);
+
+
+(* OLD IMPLEMENTATION
+ToInducedDerivativeScreenSpace[expr_,supercd_,cd_,cd2_]:=expr/.supercd[ind_][expr1:(_?xTensorQ[___]|_?InertHeadQ[___]|cd[_][_]|LieD[_][_])]:>-cd[ind][expr1]+
+With[{frees=FindFreeIndices[expr1],n=Last@InducedFrom[MetricOfCovD[cd2]]},ToInducedDerivative[supercd[ind][expr1],supercd,cd]+ToInducedDerivative[cd[ind][expr1],cd,cd2]
+(*/.LieD[n[a_]][expr1]:>LieDToCovD[LieD[n[a]][expr1],supercd]*)
+(* Even though the third label index is a directional derivative, it proves easier to perform the splitting with the Lie Derivative. And then only to use the directional derivative when implementing the incrementation of the label index*)
+
+]
+
+*)
+ToInducedDerivativeScreenSpace[expr_,CD_,cd_]:=FixedPoint[(ToInducedDerivative[#,CD,cd]//GradNormalToExtrinsicK)&,expr]//ContractMetric//ToCanonical[#,UseMetricOnVBundle->None]&;
+
+ToInducedDerivativeScreenSpace[expr_,CD_,cd_,cd2_]:=FixedPoint[
+(ToInducedDerivative[#,cd,cd2]//GradNormalToExtrinsicK)&,
+FixedPoint[
+(ToInducedDerivative[#,CD,cd]//GradNormalToExtrinsicK)&,
+expr]//ToCanonical[#,UseMetricOnVBundle->None]&
+]//GradNormalToExtrinsicK//ContractMetric//ToCanonical[#,UseMetricOnVBundle->None]&;
 
 
 DefinedPerturbationParameter[x_]:=False;
