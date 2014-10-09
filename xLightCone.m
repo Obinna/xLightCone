@@ -159,6 +159,9 @@ Unprotect[OrthogonalToVectorQ];
 OrthogonalToVectorQ[vector_][LieD[vector_?xTensorQ[i_]][expr_]]=.
 
 OrthogonalToVectorQ[vector_][LieD[vector2_?xTensorQ[i_]][expr_]]:=OrthogonalToVectorQ[vector][expr]&&((*IndicesOf[Free,xAct`xTensor`Up][expr]===IndexList[]||*)LieD[vector[i]][vector2[-i]]===0);
+
+(* This is very very Addhoc. It is because when there is a spatial derivative on a terme + a lie derivative, then OrthogonalToVectorQ is saying that it is not orthogonal because it cannot treat the LieDerivative case. This is a dirty cheat.*)
+OrthogonalToVectorQ[vector_][expr1_+expr2_]:=(xAct`xTensor`Private`OToVcheck[vector,expr1+expr2, List@@FindFreeIndices[expr1+expr2]])||(OrthogonalToVectorQ[vector][expr2]&&OrthogonalToVectorQ[vector][expr2]);
 Protect[OrthogonalToVectorQ];
 
 
