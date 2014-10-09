@@ -113,6 +113,10 @@ a::usage = "";
 
 H::usage = "";
 
+\[Theta]::usage = "";
+
+\[ScriptK]::usage = "";
+
 DefMatterFields::usage  = "";
 
 DefMetricFields::usage = "";
@@ -646,7 +650,7 @@ NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1]};
 
 (*We specify the spacetime. Here it is stollen from basic 1+3*)
 
-(DefScreenProjectedTensor[#[[1]],NSS,SpaceTimesOfDefinition->{"Background"},TensorProperties->{"Traceless","Transverse","SymmetricTensor"},PrintAs->#[[2]]])&/@$ListFieldsBackgroundOnly[h];
+(DefScreenProjectedTensor[#[[1]],NSS,SpaceTimesOfDefinition->{"Background"},TensorProperties->{"Traceless","Transverse","SymmetricTensor"},PrintAs->#[[2]]])&/@$ListFieldsBackgroundOnly[h,NSS];
 
 ah::usage=a::usage;
 Hh::usage=H::usage;
@@ -716,7 +720,7 @@ IndexSet[RicciScalar[cd][],\[ScriptK][h][]h[i1,-i1](h[i3,-i3]-1)];
 
 (* In FL the eextrinsic curvature is zero because there is an outside conformal transformation*)
 (*But what we do is that we set it to zero automatically ! SO this is ridiculous TODO clean*)
-With[{Kh=Evaluate[ExtrinsicK[h]],KNSS=Evaluate[ExtrinsicK[NSS]]},
+With[{Kh=Evaluate[ExtrinsicK[h]],KNSS=Evaluate[ExtrinsicK[NSS]],\[Theta]NSS=Evaluate[\[Theta][NSS]]},
 
 Kh/:Kh[ind1_,ind2_]=0;
 
@@ -734,10 +738,22 @@ NSS/:cd2[ind3_]@NSS[ind1_,ind2_]:= 0;
 NSS/:LieD[u[dummy_]][NSS[ind1_,ind2_]]=0;
 
 
+KNSS/:KNSS[ind1_,ind2_]:=\[Theta]NSS[]/(dim-2)*NSS[ind1,ind2];
 (* TODO This is wrong!!!! PUT THE CORRECT EVOLUTION OF THE TRACE OF EXTRINSIC CURVATURE ! TODO TODO !*)
-KNSS/:CD[ind3_]@KNSS[ind1_,ind2_]:= 0;
+(*KNSS/:CD[ind3_]@KNSS[ind1_,ind2_]:= 0;
 KNSS/:cd[ind3_]@KNSS[ind1_,ind2_]:= 0;
-KNSS/:cd2[ind3_]@KNSS[ind1_,ind2_]:= 0;
+KNSS/:cd2[ind3_]@KNSS[ind1_,ind2_]:= 0;*)
+
+\[Theta]NSS/:cd2[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= 0;
+Which[
+FlatSpaceBool[SpaceTimeType],
+\[Theta]NSS/:cd[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= n[ind3](-\[Theta]NSS[]^2/2);,
+
+CurvedSpaceBool[SpaceTimeType],
+\[Theta]NSS/:cd[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= n[ind3](-\[Theta]NSS[]^2/2  + \[ScriptK][h][]*(dim-2));
+];
+(* Check this relation for the evolution of the extrinsic curvature trace*)
+\[Theta]NSS/:CD[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:=cd[ind3][\[Theta]NSS[]];
 
 (* The extrinsic curvature of n should be spatial. This is enforced*)
 (* Obsolete as now this is part of the DefScreenSpaceMetricProperties function*)
@@ -1218,6 +1234,7 @@ DefinedPerturbationParameter[x_]:=False;
 (***BUILDING SYMBOLS:Geometrical quantities***)
 a[symb_]:=SymbolJoin[a,symb];
 H[symb_]:=SymbolJoin[H,symb];
+\[Theta][symb_]:=SymbolJoin[\[Theta],symb];
 
 Connection[symb_]:=SymbolJoin[Connection,symb];
 CS[symb_]:=SymbolJoin[CS,symb];
@@ -1267,7 +1284,7 @@ Lvp[N_?InducedMetricQ]:=SymbolJoin[Lvp,N];
 Lvt[N_?InducedMetricQ]:=SymbolJoin[Lvt,N];
 
 
-$ListFieldsBackgroundOnly[h_?InducedMetricQ]:={{a[h][],"a"},{H[h][],"\[ScriptCapitalH]"}};
+$ListFieldsBackgroundOnly[h_?InducedMetricQ,NSS_?InducedMetricQ]:={{a[h][],"a"},{H[h][],"\[ScriptCapitalH]"},{\[Theta][NSS][],"\[Theta]"}};
 
 $ListFieldsPerturbedOnly[N_?InducedMetricQ]:=With[{M=ManifoldOfCovD@CovDOfMetric@First@InducedFrom@N},Block[{\[Mu],\[Nu]},{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
 {{\[Phi][N][],"\[Phi]"},{Bs[N][],"\!\(\*SubscriptBox[\(B\), \(s\)]\)"},{Bvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(B\), \(\(v\)\(\[UpTee]\)\)]\)"},{Bvp[N][],"\!\(\*SubscriptBox[\(B\), \(||\)]\)"},{\[Psi][N][],"\[Psi]"},{Es[N][],"\!\(\*SubscriptBox[\(E\), \(s\)]\)"},{Evp[N][],"\!\(\*SubscriptBox[SubscriptBox[\(E\), \(v\)], \(||\)]\)"},{Evt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(\(v\)\(\[UpTee]\)\)]\)"},{Etp[N][],"\!\(\*SubscriptBox[\(E\), \(\(t\)\(||\)\)]\)"},{Etpt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(t ||  \[UpTee] \)]\)"},{Ett[N][-\[Mu],-\[Nu]],"\!\(\*SubscriptBox[\(E\), \(t\)]\)\[UpTee]"},{T[N][],"T"},{Ls[N][],"L"},{Lvp[N][],"\!\(\*SubscriptBox[\(L\), \(||\)]\)"},{Lvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[UpTee]\)\)]\)"}}]];
