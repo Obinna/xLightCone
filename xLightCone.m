@@ -1246,7 +1246,7 @@ ToInducedDerivativeScreenSpace[expr_,CD_,cd_,cd2_]:=FixedPoint[
 FixedPoint[
 (ToInducedDerivative[#,CD,cd]//GradNormalToExtrinsicK)&,
 expr]//ToCanonical[#,UseMetricOnVBundle->None]&
-]//GradNormalToExtrinsicK//ContractMetric//ToCanonical[#,UseMetricOnVBundle->None]&;
+]//GradNormalToExtrinsicK(*//LieDToCovD[#,cd]&*)//ContractMetric//ToCanonical[#,UseMetricOnVBundle->None]&;
 
 
 DefinedPerturbationParameter[x_]:=False;
