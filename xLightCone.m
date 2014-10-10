@@ -117,6 +117,10 @@ H::usage = "";
 
 \[ScriptK]::usage = "";
 
+Conformal::usage = "";
+
+ConformalWeight::usage = "";
+
 DefMatterFields::usage  =  "";
 
 DefMetricFields::usage =  "";
@@ -124,6 +128,8 @@ DefMetricFields::usage =  "";
 DefScreenProjectedTensor::usage = "";
 
 DefScreenSpaceMetric::usage = "";
+
+ExtractComponents::usage = "";
 
 InducedDecompositionLightCone::usage = "";
 
@@ -133,15 +139,21 @@ SetSlicingUpToScreenSpaceObinna::usage = "";
 
 SplitMetric ::usage = "";
 
+SplitMatter ::usage = "";
+
 SplitPerturbations::usage = "";
 
 ToInducedDerivativeScreenSpace::usage="";
 
 ToLightConeFromRules::usage = "";
 
+ToLightCone::usage = "";
+
 (*$DebugInfoQ::usage = "";*)
 
 $ConformalTime::usage ="";
+
+$RadialLieDerivative::usage ="";
 
 
 Begin["xAct`xLightCone`Private`"]
@@ -187,6 +199,39 @@ $OpenConstantsOfStructure=True;
 $PrePrint=ScreenDollarIndices;
 $SortCovDAutomatic=True;
 Off[RuleDelayed::rhs];
+$RadialLieDerivative=False;
+
+
+(*** COLORATION OF THE PERTURBATION ORDERS ***)
+
+DerCharacter:=If[$ConformalTime,"\[Prime]","."];
+RadialCharacter:="*"
+(* The output format of the Lie derivative with respect to the vector normal to the hypersurfaces is a prime when one considers the conformal time, and a dot when one considers the cosmic time. *)
+
+PerturbationOrderColor[1]:=RGBColor[0.85,0,0];
+PerturbationOrderColor[2]:=RGBColor[0,0.6,0];
+PerturbationOrderColor[3]:=RGBColor[0,0,0.85];
+PerturbationOrderColor[4]:=RGBColor[0.6,0.4,0.2];
+PerturbationOrderColor[5]:=RGBColor[0.7,0,0.7];
+PerturbationOrderColor[_]:=RGBColor[1,0.6,0];
+
+
+
+xTensorFormStop[Tensor]
+
+MakeBoxes[Tens_?xTensorQ[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],inds___],StandardForm]:=
+xAct`xTensor`Private`interpretbox[Tens[LI[p],LI[q],LI[r],inds],
+(*If[(AnisotropyBool[SpaceType@InducedMetricOf[Tens]]||BianchiBool[SpaceType@InducedMetricOf[Tens]])&&Cases[{inds},_?UpIndexQ]=!={}&&q>=1,
+Message[xPand::makeboxes];
+RowBox[{OverscriptBox["\[Null]",RowBox[{"(",ToString[p],")"}]],"\[NegativeThinSpace]",OverscriptBox[MakeBoxes[Tens[inds],StandardForm],ToString[q]]}],*)
+Switch[p,
+0,RowBox[{OverscriptBox[MakeBoxes[Tens[inds],StandardForm],StringJoin@Join[Table[DerCharacter,{i,1,q}],Table[RadialCharacter,{j,1,r}]]]}],
+_,RowBox[{OverscriptBox["\[Null]",RowBox[{StyleBox["("<>ToString[p]<>")",FontColor->PerturbationOrderColor[p]]}]],"\[NegativeThinSpace]",OverscriptBox[MakeBoxes[Tens[inds],StandardForm],StringJoin@Join[Table[DerCharacter,{i,1,q}],Table[RadialCharacter,{j,1,r}]]]}]
+(*]*)
+]
+];
+
+xTensorFormStart[Tensor]
 
 
 (*** HANDLING EXPRESSIONS ***)
@@ -430,7 +475,7 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
        vector[a_] superCD[b_][expr_] :> -superCD[b][vector[a]] expr /;
           xAct`xTensor`Private`HasOrthogonalIndexQ[expr, vector[a]], 
        LieD[vector[_]][expr_] vector[-a_] :> -$AccelerationOfnSign norm accelerationname[-a] expr /; xAct`xTensor`Private`HasOrthogonalIndexQ[expr, vector[-a]](*,
-       LieD[vector[_]][expr_]vector[a_]\[RuleDelayed]0/;
+       LieD[vector[_]][expr_]vector[a_]:>0/;
        HasOrthogonalIndexQ[expr,vector[a]]*)};
 
      
@@ -721,13 +766,16 @@ Hh::usage=H::usage;
 Hh/:PrintAs[Hh]=.;
 PrintAs[Hh]^:=If[$ConformalTime,"\[ScriptCapitalH]","H"];
 
+(* TODO find a way to remove all these useless LI indices*)
 Unprotect[NoScalar];
 (* We know it is safe to remove the scalar heads on scale factors and Hubble factors, because we shall never replace a Hubble factor nor a scale factor by something else which is not a pure scalar field...*)
-NoScalar[Power[Scalar[Hh[LI[0],LI[0],LI[0]]],ni_Integer]]:=Power[Hh[LI[0],LI[0]],ni];
-NoScalar[Power[Scalar[ah[LI[0],LI[0],LI[0]]],ni_Integer]]:=Power[ah[LI[0],LI[0]],ni];
+NoScalar[Power[Scalar[Hh[LI[0],LI[0],LI[0]]],ni_Integer]]:=Power[Hh[(*LI[0],LI[0],LI[0]*)],ni];
+NoScalar[Power[Scalar[ah[LI[0],LI[0],LI[0]]],ni_Integer]]:=Power[ah[(*LI[0],LI[0],LI[0]*)],ni];
 Protect[NoScalar];
 
-If[SpaceTimeType==="Minkowski",ah[LI[0],LI[0],LI[0]]=1;Hh[LI[0],LI[0],LI[0]]=0;,
+If[SpaceTimeType==="Minkowski",
+ah[LI[0],LI[0],LI[0]]=1;
+Hh[LI[0],LI[0],LI[0]]=0;,
 ah[LI[0],LI[1],LI[0]]:=Hh[LI[0],LI[0],LI[0]]ah[LI[0],LI[0],LI[0]];
 ah[LI[0],LI[q_?((IntegerQ[#]&&#>=2)&)],LI[0]]:=NoScalar@org@Nest[LieD[u[ind1]][#]&,ah[LI[0],LI[0],LI[0]],q];
 DefConformalMetric[g,ah];
@@ -748,10 +796,10 @@ Perturbation[u[ind1_],ni_]^:=0/;ni>=1;
 CD[ind1_][n[ind2_]]:=cd[ind1][n[ind2]];
 
 (* Lie Derivatives of metric with up indices should be automatic*)
-(*AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[ind1,ind2]],LieD[u[dummy]][g[ind1,ind2]]//MetricToProjector//ToCanonical}],MetricOn\[Rule]None]];*)
+(*AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[ind1,ind2]],LieD[u[dummy]][g[ind1,ind2]]//MetricToProjector//ToCanonical}],MetricOn->None]];*)
 AutomaticRules[g,BuildRule[Evaluate[{LieD[u[dummy]][g[-ind1,-ind2]],LieD[u[dummy]][g[-ind1,-ind2]]//MetricToProjector//ToCanonical}],MetricOn->None]];
 
-(*AutomaticRules[g,BuildRule[Evaluate[{LieD[n[dummy]][g[ind1,ind2]],LieDToCovD[LieD[n[dummy]][g[ind1,ind2]],CD]//GradNormalToExtrinsicK//ToCanonical}],MetricOn\[Rule]None]];*)
+(*AutomaticRules[g,BuildRule[Evaluate[{LieD[n[dummy]][g[ind1,ind2]],LieDToCovD[LieD[n[dummy]][g[ind1,ind2]],CD]//GradNormalToExtrinsicK//ToCanonical}],MetricOn->None]];*)
 AutomaticRules[g,BuildRule[Evaluate[{LieD[n[dummy]][g[-ind1,-ind2]],LieDToCovD[LieD[n[dummy]][g[-ind1,-ind2]],CD]//GradNormalToExtrinsicK//ToCanonical}],MetricOn->None]];
 
 
@@ -764,7 +812,7 @@ RicciScalar[cd][]=0;,
 CurvedSpaceBool[SpaceTimeType],
 DefTensor[\[ScriptK][h][],{Manifold},PrintAs->StringJoin["\[ScriptK]"(*,ToString[h]*)]];
 
-CD[ind1_][\[ScriptK][h][]]:=0(*-1*(-2/3)*u[ind1]\[ScriptK][h][]CD[-ind2][u[ind2]]*); (* This is because Subscript[\[ScriptCapitalL], u](\[ScriptK]^(1/2)Subscript[\[Epsilon]^\[Mu], \[Nu]\[Sigma]]) must be zero since Subscript[\[ScriptCapitalL], u](Subscript[C^\[Mu], \[Nu]\[Sigma]])=0*)
+CD[ind1_][\[ScriptK][h][]]:=0(*-1*(-2/3)*u[ind1]\[ScriptK][h][]CD[-ind2][u[ind2]]*); (* This is because Subscript[\[ScriptCapitalL], u](\[ScriptK]^(1/2) Subscript[\[Epsilon]^\[Mu], \[Nu]\[Sigma]]) must be zero since Subscript[\[ScriptCapitalL], u](Subscript[C^\[Mu], \[Nu]\[Sigma]])=0*)
 (* Given that we first work on the conformal metric where the trace of the extrinsic curvature is 0, then this point does not matter at all for us.*)
 cd[ind1_][\[ScriptK][h][]]=0;
 If[SpaceTimeType==="FLCurved",
@@ -776,7 +824,7 @@ IndexSet[RicciScalar[cd][],\[ScriptK][h][]h[i1,-i1](h[i3,-i3]-1)];
 
 
 (* We replace the extrinsic curvature with an adhoc tensor which can have derivatives label indices*)
-(*DefScreenProjectedTensor[K[h][-ind1,-ind2],NSS,TensorProperties->{"SymmetricTensor","Traceless"},SpaceTimesOfDefinition->{"Background"},PrintAs\[Rule]"K"];*)
+(*DefScreenProjectedTensor[K[h][-ind1,-ind2],NSS,TensorProperties->{"SymmetricTensor","Traceless"},SpaceTimesOfDefinition->{"Background"},PrintAs->"K"];*)
 
 (*ExtrinsicK[h][i1_,i2_]:=If[$ConformalTime,1,a[h][]]*K[h][LI[0],LI[0],LI[0],i1,i2];*)
 
@@ -855,9 +903,9 @@ With[{frees=FindFreeIndices[expr1]},
 ToCanonical[
 (cd[ind2][LieD[u[ind1]][expr1]](*
 +$ExtrinsicKSign *Plus@@(
-(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#\[Rule]-dum]
-+cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#\[Rule]-dum]
--cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#\[Rule]-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
+(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
++cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
+-cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
 (* And now if we put the cd2 induced metric ? To Check that this leads correct results below*)
@@ -878,9 +926,9 @@ LieD[u[ind1_]][cd2[ind2_][expr1_]]:=LieD[u[ind1]][IndicesDown[cd2[ind2][expr1] ]
 LieD[u[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 With[{frees=FindFreeIndices[expr1]},ToCanonical[
 (cd2[ind2][LieD[u[ind1]][expr1]](* Here this should be something else which is by the way zero...+$ExtrinsicKSign *Plus@@(
-(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#\[Rule]-dum]
-+cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#\[Rule]-dum]
--cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#\[Rule]-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
+(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
++cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
+-cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
 (* Obinna has showed that the Directional Lie derivative and the induced derivative should commute. But When indices are down.*)
@@ -889,9 +937,9 @@ LieD[n[ind1_]][cd2[ind2_][expr1_]]:=LieD[n[ind1]][IndicesDown[cd2[ind2][expr1] ]
 LieD[n[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 With[{frees=FindFreeIndices[expr1]},ToCanonical[
 (cd2[ind2][LieD[n[ind1]][expr1]](* Here this should be something else which is by the way zero...+$ExtrinsicKSign *Plus@@(
-(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#\[Rule]-dum]
-+cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#\[Rule]-dum]
--cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#\[Rule]-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
+(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
++cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
+-cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[n][expr1]&&Abs[n[ind1]n[-ind1]]===1;
 
 Protect[LieD];
@@ -909,24 +957,24 @@ With[{ind1=DummyIn[Tangent[Manifold]],ind2=DummyIn[Tangent[Manifold]],ind3=Dummy
 
 
 
-DefTensor[u[-ind1],{Manifold},PrintAs\[Rule]"\!\("<>ToString[ind1]<>"\&-\)"]
+DefTensor[u[-ind1],{Manifold},PrintAs->"\!\("<>ToString[ind1]<>"\&-\)"]
         
 (*Induced Metric *)
 Off[DefMetric::old];
-DefMetric[1,h[-ind1,-ind2],cd,{cdpost,cdpre},InducedFrom\[Rule]{g,u},PrintAs\[Rule]"\!\("<>ToString[h]<>"\&-\)"];
+DefMetric[1,h[-ind1,-ind2],cd,{cdpost,cdpre},InducedFrom->{g,u},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];
 (*Another induced metric, I used the cd for the angular derivative, it is cheating I will sort it later*)
 
-DefTensor[n[-ind1],{Manifold},OrthogonalTo\[Rule]{u[ind1]},ProjectedWith\[Rule]{h[ind1,-ind2]},PrintAs\[Rule]"\!\("<>ToString[n]<>"\&-\)"];
+DefTensor[n[-ind1],{Manifold},OrthogonalTo->{u[ind1]},ProjectedWith->{h[ind1,-ind2]},PrintAs->"\!\("<>ToString[n]<>"\&-\)"];
 
 DirectionVectorQ[n]=True;
 
 
 (* I use NSS as the screen space metric because the Silent metric is 3-D, I will clean up these later*)
 (* CP: OK Obinna I see what you do !*)
-DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo\[Rule]{u[ind1],u[ind2],n[ind1],n[ind2]},ProjectedWith\[Rule]{h[ind1,-ind4],h[ind2,-ind5](*,NSS[ind1,-ind4],NSS[ind2,-ind5]*)},PrintAs\[Rule]"\!\("<>ToString[NSS]<>"\&-\)"];
+DefTensor[NSS[-ind1,-ind2],{Manifold},Symmetric[{-ind1,-ind2}],OrthogonalTo->{u[ind1],u[ind2],n[ind1],n[ind2]},ProjectedWith->{h[ind1,-ind4],h[ind2,-ind5](*,NSS[ind1,-ind4],NSS[ind2,-ind5]*)},PrintAs->"\!\("<>ToString[NSS]<>"\&-\)"];
 
 (* So let me try to define separately the CovD, So That I suppress this definition *)
-(*DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom\[Rule]{g,n},PrintAs\[Rule]"\!\("<>ToString[h]<>"\&-\)"];*)
+(*DefMetric[1,Silenth[-ind1,-ind2],cd2,{cd2post,cd2pre},InducedFrom->{g,n},PrintAs->"\!\("<>ToString[h]<>"\&-\)"];*)
 
 (* CP: Let me try this implementation for the CovD twice projected*)
 (* This seems cleaner than to define a Silent Metric.*)
@@ -938,7 +986,7 @@ AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] u[-ind2],0}]];
 
 (*I used AutomaticRule to assign rules to NSS...*)
 (* Well it doesn't work well*)
-(*NSS[-ind1,-ind2]^:=2/;ind1+ind2\[Equal]0;
+(*NSS[-ind1,-ind2]^:=2/;ind1+ind2==0;
 NSS[-ind1,-ind2]NSS[ind1,ind2]^:=2;*)
 
 (*AutomaticRules[NSS,BuildRule[{NSS[-ind1,-ind2],h[-ind1,-ind2]-n[-ind1]n[-ind2]}]]*)AutomaticRules[NSS,BuildRule[{NSS[ind1,ind2] NSS[-ind2,-ind3],NSS[ind1,-ind3]}]];
@@ -956,18 +1004,18 @@ Protect[prot];
 (* CP. Do you remember why we had this? *)
 (*OU: Yes it is used in DefTensorProperties for Post-Processing*)
 $Rulecdh[h1_]:={
-h1[-a_,b_] cd[a_][expr1_]\[RuleDelayed]cd[b][expr1],
-h1[a_,b_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],
-h1[b_,-a_] cd[a_][expr1_]\[RuleDelayed]cd[b][expr1],
-h1[b_,a_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],
-h1[-a_,b_] cd[c_]@cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],
-h1[b_,-a_] cd[c_]@cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1]};
+h1[-a_,b_] cd[a_][expr1_]:>cd[b][expr1],
+h1[a_,b_] cd[-a_][expr1_]:>cd[b][expr1],
+h1[b_,-a_] cd[a_][expr1_]:>cd[b][expr1],
+h1[b_,a_] cd[-a_][expr1_]:>cd[b][expr1],
+h1[-a_,b_] cd[c_]@cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@cd[-a_][expr1_]:>cd[c]@cd[b][expr1],
+h1[b_,-a_] cd[c_]@cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@cd[-a_][expr1_]:>cd[c]@cd[b][expr1]};
 
-$RulecdNSS[NSS1_]:={NSS1[-a_,b_] cd2[a_][expr1_]\[RuleDelayed]cd2[b][expr1],
-NSS1[a_,b_] cd2[-a_][expr1_]\[RuleDelayed]cd2[b][expr1],
-NSS1[b_,-a_] cd2[a_][expr1_]\[RuleDelayed]cd2[b][expr1],
-NSS1[b_,a_] cd2[-a_][expr1_]\[RuleDelayed]cd2[b][expr1],
-NSS1[-a_,b_] cd2[c_]@cd2[a_][expr1_]\[RuleDelayed]cd2[c]@cd2[b][expr1],NSS1[a_,b_] cd2[c_]@cd2[-a_][expr1_]\[RuleDelayed]cd2[c]@cd2[b][expr1],NSS1[b_,-a_] cd2[c_]@cd2[a_][expr1_]\[RuleDelayed]cd2[c]@cd2[b][expr1],NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]\[RuleDelayed]cd2[c]@cd2[b][expr1]};
+$RulecdNSS[NSS1_]:={NSS1[-a_,b_] cd2[a_][expr1_]:>cd2[b][expr1],
+NSS1[a_,b_] cd2[-a_][expr1_]:>cd2[b][expr1],
+NSS1[b_,-a_] cd2[a_][expr1_]:>cd2[b][expr1],
+NSS1[b_,a_] cd2[-a_][expr1_]:>cd2[b][expr1],
+NSS1[-a_,b_] cd2[c_]@cd2[a_][expr1_]:>cd2[c]@cd2[b][expr1],NSS1[a_,b_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1],NSS1[b_,-a_] cd2[c_]@cd2[a_][expr1_]:>cd2[c]@cd2[b][expr1],NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1]};
 
 
 
@@ -1000,8 +1048,8 @@ AutomaticRules[n,BuildRule[{n[-ind1] g[ind1,ind2],n[ind2]}]];
 (*AutomaticRules[n,BuildRule[{g[ind1,ind2] n[-ind2] n[-ind1],normn}]];*)
 
 
-If[IntegerQ@dim&&dim\[GreaterEqual]2,indsdim=GetIndicesOfVBundle[Tangent@Manifold,dim,{ind5}];
-AutomaticRules[epsilon[g],BuildRule[Evaluate[{epsilon[g]@@indsdim u[-indsdim[[1]]] h[-indsdim[[2]],ind5],ReplaceIndex[Evaluate[epsilon[g]@@indsdim],indsdim[[2]]\[Rule]ind5] u[-indsdim[[1]]]}]]];
+If[IntegerQ@dim&&dim>=2,indsdim=GetIndicesOfVBundle[Tangent@Manifold,dim,{ind5}];
+AutomaticRules[epsilon[g],BuildRule[Evaluate[{epsilon[g]@@indsdim u[-indsdim[[1]]] h[-indsdim[[2]],ind5],ReplaceIndex[Evaluate[epsilon[g]@@indsdim],indsdim[[2]]->ind5] u[-indsdim[[1]]]}]]];
 ];
 ]
 ]
@@ -1049,11 +1097,11 @@ If[Not@AnyIndicesListQ[IndsNoLI],DefProjectedTensorProperties[Name,IndsNoLI/.Lis
 (* TODO implement in the case of tensor with non fixed number of indices.*)
 ];
 
-Name/:OrthogonalToVectorQ[n][Name]=True;
+Name/:OrthogonalToVectorQ[n][Name]=True;(* In pricniple this makes sens only for non scalars. But who cares?*)
 Name/:OrthogonalToVectorQ[u][Name]=True;
 )]]]
 
-SetNumberOfArguments[DefScreenProjectedTensor,{3,Infinity}]
+SetNumberOfArguments[DefScreenProjectedTensor,{2,Infinity}]
 Protect[DefScreenProjectedTensor];
 
 
@@ -1083,7 +1131,7 @@ Name[LI[p_?((IntegerQ[#]&&#>=0)&)],indices___?AIndexQ]:=Name[LI[p],LI[0],LI[0],i
 Name/:Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[0],LI[0],indices1___,-Dum_,indices2___,Dum_,indices3___]:=0/;(Length[Join[{indices1},{indices2},{indices3}]]+2===Length[{inds}]);
 
 (*Then the trace of a derivative is not the derivative of the trace and there are commutation rules. TODO check that it is correct.*)(*Up down case*)
-(* What about the third derivative here?????*)(* TODO check if this is correct. *)
+(* What about the third derivative here ?????*)(* TODO check if this is correct. *)
 Name/:Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices1___,Dum_,indices2___,-Dum_,indices3___]:=
 Module[{Dummy1,Dummy2},Dummy1=DummyIn[Tangent[M]];Dummy2=DummyIn[Tangent[M]];
 
@@ -1125,7 +1173,9 @@ If[(IntegerQ[p]&&p>=0)&&(IntegerQ[q]&&q>=0)&&(IntegerQ[r]&&r>=0),Name[LI[p+PertO
 ];
 
 
-(*For tensors living on the background only, we have:*)If[BackgroundBool&&Not[PerturbedBool],Perturbation[Name[LI[0],LI[q_],LI[r_],indices___],PertOrder_]^:=Catch@Module[{},
+(*For tensors living on the background only, we have:*)
+If[BackgroundBool&&Not[PerturbedBool],
+Perturbation[Name[LI[0],LI[q_],LI[r_],indices___],PertOrder_]^:=Catch@Module[{},
 If[Length[{indices}]=!=Length[{inds}],Throw[Print["** Warning: The number of indices for the tensor ",Name," is incorrect."]]];
 
 If[Cases[AIndexQ/@{indices},False]=!={},Throw[Print["** Warning: The indices of the tensor ",Name," have to be abstract indices."]]];
@@ -1146,7 +1196,7 @@ If[IntegerQ[r]&&r>=0,0,Throw[Print["** Warning: The third label-index has to be 
 ];
 
 
-(*For pure perturbations (i.e.for tensors without background values),we have:*)If[Not[BackgroundBool]&&PerturbedBool,(*This is the 0.4.0 version way to do it.We define a delayed 0 value for the background*)(*However this is problematic when we want to perturb.Because then when we perturb this quantity*)(*we write Perturbed[quantity] but Mathematica will read Perturbed[0],and so this leads to 0.*)(*Instead we should append this to a list of rules,that should be applied in SplitPerturbations*)(*The easiest way is to define a set of global rules and to append a new rule each time there is a tensor vanishing on the background*)(*Old implementation*)(*Name[LI[0],LI[q_?((IntegerQ[#]&&#\[GreaterEqual]0)&)],indices___?AIndexQ]:=0/;(Length[{indices}]===Length[{inds}]);*)
+(*For pure perturbations (i.e.for tensors without background values),we have:*)If[Not[BackgroundBool]&&PerturbedBool,(*This is the 0.4.0 version way to do it.We define a delayed 0 value for the background*)(*However this is problematic when we want to perturb.Because then when we perturb this quantity*)(*we write Perturbed[quantity] but Mathematica will read Perturbed[0],and so this leads to 0.*)(*Instead we should append this to a list of rules,that should be applied in SplitPerturbations*)(*The easiest way is to define a set of global rules and to append a new rule each time there is a tensor vanishing on the background*)(*Old implementation*)(*Name[LI[0],LI[q_?((IntegerQ[#]&&#>=0)&)],indices___?AIndexQ]:=0/;(Length[{indices}]===Length[{inds}]);*)
 
 (*New implementation*)
 Lengthindices=Length[{inds}];
@@ -1163,14 +1213,17 @@ PropertiesList[Name]^=Join[PropertiesList[Name],Which[Length[{inds}]===1&&Transv
 If[$ConformalTime,1,a[h][]]*Name[LI[p],LI[q+1],LI[r],indices]/;(Length[{indices}]===Length[{inds}]);
 
 
-(* However, the third index is the directional derivative in the direction of n. *)
+(* However, the third index is the directional derivative in the direction of n. Unless the option $RadialLieDerivative is set to True and in that case it is the Lie derivative *)
+(* So we define two rules with just a dependence on the Boolea*)
 (* One could even remove the assumptions that the indices are down here.*)
-n/:n[Dum_]cd1[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}]);
+n/:n[Dum_]cd1[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}])/;(Not@$RadialLieDerivative||(Length[{inds}]===0));
 
-
+Unprotect[LieD];
+LieD/:LieD[n[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}])/;($RadialLieDerivative||(Length[{inds}]===0));
+Protect[LieD];
 
 (*(*For tensors of rank larger than or equal to 1,*)
-If[Length[{inds}]\[GreaterEqual]1,Name/:OrthogonalToVectorQ[u][Name]=True;
+If[Length[{inds}]>=1,Name/:OrthogonalToVectorQ[u][Name]=True;
 (* Already set above *)
 *)
 
@@ -1229,7 +1282,7 @@ Name/:Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=1)&)],LI[r_?((I
 
 
 (*g converted to h when contracted with a projected tensor.It is made automatic*)
-(* CP: TODO: And why not to the screen space metric directly???*)
+(* CP: TODO: And why not to the screen space metric directly ???*)
 (* CP I will modify this and put N instead of h*)
 Name/:Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices1___,Dum1_,indices2___] g[-Dum1_,Dum2_]:=Name[LI[p],LI[q],LI[r],indices1,Dum1,indices2] N[-Dum1,Dum2]/;(Length[Join[{indices1},{indices2}]]+1===Length[{inds}]);
 
@@ -1272,8 +1325,20 @@ Name/:cd2[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=1)&)],LI[q_?((IntegerQ[#]&&#>=1)&)
 g[indup,Dummy] cd2[-Dum][Name[LI[p],LI[q],LI[r],indices1,Dum,indices3,-Dummy,indices2]]]/;(Length[Join[{indices1},{indices2},{indices3}]]+2===Length[{inds}]);];];
 
 
-(*The following rule serves to express the three-covariant derivative of (homogeneous) background quantities in terms of the connection components.For instance,'Subscript[D,i] Subscript[\[Omega],j]' is replaced by:'-Subscript[\[CapitalGamma]^a,ij]Subscript[\[Omega],a]'.*)(*If[BackgroundBool,Name/:cd2[Dummy2_][Name[LI[0],LI[q_?((IntegerQ[#]&&#\[GreaterEqual]0)&)],indices___]]:=Module[{Dummy1},Dummy1=DummyIn[Tangent[M]];
-ToCan[Plus@@((-Connection[h][Dummy1,Dummy2,#]ReplaceIndex[Evaluate[Name[LI[0],LI[q],indices]],#\[Rule]-Dummy1])&/@{indices})]]/;(Length[{indices}]===Length[{inds}]);];*)(*Confer the function SetSlicing for the definition of'Connection' and its properties.*)(*Is the above relation correct for space-time indices?To check!*)(*What is the need for'Evaluate'?I forgot.*)
+(* The following rule serves to express the three-covariant derivative of (homogeneous) background quantities in terms of the connection components. But in our FL case this is just 0. *)
+(* We then need to say that the radial derivatives are 0 as well !*)
+If[BackgroundBool,
+
+Name/:cd2[Dummy2_][Name[LI[0],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___]]:=0/;(Length[{indices}]===Length[{inds}]);
+(*Module[{Dummy1},
+Dummy1=DummyIn[Tangent[M]];
+ToCan[Plus@@((-Connection[h][Dummy1,Dummy2,#]ReplaceIndex[Evaluate[Name[LI[0],LI[q],indices]],#->-Dummy1])&/@ {indices})]
+]/;(Length[{indices}]===Length[{inds}]);*)
+
+(* TODO Check if this is clean enough or not. *)
+Name/:Name[LI[0],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices___]:=0/;(Length[{indices}]===Length[{inds}]);
+];
+
 
 
 
@@ -1296,9 +1361,9 @@ InducedDecompositionLightCone[expression_,{h_,u_},{NSS_,n_}]:=(SimplifyImbricate
 
 
 (* OLD IMPLEMENTATION
-ToInducedDerivativeScreenSpace[expr_,supercd_,cd_,cd2_]:=expr/.supercd[ind_][expr1:(_?xTensorQ[___]|_?InertHeadQ[___]|cd[_][_]|LieD[_][_])]\[RuleDelayed]-cd[ind][expr1]+
+ToInducedDerivativeScreenSpace[expr_,supercd_,cd_,cd2_]:=expr/.supercd[ind_][expr1:(_?xTensorQ[___]|_?InertHeadQ[___]|cd[_][_]|LieD[_][_])]:>-cd[ind][expr1]+
 With[{frees=FindFreeIndices[expr1],n=Last@InducedFrom[MetricOfCovD[cd2]]},ToInducedDerivative[supercd[ind][expr1],supercd,cd]+ToInducedDerivative[cd[ind][expr1],cd,cd2]
-(*/.LieD[n[a_]][expr1]\[RuleDelayed]LieDToCovD[LieD[n[a]][expr1],supercd]*)
+(*/.LieD[n[a_]][expr1]:>LieDToCovD[LieD[n[a]][expr1],supercd]*)
 (* Even though the third label index is a directional derivative, it proves easier to perform the splitting with the Lie Derivative. And then only to use the directional derivative when implementing the incrementation of the label index*)
 
 ]
@@ -1346,7 +1411,7 @@ restemp0=SameDummies@ToCanonical@expr;
 (*On[ToCanonical::"cmods"];*)
 SortCovDsStart[cd];If[$DebugInfoQ,Print["First Canonicalisation with automatic sorting of Cov Ds.  ",Length[restemp0]," terms."];];
 counter=0;
-restemp=Map[(If[$DebugInfoQ,counter=counter+1;If[Mod[counter,10]===0(*||counter\[GreaterEqual]4180*),Print["We canonicalize term ",counter," ",#];];];SameDummies@ToCanonical@ContractMetric[#])&,restemp0];
+restemp=Map[(If[$DebugInfoQ,counter=counter+1;If[Mod[counter,10]===0(*||counter>=4180*),Print["We canonicalize term ",counter," ",#];];];SameDummies@ToCanonical@ContractMetric[#])&,restemp0];
 Block[{Print},SortCovDsStop[cd];];,
 Block[{Print},Off[Unset::norep];SortCovDsStop[cd];On[Unset::norep];];restemp=res;
 ];
@@ -1364,7 +1429,7 @@ res
 
 CheckSTFTensors[expr_,NSS_,exceptlist_List]:=Module[{tens},With[{listpb=Cases[Expand@expr,tens_?((And@@(Function[t,t=!=#]/@exceptlist))&&xTensorQ[#]&&Not@DefScreenProjectedTensorQ[#,NSS]&)[inds___]->tens,Infinity]},Print["** Warning: the tensor ",#," was not defined with DefProjectedTensor. The rules necessary for its splitting were thus not defined. **"]&/@(DeleteDuplicates@listpb)];];
 
-(* Warning message to update \[Rule] the slicing should be taken into account. *)
+(* Warning message to update -> the slicing should be taken into account. *)
 
 CheckSTFTensors[expr_,NSS_]:=CheckSTFTensors[expr,NSS,{}];
 
@@ -1395,7 +1460,7 @@ MaxDerOrder[expr_,CD_?CovDQ,inner_]:=-1+NestWhile[#+1&,0,ContainsDerOrderQ[expr,
 
 (* If the background field method is used, this rule ensures that tensor with a label index for order strictly larger than 1 vanish.*)
 (*$BackgroundFieldRule:=If[BackgroundFieldMethod,
-{tens_?xTensorQ[inds___]\[RuleDelayed]0/;PerturbationOrder[tens[inds]]>1},{}]*)
+{tens_?xTensorQ[inds___]:>0/;PerturbationOrder[tens[inds]]>1},{}]*)
 
 
 RulesCovDsOfTensor[expr_,replacerule_,rulesprojected_,h_?InducedMetricQ,NSS_?InducedMetricQ]:=Module[{dummiesup,tableleft,tableright,testpatternlistnmax,freedownleft,dummiesdown,leftupindices,leftupindicesnopattern,tableleftnopattern,Listlhsrhsnoreplace,temp,tempdown,rhs,rulepert,leftupindicesnopatterntests,tobecan,oncecan,RulesCovDs},Catch@With[{g=First@InducedFrom@h,u=Last@InducedFrom@h,n=Last@InducedFrom@NSS},
@@ -1613,7 +1678,7 @@ $ListFieldsBackgroundAndPerturbed[N_?InducedMetricQ,velocity_]:=With[{M=Manifold
 
 (*DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];*)
 
-DefMetricFields[g_?MetricQ, dg_, N_?InducedMetricQ,n_?DirectionVectorQ, 
+DefMetricFields[g_?MetricQ, dg_, N_?InducedMetricQ,n_?DirectionVectorQ(* TODO changhe the arguments *), 
   PerturbParameter_: \[Epsilon]] := 
  Module[{Zn}, 
   With[{M = ManifoldOfCovD@CovDOfMetric@g, cd = CovDOfMetric@N}, 
@@ -1654,17 +1719,17 @@ DefMetricFields[g_?MetricQ, dg_, N_?InducedMetricQ,n_?DirectionVectorQ,
 
 SetNumberOfArguments[DefMetricFields, {3, 4}];
 Protect[DefMetricFields];
-SetNumberOfArguments[DefMetricFields,{4,5}];
-Protect[DefMetricFields];
 
 
-DefMatterFields[uf_,duf_,h_?InducedMetricQ,n_?DirectionVectorQ, PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];
+
+DefMatterFields[uf_,duf_,h_?InducedMetricQ,NSS_?InducedMetricQ, PerturbParameter_:\[Epsilon]]:=Null;
 
 SetNumberOfArguments[DefMatterFields,{4,5}];
 Protect[DefMatterFields];
 
 
-SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,gauge_?GaugeQ]:=Print["Dobidoouah"];
+SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ]:={};
+SplitMatter[uf_,duf_,normvector_,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:={};
 
 
 IndicesDown[expr_]:= Fold[SeparateMetric[First@$Metrics][#1,#2]&,expr,Select[IndicesOf[Up][expr],Not@LIndexQ[#]&]]
@@ -1679,31 +1744,31 @@ ConformalMetricName[g_?MetricQ,1]:=g;
 ConformalMetricName[g_?MetricQ,conffactor_]:=SymbolJoin[g,conffactor,2];
 
 
-DefConformalMetric[g_?MetricQ,conffactor_]:=Module[{n,q},Catch@With[{M=ManifoldOfCovD@CovDOfMetric@g,CD=CovDOfMetric@g},
+DefConformalMetric[g_?MetricQ,conffactor_]:=Module[{n,q,r},Catch@With[{M=ManifoldOfCovD@CovDOfMetric@g,CD=CovDOfMetric@g},
 With[{i1=DummyIn[Tangent[M]],i2=DummyIn[Tangent[M]],sy1=SymbolOfCovD[CD][[1]],sy2=SymbolOfCovD[CD][[2]],metlist=Select[$Metrics,InducedFrom[#]===Null&]},
 
 
-If[Not@DefTensorQ[conffactor],DefTensor[conffactor[LI[n],LI[q]],{M},PrintAs->ToString[conffactor]]];
+If[Not@DefTensorQ[conffactor],DefTensor[conffactor[LI[n],LI[q],LI[r]],{M},PrintAs->ToString[conffactor]]];
 
 
 Off[DefMetric::old];(* Annoying message turned off*)
 If[Not[DefTensorQ[ConformalMetricName[g,conffactor]]],
 
 
-DefMetric[-1,ConformalMetricName[g,conffactor][-i1,-i2],SymbolJoin[CD,conffactor,2],{":",StringJoin[sy2,ToString[conffactor],ToString[2]]},PrintAs->StringJoin["[",PrintAs[g],"\!\("<>PrintAs[conffactor]<>"\^2\)","]"(*ToString[conffactor],ToString[2]*)],ConformalTo->{g[-i1,-i2],conffactor[LI[0],LI[0]]^2}];
+DefMetric[-1,ConformalMetricName[g,conffactor][-i1,-i2],SymbolJoin[CD,conffactor,2],{":",StringJoin[sy2,ToString[conffactor],ToString[2]]},PrintAs->StringJoin["[",PrintAs[g],"\!\("<>PrintAs[conffactor]<>"\^2\)","]"(*ToString[conffactor],ToString[2]*)],ConformalTo->{g[-i1,-i2],conffactor[(*LI[0],LI[0],LI[0]*)]^2}];
 
 ];
 On[DefMetric::old];
 
 (* We have to ensure it is safe*)
-Perturbation[conffactor[LI[0],LI[q_],indices___],n_]^:=0/;n>=1;
+Perturbation[conffactor[LI[0],LI[q_],LI[r_],indices___],n_]^:=0/;n>=1;
 
 
 Off[ConformalRules::unknown];
 (* We use the error sent by ConformalRules to chekc whether or not the metric in the list metlist is conformallyr elated to the metric g.
 If it is the case we enforce transitivity of the conformal relations.*)
 If[Catch@ConformalRules[g,#]=!=Null,
-SetConformalTo[SymbolJoin[g,conffactor,2][-i1,-i2], {#[-i1, -i2],ConformalFactor[g,#]* conffactor[LI[0],LI[0]]^2}]]&/@metlist;
+SetConformalTo[SymbolJoin[g,conffactor,2][-i1,-i2], {#[-i1, -i2],ConformalFactor[g,#]* conffactor[(*LI[0],LI[0],LI[0]*)]^2}]]&/@metlist;
 On[ConformalRules::unknown];
 
 ]
@@ -1898,21 +1963,76 @@ res2
 Conformal[metric1_?MetricQ,metric2_?MetricQ][expr_]:=Conformal[First@$Metrics][metric1,metric2][expr]
 
 
-ToLightConeFromRules[expr_,RulesList_List,h_?InducedMetricQ,n_?DirectionVectorQ,order_(*?IntegerQ*)]:=Print["Dobidoouah"];
+ToLightConeFromRules[expr_,RulesList_List,h_?InducedMetricQ,NSS_?InducedMetricQ,order_?IntegerQ]:=
+With[{g=First@InducedFrom@h},
+If[Not[DefTensorQ[ConformalMetricName[g,a[h]]]]&&SpaceType[h]=!="Minkowski",
+If[$DefInfoQ,
+Print["** Warning: The conformally related metric ",ConformalMetricName[g,a[h]],"  was not previously defined **"];
+Print["** We call DefConformalMetric in order to define it. **"];
+];
+DefConformalMetric[g,a[h]];
+];
+SplitPerturbations[ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType[h]=!="Minkowski",a[h],1]]][expr],order],RulesList,h,NSS]
+];
+
+ToLightConeFromRules[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,order_]:=ToxPandFromRules[expr,{},h,NSS,order];
 
 SetNumberOfArguments[ToLightConeFromRules,{4,5}];
 Protect[ToLightConeFromRules];
 
 
-ExtractComponents[expr_,h_?InducedMetricQ,n_?DirectionVectorQ,roj_List,ListIndsToContract_List]:=Print["Dobidoouah"];
+ToLightCone[expr_,dg_,uf_,duf_,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ,order_?IntegerQ] := ToxPand[expr,dg,{{uf,duf}},h,NSS,gauge,order]
+
+ToLightCone[expr_,dg_,ufduflist_List,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:=Module[{ruleslist},
+With[{g=First@InducedFrom@h},
+ruleslist=Flatten@Join[SplitMetric[g,dg,h,NSS,gauge],Map[SplitMatter[#[[1]],#[[2]],-1,h,NSS,gauge,order]&,ufduflist]  ];
+If[Not[DefTensorQ[Evaluate[ConformalMetricName[g,a[h]]]]]&&SpaceType[h]=!="Minkowski",
+If[$DefInfoQ,
+Print["** Warning: The conformally related metric ",ConformalMetricName[g,a[h]],"  was not previously defined **"];
+Print["** We call DefConformalMetric in order to define it. **"];
+];
+DefConformalMetric[g,a[h]];
+];
+SplitPerturbations[ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType[h]=!="Minkowski",a[h],1]]][expr],order],ruleslist,h,NSS]
+]
+];
+
+
+
+SetNumberOfArguments[ToLightCone,{7,8}];
+Protect[ToLightCone];
+
+
+(* TODO modify the arguments. NSS should be enough Elsewhere it is similar*)
+ExtractComponents::invalidprojector = "One of the projectors in `1` is not valid. The possible projectors are: 'Time' or '*NameOfTimeVector*', and 'Direction' or '*NameOfDirectionVector*', and 'Screen' or '*NameOfScreenMetric*'.";
+
+ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,proj_List,ListIndsToContract_List]:=
+Catch@With[{frees=List@@FindFreeIndices[expr],u=Last@InducedFrom@h,n=Last@InducedFrom@NSS},
+If[Length[proj]=!=Length[frees],Throw@Message[xPanding::error,"Number of projectors not equal to number of free indices."]];
+If[Sort[ListIndsToContract]=!=frees,Throw@Message[xPanding::error, "List of indices on which the projection is taken is not equal to the list of free indices"]];
+(* frees is the list of free indices in the expression*)
+
+If[Length[Select[proj,And[#=!=u,#=!=n,(*#=!=h,*)#=!=NSS,#=!="Screen",#=!="Direction",#=!="Time"]&]]!=0,Throw@Message[ExtractComponents::invalidprojector,proj]];
+
+(* Then it performs the contraction according to what is written in proj___*)
+(* NOte that we also apply /.$RulesVanishingBackgroundFields[h]. In principle this is unnecessary because the expression should have beend computed with SplitPerturbations, so all quantities which vanish on the background are already removed. Just ine case we perform this extra list of replacements, in case the user had prepared the expression in a different manner.*)
+PostProcess[h][NoScalar@org@Module[{dummy},
+Fold[(dummy=Function[{ind},If[UpIndexQ[ind],UpIndex,DownIndex][DummyIn[VBundleOfIndex[ind]]]][#2[[1]]];
+Switch[#2[[2]],
+NSS,NSS[-dummy,#2[[1]]],"Screen",NSS[-dummy,#2[[1]]],
+u,If[UpIndexQ[dummy],-1*If[$ConformalTime,1,a[h][]],1*If[$ConformalTime,1,1/a[h][]]]*u[-dummy],"Time",If[UpIndexQ[dummy],-1*If[$ConformalTime,1,a[h][]],1*If[$ConformalTime,1,1/a[h][]]]*u[-dummy],
+n,n[-dummy],"Direction",n[-dummy]
+]ReplaceIndex[#1,#2[[1]]->dummy])&,(expr(*/.$RulesVanishingBackgroundFields[h]*)),Transpose[{ListIndsToContract,proj}]]]]]
+
+ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,proj_List]:=With[{frees=List@@FindFreeIndices[expr]},ExtractComponents[expr,h,NSS,proj,frees]]
+
+(* A remettre*)
+(*ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ]:=VisualizeTensor[expr,h,NSS](*expr*)/;Length@IndicesOf[Free][expr]===2||Length@IndicesOf[Free][expr]===1*)
+(*Even when there is nothing to do, we remove all quantities which should cancel on the background. Just in case the expression provided was not obtained from SplitPerturbations, where such cancellation have been made*)
+(*ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ]:=(expr(*/.$RulesVanishingBackgroundFields[h]*))/;Length@IndicesOf[Free][expr]>2||Length@IndicesOf[Free][expr]===0*)
 
 SetNumberOfArguments[ExtractComponents,{3,5}];
 Protect[ExtractComponents];
-
-VisualizeTensor[expr_,h_?InducedMetricQ,n_?DirectionVectorQ]:=Print["Dobidoouah"];
-
-SetNumberOfArguments[VisualizeTensor,3];
-Protect[VisualizeTensor];
 
 
 On[RuleDelayed::rhs];
