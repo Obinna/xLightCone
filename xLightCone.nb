@@ -2501,65 +2501,78 @@ Cell[BoxData[
           RowBox[{"TODO", " ", "Corriger", " ", 
            RowBox[{"ca", "."}]}], "*)"}], "\n", 
          RowBox[{"(*", " ", 
-          RowBox[{"COmmente", " ", "poru", " ", 
-           RowBox[{"l", "'"}], "instant"}], "*)"}], "\n", 
+          RowBox[{"Commente", " ", "pour", " ", 
+           RowBox[{"l", "'"}], "instant"}], "*)"}], "\n", "\n", 
          RowBox[{"(*", "\n", 
           RowBox[{
            RowBox[{
-            RowBox[{"DummyS", "[", "Sym_", "]"}], ":=", 
-            RowBox[{"SymbolJoin", "[", 
-             RowBox[{"DS", ",", "Sym"}], "]"}]}], ";", "\[IndentingNewLine]", 
-           
-           RowBox[{
-            RowBox[{"DummyV", "[", "Sym_", "]"}], ":=", 
-            RowBox[{"SymbolJoin", "[", 
-             RowBox[{"DV", ",", "Sym"}], "]"}]}], ";", "\[IndentingNewLine]", 
-           
-           RowBox[{
-            RowBox[{"DummyT", "[", "Sym_", "]"}], ":=", 
-            RowBox[{"SymbolJoin", "[", 
-             RowBox[{"DT", ",", "Sym"}], "]"}]}], ";", "\[IndentingNewLine]", 
-           "\[IndentingNewLine]", 
-           RowBox[{"Block", "[", 
             RowBox[{
-             RowBox[{"{", "Print", "}"}], ",", "\[IndentingNewLine]", 
              RowBox[{
-              RowBox[{"DefScreenProjectedTensor", "[", 
-               RowBox[{
+              RowBox[{"DummyS", "[", "Sym_", "]"}], ":=", 
+              RowBox[{"SymbolJoin", "[", 
+               RowBox[{"DS", ",", "Sym"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"DummyV", "[", "Sym_", "]"}], ":=", 
+              RowBox[{"SymbolJoin", "[", 
+               RowBox[{"DV", ",", "Sym"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"DummyT", "[", "Sym_", "]"}], ":=", 
+              RowBox[{"SymbolJoin", "[", 
+               RowBox[{"DT", ",", "Sym"}], "]"}]}], ";"}], 
+            "\[IndentingNewLine]", "\n", "\n", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "In", " ", "general", " ", "the", " ", "tensors", " ", "should", 
+              " ", "not", " ", "be", " ", "assumed", " ", "to", " ", "be", 
+              " ", 
+              RowBox[{"transverse", ".", " ", "However"}], " ", "they", " ", 
+              "are", " ", "symmetric", " ", "and", " ", "they", " ", "should",
+               " ", "be", " ", 
+              RowBox[{"perturbed", "."}]}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"Block", "[", 
+             RowBox[{
+              RowBox[{"{", "Print", "}"}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"DefScreenProjectedTensor", "[", 
                 RowBox[{
-                 RowBox[{"Evaluate", "[", 
-                  RowBox[{"DummyS", "[", "metric", "]"}], "]"}], "[", "]"}], 
-                ",", "metric", ",", 
-                RowBox[{"SpaceTimesOfDefinition", "->", 
-                 RowBox[{"{", "\"\<Perturbed\>\"", "}"}]}]}], "]"}], ";", 
-              "\[IndentingNewLine]", 
-              RowBox[{"DefScreenProjectedTensor", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"Evaluate", "[", 
-                  RowBox[{"DummyV", "[", "metric", "]"}], "]"}], "[", 
-                 RowBox[{"-", "ind1"}], "]"}], ",", "metric", ",", 
-                RowBox[{"SpaceTimesOfDefinition", "->", 
-                 RowBox[{"{", "\"\<Perturbed\>\"", "}"}]}], ",", 
-                RowBox[{"TensorProperties", "->", 
-                 RowBox[{"{", "\"\<Transverse\>\"", "}"}]}]}], "]"}], ";", 
-              "\[IndentingNewLine]", 
-              RowBox[{"DefScreenProjectedTensor", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"Evaluate", "[", 
-                  RowBox[{"DummyT", "[", "metric", "]"}], "]"}], "[", 
                  RowBox[{
-                  RowBox[{"-", "ind1"}], ",", 
-                  RowBox[{"-", "ind2"}]}], "]"}], ",", "metric", ",", 
-                RowBox[{"TensorProperties", "->", 
-                 RowBox[{"{", 
+                  RowBox[{"Evaluate", "[", 
+                   RowBox[{"DummyS", "[", "metric", "]"}], "]"}], "[", "]"}], 
+                 ",", "metric", ",", 
+                 RowBox[{"SpaceTimesOfDefinition", "->", 
+                  RowBox[{"{", "\"\<Perturbed\>\"", "}"}]}]}], "]"}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"DefScreenProjectedTensor", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Evaluate", "[", 
+                   RowBox[{"DummyV", "[", "metric", "]"}], "]"}], "[", 
+                  RowBox[{"-", "ind1"}], "]"}], ",", "metric", ",", 
+                 RowBox[{"SpaceTimesOfDefinition", "->", 
+                  RowBox[{"{", "\"\<Perturbed\>\"", "}"}]}], ",", 
+                 RowBox[{"TensorProperties", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"(*", "\"\<Transverse\>\"", "*)"}], "}"}]}]}], 
+                "]"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"DefScreenProjectedTensor", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Evaluate", "[", 
+                   RowBox[{"DummyT", "[", "metric", "]"}], "]"}], "[", 
                   RowBox[{
-                  "\"\<SymmetricTensor\>\"", ",", "\"\<Transverse\>\"", ",", 
-                   "\"\<Traceless\>\""}], "}"}]}], ",", 
-                RowBox[{"SpaceTimesOfDefinition", "->", 
-                 RowBox[{"{", "\"\<Perturbed\>\"", "}"}]}]}], "]"}], ";"}]}], 
-            "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+                   RowBox[{"-", "ind1"}], ",", 
+                   RowBox[{"-", "ind2"}]}], "]"}], ",", "metric", ",", 
+                 RowBox[{"TensorProperties", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<SymmetricTensor\>\"", ",", 
+                    RowBox[{"(*", 
+                    RowBox[{"\"\<Transverse\>\"", ","}], "*)"}], 
+                    "\"\<Traceless\>\""}], "}"}]}], ",", 
+                 RowBox[{"SpaceTimesOfDefinition", "->", 
+                  RowBox[{"{", "\"\<Perturbed\>\"", "}"}]}]}], "]"}], ";"}]}],
+              "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
            "\[IndentingNewLine]", "\[IndentingNewLine]", 
            RowBox[{"$CommutecdRules", "=", 
             RowBox[{"Join", "[", 
@@ -3393,7 +3406,7 @@ Cell[BoxData[
                RowBox[{"Evaluate", "[", 
                 RowBox[{"DummyT", "[", "metric", "]"}], "]"}], "]"}], ";"}]}],
              "\[IndentingNewLine]", "]"}], ";"}], "\n", "*)"}], "\n", "\n", 
-         "]"}]}], "]"}], ";"}], "\n", "\n", ",", " ", 
+         "\n", "]"}]}], "]"}], ";"}], "\n", "\n", ",", " ", 
      RowBox[{
      "Print", "[", 
       "\"\<** DefMetric:: You have to ensure first that the following objects \
@@ -11760,7 +11773,7 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}],
                 RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";"}]}], 
          "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}]}]}]}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 

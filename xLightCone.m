@@ -443,16 +443,19 @@ xAct`xTensor`Private`MakeProjectedDerivative[cd2,metric[inda, -ind2],n[inda]];
 (* We gather many many rules for the commutation of induced derivatives. These are in general made to make sure that the transverse conditions of vectors and tensors are used. It is also made to gather Laplacians.*)
 
 (* TODO Corriger ca.*)
-(* COmmente poru l'instant*)
+(* Commente pour l'instant*)
+
 (*
 DummyS[Sym_]:=SymbolJoin[DS,Sym];
 DummyV[Sym_]:=SymbolJoin[DV,Sym];
 DummyT[Sym_]:=SymbolJoin[DT,Sym];
 
+
+(* In general the tensors should not be assumed to be transverse. However they are symmetric and they should be perturbed.*)
 Block[{Print},
 DefScreenProjectedTensor[Evaluate[DummyS[metric]][],metric,SpaceTimesOfDefinition->{"Perturbed"}];
-DefScreenProjectedTensor[Evaluate[DummyV[metric]][-ind1],metric,SpaceTimesOfDefinition->{"Perturbed"},TensorProperties->{"Transverse"}];
-DefScreenProjectedTensor[Evaluate[DummyT[metric]][-ind1,-ind2],metric,TensorProperties->{"SymmetricTensor","Transverse","Traceless"},SpaceTimesOfDefinition->{"Perturbed"}];
+DefScreenProjectedTensor[Evaluate[DummyV[metric]][-ind1],metric,SpaceTimesOfDefinition->{"Perturbed"},TensorProperties->{(*"Transverse"*)}];
+DefScreenProjectedTensor[Evaluate[DummyT[metric]][-ind1,-ind2],metric,TensorProperties->{"SymmetricTensor",(*"Transverse",*)"Traceless"},SpaceTimesOfDefinition->{"Perturbed"}];
 ];
 
 
@@ -489,6 +492,7 @@ UndefTensor[Evaluate[DummyV[metric]]];
 UndefTensor[Evaluate[DummyT[metric]]];
 ];
 *)
+
 
 ]];
 
