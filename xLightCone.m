@@ -278,6 +278,38 @@ FlatSpaceBool[Spacetype_]:=(Spacetype==="FLFlat"||Spacetype==="Minkowski")
 CurvedSpaceBool[Spacetype_]:=(Spacetype==="FLCurved")
 
 
+(*** CONVENIENT FUNCTIONS TO BUILD RULES ***)
+
+PatternLeft[(left_:> right_),ElementsToBePatterned_List]:=(left/.((#->Pattern[#,_])&/@ ElementsToBePatterned)):>right
+PatternLeft[(left_-> right_),ElementsToBePatterned_List]:=(left/.((#->Pattern[#,_])&/@ ElementsToBePatterned))->right
+
+
+(* Note that only down indices can be passed to this function *)
+IsElementInList[el_,list_]:=Length@Cases[list,el]>=1;
+
+(*TranverseTensorQ[tens_]:=xTensorQ[tens]&&IsElementInList[Transverse,PropertiesList[tens]];*)
+ScalarTensorQ[tens_]:=xTensorQ[tens]&&IsElementInList["Scalar",PropertiesList[tens]];
+VectorTensorQ[tens_]:=xTensorQ[tens]&&IsElementInList["Vector",PropertiesList[tens]];
+TensorTensorQ[tens_]:=xTensorQ[tens]&&IsElementInList["Tensor",PropertiesList[tens]];
+
+
+(* Rules used to build Automaticrules. We first use MakeRule, and then we use these rule to put patterns on the Lable indices of the left hand side.*)
+
+PatternTensorLeftScalar[(lhs_:>rhs_),TensDummy_?ScalarTensorQ[inds___]]:=Block[{TScal},
+(Evaluate[lhs/.(TensDummy->PatternTest[Pattern[TensDummy,_],ScalarTensorQ])]:>(rhs))/.(TensDummy->TScal)
+]
+
+
+PatternTensorLeftVector[(lhs_:>rhs_),TensDummy_?VectorTensorQ[inds___]]:=Block[{TVect},
+(Evaluate[lhs/.(TensDummy->PatternTest[Pattern[TensDummy,_],VectorTensorQ])]:>(rhs))/.(TensDummy->TVect)
+]
+
+
+PatternTensorLeftTensor[(lhs_:>rhs_),TensDummy_?TensorTensorQ[inds___]]:=Block[{TTens},
+(Evaluate[lhs/.(TensDummy->PatternTest[Pattern[TensDummy,_],TensorTensorQ])]:>(rhs))/.(TensDummy->TTens)
+]
+
+
 (* ::Code:: *)
 DefScreenSpaceMetric[metric_[inda_, indb_], Manifold_, cd2_, {cdpost_String, cdpre_String}, InducedHypersurface_, SpaceTimeType_?SpaceTimeQ] :=
 (* Extracting the specifications of the problem (metric manifold normal vector etc...)*) 
@@ -407,9 +439,60 @@ xAct`xTensor`Private`MakeProjectedDerivative[cd2,metric[inda, -ind2],n[inda]];
 
 (*g/:xAct`xTensor`Private`ZeroDerOnMetricQ[xAct`xTensor`Private`deronvbundle[cd2,TangentM],g]=.*)
 
-]],
 
-  Print["** DefMetric:: You have to ensure first that the following objects are defined:  metric induced from the super metric, a hypersurface specifying  four vector  and a \
+(* We gather many many rules for the commutation of induced derivatives. These are in general made to make sure that the transverse conditions of vectors and tensors are used. It is also made to gather Laplacians.*)
+
+(* TODO Corriger ca.*)
+(* COmmente poru l'instant*)
+(*
+DummyS[Sym_]:=SymbolJoin[DS,Sym];
+DummyV[Sym_]:=SymbolJoin[DV,Sym];
+DummyT[Sym_]:=SymbolJoin[DT,Sym];
+
+Block[{Print},
+DefScreenProjectedTensor[Evaluate[DummyS[metric]][],metric,SpaceTimesOfDefinition->{"Perturbed"}];
+DefScreenProjectedTensor[Evaluate[DummyV[metric]][-ind1],metric,SpaceTimesOfDefinition->{"Perturbed"},TensorProperties->{"Transverse"}];
+DefScreenProjectedTensor[Evaluate[DummyT[metric]][-ind1,-ind2],metric,TensorProperties->{"SymmetricTensor","Transverse","Traceless"},SpaceTimesOfDefinition->{"Perturbed"}];
+];
+
+
+$CommutecdRules=Join[$CommutecdRules,Flatten@Join[
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftScalar[#,Evaluate[DummyS[metric]][LI[p],LI[q],LI[r]]]&/@BuildRule[Evaluate[{cd2[-ind1][cd2[ind2][cd2[ind3][cd2[ind1][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]]],org[CommuteCovDs[CommuteCovDs[cd2[-ind1][cd2[ind2][cd2[ind3][cd2[ind1][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]]],cd2,{ind2,-ind1}],cd2,{ind3,-ind1}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftScalar[#,Evaluate[DummyS[metric]][LI[p],LI[q],LI[r]]]&/@BuildRule[Evaluate[{cd2[ind2][cd2[-ind1][cd2[ind3][cd2[ind1][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]]],org[CommuteCovDs[cd2[ind2][cd2[-ind1][cd2[ind3][cd2[ind1][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]]],cd2,{ind3,-ind1}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftScalar[#,Evaluate[DummyS[metric]][LI[p],LI[q],LI[r]]]&/@BuildRule[Evaluate[{cd2[-ind1][cd2[ind1][cd2[ind3][cd2[ind2][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]]],org[CommuteCovDs[CommuteCovDs[CommuteCovDs[CommuteCovDs[cd2[-ind1][cd2[ind1][cd2[ind3][cd2[ind2][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]]],cd2,{ind3,ind1}],cd2,{ind3,-ind1}],cd2,{ind2,ind1}],cd2,{ind2,-ind1}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftScalar[#,Evaluate[DummyS[metric]][LI[p],LI[q],LI[r]]]&/@BuildRule[Evaluate[{cd2[-ind2][cd2[-ind1][cd2[ind2][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]],org[CommuteCovDs[cd2[-ind2][cd2[-ind1][cd2[ind2][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]],cd2,{-ind1,-ind2}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftScalar[#,Evaluate[DummyS[metric]][LI[p],LI[q],LI[r]]]&/@BuildRule[Evaluate[{cd2[-ind2][cd2[ind2][cd2[-ind1][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]],org[CommuteCovDs[CommuteCovDs[cd2[-ind2][cd2[ind2][cd2[-ind1][Evaluate[DummyS[h]][LI[p],LI[q],LI[r]]]]],cd2,{-ind1,ind2}],cd2,{-ind1,-ind2}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftVector[#,Evaluate[DummyV[metric]][LI[p],LI[q],LI[r],ind2]]&/@BuildRule[Evaluate[{cd2[-ind2][cd2[-ind1][cd2[ind1][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind2]]]],org[CommuteCovDs[CommuteCovDs[cd2[-ind2][cd2[-ind1][cd2[ind1][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind2]]]],cd2,{-ind1,-ind2}],cd2,{ind1,-ind2}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftVector[#,Evaluate[DummyV[metric]][LI[p],LI[q],LI[r],ind2]]&/@BuildRule[Evaluate[{cd2[-ind2][cd2[-ind1][cd2[ind1][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind2]]]],org[CommuteCovDs[CommuteCovDs[cd2[-ind2][cd2[-ind1][cd2[ind1][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind2]]]],cd2,{-ind1,-ind2}],cd2,{ind1,-ind2}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftVector[#,Evaluate[DummyV[metric]][LI[p],LI[q],LI[r],ind3]]&/@BuildRule[Evaluate[{cd2[-ind3][cd2[ind1][cd2[ind2][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind3]]]],org[CommuteCovDs[CommuteCovDs[cd2[-ind3][cd2[ind1][cd2[ind2][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind3]]]],cd2,{ind1,-ind3}],cd2,{ind2,-ind3}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftVector[#,Evaluate[DummyV[metric]][LI[p],LI[q],LI[r],ind3]]&/@BuildRule[Evaluate[{cd2[ind1][cd2[-ind3][cd2[ind2][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind3]]]],org[CommuteCovDs[cd2[ind1][cd2[-ind3][cd2[ind2][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind3]]]],cd2,{ind2,-ind3}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftVector[#,Evaluate[DummyV[metric]][LI[p],LI[q],LI[r],ind2]]&/@BuildRule[Evaluate[{cd2[-ind3][cd2[-ind1][cd2[ind3][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind2]]]],org[CommuteCovDs[cd2[-ind3][cd2[-ind1][cd2[ind3][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind2]]]],cd2,{ind3,-ind1}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftVector[#,Evaluate[DummyV[metric]][LI[p],LI[q],LI[r],ind1]]&/@BuildRule[Evaluate[{cd2[-ind1][cd2[-ind2][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind1]]],org[CommuteCovDs[cd2[-ind1][cd2[-ind2][Evaluate[DummyV[h]][LI[p],LI[q],LI[r],ind1]]],cd2,{-ind2,-ind1}]]}]]),
+
+PatternLeft[#,{p,q,r}]&/@(PatternTensorLeftTensor[#,Evaluate[DummyT[metric]][LI[p],LI[q],LI[r],ind2,ind3]]&/@BuildRule[Evaluate[{cd2[-ind2][cd2[-ind1][Evaluate[DummyT[h]][LI[p],LI[q],LI[r],ind2,ind3]]],org[CommuteCovDs[cd2[-ind2][cd2[-ind1][Evaluate[DummyT[h]][LI[p],LI[q],LI[r],ind2,ind3]]],cd2,{-ind1,-ind2}]]}]])
+
+]];
+
+Block[{Print},
+UndefTensor[Evaluate[DummyS[metric]]];
+UndefTensor[Evaluate[DummyV[metric]]];
+UndefTensor[Evaluate[DummyT[metric]]];
+];
+*)
+
+]];
+
+, Print["** DefMetric:: You have to ensure first that the following objects are defined:  metric induced from the super metric, a hypersurface specifying  four vector  and a \
 screen space specifying vector"]];
 
 
@@ -1413,13 +1496,19 @@ SortCovDsStart[cd];If[$DebugInfoQ,Print["First Canonicalisation with automatic s
 counter=0;
 restemp=Map[(If[$DebugInfoQ,counter=counter+1;If[Mod[counter,10]===0(*||counter>=4180*),Print["We canonicalize term ",counter," ",#];];];SameDummies@ToCanonical@ContractMetric[#])&,restemp0];
 Block[{Print},SortCovDsStop[cd];];,
-Block[{Print},Off[Unset::norep];SortCovDsStop[cd];On[Unset::norep];];restemp=res;
+Block[{Print},Off[Unset::norep];SortCovDsStop[cd];On[Unset::norep];];
+restemp=expr;
 ];
-(*Entering the Cov Ds sorting defined by BackgroundSlicing. Made to gather the Laplacian near the perturbations, and to use the transversailty conditions.*)
+(*Entering the Cov Ds sorting defined by BackgroundSlicing. Made to gather the Laplacian near the perturbations, and to use the transversality conditions.*)
 If[$DebugInfoQ,Print["Entering the commutation of Cov Ds..."];];
 counter=0;
 (*Off[ToCanonical::"cmods"];*)
-res=FixedPoint[(counter=counter+1;If[$DebugInfoQ,Print["We commute the Cov Ds for the ",counter," time."];];SameDummies@ToCanonical@ContractMetric[#/.$CommutecdRules])&,restemp,10];
+(*Print["res = ",restemp];
+Print["Tocan@res ",ToCanonical@restemp];
+Print["Tocan@ContractMetric@res ",ToCanonical@ContractMetric@restemp];*)
+(* It is strange. If I pout ContractMetric in the FixedPoint function this fails... That's so strange*)
+(* We need to implement the commutation rules like in xPAnd to ensure a better result given the tranverse relations.*)
+res=FixedPoint[(counter=counter+1;If[$DebugInfoQ,Print["We commute the Cov Ds for the ",counter," time."];];SameDummies@ToCanonical[#/.$CommutecdRules])&,restemp,10];
 If[$DebugInfoQ,Print["Induced Derivatives were commuted ",counter," times"];];
 If[counter>=9,Print["** Warning, the induced derivatives are commuting endlessly. Stopped after 10 iterations to avoid an infinite loop. This is anormal behaviour. **"];];
 (*On[ToCanonical::"cmods"];*)
@@ -1972,7 +2061,11 @@ Print["** We call DefConformalMetric in order to define it. **"];
 ];
 DefConformalMetric[g,a[h]];
 ];
-SplitPerturbations[ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType[h]=!="Minkowski",a[h],1]]][expr],order],RulesList,h,NSS]
+(*Print["Now perturbing and conformally transforming"];
+temp=ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType[h]=!="Minkowski",a[h],1]]][expr],order];
+Print[temp];*)
+
+SplitPerturbations[ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType[h]=!="Minkowski",a[h],1]]][expr],order];,RulesList,h,NSS]
 ];
 
 ToLightConeFromRules[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,order_]:=ToxPandFromRules[expr,{},h,NSS,order];
