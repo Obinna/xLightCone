@@ -117,6 +117,12 @@ H::usage = "";
 
 \[ScriptK]::usage = "";
 
+\[Phi]::usage = "";
+
+Bs::usage = "";
+
+Bvp::usage = "";
+
 Conformal::usage = "";
 
 ConformalWeight::usage = "";
