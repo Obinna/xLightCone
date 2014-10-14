@@ -14584,13 +14584,7 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"n", "[", "i1", "]"}], " ", 
                     RowBox[{"n", "[", "i2", "]"}], " ", "2", 
                     RowBox[{"(", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"Etpp", "[", "NSS", "]"}], "[", 
-                    RowBox[{
-                    RowBox[{"LI", "[", "1", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}]}], "]"}], "-", 
+                    RowBox[{"-", 
                     RowBox[{
                     RowBox[{"\[Psi]", "[", "NSS", "]"}], "[", 
                     RowBox[{
@@ -14611,6 +14605,15 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"BT1", " ", "2", " ", 
                     RowBox[{"(", 
                     RowBox[{
+                    RowBox[{
+                    RowBox[{"n", "[", "i1", "]"}], " ", 
+                    RowBox[{"n", "[", "i2", "]"}], 
+                    RowBox[{
+                    RowBox[{"Etpp", "[", "NSS", "]"}], "[", 
+                    RowBox[{
+                    RowBox[{"LI", "[", "1", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}]}], "]"}]}], "+", 
                     RowBox[{
                     RowBox[{"Ett", "[", "NSS", "]"}], "[", 
                     RowBox[{
@@ -14703,15 +14706,8 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{
                     RowBox[{"n", "[", "i1", "]"}], " ", 
                     RowBox[{"n", "[", "i2", "]"}], " ", "2", " ", 
-                    RowBox[{"(", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"Etpp", "[", "NSS", "]"}], "[", 
-                    RowBox[{
-                    RowBox[{"LI", "[", "1", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}]}], "]"}], 
-                    "\[IndentingNewLine]", "-", 
+                    RowBox[{"(", "\[IndentingNewLine]", 
+                    RowBox[{"-", 
                     RowBox[{
                     RowBox[{"\[Psi]", "[", "NSS", "]"}], "[", 
                     RowBox[{
@@ -14732,6 +14728,15 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"BT1", " ", "2", " ", 
                     RowBox[{"(", 
                     RowBox[{
+                    RowBox[{
+                    RowBox[{"n", "[", "i1", "]"}], " ", 
+                    RowBox[{"n", "[", "i2", "]"}], 
+                    RowBox[{
+                    RowBox[{"Etpp", "[", "NSS", "]"}], "[", 
+                    RowBox[{
+                    RowBox[{"LI", "[", "1", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}]}], "]"}]}], "+", 
                     RowBox[{
                     RowBox[{"Ett", "[", "NSS", "]"}], "[", 
                     RowBox[{
@@ -14867,13 +14872,7 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"n", "[", "i1", "]"}], " ", 
                     RowBox[{"n", "[", "i2", "]"}], " ", "2", 
                     RowBox[{"(", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"Etpp", "[", "NSS", "]"}], "[", 
-                    RowBox[{
-                    RowBox[{"LI", "[", "m", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}]}], "]"}], "-", 
+                    RowBox[{"-", 
                     RowBox[{
                     RowBox[{"\[Psi]", "[", "NSS", "]"}], "[", 
                     RowBox[{
@@ -14892,13 +14891,45 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"NSS", "[", 
                     RowBox[{"i1", ",", "i2"}], "]"}], ")"}]}], "+", 
                     RowBox[{"BT1", " ", "2", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"n", "[", "i1", "]"}], " ", 
+                    RowBox[{"n", "[", "i2", "]"}], 
+                    RowBox[{
+                    RowBox[{"Etpp", "[", "NSS", "]"}], "[", 
+                    RowBox[{
+                    RowBox[{"LI", "[", "m", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}]}], "]"}]}], "+", 
                     RowBox[{
                     RowBox[{"Ett", "[", "NSS", "]"}], "[", 
                     RowBox[{
                     RowBox[{"LI", "[", "m", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", "i1", ",", "i2"}], 
-                    "]"}]}], "-", 
+                    "]"}], "+", 
+                    RowBox[{"2", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"n", "[", "i1", "]"}], " ", 
+                    RowBox[{
+                    RowBox[{"Etpt", "[", "NSS", "]"}], "[", 
+                    RowBox[{
+                    RowBox[{"LI", "[", "m", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", "i2"}], "]"}]}], "+", 
+                    
+                    RowBox[{
+                    RowBox[{"n", "[", "i2", "]"}], " ", 
+                    RowBox[{
+                    RowBox[{"Etpt", "[", "NSS", "]"}], "[", 
+                    RowBox[{
+                    RowBox[{"LI", "[", "m", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", "i1"}], "]"}]}]}], 
+                    ")"}]}]}], ")"}]}], "-", 
                     RowBox[{"BV1", " ", 
                     RowBox[{"(", 
                     RowBox[{
@@ -14939,29 +14970,9 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"LI", "[", "m", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", "i1"}], "]"}]}]}], 
-                    ")"}], "\[IndentingNewLine]", "+", 
-                    RowBox[{"2", 
-                    RowBox[{"(", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"n", "[", "i1", "]"}], " ", 
-                    RowBox[{
-                    RowBox[{"Etpt", "[", "NSS", "]"}], "[", 
-                    RowBox[{
-                    RowBox[{"LI", "[", "m", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}], ",", "i2"}], "]"}]}], "+", 
-                    
-                    RowBox[{
-                    RowBox[{"n", "[", "i2", "]"}], " ", 
-                    RowBox[{
-                    RowBox[{"Etpt", "[", "NSS", "]"}], "[", 
-                    RowBox[{
-                    RowBox[{"LI", "[", "m", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}], ",", 
-                    RowBox[{"LI", "[", "0", "]"}], ",", "i1"}], "]"}]}]}], 
-                    ")"}]}]}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
-                   "\[IndentingNewLine]", "\"\<ComovingGauge\>\"", ",", 
+                    ")"}]}], "\[IndentingNewLine]", "]"}]}], "}"}], ",", 
+                   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                   "\"\<ComovingGauge\>\"", ",", 
                    RowBox[{"{", 
                     RowBox[{
                     RowBox[{"dg", "[", 
@@ -16799,7 +16810,6 @@ are: 'Time' or '*NameOfTimeVector*', and 'Direction' or \
            RowBox[{"Message", "[", 
             RowBox[{
              RowBox[{"xPanding", "::", "error"}], ",", " ", 
-             
              "\"\<List of indices on which the projection is taken is not \
 equal to the list of free indices\>\""}], "]"}]}]}], "]"}], ";", 
         "\[IndentingNewLine]", 
