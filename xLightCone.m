@@ -119,9 +119,33 @@ H::usage = "";
 
 \[Phi]::usage = ".";
 
+\[Psi]::usage = ".";
+
 Bs::usage = ".";
 
+Es::usage = ".";
+
 Bvp::usage = ".";
+
+Bvt::usage = ".";
+
+Evp::usage = ".";
+
+Evt::usage = ".";
+
+Etpp::usage = ".";
+
+Etpt::usage = ".";
+
+Ett::usage = ".";
+
+T::usage = ".";
+
+Ls::usage = ".";
+
+Lvp::usage = ".";
+
+Lvt::usage = ".";
 
 Conformal::usage = "";
 
@@ -1755,7 +1779,7 @@ Evt[N_?InducedMetricQ]:=SymbolJoin[Evt,N];
 Etpp[N_?InducedMetricQ]:=SymbolJoin[Etpp,N];
 
 Etpt[N_?InducedMetricQ]:=SymbolJoin[Etpt,N];
-Print["Definition of Etpt inputform ends"];
+(*Print["Definition of Etpt inputform ends"];*)
 Ett[N_?InducedMetricQ]:=SymbolJoin[Ett,N];
 
 
@@ -1881,11 +1905,6 @@ Join[(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[1],i1
 ]]]];
 SetNumberOfArguments[SplitMetric,4]
 Protect[SplitMetric];
-
-
-
-
-
 
 
 SplitMatter[uf_,duf_,normvector_,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:={};
