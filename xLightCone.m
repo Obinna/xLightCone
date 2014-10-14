@@ -155,6 +155,8 @@ $ConformalTime::usage ="";
 
 $RadialLieDerivative::usage ="";
 
+VisualizeTensorScreenSpace::usage ="";
+
 
 Begin["xAct`xLightCone`Private`"]
 
@@ -193,8 +195,8 @@ BackgroundFieldMethod=False;
 $DebugInfoQ=False;
 $CommutecdRules={};
 $ConformalTime=True;
-$FirstOrderVectorPerturbations=True;
-$FirstOrderTensorPerturbations=True;
+$FirstOrderVectorPerturbations=False;
+$FirstOrderTensorPerturbations=False;
 $OpenConstantsOfStructure=True;
 $PrePrint=ScreenDollarIndices;
 $SortCovDAutomatic=True;
@@ -1845,7 +1847,7 @@ DefMetricFields[g,dg,NSS,n]];
 Join[(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[1],i1_,i2_],-u[i1] u[i2] 2 \[Phi][NSS][LI[1],LI[0],LI[0]]
 +n[i1] n[i2] 2(-\[Psi][NSS][LI[1],LI[0],LI[0]])
 -2 \[Psi][NSS][LI[1],LI[0],LI[0]] (NSS[i1,i2])+BT1 2 (n[i1] n[i2]Etpp[NSS][LI[1],LI[0],LI[0]]+Ett[NSS][LI[1],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[1],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[1],LI[0],LI[0],i1]))-BV1 (u[i1]n[i2] Bvp[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[1],LI[0],LI[0]])
--(u[i1] Bvt[NSS][LI[1],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[1],LI[0],LI[0],i1])
+-BV1(u[i1] Bvt[NSS][LI[1],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[1],LI[0],LI[0],i1])
 },
 
 "ComovingGauge",{dg[LI[1],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[1],LI[0],LI[0]]+n[i1] n[i2] 2 (
@@ -1858,7 +1860,7 @@ Join[(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[1],i1
 (*And then the rules at order larger that 1*)(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[m_?(#>=2&)],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[m],LI[0],LI[0]]
 +n[i1] n[i2] 2(-\[Psi][NSS][LI[m],LI[0],LI[0]])
 -2 \[Psi][NSS][LI[m],LI[0],LI[0]] (NSS[i1,i2])+BT1 2 (n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]]+Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+2(n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]))-BV1 (u[i1]n[i2] Bvp[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
--(u[i1] Bvt[NSS][LI[m],LI[0],i2]+u[i2] Bvt[NSS][LI[m],LI[0],LI[0],i1])
+-BV1(u[i1] Bvt[NSS][LI[m],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[m],LI[0],LI[0],i1])
 ]},
 
 "ComovingGauge",{dg[LI[m_?(#>=2&)],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[m],LI[0],LI[0]]-n[i1] n[i2] 2 (
@@ -2188,6 +2190,17 @@ ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,proj_List]:=With[{
 
 SetNumberOfArguments[ExtractComponents,{3,5}];
 Protect[ExtractComponents];
+
+
+VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,n=Last@InducedFrom@NSS,h=First@InducedFrom@NSS},
+Grid[{{Null,u,n,NSS},{u,ExtractComponents[expr,h,NSS,{"Time","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Time","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Time","Screen"}]//$PrePrint},
+{n,ExtractComponents[expr,h,NSS,{"Direction","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction""Screen"}]//$PrePrint},{NSS,ExtractComponents[expr,h,NSS,{"Screen""Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===2
+VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,h=First@InducedFrom@NSS,n=Last@InducedFrom@NSS},Grid[{{u,ExtractComponents[expr,h,NSS,{"Time"}]//$PrePrint},{n,ExtractComponents[expr,h,NSS,{"Direction"}]//$PrePrint},{NSS,ExtractComponents[expr,h,NSS,{"Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===1
+
+VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=expr/;Not[Length@IndicesOf[Free][expr]===2]&&Not[Length@IndicesOf[Free][expr]===1]
+
+SetNumberOfArguments[VisualizeTensorScreenSpace,2];
+Protect[VisualizeTensorScreenSpace];
 
 
 On[RuleDelayed::rhs];

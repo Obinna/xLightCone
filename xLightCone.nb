@@ -181,7 +181,7 @@ Cell["\<\
  InitializationCell->True],
 
 Cell["", "Text"]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -542,7 +542,7 @@ Cell[BoxData["$Context"], "Input"],
 
 Cell[BoxData["\<\"xAct`xLightCone`\"\>"], "Output"]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -745,8 +745,13 @@ Cell[BoxData[{
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"$RadialLieDerivative", "::", "usage"}], " ", "=", "\"\<\>\""}], 
-  ";"}]}], "Input",
+   RowBox[{
+    RowBox[{"$RadialLieDerivative", "::", "usage"}], " ", "=", "\"\<\>\""}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VisualizeTensorScreenSpace", "::", "usage"}], " ", "=", 
+   "\"\<\>\""}], ";"}]}], "Input",
  InitializationCell->True]
 }, Open  ]],
 
@@ -784,8 +789,8 @@ Cell[BoxData[
     RowBox[{"f", "[", 
      RowBox[{"NoScalar", "@", "expr"}], "]"}]}], "\n", 
    RowBox[{
-    RowBox[{"Protect", "[", "xAct`xTensor`NoScalar", "]"}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+    RowBox[{"Protect", "[", "xAct`xTensor`NoScalar", "]"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "*", "To", " ", "avoid", " ", "complaints", " ", "from", " ", "MakeRule", 
@@ -995,9 +1000,9 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"$ConformalTime", "=", "True"}], ";"}], "\n", 
    RowBox[{
-    RowBox[{"$FirstOrderVectorPerturbations", "=", "True"}], ";"}], "\n", 
+    RowBox[{"$FirstOrderVectorPerturbations", "=", "False"}], ";"}], "\n", 
    RowBox[{
-    RowBox[{"$FirstOrderTensorPerturbations", "=", "True"}], ";"}], "\n", 
+    RowBox[{"$FirstOrderTensorPerturbations", "=", "False"}], ";"}], "\n", 
    RowBox[{
     RowBox[{"$OpenConstantsOfStructure", "=", "True"}], ";"}], "\n", 
    RowBox[{
@@ -1011,7 +1016,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"$RadialLieDerivative", "=", "False"}], ";"}]}]}]], "Input",
  InitializationCell->True]
-}, Closed]]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1234,7 +1239,7 @@ Cell[BoxData[
                     RowBox[{"j", ",", "1", ",", "r"}], "}"}]}], "]"}]}], 
                 "]"}]}]}], "]"}]}], "}"}], "]"}]}], "\[IndentingNewLine]", 
         RowBox[{"(*", "]", "*)"}], "\[IndentingNewLine]", "]"}]}], 
-      "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+      "\[IndentingNewLine]", "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"xTensorFormStart", "[", "Tensor", "]"}]}]}]], "Input",
  InitializationCell->True],
 
@@ -1316,7 +1321,7 @@ Cell[BoxData[
      RowBox[{
      "the", " ", "information", " ", "messages", " ", "are", " ", "not", " ", 
       
-      RowBox[{"printed", "."}]}]}], "*)"}], "\[IndentingNewLine]", "\n", 
+      RowBox[{"printed", "."}]}]}], "*)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"*", "Testing", " ", "expressions"}], "**)"}], 
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
@@ -1326,7 +1331,7 @@ Cell[BoxData[
      RowBox[{"Cases", "[", 
       RowBox[{"inds", ",", 
        RowBox[{"AnyIndices", "[", "_", "]"}]}], "]"}], "=!=", 
-     RowBox[{"{", "}"}]}]}], "\n", 
+     RowBox[{"{", "}"}]}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1343,13 +1348,13 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"DefTensorQ", "[", "symb_", "]"}], ":=", 
     RowBox[{
      RowBox[{"Cases", "[", 
       RowBox[{"$Tensors", ",", "symb"}], "]"}], "===", 
-     RowBox[{"{", "symb", "}"}]}]}], "\n", 
+     RowBox[{"{", "symb", "}"}]}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1365,7 +1370,7 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"GaugeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -1377,7 +1382,7 @@ Cell[BoxData[
          "\"\<FlatGauge\>\"", ",", "\"\<IsoDensityGauge\>\"", ",", 
          "\"\<NewtonGauge\>\"", ",", "\"\<SynchronousGauge\>\""}], "}"}], ",",
         "strg"}], "]"}], "===", 
-     RowBox[{"{", "strg", "}"}]}]}], "\n", 
+     RowBox[{"{", "strg", "}"}]}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1393,7 +1398,7 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"InducedMetricQ", "[", "symb_", "]"}], ":=", 
     RowBox[{"If", "[", 
@@ -1401,7 +1406,7 @@ Cell[BoxData[
       RowBox[{"MetricQ", "[", "symb", "]"}], ",", 
       RowBox[{
        RowBox[{"InducedFrom", "[", "symb", "]"}], "=!=", "Null"}], ",", 
-      "False"}], "]"}]}], "\n", 
+      "False"}], "]"}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1427,7 +1432,7 @@ Cell[BoxData[
        RowBox[{"gives", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"SpaceTimeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -1452,8 +1457,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"returns", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\n", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"TensorNullQ", "[", "tens_", "]"}], ":=", 
     RowBox[{"If", "[", 
@@ -1476,7 +1481,7 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
            RowBox[{"SlotsOfTensor", "[", "tens", "]"}]}]}], "}"}], ",", 
         RowBox[{
          RowBox[{"tens", "@@", "inds"}], "===", "0"}]}], "]"}]}], "]"}]}], 
-   "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1500,7 +1505,7 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
     RowBox[{
     "Will", " ", "probably", " ", "disappear", " ", "since", " ", "we", " ", 
      "will", " ", "only", " ", "do", " ", "curved", " ", "and", " ", "flat", 
-     " ", "FL"}], " ", "*)"}], "\[IndentingNewLine]", "\n", 
+     " ", "FL"}], " ", "*)"}], "\n", "\n", 
    RowBox[{
     RowBox[{"FlatSpaceBool", "[", "Spacetype_", "]"}], ":=", 
     RowBox[{"(", 
@@ -7855,7 +7860,7 @@ Cell[BoxData[{
       RowBox[{"SpaceTimesOfDefinition", "\[Rule]", 
        RowBox[{"{", 
         RowBox[{"\"\<Background\>\"", ",", "\"\<Perturbed\>\""}], "}"}]}]}], 
-     "}"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+     "}"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"DefScreenProjectedTensorQ", "[", 
@@ -7871,7 +7876,7 @@ Cell[BoxData[{
     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{"Review", " ", "all", " ", "these", " ", 
-    RowBox[{"properties", "."}]}], "*)"}], "\[IndentingNewLine]"}], "\n", 
+    RowBox[{"properties", "."}]}], "*)"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DefScreenProjectedTensor", "[", 
@@ -8107,7 +8112,7 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
              RowBox[{
               RowBox[{"OrthogonalToVectorQ", "[", "u", "]"}], "[", "Name", 
               "]"}], "=", "True"}], ";"}], "\[IndentingNewLine]", ")"}]}], 
-         "]"}]}], "]"}]}], "]"}]}]}], "\[IndentingNewLine]"}], "\n", 
+         "]"}]}], "]"}]}], "]"}]}]}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{"SetNumberOfArguments", "[", 
   RowBox[{"DefScreenProjectedTensor", ",", 
    RowBox[{"{", 
@@ -13627,8 +13632,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"av", "[", "symb_", "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"av", ",", "symb"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+      RowBox[{"av", ",", "symb"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"K", "[", "symb_", "]"}], ":=", 
@@ -13644,8 +13649,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
-      RowBox[{"Fluid", " ", "quantities"}]}]}], "***)"}], 
-   "\[IndentingNewLine]", "\n", 
+      RowBox[{"Fluid", " ", "quantities"}]}]}], "***)"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"\[Rho]", "[", "symb_", "]"}], ":=", 
@@ -13662,14 +13667,15 @@ Cell[BoxData[
       RowBox[{"\[CapitalPi]", "[", "symb_", "]"}], ":=", 
       RowBox[{"SymbolJoin", "[", 
        RowBox[{"\[CapitalPi]", ",", "symb"}], "]"}]}], ";"}], "*)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
       RowBox[{
        RowBox[{"Perturbed", " ", "fluid", " ", "four"}], "-", 
-       "velocity"}]}]}], "***)"}], "\n", "\[IndentingNewLine]", 
+       "velocity"}]}]}], "***)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"V0", "[", 
@@ -13704,14 +13710,14 @@ Cell[BoxData[
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
       RowBox[{"Perturbation", " ", "of", " ", "the", " ", "metric"}]}]}], 
-    "***)"}], "\[IndentingNewLine]", "\n", 
+    "***)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"\[Phi]", "[", 
       RowBox[{"N_", "?", "InducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"\[Phi]", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+      RowBox[{"\[Phi]", ",", "N"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"Bs", "[", 
@@ -13729,7 +13735,7 @@ Cell[BoxData[
      RowBox[{"Bvt", "[", 
       RowBox[{"N_", "?", "InducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Bvt", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+      RowBox[{"Bvt", ",", "N"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    
    RowBox[{
     RowBox[{
@@ -13783,21 +13789,21 @@ Cell[BoxData[
      RowBox[{"Ett", "[", 
       RowBox[{"N_", "?", "InducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Ett", ",", "N"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+      RowBox[{"Ett", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
       RowBox[{"Gauge", " ", "vector", " ", "and", " ", "decomposition"}]}]}], 
-    "***)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "***)"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"\[Xi]", "[", 
       RowBox[{"N_", "?", "InducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"\[Xi]", ",", "N"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+      RowBox[{"\[Xi]", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"T", "[", 
@@ -13821,8 +13827,8 @@ Cell[BoxData[
      RowBox[{"Lvt", "[", 
       RowBox[{"N_", "?", "InducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Lvt", ",", "N"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+      RowBox[{"Lvt", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"$ListFieldsBackgroundOnly", "[", 
@@ -13845,7 +13851,7 @@ Cell[BoxData[
         RowBox[{
          RowBox[{
           RowBox[{"\[Theta]", "[", "NSS", "]"}], "[", "]"}], ",", 
-         "\"\<\[Theta]\>\""}], "}"}]}], "}"}]}], ";"}], "\n", 
+         "\"\<\[Theta]\>\""}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{
@@ -13887,7 +13893,7 @@ Cell[BoxData[
          " ", "whose", " ", "one", " ", "index", " ", "is", " ", "paralllel", 
         " ", "to", " ", "the", " ", "direction", " ", "vector", " ", "and", 
         " ", "the", " ", "order", " ", "is", " ", "transverse", " ", "to", 
-        " ", "it"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+        " ", "it"}]}]}]}], "*)"}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"$ListFieldsPerturbedOnly", "[", 
@@ -14003,8 +14009,9 @@ Cell[BoxData[
                RowBox[{"Lvt", "[", "N", "]"}], "[", 
                RowBox[{"-", "\[Mu]"}], "]"}], ",", 
               "\"\<\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[UpTee]\)\)]\)\>\""}], 
-             "}"}]}], "}"}]}]}], "]"}]}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             "}"}]}], "}"}]}]}], "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
+   
    RowBox[{
     RowBox[{
      RowBox[{"$ListFieldsBackgroundAndPerturbed", "[", 
@@ -14663,6 +14670,7 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}]}], "]"}]}]}], ")"}]}], 
                     "\[IndentingNewLine]", "-", 
+                    RowBox[{"BV1", 
                     RowBox[{"(", 
                     RowBox[{
                     RowBox[{
@@ -14682,7 +14690,7 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"LI", "[", "1", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", "i1"}], "]"}]}]}], 
-                    ")"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+                    ")"}]}]}]}], "\[IndentingNewLine]", "}"}], ",", 
                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
                    "\"\<ComovingGauge\>\"", ",", 
                    RowBox[{"{", 
@@ -14952,6 +14960,7 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}]}], "]"}]}]}], ")"}]}], 
                     "\[IndentingNewLine]", "-", 
+                    RowBox[{"BV1", 
                     RowBox[{"(", 
                     RowBox[{
                     RowBox[{
@@ -14960,6 +14969,7 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"Bvt", "[", "NSS", "]"}], "[", 
                     RowBox[{
                     RowBox[{"LI", "[", "m", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", "i2"}], "]"}]}], "+", 
                     
                     RowBox[{
@@ -14970,7 +14980,7 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
                     RowBox[{"LI", "[", "m", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", "i1"}], "]"}]}]}], 
-                    ")"}]}], "\[IndentingNewLine]", "]"}]}], "}"}], ",", 
+                    ")"}]}]}], "\[IndentingNewLine]", "]"}]}], "}"}], ",", 
                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
                    "\"\<ComovingGauge\>\"", ",", 
                    RowBox[{"{", 
@@ -15578,7 +15588,7 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{"MyChangeChristoffel", "[", 
        RowBox[{"#1", ",", "#2", ",", "cd1"}], "]"}], "&"}], ",", "expr", ",", 
-     "cd2list"}], "]"}]}], "\n"}], "\[IndentingNewLine]", 
+     "cd2list"}], "]"}]}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{"MyChangeChristoffel", "[", 
    RowBox[{"expr_", ",", "cd2_", ",", "cd1_"}], "]"}], ":=", 
@@ -16019,7 +16029,7 @@ since we do not know very well how to handle that. **\>\"", "]"}], ";"}]}],
                 "]"}], ";", "\[IndentingNewLine]", "res"}]}], 
              "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
-     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -17064,6 +17074,180 @@ equal to the list of free indices\>\""}], "]"}]}]}], "]"}], ";",
    
    RowBox[{
     RowBox[{"Protect", "[", "ExtractComponents", "]"}], ";"}]}]}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"VisualizeTensorScreenSpace", "[", 
+   RowBox[{"expr_", ",", 
+    RowBox[{"NSS_", "?", "InducedMetricQ"}]}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"u", "=", 
+        RowBox[{"Last", "@", 
+         RowBox[{"InducedFrom", "@", 
+          RowBox[{"First", "@", 
+           RowBox[{"InducedFrom", "@", "NSS"}]}]}]}]}], ",", 
+       RowBox[{"n", "=", 
+        RowBox[{"Last", "@", 
+         RowBox[{"InducedFrom", "@", "NSS"}]}]}], ",", 
+       RowBox[{"h", "=", 
+        RowBox[{"First", "@", 
+         RowBox[{"InducedFrom", "@", "NSS"}]}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Grid", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Null", ",", "u", ",", "n", ",", "NSS"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"u", ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Time\>\"", ",", "\"\<Time\>\""}], "}"}]}], "]"}], 
+            "//", "$PrePrint"}], ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Time\>\"", ",", "\"\<Direction\>\""}], "}"}]}], 
+             "]"}], "//", "$PrePrint"}], ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Time\>\"", ",", "\"\<Screen\>\""}], "}"}]}], 
+             "]"}], "//", "$PrePrint"}]}], "}"}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Direction\>\"", ",", "\"\<Time\>\""}], "}"}]}], 
+             "]"}], "//", "$PrePrint"}], ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Direction\>\"", ",", "\"\<Direction\>\""}], 
+               "}"}]}], "]"}], "//", "$PrePrint"}], ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Direction\>\"", "\"\<Screen\>\""}], "}"}]}], 
+             "]"}], "//", "$PrePrint"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"NSS", ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Screen\>\"", "\"\<Time\>\""}], "}"}]}], "]"}], "//",
+             "$PrePrint"}], ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Screen\>\"", ",", "\"\<Direction\>\""}], "}"}]}], 
+             "]"}], "//", "$PrePrint"}], ",", 
+           RowBox[{
+            RowBox[{"ExtractComponents", "[", 
+             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Screen\>\"", ",", "\"\<Screen\>\""}], "}"}]}], 
+             "]"}], "//", "$PrePrint"}]}], "}"}]}], "}"}], ",", 
+       RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "]"}], "/;", 
+   RowBox[{
+    RowBox[{"Length", "@", 
+     RowBox[{
+      RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===", 
+    "2"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VisualizeTensorScreenSpace", "[", 
+    RowBox[{"expr_", ",", 
+     RowBox[{"NSS_", "?", "InducedMetricQ"}]}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"u", "=", 
+         RowBox[{"Last", "@", 
+          RowBox[{"InducedFrom", "@", 
+           RowBox[{"First", "@", 
+            RowBox[{"InducedFrom", "@", "NSS"}]}]}]}]}], ",", 
+        RowBox[{"h", "=", 
+         RowBox[{"First", "@", 
+          RowBox[{"InducedFrom", "@", "NSS"}]}]}], ",", 
+        RowBox[{"n", "=", 
+         RowBox[{"Last", "@", 
+          RowBox[{"InducedFrom", "@", "NSS"}]}]}]}], "}"}], ",", 
+      RowBox[{"Grid", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"u", ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", "\"\<Time\>\"", "}"}]}], "]"}], "//", 
+             "$PrePrint"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"n", ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", "\"\<Direction\>\"", "}"}]}], "]"}], "//", 
+             "$PrePrint"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"NSS", ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", "\"\<Screen\>\"", "}"}]}], "]"}], "//", 
+             "$PrePrint"}]}], "}"}]}], "}"}], ",", 
+        RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "]"}], "/;", 
+    RowBox[{
+     RowBox[{"Length", "@", 
+      RowBox[{
+       RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===", 
+     "1"}]}]}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VisualizeTensorScreenSpace", "[", 
+    RowBox[{"expr_", ",", 
+     RowBox[{"NSS_", "?", "InducedMetricQ"}]}], "]"}], ":=", 
+   RowBox[{"expr", "/;", 
+    RowBox[{
+     RowBox[{"Not", "[", 
+      RowBox[{
+       RowBox[{"Length", "@", 
+        RowBox[{
+         RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===",
+        "2"}], "]"}], "&&", 
+     RowBox[{"Not", "[", 
+      RowBox[{
+       RowBox[{"Length", "@", 
+        RowBox[{
+         RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===",
+        "1"}], "]"}]}]}]}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetNumberOfArguments", "[", 
+   RowBox[{"VisualizeTensorScreenSpace", ",", "2"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Protect", "[", "VisualizeTensorScreenSpace", "]"}], 
+  ";"}]}], "Input",
  InitializationCell->True]
 }, Open  ]],
 
@@ -17093,7 +17277,7 @@ Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], "Output"]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1196, 735},
-WindowMargins->{{-51, Automatic}, {Automatic, 6}},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
