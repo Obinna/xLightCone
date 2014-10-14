@@ -16808,7 +16808,7 @@ are: 'Time' or '*NameOfTimeVector*', and 'Direction' or \
           RowBox[{"Throw", "@", 
            RowBox[{"Message", "[", 
             RowBox[{
-             RowBox[{"xPanding", "::", "error"}], ",", 
+             RowBox[{"ExtractComponents", "::", "error"}], ",", 
              "\"\<Number of projectors not equal to number of free indices.\>\
 \""}], "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
         RowBox[{"If", "[", 
@@ -17078,99 +17078,99 @@ equal to the list of free indices\>\""}], "]"}]}]}], "]"}], ";",
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"VisualizeTensorScreenSpace", "[", 
-   RowBox[{"expr_", ",", 
-    RowBox[{"NSS_", "?", "InducedMetricQ"}]}], "]"}], ":=", 
   RowBox[{
-   RowBox[{"With", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"u", "=", 
-        RowBox[{"Last", "@", 
-         RowBox[{"InducedFrom", "@", 
-          RowBox[{"First", "@", 
-           RowBox[{"InducedFrom", "@", "NSS"}]}]}]}]}], ",", 
-       RowBox[{"n", "=", 
-        RowBox[{"Last", "@", 
-         RowBox[{"InducedFrom", "@", "NSS"}]}]}], ",", 
-       RowBox[{"h", "=", 
-        RowBox[{"First", "@", 
-         RowBox[{"InducedFrom", "@", "NSS"}]}]}]}], "}"}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{"Grid", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"Null", ",", "u", ",", "n", ",", "NSS"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"u", ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Time\>\"", ",", "\"\<Time\>\""}], "}"}]}], "]"}], 
-            "//", "$PrePrint"}], ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Time\>\"", ",", "\"\<Direction\>\""}], "}"}]}], 
-             "]"}], "//", "$PrePrint"}], ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Time\>\"", ",", "\"\<Screen\>\""}], "}"}]}], 
-             "]"}], "//", "$PrePrint"}]}], "}"}], ",", "\[IndentingNewLine]", 
-         
-         RowBox[{"{", 
-          RowBox[{"n", ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Direction\>\"", ",", "\"\<Time\>\""}], "}"}]}], 
-             "]"}], "//", "$PrePrint"}], ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Direction\>\"", ",", "\"\<Direction\>\""}], 
-               "}"}]}], "]"}], "//", "$PrePrint"}], ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Direction\>\"", "\"\<Screen\>\""}], "}"}]}], 
-             "]"}], "//", "$PrePrint"}]}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"NSS", ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Screen\>\"", "\"\<Time\>\""}], "}"}]}], "]"}], "//",
-             "$PrePrint"}], ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Screen\>\"", ",", "\"\<Direction\>\""}], "}"}]}], 
-             "]"}], "//", "$PrePrint"}], ",", 
-           RowBox[{
-            RowBox[{"ExtractComponents", "[", 
-             RowBox[{"expr", ",", "h", ",", "NSS", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<Screen\>\"", ",", "\"\<Screen\>\""}], "}"}]}], 
-             "]"}], "//", "$PrePrint"}]}], "}"}]}], "}"}], ",", 
-       RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "]"}], "/;", 
+   RowBox[{"VisualizeTensorScreenSpace", "[", 
+    RowBox[{"expr_", ",", 
+     RowBox[{"NSS_", "?", "InducedMetricQ"}]}], "]"}], ":=", 
    RowBox[{
-    RowBox[{"Length", "@", 
+    RowBox[{"With", "[", 
      RowBox[{
-      RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===", 
-    "2"}]}]}], "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"u", "=", 
+         RowBox[{"Last", "@", 
+          RowBox[{"InducedFrom", "@", 
+           RowBox[{"First", "@", 
+            RowBox[{"InducedFrom", "@", "NSS"}]}]}]}]}], ",", 
+        RowBox[{"n", "=", 
+         RowBox[{"Last", "@", 
+          RowBox[{"InducedFrom", "@", "NSS"}]}]}], ",", 
+        RowBox[{"h", "=", 
+         RowBox[{"First", "@", 
+          RowBox[{"InducedFrom", "@", "NSS"}]}]}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Grid", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Null", ",", "u", ",", "n", ",", "NSS"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"u", ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Time\>\"", ",", "\"\<Time\>\""}], "}"}]}], "]"}],
+              "//", "$PrePrint"}], ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Time\>\"", ",", "\"\<Direction\>\""}], "}"}]}], 
+              "]"}], "//", "$PrePrint"}], ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Time\>\"", ",", "\"\<Screen\>\""}], "}"}]}], 
+              "]"}], "//", "$PrePrint"}]}], "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"n", ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Direction\>\"", ",", "\"\<Time\>\""}], "}"}]}], 
+              "]"}], "//", "$PrePrint"}], ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Direction\>\"", ",", "\"\<Direction\>\""}], 
+                "}"}]}], "]"}], "//", "$PrePrint"}], ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Direction\>\"", ",", "\"\<Screen\>\""}], "}"}]}],
+               "]"}], "//", "$PrePrint"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"NSS", ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Screen\>\"", ",", "\"\<Time\>\""}], "}"}]}], 
+              "]"}], "//", "$PrePrint"}], ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Screen\>\"", ",", "\"\<Direction\>\""}], "}"}]}],
+               "]"}], "//", "$PrePrint"}], ",", 
+            RowBox[{
+             RowBox[{"ExtractComponents", "[", 
+              RowBox[{"expr", ",", "h", ",", "NSS", ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Screen\>\"", ",", "\"\<Screen\>\""}], "}"}]}], 
+              "]"}], "//", "$PrePrint"}]}], "}"}]}], "}"}], ",", 
+        RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "]"}], "/;", 
+    RowBox[{
+     RowBox[{"Length", "@", 
+      RowBox[{
+       RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===", 
+     "2"}]}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"VisualizeTensorScreenSpace", "[", 
@@ -17222,7 +17222,7 @@ Cell[BoxData[{
      RowBox[{"Length", "@", 
       RowBox[{
        RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===", 
-     "1"}]}]}], "\n"}], "\[IndentingNewLine]", 
+     "1"}]}]}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"VisualizeTensorScreenSpace", "[", 
@@ -17241,7 +17241,7 @@ Cell[BoxData[{
        RowBox[{"Length", "@", 
         RowBox[{
          RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===",
-        "1"}], "]"}]}]}]}], "\[IndentingNewLine]"}], "\n", 
+        "1"}], "]"}]}]}]}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"SetNumberOfArguments", "[", 
    RowBox[{"VisualizeTensorScreenSpace", ",", "2"}], "]"}], ";"}], "\n", 
@@ -17277,7 +17277,7 @@ Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], "Output"]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1196, 735},
-WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+WindowMargins->{{28, Automatic}, {Automatic, 117}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

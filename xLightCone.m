@@ -2165,7 +2165,7 @@ ExtractComponents::invalidprojector = "One of the projectors in `1` is not valid
 
 ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,proj_List,ListIndsToContract_List]:=
 Catch@With[{frees=List@@FindFreeIndices[expr],u=Last@InducedFrom@h,n=Last@InducedFrom@NSS},
-If[Length[proj]=!=Length[frees],Throw@Message[xPanding::error,"Number of projectors not equal to number of free indices."]];
+If[Length[proj]=!=Length[frees],Throw@Message[ExtractComponents::error,"Number of projectors not equal to number of free indices."]];
 If[Sort[ListIndsToContract]=!=frees,Throw@Message[xPanding::error, "List of indices on which the projection is taken is not equal to the list of free indices"]];
 (* frees is the list of free indices in the expression*)
 
@@ -2194,7 +2194,8 @@ Protect[ExtractComponents];
 
 VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,n=Last@InducedFrom@NSS,h=First@InducedFrom@NSS},
 Grid[{{Null,u,n,NSS},{u,ExtractComponents[expr,h,NSS,{"Time","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Time","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Time","Screen"}]//$PrePrint},
-{n,ExtractComponents[expr,h,NSS,{"Direction","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction""Screen"}]//$PrePrint},{NSS,ExtractComponents[expr,h,NSS,{"Screen""Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===2
+{n,ExtractComponents[expr,h,NSS,{"Direction","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction","Screen"}]//$PrePrint},{NSS,ExtractComponents[expr,h,NSS,{"Screen","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===2
+
 VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,h=First@InducedFrom@NSS,n=Last@InducedFrom@NSS},Grid[{{u,ExtractComponents[expr,h,NSS,{"Time"}]//$PrePrint},{n,ExtractComponents[expr,h,NSS,{"Direction"}]//$PrePrint},{NSS,ExtractComponents[expr,h,NSS,{"Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===1
 
 VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=expr/;Not[Length@IndicesOf[Free][expr]===2]&&Not[Length@IndicesOf[Free][expr]===1]
