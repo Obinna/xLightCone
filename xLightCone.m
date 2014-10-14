@@ -660,9 +660,18 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
      projectorname[rest_. x_?ScalarQ] := Scalar[x] projectorname[rest];
      projectorname[vector[i_] expr_.] := 
       0 /; Not@IsIndexOf[expr, -i, supermetric];
+
+
+(* CP I add this rule because now this projector is orthogonal to both vectors.  *)
+	 projectorname[u[i_] expr_.] := 
+      0 /; Not@IsIndexOf[expr, -i, supermetric];
+
      projectorname[projectorname[expr_]] := projectorname[expr];
      projectorname[tensor_?xTensorQ[inds__]] := 
-      tensor[inds] /; OrthogonalToVectorQ[vector][tensor];
+      tensor[inds] /; OrthogonalToVectorQ[vector][tensor]&&OrthogonalToVectorQ[u][tensor];
+(* Here we specify that it should be orthogonal to both vector to deserve the removal of the Projector Head.*)
+(* This lead to a bug previously...*)
+
      projectorname[covd[k_][expr_]] := covd[k][expr];
      
      xAct`xTensor`Private`ProjectDerivativeRules[
