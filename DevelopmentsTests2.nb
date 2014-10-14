@@ -74802,7 +74802,7 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"It", " ", 
     RowBox[{"isn", "'"}], "t", " ", "correct", " ", "yet"}], ",", " ", 
-   RowBox[{"something", " ", "is", " ", "wring", " ", "somewhere"}], ",", " ", 
+   RowBox[{"something", " ", "is", " ", "wrong", " ", "somewhere"}], ",", " ", 
    RowBox[{"I", " ", "will", " ", "continue", " ", 
     RowBox[{"tommrrow", "."}]}]}], "*)"}]], "Input"],
 
