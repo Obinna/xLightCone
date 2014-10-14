@@ -117,11 +117,11 @@ H::usage = "";
 
 \[ScriptK]::usage = "";
 
-\[Phi]::usage = "";
+\[Phi]::usage = ".";
 
-Bs::usage = "";
+Bs::usage = ".";
 
-Bvp::usage = "";
+Bvp::usage = ".";
 
 Conformal::usage = "";
 

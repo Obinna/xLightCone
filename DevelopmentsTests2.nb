@@ -67702,11 +67702,11 @@ Cell[BoxData[
     $CellContext`RicciScalarCD[],
     Editable->False], "\[InvisibleSpace]", "\<\" +... was performed in \"\>", 
    "\[InvisibleSpace]", 
-   "1.24554300000000006676259545201901346445`6.115958638600857", 
+   "1.25366200000000005410072390077402815223`6.118780375355383", 
    "\[InvisibleSpace]", "\<\" seconds.\"\>"}],
   SequenceForm["The Splitting of ", 
    $CellContext`RicciScalarCD[], " +... was performed in ", 
-   1.24554300000000006676259545201901346445`6.115958638600857, " seconds."],
+   1.25366200000000005410072390077402815223`6.118780375355383, " seconds."],
   Editable->False]], "Print"],
 
 Cell[BoxData[
