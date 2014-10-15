@@ -6372,7 +6372,7 @@ Cell[BoxData[{
               RowBox[{
               "Check", " ", "this", " ", "relation", " ", "for", " ", "the", 
                " ", "evolution", " ", "of", " ", "the", " ", "extrinsic", " ",
-                "curvature", " ", "trace"}], "*)"}], "\n", 
+                "curvature", " ", "trace", " ", "TODO"}], "*)"}], "\n", 
              RowBox[{"\[Theta]NSS", "/:", 
               RowBox[{
                RowBox[{"CD", "[", "ind3_", "]"}], "@", 

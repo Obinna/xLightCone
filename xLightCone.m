@@ -995,7 +995,7 @@ CurvedSpaceBool[SpaceTimeType],
 \[Theta]NSS/:cd[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= n[ind3](-\[Theta]NSS[]^2/2  -
  \[ScriptK][h][]*(dim-2));
 ];
-(* Check this relation for the evolution of the extrinsic curvature trace*)
+(* Check this relation for the evolution of the extrinsic curvature trace TODO*)
 \[Theta]NSS/:CD[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:=cd[ind3][\[Theta]NSS[]];
 
 (* The extrinsic curvature of n should be spatial. This is enforced*)
