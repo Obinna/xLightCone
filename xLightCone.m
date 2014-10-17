@@ -147,6 +147,20 @@ Lvp::usage = ".";
 
 Lvt::usage = ".";
 
+Vs::usage = ".";
+
+Vvp::usage = ".";
+
+Vvt::usage = ".";
+
+V0::usage = ".";
+
+Vspat::usage = ".";
+
+\[Rho]::usage = ".";
+
+P::usage = ".";
+
 Conformal::usage = "";
 
 ConformalWeight::usage = "";
@@ -309,10 +323,11 @@ AnyIndicesListQ[inds_List]:=Cases[inds,AnyIndices[_]]=!={}
 DefTensorQ[symb_]:=Cases[$Tensors,symb]==={symb}
 (*If'symb' has been defined as a tensor,then DefTensorQ[symb] returns'True';otherwise it returns'False'.*)
 
-GaugeQ[strg_]:=Cases[{"AnyGauge","ComovingGauge","FlatGauge","IsoDensityGauge","NewtonGauge","SynchronousGauge"},strg]==={strg}
+GaugeQ[strg_]:=Cases[{"AnyGauge","FluidComovingGauge","ScalarFieldComovingGauge","FlatGauge","IsoDensityGauge","NewtonGauge","SynchronousGauge"},strg]==={strg}
 (*If'strg' matches one of the element in the list,then GaugeQ[strg] returns'True';otherwise it returns'False'.*)
 
 InducedMetricQ[symb_]:=If[MetricQ[symb],InducedFrom[symb]=!=Null,False]
+InducedFromInducedMetricQ[symb_]:=False;
 (*If'symb' is not defined as a metric,then InducedMetricQ[symb] returns'False'.Otherwise,it checks whether'symb' is an induced metric.If this is the case,then InducedMetricQ[symb] gives'True';otherwise it gives'False'.*)
 
 SpaceTimeQ[strg_]:=Cases[{"FLCurved","FLFlat","Minkowski"},strg]==={strg}
@@ -378,7 +393,8 @@ ind1 = DummyIn[Tangent[Manifold]], ind2 = DummyIn[Tangent[Manifold]], ind3 = Dum
 (* Definition of the screen-space metric. Projected orthogonally to u and n.*)
    DefTensor[metric[inda, indb], Manifold, If[$TorsionSign === 1, Symmetric[{inda, indb}], {}], 
     OrthogonalTo -> {u[-inda], u[-indb], n[-inda], n[-indb]}, ProjectedWith -> {h[-inda, ind1], h[-indb, ind1]}];
-   
+ 
+ 
 (* We defined a covariant derivative associated to this screen metric and we will load later all its properties. *)
    DefCovD[cd2[inda], vbundle, {cdpost, cdpre}, OrthogonalTo -> {u[-inda], n[-inda]}, ProjectedWith -> {h[-inda, ind2], metric[-inda, ind2]}];
 (* Even though the function DfCovD is called saying that the orthogonality should be wrt to u and n, wrt h and metric, 
@@ -426,6 +442,7 @@ MetricOfCovD[cd2] ^= metric;
 AppendTo[$Metrics, metric];
 MetricQ[metric] ^= True;
 InducedMetricQ[metric]^= True;
+InducedFromInducedMetricQ[metric]^=True;
 CovDOfMetric[metric] ^= cd2;
 
 
@@ -1231,7 +1248,7 @@ InducedMetricOf[Name_]:={};
 
 (*Review all these properties.*)
 
-DefScreenProjectedTensor[Name_[inds___],N_?InducedMetricQ,options___?OptionQ]:=Catch@Module[{IndsNoLI,p,q,r,PrAs,SpaTimeDef,TensProp},With[{M=ManifoldOfCovD@CovDOfMetric[First@InducedFrom@First@InducedFrom[N]],n=Last@InducedFrom[N],
+DefScreenProjectedTensor[Name_[inds___],N_?InducedFromInducedMetricQ,options___?OptionQ]:=Catch@Module[{IndsNoLI,p,q,r,PrAs,SpaTimeDef,TensProp},With[{M=ManifoldOfCovD@CovDOfMetric[First@InducedFrom@First@InducedFrom[N]],n=Last@InducedFrom[N],
 u=Last@InducedFrom@First@InducedFrom@N,
 h=First@InducedFrom@N},
 With[{Dummy1=DummyIn[Tangent[M]],Dummy2=DummyIn[Tangent[M]]},
@@ -1642,7 +1659,7 @@ MaxDerOrder[expr_,CD_?CovDQ,inner_]:=-1+NestWhile[#+1&,0,ContainsDerOrderQ[expr,
 {tens_?xTensorQ[inds___]:>0/;PerturbationOrder[tens[inds]]>1},{}]*)
 
 
-RulesCovDsOfTensor[expr_,replacerule_,rulesprojected_,h_?InducedMetricQ,NSS_?InducedMetricQ]:=Module[{dummiesup,tableleft,tableright,testpatternlistnmax,freedownleft,dummiesdown,leftupindices,leftupindicesnopattern,tableleftnopattern,Listlhsrhsnoreplace,temp,tempdown,rhs,rulepert,leftupindicesnopatterntests,tobecan,oncecan,RulesCovDs},Catch@With[{g=First@InducedFrom@h,u=Last@InducedFrom@h,n=Last@InducedFrom@NSS},
+RulesCovDsOfTensor[expr_,replacerule_,rulesprojected_,h_?InducedMetricQ,NSS_?InducedFromInducedMetricQ]:=Module[{dummiesup,tableleft,tableright,testpatternlistnmax,freedownleft,dummiesdown,leftupindices,leftupindicesnopattern,tableleftnopattern,Listlhsrhsnoreplace,temp,tempdown,rhs,rulepert,leftupindicesnopatterntests,tobecan,oncecan,RulesCovDs},Catch@With[{g=First@InducedFrom@h,u=Last@InducedFrom@h,n=Last@InducedFrom@NSS},
 With[{CD=CovDOfMetric[g],cd=CovDOfMetric[h],cd2=CovDOfMetric[NSS],M=ManifoldOfCovD@CovDOfMetric[g]},
 With[{CDmax=MaxDerOrder[expr,CD,First@replacerule]},
 
@@ -1691,9 +1708,9 @@ RulesCovDs
 ]
 ];
 
-ProjectionAndBackgroundRuleQ[rule_,NSS_?InducedMetricQ,u_,n_]:=(PerturbationOrder[RemovePatterns[First@rule]]===0)&&(Projector[NSS][Last@rule]===0||OrthogonalToVectorQ[n][Last@rule]||OrthogonalToVectorQ[u][Last@rule]);
+ProjectionAndBackgroundRuleQ[rule_,NSS_?InducedFromInducedMetricQ,u_,n_]:=(PerturbationOrder[RemovePatterns[First@rule]]===0)&&(Projector[NSS][Last@rule]===0||OrthogonalToVectorQ[n][Last@rule]||OrthogonalToVectorQ[u][Last@rule]);
 
-SplitPerturbations[expr_,ListPairs_List,h_?InducedMetricQ,NSS_?InducedMetricQ]:=Module[{res,restemp,resfinal,restemp2,res0,res1,res2,res3,res4,res4bis,res6bis,res6ter,res6quater,res4ter,res4quater,res5,res6,res7,res8,rules,rulesprojectedandbackground},
+SplitPerturbations[expr_,ListPairs_List,h_?InducedMetricQ,NSS_?InducedFromInducedMetricQ]:=Module[{res,restemp,resfinal,restemp2,res0,res1,res2,res3,res4,res4bis,res6bis,res6ter,res6quater,res4ter,res4quater,res5,res6,res7,res8,rules,rulesprojectedandbackground},
 With[{g=First@InducedFrom@h,u=Last@InducedFrom@h,n=Last@InducedFrom@NSS},
 With[{CD=CovDOfMetric[g],cd=CovDOfMetric[h],cd2=CovDOfMetric[NSS]},
 
@@ -1783,8 +1800,12 @@ ScreenDollarIndices@collect@SameDummies@Expand[IndicesDownOnLieDerivatives[expr]
 ScreenDollarIndices@collect[expr]
 ]*)
 
-SplitPerturbations[expr_,h_?InducedMetricQ]:=SplitPerturbations[expr,{},h]
-SetNumberOfArguments[SplitPerturbations,{2,3}]
+SplitPerturbations[expr_,ListPairs_List,NSS_?InducedFromInducedMetricQ]:=SplitPerturbations[expr,ListPairs,First@InducedFrom@NSS,NSS];
+
+SplitPerturbations[expr_,h_?InducedMetricQ,NSS_?InducedFromInducedMetricQ]:=SplitPerturbations[expr,{},h,NSS];
+SplitPerturbations[expr_,NSS_?InducedFromInducedMetricQ]:=SplitPerturbations[expr,First@InducedFrom@NSS,NSS];
+
+SetNumberOfArguments[SplitPerturbations,{2,4}]
 Protect[SplitPerturbations];
 
 
@@ -1812,58 +1833,58 @@ P[symb_]:=SymbolJoin[P,symb];
 
 (***BUILDING SYMBOLS:Perturbed fluid four-velocity***)
 
-V0[N_?InducedMetricQ,velocity_]:=SymbolJoin[V0,N,velocity];
-Vspat[N_?InducedMetricQ,velocity_]:=SymbolJoin[Vspat,N,velocity];
-Vs[N_?InducedMetricQ,velocity_]:=SymbolJoin[Vs,N,velocity];
-Vv[N_?InducedMetricQ,velocity_]:=SymbolJoin[Vv,N,velocity];
+V0[N_?InducedFromInducedMetricQ,velocity_]:=SymbolJoin[V0,N,velocity];
+Vspat[N_?InducedFromInducedMetricQ,velocity_]:=SymbolJoin[Vspat,N,velocity];
+Vs[N_?InducedFromInducedMetricQ,velocity_]:=SymbolJoin[Vs,N,velocity];
+Vvp[N_?InducedFromInducedMetricQ,velocity_]:=SymbolJoin[Vvp,N,velocity];
+Vvt[N_?InducedFromInducedMetricQ,velocity_]:=SymbolJoin[Vvt,N,velocity];
 
 (***BUILDING SYMBOLS:Perturbation of the metric***)
 
-\[Phi][N_?InducedMetricQ]:=SymbolJoin[\[Phi],N];
+\[Phi][N_?InducedFromInducedMetricQ]:=SymbolJoin[\[Phi],N];
 
-Bs[N_?InducedMetricQ]:=SymbolJoin[Bs,N];
-Bvp[N_?InducedMetricQ]:=SymbolJoin[Bvp,N];
-Bvt[N_?InducedMetricQ]:=SymbolJoin[Bvt,N];
+Bs[N_?InducedFromInducedMetricQ]:=SymbolJoin[Bs,N];
+Bvp[N_?InducedFromInducedMetricQ]:=SymbolJoin[Bvp,N];
+Bvt[N_?InducedFromInducedMetricQ]:=SymbolJoin[Bvt,N];
 
-\[Psi][N_?InducedMetricQ]:=SymbolJoin[\[Psi],N];
-Es[N_?InducedMetricQ]:=SymbolJoin[Es,N];
-(*Ev[N_?InducedMetricQ]:=SymbolJoin[Ev,N];*)
-Evp[N_?InducedMetricQ]:=SymbolJoin[Evp,N];
-Evt[N_?InducedMetricQ]:=SymbolJoin[Evt,N];
-Etpp[N_?InducedMetricQ]:=SymbolJoin[Etpp,N];
+\[Psi][N_?InducedFromInducedMetricQ]:=SymbolJoin[\[Psi],N];
+Es[N_?InducedFromInducedMetricQ]:=SymbolJoin[Es,N];
+(*Ev[N_?InducedFromInducedMetricQ]:=SymbolJoin[Ev,N];*)
+Evp[N_?InducedFromInducedMetricQ]:=SymbolJoin[Evp,N];
+Evt[N_?InducedFromInducedMetricQ]:=SymbolJoin[Evt,N];
+Etpp[N_?InducedFromInducedMetricQ]:=SymbolJoin[Etpp,N];
 
-Etpt[N_?InducedMetricQ]:=SymbolJoin[Etpt,N];
+Etpt[N_?InducedFromInducedMetricQ]:=SymbolJoin[Etpt,N];
 (*Print["Definition of Etpt inputform ends"];*)
-Ett[N_?InducedMetricQ]:=SymbolJoin[Ett,N];
+Ett[N_?InducedFromInducedMetricQ]:=SymbolJoin[Ett,N];
 
 
 (***BUILDING SYMBOLS:Gauge vector and decomposition***)
 
-\[Xi][N_?InducedMetricQ]:=SymbolJoin[\[Xi],N];
+\[Xi][N_?InducedFromInducedMetricQ]:=SymbolJoin[\[Xi],N];
 
-T[N_?InducedMetricQ]:=SymbolJoin[T,N];
-Ls[N_?InducedMetricQ]:=SymbolJoin[Ls,N];
-Lvp[N_?InducedMetricQ]:=SymbolJoin[Lvp,N];
-Lvt[N_?InducedMetricQ]:=SymbolJoin[Lvt,N];
+T[N_?InducedFromInducedMetricQ]:=SymbolJoin[T,N];
+Ls[N_?InducedFromInducedMetricQ]:=SymbolJoin[Ls,N];
+Lvp[N_?InducedFromInducedMetricQ]:=SymbolJoin[Lvp,N];
+Lvt[N_?InducedFromInducedMetricQ]:=SymbolJoin[Lvt,N];
 
 
-$ListFieldsBackgroundOnly[h_?InducedMetricQ,NSS_?InducedMetricQ]:={{a[h][],"a"},{H[h][],"\[ScriptCapitalH]"},{\[Theta][NSS][],"\[Theta]"}};
+$ListFieldsBackgroundOnly[h_?InducedMetricQ,NSS_?InducedFromInducedMetricQ]:={{a[h][],"a"},{H[h][],"\[ScriptCapitalH]"},{\[Theta][NSS][],"\[Theta]"}};
 (* Added a couple of subscripts for the formatting  of Background fields: The subscript S, V , T stand for Scalar, Vector, Tensor mode. This is the signature they obtian after mode decomposition while the subscripts \[DoubleVerticalBar], \[UpTee] and \[DoubleVerticalBar]\[UpTee]  is used to characterize tensors project onto the screen space. \[DoubleVerticalBar] subscerpt stands for a component parallel to the direction vector, \[UpTee] stands for tensors whose all indices are projected onto the screen space and \[DoubleVerticalBar]\[UpTee] stands for a rank two tensor whose one index is paralllel to the direction vector and the order is transverse to it*)
-$ListFieldsPerturbedOnly[N_?InducedMetricQ]:=With[{M=ManifoldOfCovD@CovDOfMetric@First@InducedFrom@N},Block[{\[Mu],\[Nu]},{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
+$ListFieldsPerturbedOnly[N_?InducedFromInducedMetricQ]:=With[{M=ManifoldOfCovD@CovDOfMetric@First@InducedFrom@N},Block[{\[Mu],\[Nu]},{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
 {{\[Phi][N][],"\[Phi]"},{Bs[N][],"\!\(\*SubscriptBox[\(B\), \(s\)]\)"},{Bvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(B\), \(\(v\)\(\[UpTee]\)\)]\)"},{Bvp[N][],"\!\(\*SubscriptBox[\(B\), \(||\)]\)"},{\[Psi][N][],"\[Psi]"},{Es[N][],"\!\(\*SubscriptBox[\(E\), \(s\)]\)"},{Evp[N][],"\!\(\*SubscriptBox[SubscriptBox[\(E\), \(v\)], \(||\)]\)"},{Evt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(\(v\)\(\[UpTee]\)\)]\)"},{Etpp[N][],"\!\(\*SubscriptBox[\(E\), \(\(t\)\(\[DoubleVerticalBar]\)\)]\)"},{Etpt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(t \[DoubleVerticalBar]  \[UpTee] \)]\)"},{Ett[N][-\[Mu],-\[Nu]],"\!\(\*SubscriptBox[\(E\), \(\(t\)\(\[UpTee]\)\)]\)"},{T[N][],"T"},{Ls[N][],"L"},{Lvp[N][],"\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[DoubleVerticalBar]\)\)]\)"},{Lvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[UpTee]\)\)]\)"}}]];
 
 
 
-$ListFieldsBackgroundAndPerturbed[N_?InducedMetricQ,velocity_]:=With[{M=ManifoldOfCovD@CovDOfMetric@First@InducedFrom@N},Block[{\[Mu],\[Nu]},{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
+$ListFieldsBackgroundAndPerturbed[N_?InducedFromInducedMetricQ,velocity_]:=With[{M=ManifoldOfCovD@CovDOfMetric@First@InducedFrom@N},Block[{\[Mu],\[Nu]},{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
 {{\[CurlyPhi][],"\[CurlyPhi]"},{\[Rho][velocity][],ToString@StringJoin[{"\[Rho]"},ToString[velocity]]},{P[velocity][],ToString@StringJoin[{"P"},ToString[velocity]]},{Vspat[N,velocity][-\[Mu]],ToString@StringJoin[{"\[ScriptCapitalV]",ToString[velocity]}]},{V0[N,velocity][],ToString@StringJoin[{"V0",ToString[velocity]}]},{Vs[N,velocity][],ToString@StringJoin[{"V",ToString[velocity]}]},{Vvp[N,velocity][-\[Mu]],ToString@StringJoin[{"\!\(\*SubscriptBox[\(V\), \(\[LeftDoubleBracketingBar]\)]\)",ToString[velocity]}]},{Vvt[N,velocity][-\[Mu]],ToString@StringJoin[{"\!\(\*SubscriptBox[\(V\), \(\[UpTee]\)]\)",ToString[velocity]}]}}]];
 
 
 (*DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];*)
 
-DefMetricFields[g_?MetricQ, dg_, N_?InducedMetricQ,n_?DirectionVectorQ(* TODO changhe the arguments *), 
-  PerturbParameter_: \[Epsilon]] := 
+DefMetricFields[g_?MetricQ, dg_, N_?InducedFromInducedMetricQ, PerturbParameter_: \[Epsilon]] := 
  Module[{Zn}, 
-  With[{M = ManifoldOfCovD@CovDOfMetric@g, cd = CovDOfMetric@N}, 
+  With[{M = ManifoldOfCovD@CovDOfMetric@g,h=First@InducedFrom@N, cd = CovDOfMetric@N}, 
    Block[{\[Mu], \[Nu]}, {\[Mu], \[Nu]} =  GetIndicesOfVBundle[Tangent@M, 2];
     If[Not[DefTensorQ[dg]], DefMetricPerturbation[g, dg, Evaluate[If[DefinedPerturbationParameter[$PerturbationParameter],$PerturbationParameter, PerturbParameter]]];
 
@@ -1875,14 +1896,13 @@ Print["Defining "$PerturbationParameter " inputform"];
       If[$DefInfoQ, 
        Print["** Warning: Metric perturbation already defined. Thiscannot be redefined without undefining it. **"];];
 ];
-    Print["Calling Perturbed fields start"];
+(*    Print["Calling Perturbed fields start"];*)
 (*Defining some tensors we shall need anyway*)
-(DefScreenProjectedTensor[#[[1]], N,TensorProperties -> {"Traceless", "Transverse", 
+(DefScreenProjectedTensor[#[[1]], N,TensorProperties -> {"Traceless", (*"Transverse",*)(* The transverse condition is more subtle*) 
           "SymmetricTensor"}, SpaceTimesOfDefinition -> {"Perturbed"},PrintAs -> #[[2]]]) & /@ $ListFieldsPerturbedOnly[N];
 
- Print["Calling Perturbed fields ends"];
-
-    Evaluate[\[Phi][N]]::usage = \[Phi]::usage;
+(* Print["Calling Perturbed fields ends"];*)
+Evaluate[\[Phi][N]]::usage = \[Phi]::usage;
     Evaluate[Bs[N]]::usage = Bs::usage;
     Evaluate[Bvp[N]]::usage =Bvp::usage;
     Evaluate[Bvt[N]]::usage =Bvt::usage;
@@ -1901,16 +1921,10 @@ Print["Defining "$PerturbationParameter " inputform"];
 
     (*If we want a nice output for the perturbation parameter,,*)
     MakeBoxes[PerturbParameter, StandardForm] :=StyleBox[ToString[$PerturbationParameter],FontColor -> RGBColor[0.3, 0.8, 0.8]]]]]
-Print["Calling Perturbed fields ends"];
-SetNumberOfArguments[DefMetricFields, {4, 5}];
+(*Print["Calling Perturbed fields ends"];*)
+SetNumberOfArguments[DefMetricFields, {3, 5}];
 Protect[DefMetricFields];
 
-
-
-DefMatterFields[uf_,duf_,h_?InducedMetricQ,NSS_?InducedMetricQ, PerturbParameter_:\[Epsilon]]:=Null;
-
-SetNumberOfArguments[DefMatterFields,{4,5}];
-Protect[DefMatterFields];
 
 
 (*SplitMetric[g_?MetricQ,dg_,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ]:={};*)
@@ -1919,41 +1933,65 @@ BV1:=Boole@$FirstOrderVectorPerturbations;
 BT1:=Boole@$FirstOrderTensorPerturbations;
 
 (* Only metric on the screen space is required, since we can get the properties of the metric on the hypersurface using InducedFrom*)
-SplitMetric[g_?MetricQ,dg_,NSS_?InducedMetricQ,gauge_?GaugeQ]:=
-Module[{m,ind1,ind2},With[{u=Last@InducedFrom@First@InducedFrom@NSS,n=Last@InducedFrom@NSS,M=ManifoldOfCovD@CovDOfMetric@g,cd=CovDOfMetric@First@InducedFrom@NSS,cd2=CovDOfMetric@NSS},{ind1,ind2}=GetIndicesOfVBundle[Tangent@M,2];
+SplitMetric[g_?MetricQ,dg_,NSS_?InducedFromInducedMetricQ,gauge_?GaugeQ]:=
+Module[{m,ind1,ind2},With[{u=Last@InducedFrom@First@InducedFrom@NSS,n=Last@InducedFrom@NSS,h=First@InducedFrom@NSS,M=ManifoldOfCovD@CovDOfMetric@g,cd=CovDOfMetric@First@InducedFrom@NSS,cd2=CovDOfMetric@NSS},{ind1,ind2}=GetIndicesOfVBundle[Tangent@M,2];
 
 With[{i1=ind1,i2=ind2},If[Not[DefTensorQ[Ett[NSS]]]||Not[DefTensorQ[dg]],Print["** Warning: The perturbed metric, or the fields required to parameterize its splitting were not previously defined **"];
 Print["** DefMetricFields is called to build the perturbation of the metric and the fields needed for future splitting **"];
-DefMetricFields[g,dg,NSS,n]];
+DefMetricFields[g,dg,NSS]];
 (*First the rules at first order.We separate them from higher order rules because the user can choose not to use vectors and tensor at first order.*)(**JMM explained that I should use a combination of Module and With,and also build first the lhs and rhs that I gather in {lhs,rhs},and apply the Rule head on it with Rule@@**)(**This avoids the use of PatternLeft and ensure that the indices inside the rule belong to the manifold and thus this avoids conflict with SCreenDollarIndices**)
 
-
-Join[(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[1],i1_,i2_],-u[i1] u[i2] 2 \[Phi][NSS][LI[1],LI[0],LI[0]]
+(* Check these gauges. I find it strange that there are some cd instead of cd2. I have tried to start checking and correcting. The Anygauge will be quite long...*)
+Join[(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[1],i1_,i2_],
+-u[i1] u[i2] 2 \[Phi][NSS][LI[1],LI[0],LI[0]]
 +n[i1] n[i2] 2(-\[Psi][NSS][LI[1],LI[0],LI[0]])
--2 \[Psi][NSS][LI[1],LI[0],LI[0]] (NSS[i1,i2])+BT1 2 (n[i1] n[i2]Etpp[NSS][LI[1],LI[0],LI[0]]+Ett[NSS][LI[1],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[1],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[1],LI[0],LI[0],i1]))-BV1 (u[i1]n[i2] Bvp[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[1],LI[0],LI[0]])
+-2 \[Psi][NSS][LI[1],LI[0],LI[0]] (NSS[i1,i2])
++BT1 2 (n[i1] n[i2]Etpp[NSS][LI[1],LI[0],LI[0]]+Ett[NSS][LI[1],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[1],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[1],LI[0],LI[0],i1]))
+-BV1 (u[i1]n[i2] Bvp[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[1],LI[0],LI[0]])
 -BV1(u[i1] Bvt[NSS][LI[1],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[1],LI[0],LI[0],i1])
 },
 
-"ComovingGauge",{dg[LI[1],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[1],LI[0],LI[0]]+n[i1] n[i2] 2 (
+(* TODO CP: Seems to be rather incorrectly implemented for vector modes *)
+"FluidComovingGauge",{dg[LI[1],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[1],LI[0],LI[0]]+n[i1] n[i2] 2 (
 -\[Psi][NSS][LI[1],LI[0],LI[0]])-2 \[Psi][NSS][LI[1],LI[0],LI[0]] (NSS[i1,i2])
-+BT1 2 (n[i1] n[i2]Etpp[NSS][LI[1],LI[0],LI[0]]+Ett[NSS][LI[1],LI[0],LI[0],i1,i2]+n[i1] Etpt[NSS][LI[1],LI[0],LI[0],i2]
-+n[i2] Etpt[NSS][LI[1],LI[0],LI[0],i1])
--(u[i1] cd[i2]@Bs[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[1],LI[0],LI[0]])
--BV1 (u[i1] Bvt[NSS][LI[1],LI[0],LI[0],i2]
-+u[i2] Bvt[NSS][LI[1],LI[0],LI[0],i1])-(u[i1] cd2[i2]@Bs[NSS][LI[1],LI[0],LI[0]]+u[i2] cd2[i1]@Bs[NSS][LI[1],LI[0],LI[0]])]}]},
++BT1 2 (n[i1] n[i2]Etpp[NSS][LI[1],LI[0],LI[0]]+Ett[NSS][LI[1],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[1],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[1],LI[0],LI[0],i1]))
+-BV1 (u[i1]n[i2] Bvp[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[1],LI[0],LI[0]])
+-BV1(u[i1] Bvt[NSS][LI[1],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[1],LI[0],LI[0],i1])
+-(u[i1] cd2[i2]@Bs[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bs[NSS][LI[1],LI[0],LI[1]]
++u[i2] cd2[i1]@Bs[NSS][LI[1],LI[0],LI[0]]+u[i1]n[i2] Bs[NSS][LI[1],LI[0],LI[1]])]},
+
+"ScalarFieldComovingGauge",{dg[LI[1],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[1],LI[0],LI[0]]+n[i1] n[i2] 2 (
+-\[Psi][NSS][LI[1],LI[0],LI[0]])-2 \[Psi][NSS][LI[1],LI[0],LI[0]] (NSS[i1,i2])
++BT1 2 (n[i1] n[i2]Etpp[NSS][LI[1],LI[0],LI[0]]+Ett[NSS][LI[1],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[1],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[1],LI[0],LI[0],i1]))
+-BV1 (u[i1]n[i2] Bvp[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[1],LI[0],LI[0]])
+-BV1(u[i1] Bvt[NSS][LI[1],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[1],LI[0],LI[0],i1])
+-(u[i1] cd2[i2]@Bs[NSS][LI[1],LI[0],LI[0]]+u[i2]n[i1] Bs[NSS][LI[1],LI[0],LI[1]]
++u[i2] cd2[i1]@Bs[NSS][LI[1],LI[0],LI[0]]+u[i1]n[i2] Bs[NSS][LI[1],LI[0],LI[1]])]}
+]},
 (*And then the rules at order larger that 1*)(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[m_?(#>=2&)],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[m],LI[0],LI[0]]
 +n[i1] n[i2] 2(-\[Psi][NSS][LI[m],LI[0],LI[0]])
--2 \[Psi][NSS][LI[m],LI[0],LI[0]] (NSS[i1,i2])+ 2 (n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]]+Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]))- (u[i1]n[i2] Bvp[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
+-2 \[Psi][NSS][LI[m],LI[0],LI[0]] (NSS[i1,i2])
++ 2 (n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]]+Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]))
+- (u[i1]n[i2] Bvp[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
 -(u[i1] Bvt[NSS][LI[m],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[m],LI[0],LI[0],i1])
 ]},
 
-"ComovingGauge",{dg[LI[m_?(#>=2&)],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[m],LI[0],LI[0]]-n[i1] n[i2] 2 (
+"FluidComovingGauge",{dg[LI[m_?(#>=2&)],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[m],LI[0],LI[0]]-n[i1] n[i2] 2 (
 \[Psi][NSS][LI[m],LI[0],LI[0]])-2 \[Psi][NSS][LI[m],LI[0],LI[0]] (NSS[i1,i2])
-+ 2 (Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]
-+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]+n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]])
--(u[i1] cd[i2]@Bs[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
-- (u[i1] Bvt[NSS][LI[m],LI[0],LI[0],i2]
-+u[i2] Bvt[NSS][LI[m],LI[0],LI[0],i1])-(u[i1] cd2[i2]@Bs[NSS][LI[m],LI[0],LI[0]]+u[i2] cd2[i1]@Bs[NSS][LI[m],LI[0],LI[0]])]}
++ 2 (n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]]+Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]))
+- (u[i1]n[i2] Bvp[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
+-(u[i1] Bvt[NSS][LI[m],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[m],LI[0],LI[0],i1])
+-(u[i1] cd2[i2]@Bs[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bs[NSS][LI[m],LI[0],LI[1]]
++u[i2] cd2[i1]@Bs[NSS][LI[m],LI[0],LI[0]]+u[i1]n[i2] Bs[NSS][LI[m],LI[0],LI[1]])]},
+
+"ScalarFieldComovingGauge",{dg[LI[m_?(#>=2&)],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[m],LI[0],LI[0]]-n[i1] n[i2] 2 (
+\[Psi][NSS][LI[m],LI[0],LI[0]])-2 \[Psi][NSS][LI[m],LI[0],LI[0]] (NSS[i1,i2])
++ 2 (n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]]+Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]))
+- (u[i1]n[i2] Bvp[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
+-(u[i1] Bvt[NSS][LI[m],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[m],LI[0],LI[0],i1])
+-(u[i1] cd2[i2]@Bs[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bs[NSS][LI[m],LI[0],LI[1]]
++u[i2] cd2[i1]@Bs[NSS][LI[m],LI[0],LI[0]]+u[i1]n[i2] Bs[NSS][LI[m],LI[0],LI[1]])]}
+
 ]}
 
 ]]]];
@@ -1961,7 +1999,114 @@ SetNumberOfArguments[SplitMetric,4]
 Protect[SplitMetric];
 
 
-SplitMatter[uf_,duf_,normvector_,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:={};
+RulesVelocitySpatial[NSS_?InducedMetricQ,uf_,duf_,NormVectorSquare_,gauge_?GaugeQ,order_?IntegerQ(*,TiltedBool_:False*)]:=Module[{q,ord},
+With[{h=First@InducedFrom@NSS,n=Last@InducedFrom@NSS},
+With[{M=ManifoldOfCovD@CovDOfMetric@h,cd=CovDOfMetric@h,cd2=CovDOfMetric@NSS,u=Last@InducedFrom[h]},With[{ind1=DummyIn@Tangent@M,ind2=DummyIn@Tangent@M},
+Flatten@Join[
+Flatten@Join[
+If[gauge==="ScalarFieldComovingGauge",{\[CurlyPhi][LI[ord_?(#>=1&)],LI[q_],LI[r_]]:>0},{}],
+If[gauge==="IsoDensityGauge",{\[Rho][uf][LI[ord_?(#>=1&)],LI[q_],LI[r_]]:>0},{}],
+(*If[TiltedBool,{BuildRule[Evaluate[{uf[ind1],(Sqrt[Scalar[Vspat[NSS,uf][LI[0],LI[0],LI[0],ind2]Vspat[NSS,uf][LI[0],LI[0],LI[0],-ind2]]-NormVectorSquare])u[ind1]+Vspat[NSS,uf][LI[0],LI[0],LI[0],ind1]}]]},
+{BuildRule[Evaluate[{uf[ind1],u[ind1]}]]}],*)
+
+{BuildRule[Evaluate[{uf[ind1],u[ind1]}]]},
+
+{BuildRule@Evaluate[{duf[LI[1],ind1],
+Evaluate[
+V0[NSS,uf][LI[1],LI[0],LI[0]]u[ind1]
++cd2[ind1][If[gauge==="FluidComovingGauge",-Bs[NSS][LI[1],LI[0] ,LI[0]],Vs[NSS,uf][LI[1],LI[0],LI[0]] ]]
++n[ind1]If[gauge==="FluidComovingGauge",-Bs[NSS][LI[1],LI[0] ,LI[1]],Vs[NSS,uf][LI[1],LI[0],LI[1]] ]
++ BV1 (Vvt[NSS,uf][LI[1],LI[0],LI[0],ind1] +n[ind1]Vvp[NSS,uf][LI[1],LI[0],LI[0]]  )]}]}],
+Table[
+BuildRule@Evaluate[{duf[LI[i],ind1],
+Evaluate[V0[NSS,uf][LI[i],LI[0],LI[0]]u[ind1]
++cd[ind1][If[gauge==="FluidComovingGauge",-Bs[NSS][LI[i],LI[0],LI[0]] ,Vs[NSS,uf][LI[i],LI[0],LI[0]] ]]
++n[ind1]If[gauge==="FluidComovingGauge",-Bs[NSS][LI[i],LI[0] ,LI[1]],Vs[NSS,uf][LI[i],LI[0],LI[1]] ]
++ (Vvt[NSS,uf][LI[i],LI[0],LI[0],ind1] +n[ind1]Vvp[NSS,uf][LI[i],LI[0],LI[0]]) ]}],{i,2,order}]
+]
+]
+]
+]
+]
+(* TODO put the correct matter gauge above*)
+
+
+AllRulesFromProjectedRule[vector_,NormVectorSquare_,RulesVspat_,NSS_?InducedFromInducedMetricQ,order_?IntegerQ]:=
+Module[{Rulebackgroundvelocity,RuleBoost,LocalRulesVspat,RuleBoostUpton,RulesBoostUptoOrder},
+With[{h=First@InducedFrom@NSS},
+With[{g=First@InducedFrom@h,u=Last@InducedFrom@h,Boost=V0[NSS,vector],Vspatial=Vspat[NSS,vector]},
+With[{M=ManifoldOfCovD@CovDOfMetric[g]},
+With[{i1=DummyIn@Tangent@M,i2=DummyIn@Tangent@M},
+
+LocalRulesVspat=RulesVspat;(* This is because I have problems with n being replaced automatically in RulesVspat. Honestly I am not sure of why this happens. But this is necessary.*)
+
+RuleBoost[0]:={};
+
+RuleBoostUpton[m_]:=Flatten@Table[ToCanonical@ContractMetric[RuleBoost[i]],{i,0,m}];
+
+Print[First@IndexSolve[org[ExpandPerturbation@Perturbation[g[-i1,-i2]vector[i1]vector[i2],1]/.LocalRulesVspat]==0,Boost[LI[1],LI[0],LI[0]]]];
+
+RuleBoost[n_?(#>=1&)]:=MakeRule[Evaluate[{
+Boost[LI[n],LI[0],LI[0]],ToCanonical@ContractMetric@PutScalar[(Boost[LI[n],LI[0],LI[0]]/.First@IndexSolve[org[ExpandPerturbation@Perturbation[g[-i1,-i2]vector[i1]vector[i2],n]/.LocalRulesVspat]==0,Boost[LI[n],LI[0],LI[0]]])/.RuleBoostUpton[n-1]/.LocalRulesVspat](*/.$BackgroundFieldRule*)}]];
+
+Join[RulesVspat/.RuleBoostUpton[order]]
+
+]]]]];
+
+
+DefMatterFields[uf_,duf_,NSS_?InducedFromInducedMetricQ, PerturbParameter_:\[Epsilon]]:=Module[{ord},
+With[{h=First@InducedFrom@NSS},
+With[{g=First@InducedFrom@h,u=Last@InducedFrom@h,n=Last@InducedFrom@h},
+With[{M=ManifoldOfCovD@CovDOfMetric@g,cd=CovDOfMetric@h,cd2=CovDOfMetric@NSS},
+Block[{\[Mu],\[Nu]},
+{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
+
+(DefScreenProjectedTensor[#[[1]],NSS,TensorProperties->{"Traceless",(* Again the transverse condition is subtle *)(*"Transverse",*)"SymmetricTensor"},SpaceTimesOfDefinition->{"Background","Perturbed"},PrintAs->#[[2]]])&/@$ListFieldsBackgroundAndPerturbed[NSS,uf];
+
+Evaluate[\[Rho][uf]]::usage=\[Rho]::usage;
+Evaluate[P[uf]]::usage=P::usage;
+
+Evaluate[Vspat[NSS,uf]]::usage=Vspat::usage;
+Evaluate[V0[NSS,uf]]::usage=V0::usage;
+Evaluate[Vs[NSS,uf]]::usage=Vs::usage;
+Evaluate[Vvp[NSS,uf]]::usage=Vvp::usage;
+Evaluate[Vvt[NSS,uf]]::usage=Vvt::usage;
+
+If[Not[DefTensorQ[uf]],
+DefTensor[uf[\[Mu]],M];,
+If[$DefInfoQ,Print["** Warning: Tensor ",uf , "is already defined. It cannot be redefined without undefining it. **"];];
+];
+
+If[Not[DefTensorQ[duf]],
+DefTensorPerturbation[duf[LI[ord],\[Mu]],uf[\[Mu]],M,PrintAs->"\[Delta]"<>PrintAs[uf]];,
+If[$DefInfoQ,Print["** Warning: Tensor ",duf , "is already defined. It cannot be redefined without undefining it. **"];];
+];
+
+If[Not@DefinedPerturbationParameter[$PerturbationParameter],$PerturbationParameter=PerturbParameter;DefinedPerturbationParameter[$PerturbationParameter]=True];
+
+duf[\[Mu]_?AIndexQ]:=duf[LI[0],\[Mu]];
+
+]
+]
+]
+]
+]
+
+SetNumberOfArguments[DefMatterFields,{3,5}]
+Protect[DefMatterFields];
+
+
+
+SplitMatter[uf_,duf_,normvector_,NSS_?InducedFromInducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:=(
+If[Not[DefTensorQ[\[Rho][uf]]]||Not[DefTensorQ[duf]],Print["** Warning: The perturbed velocity, or the fields required to parameterize the splitting of matter fields perturbations splitting  were not previously defined **"];
+Print["** DefMatterFields is called to build the perturbation of the vector field and the projected fields needed for future splitting **"];
+DefMatterFields[uf,duf,NSS];
+];
+AllRulesFromProjectedRule[uf,normvector,RulesVelocitySpatial[NSS,uf,duf,normvector,gauge,order],NSS,order]);
+
+
+SetNumberOfArguments[SplitMatter,{6}]
+Protect[SplitMatter]
 
 
 IndicesDown[expr_]:= Fold[SeparateMetric[First@$Metrics][#1,#2]&,expr,Select[IndicesOf[Up][expr],Not@LIndexQ[#]&]]
@@ -2195,7 +2340,8 @@ res2
 Conformal[metric1_?MetricQ,metric2_?MetricQ][expr_]:=Conformal[First@$Metrics][metric1,metric2][expr]
 
 
-ToLightConeFromRules[expr_,RulesList_List,h_?InducedMetricQ,NSS_?InducedMetricQ,order_?IntegerQ]:=
+ToLightConeFromRules[expr_,RulesList_List,NSS_?InducedFromInducedMetricQ,order_?IntegerQ]:=
+With[{h=First@InducedFrom@NSS},
 With[{g=First@InducedFrom@h},
 If[Not[DefTensorQ[ConformalMetricName[g,a[h]]]]&&SpaceType[h]=!="Minkowski",
 If[$DefInfoQ,
@@ -2209,19 +2355,21 @@ temp=ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType
 Print[temp];*)
 
 SplitPerturbations[ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType[h]=!="Minkowski",a[h],1]]][expr],order],RulesList,h,NSS]
+]
 ];
 
-ToLightConeFromRules[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,order_]:=ToxPandFromRules[expr,{},h,NSS,order];
+ToLightConeFromRules[expr_,NSS_?InducedFromInducedMetricQ,order_]:=ToLightConeFromRules[expr,{},NSS,order];
 
-SetNumberOfArguments[ToLightConeFromRules,{4,5}];
+SetNumberOfArguments[ToLightConeFromRules,{3,4}];
 Protect[ToLightConeFromRules];
 
 
-ToLightCone[expr_,dg_,uf_,duf_,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ,order_?IntegerQ] := ToxPand[expr,dg,{{uf,duf}},h,NSS,gauge,order]
+ToLightCone[expr_,dg_,uf_,duf_,NSS_?InducedFromInducedMetricQ,gauge_?GaugeQ,order_?IntegerQ] := ToLightCone[expr,dg,{{uf,duf}},NSS,gauge,order]
 
-ToLightCone[expr_,dg_,ufduflist_List,h_?InducedMetricQ,NSS_?InducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:=Module[{ruleslist},
+ToLightCone[expr_,dg_,ufduflist_List,NSS_?InducedFromInducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:=Module[{ruleslist},
+With[{h=First@InducedFrom@NSS},
 With[{g=First@InducedFrom@h},
-ruleslist=Flatten@Join[SplitMetric[g,dg,h,NSS,gauge],Map[SplitMatter[#[[1]],#[[2]],-1,h,NSS,gauge,order]&,ufduflist]  ];
+ruleslist=Flatten@Join[SplitMetric[g,dg,h,NSS,gauge],Map[SplitMatter[#[[1]],#[[2]],-1,NSS,gauge,order]&,ufduflist]  ];
 If[Not[DefTensorQ[Evaluate[ConformalMetricName[g,a[h]]]]]&&SpaceType[h]=!="Minkowski",
 If[$DefInfoQ,
 Print["** Warning: The conformally related metric ",ConformalMetricName[g,a[h]],"  was not previously defined **"];
@@ -2231,18 +2379,20 @@ DefConformalMetric[g,a[h]];
 ];
 SplitPerturbations[ExpandPerturbation@Perturbed[Conformal[g,ConformalMetricName[g,If[SpaceType[h]=!="Minkowski",a[h],1]]][expr],order],ruleslist,h,NSS]
 ]
+]
 ];
 
 
 
-SetNumberOfArguments[ToLightCone,{7,8}];
+SetNumberOfArguments[ToLightCone,{6,7}];
 Protect[ToLightCone];
 
 
 (* TODO modify the arguments. NSS should be enough Elsewhere it is similar*)
 ExtractComponents::invalidprojector = "One of the projectors in `1` is not valid. The possible projectors are: 'Time' or '*NameOfTimeVector*', and 'Direction' or '*NameOfDirectionVector*', and 'Screen' or '*NameOfScreenMetric*'.";
 
-ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,proj_List,ListIndsToContract_List]:=
+ExtractComponents[expr_,NSS_?InducedFromInducedMetricQ,proj_List,ListIndsToContract_List]:=
+With[{h=First@InducedFrom@NSS},
 Catch@With[{frees=List@@FindFreeIndices[expr],u=Last@InducedFrom@h,n=Last@InducedFrom@NSS},
 If[Length[proj]=!=Length[frees],Throw@Message[ExtractComponents::error,"Number of projectors not equal to number of free indices."]];
 If[Sort[ListIndsToContract]=!=frees,Throw@Message[xPanding::error, "List of indices on which the projection is taken is not equal to the list of free indices"]];
@@ -2259,25 +2409,26 @@ NSS,NSS[-dummy,#2[[1]]],"Screen",NSS[-dummy,#2[[1]]],
 u,If[UpIndexQ[dummy],-1*If[$ConformalTime,1,a[h][]],1*If[$ConformalTime,1,1/a[h][]]]*u[-dummy],"Time",If[UpIndexQ[dummy],-1*If[$ConformalTime,1,a[h][]],1*If[$ConformalTime,1,1/a[h][]]]*u[-dummy],
 n,n[-dummy],"Direction",n[-dummy]
 ]ReplaceIndex[#1,#2[[1]]->dummy])&,(expr(*/.$RulesVanishingBackgroundFields[h]*)),Transpose[{ListIndsToContract,proj}]]]]]
+];
 
-ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ,proj_List]:=With[{frees=List@@FindFreeIndices[expr]},ExtractComponents[expr,h,NSS,proj,frees]]
+ExtractComponents[expr_,NSS_?InducedFromInducedMetricQ,proj_List]:=With[{frees=List@@FindFreeIndices[expr]},ExtractComponents[expr,NSS,proj,frees]]
 
 (* A remettre*)
 (*ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ]:=VisualizeTensor[expr,h,NSS](*expr*)/;Length@IndicesOf[Free][expr]===2||Length@IndicesOf[Free][expr]===1*)
 (*Even when there is nothing to do, we remove all quantities which should cancel on the background. Just in case the expression provided was not obtained from SplitPerturbations, where such cancellation have been made*)
 (*ExtractComponents[expr_,h_?InducedMetricQ,NSS_?InducedMetricQ]:=(expr(*/.$RulesVanishingBackgroundFields[h]*))/;Length@IndicesOf[Free][expr]>2||Length@IndicesOf[Free][expr]===0*)
 
-SetNumberOfArguments[ExtractComponents,{3,5}];
+SetNumberOfArguments[ExtractComponents,{2,4}];
 Protect[ExtractComponents];
 
 
-VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,n=Last@InducedFrom@NSS,h=First@InducedFrom@NSS},
-Grid[{{Null,u,n,NSS},{u,ExtractComponents[expr,h,NSS,{"Time","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Time","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Time","Screen"}]//$PrePrint},
-{n,ExtractComponents[expr,h,NSS,{"Direction","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Direction","Screen"}]//$PrePrint},{NSS,ExtractComponents[expr,h,NSS,{"Screen","Time"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Direction"}]//$PrePrint,ExtractComponents[expr,h,NSS,{"Screen","Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===2
+VisualizeTensorScreenSpace[expr_,NSS_?InducedFromInducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,n=Last@InducedFrom@NSS,h=First@InducedFrom@NSS},
+Grid[{{Null,u,n,NSS},{u,ExtractComponents[expr,NSS,{"Time","Time"}]//$PrePrint,ExtractComponents[expr,NSS,{"Time","Direction"}]//$PrePrint,ExtractComponents[expr,NSS,{"Time","Screen"}]//$PrePrint},
+{n,ExtractComponents[expr,NSS,{"Direction","Time"}]//$PrePrint,ExtractComponents[expr,NSS,{"Direction","Direction"}]//$PrePrint,ExtractComponents[expr,NSS,{"Direction","Screen"}]//$PrePrint},{NSS,ExtractComponents[expr,NSS,{"Screen","Time"}]//$PrePrint,ExtractComponents[expr,NSS,{"Screen","Direction"}]//$PrePrint,ExtractComponents[expr,NSS,{"Screen","Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===2
 
-VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,h=First@InducedFrom@NSS,n=Last@InducedFrom@NSS},Grid[{{u,ExtractComponents[expr,h,NSS,{"Time"}]//$PrePrint},{n,ExtractComponents[expr,h,NSS,{"Direction"}]//$PrePrint},{NSS,ExtractComponents[expr,h,NSS,{"Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===1
+VisualizeTensorScreenSpace[expr_,NSS_?InducedFromInducedMetricQ]:=With[{u=Last@InducedFrom@First@InducedFrom@NSS,h=First@InducedFrom@NSS,n=Last@InducedFrom@NSS},Grid[{{u,ExtractComponents[expr,NSS,{"Time"}]//$PrePrint},{n,ExtractComponents[expr,NSS,{"Direction"}]//$PrePrint},{NSS,ExtractComponents[expr,NSS,{"Screen"}]//$PrePrint}},Frame->All]]/;Length@IndicesOf[Free][expr]===1
 
-VisualizeTensorScreenSpace[expr_,NSS_?InducedMetricQ]:=expr/;Not[Length@IndicesOf[Free][expr]===2]&&Not[Length@IndicesOf[Free][expr]===1]
+VisualizeTensorScreenSpace[expr_,NSS_?InducedFromInducedMetricQ]:=expr/;Not[Length@IndicesOf[Free][expr]===2]&&Not[Length@IndicesOf[Free][expr]===1]
 
 SetNumberOfArguments[VisualizeTensorScreenSpace,2];
 Protect[VisualizeTensorScreenSpace];
