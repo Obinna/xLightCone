@@ -2044,7 +2044,7 @@ RuleBoost[0]:={};
 
 RuleBoostUpton[m_]:=Flatten@Table[ToCanonical@ContractMetric[RuleBoost[i]],{i,0,m}];
 
-Print[First@IndexSolve[org[ExpandPerturbation@Perturbation[g[-i1,-i2]vector[i1]vector[i2],1]/.LocalRulesVspat]==0,Boost[LI[1],LI[0],LI[0]]]];
+(*Print[First@IndexSolve[org[ExpandPerturbation@Perturbation[g[-i1,-i2]vector[i1]vector[i2],1]/.LocalRulesVspat]==0,Boost[LI[1],LI[0],LI[0]]]];*)
 
 RuleBoost[n_?(#>=1&)]:=MakeRule[Evaluate[{
 Boost[LI[n],LI[0],LI[0]],ToCanonical@ContractMetric@PutScalar[(Boost[LI[n],LI[0],LI[0]]/.First@IndexSolve[org[ExpandPerturbation@Perturbation[g[-i1,-i2]vector[i1]vector[i2],n]/.LocalRulesVspat]==0,Boost[LI[n],LI[0],LI[0]]])/.RuleBoostUpton[n-1]/.LocalRulesVspat](*/.$BackgroundFieldRule*)}]];
