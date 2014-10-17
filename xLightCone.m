@@ -209,6 +209,8 @@ VisualizeTensorScreenSpace::usage ="";
 
 $GeodesicEquation = "";
 
+\[Epsilon]::usage = "\[Epsilon] is the default perturbation parameter. It is automatically defined when calling either the function DefMetricFields or the function DefMatterFields.";
+
 
 Begin["xAct`xLightCone`Private`"]
 
@@ -1542,12 +1544,14 @@ g[IndexUp,Dum] LieD[u[Dummy1]][Name[LI[p],LI[q],LI[r],indices1,-Dum,indices2]]+L
 
 (* We will replace Scalar Heads by this head to prevent the Leibniz rule from spoiling the induced decomposition.*)
 Block[{Print},DefInertHead[ProtectMyScalar,LinearQ->True]];
+ProtectMyScalar[x_?NumberQ]:=x;
+FixProtectScalar:=ProtectMyScalar[expr_]:>ProtectMyScalar[xAct`xTensor`Private`MathInputExpand[expr]]
 
 (* When there is imbriaction of preojectors we can remove the inner projector (to be manipulated with care...)*)
 SimplifyImbricatedProjectors[expr_,{projh_,projNSS_}]:=expr/.stuff1_[expr1___   stuff2_[expr2_]]:>stuff1[expr1  expr2]/;stuff2===projh&&stuff1===projNSS/.stuff1_[stuff2_[expr2_]]:>stuff1[expr2]/;stuff1===projNSS&&stuff2===projh;
 
 InducedDecompositionLightCone[expression_,{h_,u_},{NSS_,n_}]:=(SimplifyImbricatedProjectors[(InducedDecomposition[expression,{h,u}]/.Projector[h][exp_]:>InducedDecomposition[Projector[h][exp],{NSS,n}]),
-{Projector[h],Projector[NSS]}]/.Scalar[scalex_]:>ProtectMyScalar[scalex/.Projector[h]->ProjectWith[h]]);
+{Projector[h],Projector[NSS]}]/.Scalar[scalex_]:>ProtectMyScalar[Expand[scalex/.Projector[h]->ProjectWith[h]]]);
 
 
 (* OLD IMPLEMENTATION
@@ -1689,9 +1693,9 @@ Listlhsrhsnoreplace=Reverse@Transpose[{tableleft,tableleftnopattern}];
 RulesCovDs=(
 tempdown=IndicesDown[Last@#];
 (*Print["tempdown", tempdown];*)
-rulepert=leftupindicesnopatterntests:>Evaluate[(InducedDecompositionLightCone[leftupindicesnopattern,{h,u},{NSS,n}]/.rulesprojected/.Scalar->ProtectMyScalar)];
+rulepert=leftupindicesnopatterntests:>Evaluate[(InducedDecompositionLightCone[leftupindicesnopattern,{h,u},{NSS,n}]/.rulesprojected/.Scalar[ex_]:>ProtectMyScalar[Expand[ex]])];
 (*Print["rulepert ",rulepert];*)
-temp=tempdown/.rulepert;
+temp=(tempdown/.rulepert)/.FixProtectScalar;(*This is because expressions inside the scalar heads might need to be simplified.*)
 (*Print["temp ",temp];*)
 tobecan=ToInducedDerivativeScreenSpace[temp,CD,cd,cd2];
 (*Print["tobecan ",tobecan];*)
@@ -1872,12 +1876,12 @@ Lvt[N_?InducedFromInducedMetricQ]:=SymbolJoin[Lvt,N];
 $ListFieldsBackgroundOnly[h_?InducedMetricQ,NSS_?InducedFromInducedMetricQ]:={{a[h][],"a"},{H[h][],"\[ScriptCapitalH]"},{\[Theta][NSS][],"\[Theta]"}};
 (* Added a couple of subscripts for the formatting  of Background fields: The subscript S, V , T stand for Scalar, Vector, Tensor mode. This is the signature they obtian after mode decomposition while the subscripts \[DoubleVerticalBar], \[UpTee] and \[DoubleVerticalBar]\[UpTee]  is used to characterize tensors project onto the screen space. \[DoubleVerticalBar] subscerpt stands for a component parallel to the direction vector, \[UpTee] stands for tensors whose all indices are projected onto the screen space and \[DoubleVerticalBar]\[UpTee] stands for a rank two tensor whose one index is paralllel to the direction vector and the order is transverse to it*)
 $ListFieldsPerturbedOnly[N_?InducedFromInducedMetricQ]:=With[{M=ManifoldOfCovD@CovDOfMetric@First@InducedFrom@N},Block[{\[Mu],\[Nu]},{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
-{{\[Phi][N][],"\[Phi]"},{Bs[N][],"\!\(\*SubscriptBox[\(B\), \(s\)]\)"},{Bvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(B\), \(\(v\)\(\[UpTee]\)\)]\)"},{Bvp[N][],"\!\(\*SubscriptBox[\(B\), \(||\)]\)"},{\[Psi][N][],"\[Psi]"},{Es[N][],"\!\(\*SubscriptBox[\(E\), \(s\)]\)"},{Evp[N][],"\!\(\*SubscriptBox[SubscriptBox[\(E\), \(v\)], \(||\)]\)"},{Evt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(\(v\)\(\[UpTee]\)\)]\)"},{Etpp[N][],"\!\(\*SubscriptBox[\(E\), \(\(t\)\(\[DoubleVerticalBar]\)\)]\)"},{Etpt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(t \[DoubleVerticalBar]  \[UpTee] \)]\)"},{Ett[N][-\[Mu],-\[Nu]],"\!\(\*SubscriptBox[\(E\), \(\(t\)\(\[UpTee]\)\)]\)"},{T[N][],"T"},{Ls[N][],"L"},{Lvp[N][],"\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[DoubleVerticalBar]\)\)]\)"},{Lvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[UpTee]\)\)]\)"}}]];
+{{\[Phi][N][],"\[Phi]"},{Bs[N][],"\!\(\*SubscriptBox[\(B\), \(s\)]\)"},{Bvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(B\), \(\(v\)\(\[UpTee]\)\)]\)"},{Bvp[N][],"\!\(\*SubscriptBox[\(B\), \(\[DoubleVerticalBar]\)]\)"},{\[Psi][N][],"\[Psi]"},{Es[N][],"\!\(\*SubscriptBox[\(E\), \(s\)]\)"},{Evp[N][],"\!\(\*SubscriptBox[SubscriptBox[\(E\), \(v\)], \(\[DoubleVerticalBar]\)]\)"},{Evt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(\(v\)\(\[UpTee]\)\)]\)"},{Etpp[N][],"\!\(\*SubscriptBox[\(E\), \(\(t\)\(\[DoubleVerticalBar]\)\)]\)"},{Etpt[N][-\[Mu]],"\!\(\*SubscriptBox[\(E\), \(\(\(t\)\(\[UpTee]\)\)\(\[DoubleVerticalBar]\)\)]\)"},{Ett[N][-\[Mu],-\[Nu]],"\!\(\*SubscriptBox[\(E\), \(\(t\)\(\[UpTee]\)\)]\)"},{T[N][],"T"},{Ls[N][],"L"},{Lvp[N][],"\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[DoubleVerticalBar]\)\)]\)"},{Lvt[N][-\[Mu]],"\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[UpTee]\)\)]\)"}}]];
 
 
 
 $ListFieldsBackgroundAndPerturbed[N_?InducedFromInducedMetricQ,velocity_]:=With[{M=ManifoldOfCovD@CovDOfMetric@First@InducedFrom@N},Block[{\[Mu],\[Nu]},{\[Mu],\[Nu]}=GetIndicesOfVBundle[Tangent@M,2];
-{{\[CurlyPhi][],"\[CurlyPhi]"},{\[Rho][velocity][],ToString@StringJoin[{"\[Rho]"},ToString[velocity]]},{P[velocity][],ToString@StringJoin[{"P"},ToString[velocity]]},{Vspat[N,velocity][-\[Mu]],ToString@StringJoin[{"\[ScriptCapitalV]",ToString[velocity]}]},{V0[N,velocity][],ToString@StringJoin[{"V0",ToString[velocity]}]},{Vs[N,velocity][],ToString@StringJoin[{"V",ToString[velocity]}]},{Vvp[N,velocity][-\[Mu]],ToString@StringJoin[{"\!\(\*SubscriptBox[\(V\), \(\[LeftDoubleBracketingBar]\)]\)",ToString[velocity]}]},{Vvt[N,velocity][-\[Mu]],ToString@StringJoin[{"\!\(\*SubscriptBox[\(V\), \(\[UpTee]\)]\)",ToString[velocity]}]}}]];
+{{\[CurlyPhi][],"\[CurlyPhi]"},{\[Rho][velocity][],ToString@StringJoin[{"\[Rho]"},ToString[velocity]]},{P[velocity][],ToString@StringJoin[{"P"},ToString[velocity]]},{Vspat[N,velocity][-\[Mu]],ToString@StringJoin[{"\[ScriptCapitalV]",ToString[velocity]}]},{V0[N,velocity][],ToString@StringJoin[{"V0",ToString[velocity]}]},{Vs[N,velocity][],ToString@StringJoin[{"V",ToString[velocity]}]},{Vvp[N,velocity][-\[Mu]],ToString@StringJoin[{"\!\(\*SubscriptBox[\(V\), \(\[DoubleVerticalBar]\)]\)",ToString[velocity]}]},{Vvt[N,velocity][-\[Mu]],ToString@StringJoin[{"\!\(\*SubscriptBox[\(V\), \(\[UpTee]\)]\)",ToString[velocity]}]}}]];
 
 
 (*DefMetricFields[g_?MetricQ,dg_,h_?InducedMetricQ,n_?DirectionVectorQ,PerturbParameter_:\[Epsilon]]:=Print["Dobidoouah"];*)
