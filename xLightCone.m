@@ -747,14 +747,14 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
 
  
     (*Special definitions*)
-     metric /:LieD[vector[_]][metric[-a_Symbol, -b_Symbol]] := $ExtrinsicKOnSSSign (extrinsicKname[-a, -b] + extrinsicKname[-b, -a]);
+     metric /:LieD[vector[_]][metric[-a_Symbol, -b_Symbol]] := $ExtrinsicKOnSSSign ToCanonical[(extrinsicKname[-a, -b] + extrinsicKname[-b, -a]),UseMetricOnVBundle->None];
 
      metric /:LieD[vector[_]][metric[a_Symbol, -b_Symbol]] := -$AccelerationOfnSign accelerationname[-b] vector[a];
  
-    metric /: LieD[vector[_]][metric[-a_Symbol,b_Symbol]] := -$AccelerationOfnSign accelerationname[-a] vector[b];
+     metric /: LieD[vector[_]][metric[-a_Symbol,b_Symbol]] := -$AccelerationOfnSign accelerationname[-a] vector[b];
  
-    metric /: LieD[vector[_]][metric[a_Symbol,b_Symbol]] := -$ExtrinsicKOnSSSign (extrinsicKname[a, b] + 
-          extrinsicKname[b,a]) - $AccelerationOfnSign (vector[a] accelerationname[b] + vector[b] accelerationname[a]);
+     metric /: LieD[vector[_]][metric[a_Symbol,b_Symbol]] := -$ExtrinsicKOnSSSign ToCanonical[(extrinsicKname[a, b] + 
+          extrinsicKname[b,a]),UseMetricOnVBundle->None] - $AccelerationOfnSign (vector[a] accelerationname[b] + vector[b] accelerationname[a]);
      
     vector /:LieD[vector[_]][vector[a_Symbol]] := 0;
      
@@ -931,6 +931,9 @@ NoScalar[Power[Scalar[Hh[LI[0],LI[0],LI[0]]],ni_Integer]]:=Power[Hh[(*LI[0],LI[0
 NoScalar[Power[Scalar[ah[LI[0],LI[0],LI[0]]],ni_Integer]]:=Power[ah[(*LI[0],LI[0],LI[0]*)],ni];
 Protect[NoScalar];
 
+ah/:ah[LI[0],LI[0],LI[r_?((IntegerQ@#)&&(#>0)&)]]:=0;
+Hh/:Hh[LI[0],LI[q_],LI[LI[r_?((IntegerQ@#)&&(#>0)&)]]]:=0;
+
 If[SpaceTimeType==="Minkowski",
 ah[LI[0],LI[0],LI[0]]=1;
 Hh[LI[0],LI[0],LI[0]]=0;,
@@ -1017,14 +1020,17 @@ KNSS/:cd2[ind3_]@KNSS[ind1_,ind2_]:= 0;*)
 \[Theta]NSS/:cd2[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= 0;
 Which[
 FlatSpaceBool[SpaceTimeType],
-\[Theta]NSS/:cd[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= n[ind3](-\[Theta]NSS[]^2/2);,
-
+\[Theta]NSS/:cd[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= normn n[ind3](-\[Theta]NSS[]^2/2);
+\[Theta]NSS/:LieD[n[ind3_]]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= (-\[Theta]NSS[]^2/2);
+,
 CurvedSpaceBool[SpaceTimeType],
-\[Theta]NSS/:cd[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= n[ind3](-\[Theta]NSS[]^2/2  -
- \[ScriptK][h][]*(dim-2));
+\[Theta]NSS/:cd[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= normn n[ind3](-\[Theta]NSS[]^2/2  - \[ScriptK][h][]*(dim-2));
+\[Theta]NSS/:LieD[n[ind3_]]@\[Theta]NSS[LI[0],LI[0],LI[0]]:= (-\[Theta]NSS[]^2/2 - \[ScriptK][h][]*(dim-2));
 ];
 (* Check this relation for the evolution of the extrinsic curvature trace TODO*)
 \[Theta]NSS/:CD[ind3_]@\[Theta]NSS[LI[0],LI[0],LI[0]]:=cd[ind3][\[Theta]NSS[]];
+
+
 
 (* The extrinsic curvature of n should be spatial. This is enforced*)
 (* Obsolete as now this is part of the DefScreenSpaceMetricProperties function*)
@@ -1490,6 +1496,7 @@ g[indup,Dummy] cd2[-Dum][Name[LI[p],LI[q],LI[r],indices1,Dum,indices3,-Dummy,ind
 
 (* The following rule serves to express the three-covariant derivative of (homogeneous) background quantities in terms of the connection components. But in our FL case this is just 0. *)
 (* We then need to say that the radial derivatives are 0 as well !*)
+(* Actually no! It depends ! For the Theta, it is not zero ! Bug Bug TODO TODO Correct for this crap !!! *)
 If[BackgroundBool,
 
 Name/:cd2[Dummy2_][Name[LI[0],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___]]:=0/;(Length[{indices}]===Length[{inds}]);
@@ -1499,7 +1506,10 @@ ToCan[Plus@@((-Connection[h][Dummy1,Dummy2,#]ReplaceIndex[Evaluate[Name[LI[0],LI
 ]/;(Length[{indices}]===Length[{inds}]);*)
 
 (* TODO Check if this is clean enough or not. *)
-Name/:Name[LI[0],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices___]:=0/;(Length[{indices}]===Length[{inds}]);
+(* TODO No ! This is true for a and H but not for \[Theta]*)
+(* ALERT !*)
+(*Name/:Name[LI[0],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=1)&)],indices___]:=0/;(Length[{indices}]===Length[{inds}]);*)
+(* TODO find a way to put clean rules for a and H *)
 ];
 
 

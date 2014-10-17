@@ -781,11 +781,13 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"MyOrthogonalToVectorQ", "::", "usage"}], " ", "=", " ", 
-    "\"\<\>\""}], ";", " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "Eventually", " ", "this", " ", "should", " ", "be", " ", "private"}], 
-    " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\"\<\>\""}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Eventually", " ", "this", " ", "should", " ", "be", " ", "private"}], " ",
+    "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{
     RowBox[{"SetSlicingUpToScreenSpace", "::", "usage"}], " ", "=", " ", 
     "\"\<\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
@@ -885,7 +887,7 @@ Cell[BoxData[
      RowBox[{"NoScalar", "@", "expr"}], "]"}]}], "\n", 
    RowBox[{
     RowBox[{"Protect", "[", "xAct`xTensor`NoScalar", "]"}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", 
     RowBox[{
     "*", "To", " ", "avoid", " ", "complaints", " ", "from", " ", "MakeRule", 
@@ -908,7 +910,8 @@ Cell[BoxData[
             ")"}]}], ",", "rhs_", ",", "conditions___"}], "}"}], ",", 
         RowBox[{"options", ":", 
          RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
-      RowBox[{"{", "}"}]}], ";"}], "*)"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"{", "}"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1465,7 +1468,7 @@ Cell[BoxData[
    RowBox[{"*", "Miscellaneous"}], "**)"}], 
   RowBox[{
    RowBox[{
-    RowBox[{"$DefInfoQ", "=", "True"}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{"$DefInfoQ", "=", "True"}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"If", " ", "set", " ", 
@@ -1474,7 +1477,8 @@ Cell[BoxData[
      RowBox[{
      "the", " ", "information", " ", "messages", " ", "are", " ", "not", " ", 
       
-      RowBox[{"printed", "."}]}]}], "*)"}], "\[IndentingNewLine]", "\n", 
+      RowBox[{"printed", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"*", "Testing", " ", "expressions"}], "**)"}], 
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
@@ -1500,8 +1504,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"returns", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
-   "\[IndentingNewLine]", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"DefTensorQ", "[", "symb_", "]"}], ":=", 
     RowBox[{
@@ -1522,8 +1526,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"returns", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
-   "\[IndentingNewLine]", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"GaugeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -1550,8 +1554,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"returns", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
-   "\[IndentingNewLine]", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"InducedMetricQ", "[", "symb_", "]"}], ":=", 
     RowBox[{"If", "[", 
@@ -1584,8 +1588,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"gives", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
-   "\[IndentingNewLine]", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"SpaceTimeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -1595,7 +1599,7 @@ Cell[BoxData[
         RowBox[{
         "\"\<FLCurved\>\"", ",", "\"\<FLFlat\>\"", ",", "\"\<Minkowski\>\""}],
          "}"}], ",", "strg"}], "]"}], "===", 
-     RowBox[{"{", "strg", "}"}]}]}], "\n", 
+     RowBox[{"{", "strg", "}"}]}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1610,7 +1614,7 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"returns", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"TensorNullQ", "[", "tens_", "]"}], ":=", 
@@ -1634,7 +1638,7 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
            RowBox[{"SlotsOfTensor", "[", "tens", "]"}]}]}], "}"}], ",", 
         RowBox[{
          RowBox[{"tens", "@@", "inds"}], "===", "0"}]}], "]"}]}], "]"}]}], 
-   "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1649,7 +1653,8 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
       RowBox[{"otherwise", ".", "This"}], " ", "function", " ", "is", " ", 
       "not", " ", "suited", " ", "to", " ", "test", " ", "tensors", " ", 
       "defined", " ", "with", " ", "label"}], "-", 
-     RowBox[{"indices", "."}]}], "*)"}], "\n", "\[IndentingNewLine]", 
+     RowBox[{"indices", "."}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"*", "Type", " ", "of", " ", "manifolds"}], "**)"}], 
    "\[IndentingNewLine]", 
@@ -1657,7 +1662,7 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
     RowBox[{
     "Will", " ", "probably", " ", "disappear", " ", "since", " ", "we", " ", 
      "will", " ", "only", " ", "do", " ", "curved", " ", "and", " ", "flat", 
-     " ", "FL"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     " ", "FL"}], " ", "*)"}], "\n", "\n", 
    RowBox[{
     RowBox[{"FlatSpaceBool", "[", "Spacetype_", "]"}], ":=", 
     RowBox[{"(", 
@@ -4687,17 +4692,20 @@ Cell[BoxData[
                  RowBox[{"-", "a_Symbol"}], ",", " ", 
                  RowBox[{"-", "b_Symbol"}]}], "]"}], "]"}], " ", ":=", " ", 
               RowBox[{"$ExtrinsicKOnSSSign", " ", 
-               RowBox[{"(", 
+               RowBox[{"ToCanonical", "[", 
                 RowBox[{
-                 RowBox[{"extrinsicKname", "[", 
+                 RowBox[{"(", 
                   RowBox[{
-                   RowBox[{"-", "a"}], ",", " ", 
-                   RowBox[{"-", "b"}]}], "]"}], " ", "+", " ", 
-                 RowBox[{"extrinsicKname", "[", 
-                  RowBox[{
-                   RowBox[{"-", "b"}], ",", " ", 
-                   RowBox[{"-", "a"}]}], "]"}]}], ")"}]}]}], ";", "\n", "\n", 
-             "     ", 
+                   RowBox[{"extrinsicKname", "[", 
+                    RowBox[{
+                    RowBox[{"-", "a"}], ",", " ", 
+                    RowBox[{"-", "b"}]}], "]"}], " ", "+", " ", 
+                   RowBox[{"extrinsicKname", "[", 
+                    RowBox[{
+                    RowBox[{"-", "b"}], ",", " ", 
+                    RowBox[{"-", "a"}]}], "]"}]}], ")"}], ",", 
+                 RowBox[{"UseMetricOnVBundle", "\[Rule]", "None"}]}], 
+                "]"}]}]}], ";", "\n", "\n", "     ", 
              RowBox[{"metric", " ", "/:", 
               RowBox[{
                RowBox[{"LieD", "[", 
@@ -4710,7 +4718,7 @@ Cell[BoxData[
                RowBox[{"accelerationname", "[", 
                 RowBox[{"-", "b"}], "]"}], " ", 
                RowBox[{"vector", "[", "a", "]"}]}]}], ";", "\n", " ", "\n", 
-             "    ", 
+             "     ", 
              RowBox[{"metric", " ", "/:", " ", 
               RowBox[{
                RowBox[{"LieD", "[", 
@@ -4724,7 +4732,7 @@ Cell[BoxData[
                RowBox[{"accelerationname", "[", 
                 RowBox[{"-", "a"}], "]"}], " ", 
                RowBox[{"vector", "[", "b", "]"}]}]}], ";", "\n", " ", "\n", 
-             "    ", 
+             "     ", 
              RowBox[{"metric", " ", "/:", " ", 
               RowBox[{
                RowBox[{"LieD", "[", 
@@ -4735,13 +4743,17 @@ Cell[BoxData[
               RowBox[{
                RowBox[{
                 RowBox[{"-", "$ExtrinsicKOnSSSign"}], " ", 
-                RowBox[{"(", 
+                RowBox[{"ToCanonical", "[", 
                  RowBox[{
-                  RowBox[{"extrinsicKname", "[", 
-                   RowBox[{"a", ",", " ", "b"}], "]"}], " ", "+", " ", "\n", 
-                  "          ", 
-                  RowBox[{"extrinsicKname", "[", 
-                   RowBox[{"b", ",", "a"}], "]"}]}], ")"}]}], " ", "-", " ", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"extrinsicKname", "[", 
+                    RowBox[{"a", ",", " ", "b"}], "]"}], " ", "+", " ", "\n", 
+                    "          ", 
+                    RowBox[{"extrinsicKname", "[", 
+                    RowBox[{"b", ",", "a"}], "]"}]}], ")"}], ",", 
+                  RowBox[{"UseMetricOnVBundle", "\[Rule]", "None"}]}], 
+                 "]"}]}], " ", "-", " ", 
                RowBox[{"$AccelerationOfnSign", " ", 
                 RowBox[{"(", 
                  RowBox[{
@@ -5943,8 +5955,39 @@ Cell[BoxData[{
                 RowBox[{"LI", "[", "0", "]"}], ",", 
                 RowBox[{"LI", "[", "0", "]"}]}], "*)"}], "]"}], ",", "ni"}], 
             "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"Protect", "[", "NoScalar", "]"}], ";", 
-          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"Protect", "[", "NoScalar", "]"}], ";", "\n", "\n", 
+          RowBox[{"ah", "/:", 
+           RowBox[{"ah", "[", 
+            RowBox[{
+             RowBox[{"LI", "[", "0", "]"}], ",", 
+             RowBox[{"LI", "[", "0", "]"}], ",", 
+             RowBox[{"LI", "[", 
+              RowBox[{"r_", "?", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"IntegerQ", "@", "#"}], ")"}], "&&", 
+                  RowBox[{"(", 
+                   RowBox[{"#", ">", "0"}], ")"}]}], "&"}], ")"}]}], "]"}]}], 
+            "]"}], ":=", "0"}], ";", "\n", 
+          RowBox[{"Hh", "/:", 
+           RowBox[{"Hh", "[", 
+            RowBox[{
+             RowBox[{"LI", "[", "0", "]"}], ",", 
+             RowBox[{"LI", "[", "q_", "]"}], ",", 
+             RowBox[{"LI", "[", 
+              RowBox[{"LI", "[", 
+               RowBox[{"r_", "?", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"IntegerQ", "@", "#"}], ")"}], "&&", 
+                   RowBox[{"(", 
+                    RowBox[{"#", ">", "0"}], ")"}]}], "&"}], ")"}]}], "]"}], 
+              "]"}]}], "]"}], ":=", "0"}], ";", "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", 
           RowBox[{"If", "[", 
            RowBox[{
             RowBox[{"SpaceTimeType", "===", "\"\<Minkowski\>\""}], ",", "\n", 
@@ -6072,8 +6115,8 @@ Cell[BoxData[{
             RowBox[{
              RowBox[{"u", "[", "ind1_", "]"}], ",", "ni_"}], "]"}], "^:=", 
            RowBox[{"0", "/;", 
-            RowBox[{"ni", "\[GreaterEqual]", "1"}]}]}], ";", "\n", 
-          "\[IndentingNewLine]", 
+            RowBox[{"ni", "\[GreaterEqual]", "1"}]}]}], ";", 
+          "\[IndentingNewLine]", "\n", 
           RowBox[{"(*", " ", 
            RowBox[{
            "A", " ", "rule", " ", "to", " ", "force", " ", "the", " ", 
@@ -6092,7 +6135,7 @@ Cell[BoxData[{
            RowBox[{
            "Lie", " ", "Derivatives", " ", "of", " ", "metric", " ", "with", 
             " ", "up", " ", "indices", " ", "should", " ", "be", " ", 
-            "automatic"}], "*)"}], "\[IndentingNewLine]", 
+            "automatic"}], "*)"}], "\n", 
           RowBox[{"(*", 
            RowBox[{
             RowBox[{"AutomaticRules", "[", 
@@ -6117,7 +6160,7 @@ Cell[BoxData[{
                     "MetricToProjector"}], "//", "ToCanonical"}]}], "}"}], 
                  "]"}], ",", 
                 RowBox[{"MetricOn", "\[Rule]", "None"}]}], "]"}]}], "]"}], 
-            ";"}], "*)"}], "\n", 
+            ";"}], "*)"}], "\[IndentingNewLine]", 
           RowBox[{"AutomaticRules", "[", 
            RowBox[{"g", ",", 
             RowBox[{"BuildRule", "[", 
@@ -6144,7 +6187,7 @@ Cell[BoxData[{
                    "MetricToProjector"}], "//", "ToCanonical"}]}], "}"}], 
                "]"}], ",", 
               RowBox[{"MetricOn", "\[Rule]", "None"}]}], "]"}]}], "]"}], ";", 
-          "\[IndentingNewLine]", "\n", 
+          "\n", "\[IndentingNewLine]", 
           RowBox[{"(*", 
            RowBox[{
             RowBox[{"AutomaticRules", "[", 
@@ -6347,7 +6390,7 @@ Cell[BoxData[{
                     RowBox[{"i3", ",", 
                     RowBox[{"-", "i3"}]}], "]"}], "-", "1"}], ")"}]}]}], 
                  "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], "\n", 
-           "]"}], ";", "\n", "\n", "\n", 
+           "]"}], ";", "\[IndentingNewLine]", "\n", "\n", 
           RowBox[{"(*", " ", 
            RowBox[{
            "We", " ", "replace", " ", "the", " ", "extrinsic", " ", 
@@ -6370,7 +6413,7 @@ Cell[BoxData[{
               RowBox[{"SpaceTimesOfDefinition", "->", 
                RowBox[{"{", "\"\<Background\>\"", "}"}]}], ",", 
               RowBox[{"PrintAs", "\[Rule]", "\"\<K\>\""}]}], "]"}], ";"}], 
-           "*)"}], "\n", "\[IndentingNewLine]", 
+           "*)"}], "\n", "\n", 
           RowBox[{"(*", 
            RowBox[{
             RowBox[{
@@ -6388,13 +6431,13 @@ Cell[BoxData[{
                 RowBox[{"LI", "[", "0", "]"}], ",", 
                 RowBox[{"LI", "[", "0", "]"}], ",", 
                 RowBox[{"LI", "[", "0", "]"}], ",", "i1", ",", "i2"}], 
-               "]"}]}]}], ";"}], "*)"}], "\n", "\[IndentingNewLine]", 
+               "]"}]}]}], ";"}], "*)"}], "\n", "\n", 
           RowBox[{"(*", " ", 
            RowBox[{
            "In", " ", "FL", " ", "the", " ", "eextrinsic", " ", "curvature", 
             " ", "is", " ", "zero", " ", "because", " ", "there", " ", "is", 
             " ", "an", " ", "outside", " ", "conformal", " ", 
-            "transformation"}], "*)"}], "\n", 
+            "transformation"}], "*)"}], "\[IndentingNewLine]", 
           RowBox[{"(*", 
            RowBox[{
            "But", " ", "what", " ", "we", " ", "do", " ", "is", " ", "that", 
@@ -6593,14 +6636,29 @@ Cell[BoxData[{
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}]}], "]"}]}], ":=", " ", 
-                 RowBox[{
+                 RowBox[{"normn", " ", 
                   RowBox[{"n", "[", "ind3", "]"}], 
                   RowBox[{"(", 
                    RowBox[{
                     RowBox[{"-", 
                     RowBox[{
                     RowBox[{"\[Theta]NSS", "[", "]"}], "^", "2"}]}], "/", 
-                    "2"}], ")"}]}]}], ";"}], ",", "\n", "\n", 
+                    "2"}], ")"}]}]}], ";", "\n", 
+                RowBox[{"\[Theta]NSS", "/:", 
+                 RowBox[{
+                  RowBox[{"LieD", "[", 
+                   RowBox[{"n", "[", "ind3_", "]"}], "]"}], "@", 
+                  RowBox[{"\[Theta]NSS", "[", 
+                   RowBox[{
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}]}], "]"}]}], ":=", " ", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"-", 
+                    RowBox[{
+                    RowBox[{"\[Theta]NSS", "[", "]"}], "^", "2"}]}], "/", 
+                   "2"}], ")"}]}], ";"}], "\n", ",", "\n", 
                RowBox[{"CurvedSpaceBool", "[", "SpaceTimeType", "]"}], ",", 
                "\n", 
                RowBox[{
@@ -6612,7 +6670,7 @@ Cell[BoxData[{
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}], ",", 
                     RowBox[{"LI", "[", "0", "]"}]}], "]"}]}], ":=", " ", 
-                 RowBox[{
+                 RowBox[{"normn", " ", 
                   RowBox[{"n", "[", "ind3", "]"}], 
                   RowBox[{"(", 
                    RowBox[{
@@ -6620,12 +6678,34 @@ Cell[BoxData[{
                     RowBox[{"-", 
                     RowBox[{
                     RowBox[{"\[Theta]NSS", "[", "]"}], "^", "2"}]}], "/", 
-                    "2"}], "  ", "-", "\n", " ", 
+                    "2"}], "  ", "-", " ", 
                     RowBox[{
                     RowBox[{
                     RowBox[{"\[ScriptK]", "[", "h", "]"}], "[", "]"}], "*", 
                     RowBox[{"(", 
-                    RowBox[{"dim", "-", "2"}], ")"}]}]}], ")"}]}]}], ";"}]}], 
+                    RowBox[{"dim", "-", "2"}], ")"}]}]}], ")"}]}]}], ";", 
+                "\n", 
+                RowBox[{"\[Theta]NSS", "/:", 
+                 RowBox[{
+                  RowBox[{"LieD", "[", 
+                   RowBox[{"n", "[", "ind3_", "]"}], "]"}], "@", 
+                  RowBox[{"\[Theta]NSS", "[", 
+                   RowBox[{
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}], ",", 
+                    RowBox[{"LI", "[", "0", "]"}]}], "]"}]}], ":=", " ", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"-", 
+                    RowBox[{
+                    RowBox[{"\[Theta]NSS", "[", "]"}], "^", "2"}]}], "/", 
+                    "2"}], " ", "-", " ", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"\[ScriptK]", "[", "h", "]"}], "[", "]"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"dim", "-", "2"}], ")"}]}]}], ")"}]}], ";"}]}], 
               "\n", "]"}], ";", "\n", 
              RowBox[{"(*", " ", 
               RowBox[{
@@ -6643,7 +6723,7 @@ Cell[BoxData[{
               RowBox[{
                RowBox[{"cd", "[", "ind3", "]"}], "[", 
                RowBox[{"\[Theta]NSS", "[", "]"}], "]"}]}], ";"}]}], "\n", 
-           "\n", 
+           "\n", "\n", "\n", 
            RowBox[{"(*", " ", 
             RowBox[{
             "The", " ", "extrinsic", " ", "curvature", " ", "of", " ", "n", 
@@ -8252,10 +8332,11 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"InducedMetricOf", "[", "Name_", "]"}], ":=", 
-    RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"{", "}"}]}], ";"}], "\n", "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{"Review", " ", "all", " ", "these", " ", 
-    RowBox[{"properties", "."}]}], "*)"}], "\n"}], "\[IndentingNewLine]", 
+    RowBox[{"properties", "."}]}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DefScreenProjectedTensor", "[", 
@@ -11934,6 +12015,18 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}],
              "that", " ", "the", " ", "radial", " ", "derivatives", " ", 
              "are", " ", "0", " ", "as", " ", 
              RowBox[{"well", " ", "!"}]}], "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             RowBox[{"Actually", " ", 
+              RowBox[{"no", "!"}], " ", "It", " ", 
+              RowBox[{"depends", " ", "!"}], " ", "For", " ", "the", " ", 
+              "Theta"}], ",", " ", 
+             RowBox[{"it", " ", "is", " ", "not", " ", 
+              RowBox[{"zero", " ", "!"}], " ", "Bug", " ", "Bug", " ", "TODO",
+               " ", "TODO", " ", "Correct", " ", "for", " ", "this", " ", 
+              RowBox[{
+               RowBox[{"crap", " ", "!!"}], "!"}]}]}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
            RowBox[{"If", "[", 
             RowBox[{
             "BackgroundBool", ",", "\[IndentingNewLine]", 
@@ -11969,21 +12062,21 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}],
                   RowBox[{"Length", "[", 
                    RowBox[{"{", "indices", "}"}], "]"}], "===", 
                   RowBox[{"Length", "[", 
-                   RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";", 
-              "\[IndentingNewLine]", 
-              RowBox[{"(*", 
-               RowBox[{
+                   RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";"}]}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Module", "[", 
                 RowBox[{
-                 RowBox[{"Module", "[", 
-                  RowBox[{
-                   RowBox[{"{", "Dummy1", "}"}], ",", "\[IndentingNewLine]", 
-                   RowBox[{
-                    RowBox[{"Dummy1", "=", 
-                    RowBox[{"DummyIn", "[", 
+                 RowBox[{"{", "Dummy1", "}"}], ",", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Dummy1", "=", 
+                   RowBox[{"DummyIn", "[", 
                     RowBox[{"Tangent", "[", "M", "]"}], "]"}]}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"ToCan", "[", 
-                    RowBox[{"Plus", "@@", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"ToCan", "[", 
+                   RowBox[{"Plus", "@@", 
                     RowBox[{"(", 
                     RowBox[{
                     RowBox[{
@@ -12005,19 +12098,29 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}],
                     RowBox[{"-", "Dummy1"}]}]}], "]"}]}], ")"}], "&"}], "/@", 
                     " ", 
                     RowBox[{"{", "indices", "}"}]}], ")"}]}], "]"}]}]}], 
-                  "\[IndentingNewLine]", "]"}], "/;", 
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{"Length", "[", 
-                    RowBox[{"{", "indices", "}"}], "]"}], "===", 
-                   RowBox[{"Length", "[", 
-                    RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}], ";"}], 
-               "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
-              RowBox[{"(*", " ", 
-               RowBox[{
-               "TODO", " ", "Check", " ", "if", " ", "this", " ", "is", " ", 
-                "clean", " ", "enough", " ", "or", " ", 
-                RowBox[{"not", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+                "\[IndentingNewLine]", "]"}], "/;", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"Length", "[", 
+                  RowBox[{"{", "indices", "}"}], "]"}], "===", 
+                 RowBox[{"Length", "[", 
+                  RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}], ";"}], "*)"}],
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "TODO", " ", "Check", " ", "if", " ", "this", " ", "is", " ", 
+              "clean", " ", "enough", " ", "or", " ", 
+              RowBox[{"not", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"TODO", " ", 
+              RowBox[{"No", " ", "!"}], " ", "This", " ", "is", " ", "true", 
+              " ", "for", " ", "a", " ", "and", " ", "H", " ", "but", " ", 
+              "not", " ", "for", " ", "\[Theta]"}], "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"ALERT", " ", "!"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{
               RowBox[{"Name", "/:", 
                RowBox[{"Name", "[", 
                 RowBox[{
@@ -12046,10 +12149,16 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}],
                   RowBox[{"Length", "[", 
                    RowBox[{"{", "indices", "}"}], "]"}], "===", 
                   RowBox[{"Length", "[", 
-                   RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";"}]}], 
-            "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+                   RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";"}], 
+             "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "TODO", " ", "find", " ", "a", " ", "way", " ", "to", " ", "put",
+               " ", "clean", " ", "rules", " ", "for", " ", "a", " ", "and", 
+              " ", "H"}], " ", "*)"}], "\[IndentingNewLine]", "]"}], ";", 
            "\[IndentingNewLine]", "\[IndentingNewLine]", 
            "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           "\[IndentingNewLine]", 
            RowBox[{"(*", 
             RowBox[{
              RowBox[{"In", " ", "principle"}], ",", 
@@ -14033,14 +14142,14 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"\[ScriptK]", "[", "symb_", "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"\[ScriptK]", ",", "symb"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"\[ScriptK]", ",", "symb"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
-      RowBox[{"Fluid", " ", "quantities"}]}]}], "***)"}], "\n", 
-   "\[IndentingNewLine]", 
+      RowBox[{"Fluid", " ", "quantities"}]}]}], "***)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"\[Rho]", "[", "symb_", "]"}], ":=", 
@@ -14056,15 +14165,16 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"\[CapitalPi]", "[", "symb_", "]"}], ":=", 
       RowBox[{"SymbolJoin", "[", 
-       RowBox[{"\[CapitalPi]", ",", "symb"}], "]"}]}], ";"}], "*)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"\[CapitalPi]", ",", "symb"}], "]"}]}], ";"}], "*)"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
       RowBox[{
        RowBox[{"Perturbed", " ", "fluid", " ", "four"}], "-", 
-       "velocity"}]}]}], "***)"}], "\n", "\[IndentingNewLine]", 
+       "velocity"}]}]}], "***)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"V0", "[", 
@@ -14092,14 +14202,14 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"N_", "?", "InducedMetricQ"}], ",", "velocity_"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Vv", ",", "N", ",", "velocity"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Vv", ",", "N", ",", "velocity"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
       RowBox[{"Perturbation", " ", "of", " ", "the", " ", "metric"}]}]}], 
-    "***)"}], "\n", "\[IndentingNewLine]", 
+    "***)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"\[Phi]", "[", 
@@ -14180,13 +14290,13 @@ Cell[BoxData[
       RowBox[{"N_", "?", "InducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
       RowBox[{"Ett", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
       RowBox[{"Gauge", " ", "vector", " ", "and", " ", "decomposition"}]}]}], 
-    "***)"}], "\[IndentingNewLine]", "\n", 
+    "***)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"\[Xi]", "[", 
@@ -14217,7 +14327,7 @@ Cell[BoxData[
      RowBox[{"Lvt", "[", 
       RowBox[{"N_", "?", "InducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Lvt", ",", "N"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"Lvt", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
@@ -14399,9 +14509,8 @@ Cell[BoxData[
                RowBox[{"Lvt", "[", "N", "]"}], "[", 
                RowBox[{"-", "\[Mu]"}], "]"}], ",", 
               "\"\<\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[UpTee]\)\)]\)\>\""}], 
-             "}"}]}], "}"}]}]}], "]"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
-   
+             "}"}]}], "}"}]}]}], "]"}]}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"$ListFieldsBackgroundAndPerturbed", "[", 
