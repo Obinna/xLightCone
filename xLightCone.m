@@ -167,6 +167,8 @@ $FirstOrderTensorPerturbations::usage = "";
 
 InducedDecompositionLightCone::usage = "";
 
+MyOrthogonalToVectorQ::usage = ""; (* Eventually this should be private *)
+
 SetSlicingUpToScreenSpace::usage = "";
 
 SetSlicingUpToScreenSpaceObinna::usage = "";
@@ -191,6 +193,8 @@ $RadialLieDerivative::usage ="";
 
 VisualizeTensorScreenSpace::usage ="";
 
+$GeodesicEquation = "";
+
 
 Begin["xAct`xLightCone`Private`"]
 
@@ -210,7 +214,8 @@ BuildRule[{lhs_,rhs_,conditions___}]:=MakeRule[{lhs,rhs,conditions}];
 BuildRule[{lhs_,rhs_,conditions___},options:OptionsPattern[]]:=MakeRule[{lhs,rhs,conditions},options];
 
 
-(*IN our case this definition is much better as we know there is no acceleration on the background. Careful this is valid only in FL*)
+(*In our case this definition is much better as we know there is no acceleration on the background. 
+Careful this is valid only in FL*)
 Unprotect[OrthogonalToVectorQ];
 OrthogonalToVectorQ[vector_][LieD[vector_?xTensorQ[i_]][expr_]]=.
 
@@ -218,9 +223,17 @@ OrthogonalToVectorQ[vector_][LieD[vector2_?xTensorQ[i_]][expr_]]:=OrthogonalToVe
 
 (* This is very very Addhoc. It is because when there is a spatial derivative on a terme + a lie derivative, then OrthogonalToVectorQ is saying that it is not orthogonal because it cannot treat the LieDerivative case. This is a dirty cheat.*)
 OrthogonalToVectorQ[vector_][expr1_+expr2_]:=(xAct`xTensor`Private`OToVcheck[vector,expr1+expr2, List@@FindFreeIndices[expr1+expr2]])||(OrthogonalToVectorQ[vector][expr2]&&OrthogonalToVectorQ[vector][expr2]);
+
 Protect[OrthogonalToVectorQ];
 
+(* We define our own OrthogonalToVectorQ where we add a rule for a list of vectors. Then if there is a list, it is distributed first*)
 
+MyOrthogonalToVectorQ[vectors_List][tensor_?xTensorQ]:=xUpSet[
+MyOrthogonalToVectorQ[vectors][tensor],And@@((OrthogonalToVectorQ[#][tensor]&)/@vectors)];
+
+MyOrthogonalToVectorQ[vecs_List][expr_]:=((*Print["Hello!"];*)And@@((OrthogonalToVectorQ[#][expr]&)/@vecs));
+
+MyOrthogonalToVectorQ[vec_][expr_]:=OrthogonalToVectorQ[vec][expr];
 
 
 (***DEFAULT OPTIONS AND PROTECTED NAMES***)
@@ -236,6 +249,7 @@ $PrePrint=ScreenDollarIndices;
 $SortCovDAutomatic=True;
 Off[RuleDelayed::rhs];
 $RadialLieDerivative=False;
+$GeodesicEquation = False;
 
 
 (*** COLORATION OF THE PERTURBATION ORDERS ***)
@@ -367,7 +381,10 @@ ind1 = DummyIn[Tangent[Manifold]], ind2 = DummyIn[Tangent[Manifold]], ind3 = Dum
    
 (* We defined a covariant derivative associated to this screen metric and we will load later all its properties. *)
    DefCovD[cd2[inda], vbundle, {cdpost, cdpre}, OrthogonalTo -> {u[-inda], n[-inda]}, ProjectedWith -> {h[-inda, ind2], metric[-inda, ind2]}];
-   
+(* Even though the function DfCovD is called saying that the orthogonality should be wrt to u and n, wrt h and metric, 
+   the function in xTensor is implemented sucha that only the orthogonality wrt u and h is implemented *)
+
+
 (* For other references we need a function to extract the radial vector out of the screen space metric*)
 (* TODO check if this is useful or not*)
    RadialVectOrthToTheScreenSpace[metric] := RadialVectOrthToTheScreenSpace[metric] = n;
@@ -425,7 +442,8 @@ cd2[ind1_][u[ind2_]]:=0;
 (* There is also this special definition which ensures tha the g metric can be contracted through cd2...*)
 (*Special definitions suggested by Cyril*)(* This is  patch which had beend added for cd but which is not added for cd2 since it has two master metrics (h and g)*)
 (* So I need to cancel the Leibniz rule, define some particular cases and redefine the Leibniz rule*)
-
+(* However now there is no need for such patch since this is already implemented in PropertiesOfInducedScreenSpaceMetric in the newest versions*)
+(*
 prot=Unprotect[cd2];
 (* We undefine*)
 cd2[i1_][x_ y_]=.;
@@ -433,20 +451,21 @@ cd2[_?GIndexQ][expr_]=.;
 
 (* So as to be able to introduce a rule when there is the ultra master metric*)
 cd2[i1_][g[a_?AIndexQ, b_?AIndexQ]] := 0;
-cd2[i1_][x_ g[a_?AIndexQ, b_?AIndexQ]] := metric[a, b] cd2[i1][x]/; OrthogonalToVectorQ[n][x];
+cd2[i1_][x_ g[a_?AIndexQ, b_?AIndexQ]] := metric[a, b] cd2[i1][x]/; MyOrthogonalToVectorQ[{n,u}][x];
 
 (* And we redefine *)
 cd2[i1_][x_ y_]:=Module[{res},
 res=Which[
 (* Both are orthogonal in all their indices. We can use the Leibnitz rule *)
-OrthogonalToVectorQ[n][x]&&OrthogonalToVectorQ[n][y],
+MyOrthogonalToVectorQ[{n,u}][x]&&MyOrthogonalToVectorQ[{n,u}][y],
 cd2[i1][x]y+cd2[i1][y]x,
 (* The expression is not globally orthogonal: complain and return unevaluated *)
-Not@OrthogonalToVectorQ[n][x y],
+Not@MyOrthogonalToVectorQ[{n,u}][x y],
 Message[Validate::nonproj,x y];$Failed,
 (* Expression is orthogonal, but factors are not. Avoid infinite recursion with this hack *)
 FreeQ[{x,y},n],
-cd2[i1][Expand@GradNormalToExtrinsicK@Expand[InducedDecomposition[x,{metric,n}]InducedDecomposition[y,{metric,n}]]],
+(* CP Notice here that I do a double decomposition. First a 1+3 and then a 1+2 of the 3 space.*)
+cd2[i1][Expand@GradNormalToExtrinsicK@Expand[InducedDecomposition[InducedDecomposition[x,{h,u}],{metric,n}]InducedDecomposition[InducedDecomposition[y,{h,u}],{metric,n}]]],
 (* This should never happen *)
 True,
 $Failed
@@ -454,13 +473,14 @@ $Failed
 res/;res=!=$Failed
 ];
 
-cd2[_?GIndexQ][expr_]:=$Failed/;Head[expr]=!=Times&&Not@OrthogonalToVectorQ[n][expr]&&Message[Validate::nonproj,expr];
+cd2[_?GIndexQ][expr_]:=$Failed/;Head[expr]=!=Times&&Not@MyOrthogonalToVectorQ[{n,u}][expr]&&Message[Validate::nonproj,expr];
 (* OLD crap *)
 (*cd2[i1_][x_  y_]:=cd2[i1][Expand@GradNormalToExtrinsicK@Expand[InducedDecomposition[x,{metric,n}]InducedDecomposition[y,{metric,n}]]]/;Head@x=!=g&&Head@y=!=g&&OrthogonalToVectorQ[n][x y];*)
 (*cd2[i1_][x_  y_]:=cd2[i1][x]y+cd2[i1][y]x/;And[OrthogonalToVectorQ[n][x],OrthogonalToVectorQ[n][y]];*)
 (*cd2[_?GIndexQ][expr_]:=Throw@Message[Validate::error,"Induced derivative acting on non-projected expression."]/;Not@OrthogonalToVectorQ[n][expr];*)
 Protect[Evaluate[prot]];
 (* ******* End of Patch *)
+*)
 
 (* Finally we ensure that the covd d2 we have define is the Levi Civita derivative associated woth the screen space metric*)
 AutomaticRules[metric, BuildRule[{cd2[ind3][metric[ind1, ind2] ], 0}]];
@@ -479,7 +499,9 @@ xAct`xTensor`Private`MakeProjectedDerivative[cd2,metric[inda, -ind2],n[inda]];
 (* We gather many many rules for the commutation of induced derivatives. These are in general made to make sure that the transverse conditions of vectors and tensors are used. It is also made to gather Laplacians.*)
 
 (* TODO Corriger ca.*)
+(* TODO. Problem the extrinsic curvature is automatically replace. So How can we choose this to be 0 in the geodesic equation?*)
 (* Commente pour l'instant*)
+(* TODO Gauss Codazzi should be done backwards. That is from Riemanncd2 to Riemanncd. How to do that?*)
 
 (*
 DummyS[Sym_]:=SymbolJoin[DS,Sym];
@@ -553,10 +575,12 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
    With[{extrinsicKname = GiveSymbol[ExtrinsicK, metric],
      accelerationname = GiveSymbol[Acceleration, vector],
      projectorname = GiveSymbol[Projector, metric],
+     superprojectorname = GiveSymbol[Projector, supermetric],
      epsilonname = GiveSymbol[epsilon, metric],
      superepsilonname = GiveSymbol[epsilon, supermetric],
      proj = ProjectWith[metric], 
      u=Last@InducedFrom@supermetric,
+     g=First@InducedFrom@supermetric,
      norm = Scalar@Simplify@ContractMetric[supermetric[-ind1, -ind2] vector[ind1] vector[ind2],supermetric], indexlist = GetIndicesOfVBundle[vbundle, 3]},  
 
   
@@ -624,57 +648,51 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
       ProtectNewSymbol -> False, 
       DefInfo -> {"projector inert-head", ""}];
 
-(* I add this contraction of the screen proector with h*)
+(* I add this contraction of the screen projector with h*)
      xTagSet[{projectorname, ContractThroughQ[projectorname, supermetric]},True];
      
      projectorname[supermetric[a_, b_]] := metric[a, b];
-     (*The metric,but not the supermetric,
-     can be contracted through the projector*)
-     
-     xTagSet[{projectorname, ContractThroughQ[projectorname, metric]},
-       True];
+     (*The metric, but not the supermetric, can be contracted through the projector*)
+     (* TODO CHeck that these contraction rules are consistent *)    
+ 
+     xTagSet[{projectorname, ContractThroughQ[projectorname, metric]},True];
+
 (*The supermetric is converted into metric when contracted with the projector or covd*)
-     xTagSetDelayed[{projectorname, 
-       supermetric[i1_, i2_] projectorname[expr_]}, 
-      metric[i1, i2] projectorname[expr] /; 
-       Or[IsIndexOf[expr, -i1, metric], IsIndexOf[expr, -i2, metric]]];
+     xTagSetDelayed[{projectorname,supermetric[i1_, i2_] projectorname[expr_]}, 
+      metric[i1, i2] projectorname[expr]/;Or[IsIndexOf[expr, -i1, metric], IsIndexOf[expr, -i2, metric]]];
      
-     xTagSetDelayed[{covd, supermetric[i1_, i2_] covd[i3_][expr_]}, 
-      metric[i1, i2] covd[i3][expr] /; 
-       Or[IsIndexOf[covd[i3][expr], -i1, metric], 
-        IsIndexOf[covd[i3][expr], -i2, metric]]];
+     xTagSetDelayed[{covd, supermetric[i1_, i2_] covd[i3_][expr_]},
+        metric[i1, i2] covd[i3][expr]/;Or[IsIndexOf[covd[i3][expr], -i1, metric],IsIndexOf[covd[i3][expr], -i2, metric]]];
      
 
 (*Projection rule with vector*)     
-     xTagSetDelayed[{projectorname, vector[i_] projectorname[expr_]}, 
-      0 /; IsIndexOf[expr, -i, metric]];
-
-     xTagSetDelayed[{projectorname,vector[i_]projectorname[expr_]},0/;IsIndexOf[expr,-i,metric]];
+     xTagSetDelayed[{projectorname, vector[i_] projectorname[expr_]},0 /; IsIndexOf[expr, -i, metric]];
 
 
 (* CP We add the orthogonality with respect to the master vector u*)  
-     xTagSetDelayed[{projectorname, u[i_] projectorname[expr_]}, 
-      0 /; IsIndexOf[expr, -i, metric]];
-
-     xTagSetDelayed[{projectorname,u[i_]projectorname[expr_]},0/;IsIndexOf[expr,-i,metric]];
+     xTagSetDelayed[{projectorname, u[i_] projectorname[expr_]},0 /; IsIndexOf[expr, -i, metric]];
 (*This should be checked that it works. TODO*)
      
 (*Particular cases*)
      projectorname[1] := 1;
      projectorname[rest_. x_?ScalarQ] := Scalar[x] projectorname[rest];
-     projectorname[vector[i_] expr_.] := 
-      0 /; Not@IsIndexOf[expr, -i, supermetric];
+     projectorname[vector[i_] expr_.] := 0 /; Not@IsIndexOf[expr, -i, supermetric];
 
 
 (* CP I add this rule because now this projector is orthogonal to both vectors.  *)
-	 projectorname[u[i_] expr_.] := 
-      0 /; Not@IsIndexOf[expr, -i, supermetric];
+	 projectorname[u[i_] expr_.] := 0 /; Not@IsIndexOf[expr, -i, supermetric];
 
      projectorname[projectorname[expr_]] := projectorname[expr];
-     projectorname[tensor_?xTensorQ[inds__]] := 
-      tensor[inds] /; OrthogonalToVectorQ[vector][tensor]&&OrthogonalToVectorQ[u][tensor];
-(* Here we specify that it should be orthogonal to both vector to deserve the removal of the Projector Head.*)
+     projectorname[tensor_?xTensorQ[inds__]] := tensor[inds] /; MyOrthogonalToVectorQ[{vector,u}][tensor];
+(* CP: Here we specify that it should be orthogonal to both vector to deserve the removal of the Projector Head.*)
 (* This lead to a bug previously...*)
+
+
+(* CP: I add this rule. It should be OK*)
+     projectorname[superprojectorname[expr_]] := projectorname[expr];    
+
+
+
 
      projectorname[covd[k_][expr_]] := covd[k][expr];
      
@@ -685,39 +703,48 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
           metric[i, -dummy] projectorname[superCD[dummy][expr]]], 
          projectorname[superCD[i][expr]]]};
      
-     Module[{prot = 
-        Unprotect[covd]},(*Leibnitz rule.Three cases considered*)
+     Module[{prot = Unprotect[covd]},(*Leibnitz rule.Three cases considered*)
       covd[i1_][x_Scalar y_Scalar] := x covd[i1][y] + y covd[i1][x];
       (*Special definitions suggested by Cyril*)
       covd[i1_][supermetric[a_?AIndexQ, b_?AIndexQ]] := 0;
-      (*Cyril suggests removing the OrthogonalToVectorQ check to handle the many-supermetrics case*)
-      covd[i1_][x_ supermetric[a_?AIndexQ, b_?AIndexQ]] := 
-       metric[a, b] covd[i1][x] /; OrthogonalToVectorQ[vector][x];
-      covd[i1_][x_ delta[a_?AIndexQ, b_?AIndexQ]] := 
-       metric[a, b] covd[i1][x] /; OrthogonalToVectorQ[vector][x];
+      (*Cyril suggests removing the MyOrthogonalToVectorQ check to handle the many-supermetrics case*)
+      covd[i1_][x_ supermetric[a_?AIndexQ, b_?AIndexQ]] := metric[a, b] covd[i1][x] /; MyOrthogonalToVectorQ[{u,vector}][x];
+
+     (* CP ANd we add the same type of rule for the supersupermetric.*)
+     covd[i1_][g[a_?AIndexQ, b_?AIndexQ]] := 0;
+     covd[i1_][x_ g[a_?AIndexQ, b_?AIndexQ]] := metric[a, b] covd[i1][x]/; MyOrthogonalToVectorQ[{vector,u}][x];
+
+      covd[i1_][x_ delta[a_?AIndexQ, b_?AIndexQ]] := metric[a, b] covd[i1][x] /; MyOrthogonalToVectorQ[{u,vector}][x];
+
       covd[i1_][vector[a_?AIndexQ] vector[b_?AIndexQ] x_.] := 
-       0 /; And[! IsIndexOf[x, ChangeIndex@a], ! 
-          IsIndexOf[x, ChangeIndex@b], ! PairQ[a, b]];
+       0 /; And[!IsIndexOf[x, ChangeIndex@a], !IsIndexOf[x, ChangeIndex@b], !PairQ[a, b]];
+
+     (* CP I add this. This should be consistent. Why not? *)
+     covd[i1_][u[a_?AIndexQ] vector[b_?AIndexQ] x_.] := 
+       0 /; And[!IsIndexOf[x, ChangeIndex@a], !IsIndexOf[x, ChangeIndex@b], !PairQ[a, b]];
+     covd[i1_][u[a_?AIndexQ] u[b_?AIndexQ] x_.] := 
+       0 /; And[!IsIndexOf[x, ChangeIndex@a], !IsIndexOf[x, ChangeIndex@b], !PairQ[a, b]];
 
       (*Product of two,perhaps contracted,expressions*)
       covd[i1_][x_ y_] := 
        Module[{res}, res = Which[(*Both are orthogonal in all their indices.We can use the Leibnitz rule*)
-          OrthogonalToVectorQ[vector][x] && OrthogonalToVectorQ[vector][y], 
+          MyOrthogonalToVectorQ[{vector,u}][x] && MyOrthogonalToVectorQ[{vector,u}][y], 
           covd[i1][x] y + covd[i1][y] x,(*The expression is not globally orthogonal: complain and return unevaluated*)
          
-          Not@OrthogonalToVectorQ[vector][x y], 
+          Not@MyOrthogonalToVectorQ[{vector,u}][x y], 
           Message[Validate::nonproj, x y]; $Failed,(*Expression is orthogonal, but factors are not.Avoid infinite recursion with this hack*)
           
           FreeQ[{x, y}, vector], 
-          covd[i1][Expand@GradNormalToExtrinsicK@Expand[InducedDecomposition[x, {metric, vector}] InducedDecomposition[y, {metric, vector}]]],
+          covd[i1][Expand@GradNormalToExtrinsicK@Expand[InducedDecomposition[InducedDecomposition[x,{supermetric,u}], {metric, vector}] InducedDecomposition[InducedDecomposition[y,{supermetric,u}], {metric, vector}]]],
           (*This should never happen*)True, $Failed];
         res /; res =!= $Failed];
 
       (*Induced derivatives of non-spatial objects are not accepted,
       not even divergencies*)
-      covd[_?GIndexQ][expr_] := $Failed /; 
-        Head[expr] =!= Times && Not@OrthogonalToVectorQ[vector][expr] && Message[Validate::nonproj, expr];
-      Protect[Evaluate[prot]];];
+      covd[_?GIndexQ][expr_] := $Failed /;Head[expr] =!= Times && Not@MyOrthogonalToVectorQ[{vector,u}][expr] && Message[Validate::nonproj, expr];
+      
+     Protect[Evaluate[prot]];];
+
  
     (*Special definitions*)
      metric /:LieD[vector[_]][metric[-a_Symbol, -b_Symbol]] := $ExtrinsicKOnSSSign (extrinsicKname[-a, -b] + extrinsicKname[-b, -a]);
@@ -781,8 +808,7 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
                 vector[b] vector[c] covd[d]@AA[a]/norm + vector[a] vector[c] covd[d]@AA[b]/norm))], 
 
         superRicci[a_?AIndexQ, b_?AIndexQ] :> 
-        Module[{c = DummyIn@vbundle}, 
-         ReleaseHold[Hold[superRiemann[a, -c, b, c]] /.xAct`xTensor`Private`GaussCodazziRules[metric]]], 
+        Module[{c = DummyIn@vbundle}, ReleaseHold[Hold[superRiemann[a, -c, b, c]] /.xAct`xTensor`Private`GaussCodazziRules[metric]]], 
 
        superRicciScalar[] :>Module[{a = DummyIn@vbundle, b = DummyIn@vbundle}, 
          Expand[(metric[a, b] + vector[a] vector[b]/norm) ReleaseHold[Hold[superRicci[-a, -b]] /. xAct`xTensor`Private`GaussCodazziRules[metric]]]]}];
@@ -980,7 +1006,9 @@ NSS/:cd2[ind3_]@NSS[ind1_,ind2_]:= 0;
 NSS/:LieD[u[dummy_]][NSS[ind1_,ind2_]]=0;
 
 
-KNSS/:KNSS[ind1_,ind2_]:=\[Theta]NSS[]/(dim-2)*NSS[ind1,ind2];
+(* CP here we have a dirty switch to distinguish from the geodesic and the geodesic deviation cases.*)
+KNSS/:KNSS[ind1_,ind2_]:=\[Theta]NSS[]/(dim-2)*NSS[ind1,ind2]/;!$GeodesicEquation;
+KNSS/:KNSS[ind1_,ind2_]:=0/;$GeodesicEquation;
 (* TODO This is wrong!!!! PUT THE CORRECT EVOLUTION OF THE TRACE OF EXTRINSIC CURVATURE ! TODO TODO !*)
 (*KNSS/:CD[ind3_]@KNSS[ind1_,ind2_]:= 0;
 KNSS/:cd[ind3_]@KNSS[ind1_,ind2_]:= 0;
@@ -1053,7 +1081,7 @@ ContractMetric[LieD[u[ind1]][g[dum,ind2]]cd2[-dum][cd2[-ind2][expr1]]
 +g[dum,ind2]LieD[u[ind1]][cd2[-dum][cd2[-ind2][expr1]]]]
 ];
 
-LieD[u[ind1_]][cd2[ind2_][expr1_]]:=LieD[u[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
+LieD[u[ind1_]][cd2[ind2_][expr1_]]:=LieD[u[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&MyOrthogonalToVectorQ[{u,n}][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
 LieD[u[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 With[{frees=FindFreeIndices[expr1]},ToCanonical[
@@ -1061,10 +1089,10 @@ With[{frees=FindFreeIndices[expr1]},ToCanonical[
 (-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
 +cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
 -cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
-/;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[u][expr1]&&Abs[u[ind1]u[-ind1]]===1;
+/;Length[IndicesOf[Free,Up][expr1]]===0&&MyOrthogonalToVectorQ[{u,n}][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
 (* Obinna has showed that the Directional Lie derivative and the induced derivative should commute. But When indices are down.*)
-LieD[n[ind1_]][cd2[ind2_][expr1_]]:=LieD[n[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&OrthogonalToVectorQ[n][expr1]&&Abs[n[ind1]n[-ind1]]===1;
+LieD[n[ind1_]][cd2[ind2_][expr1_]]:=LieD[n[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&MyOrthogonalToVectorQ[{u,n}][expr1]&&Abs[n[ind1]n[-ind1]]===1;
 
 LieD[n[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 With[{frees=FindFreeIndices[expr1]},ToCanonical[
@@ -1072,7 +1100,7 @@ With[{frees=FindFreeIndices[expr1]},ToCanonical[
 (-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#->-dum]
 +cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#->-dum]
 -cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#->-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
-/;Length[IndicesOf[Free,Up][expr1]]===0&&OrthogonalToVectorQ[n][expr1]&&Abs[n[ind1]n[-ind1]]===1;
+/;Length[IndicesOf[Free,Up][expr1]]===0&&MyOrthogonalToVectorQ[{n,u}][expr1]&&Abs[n[ind1]n[-ind1]]===1;
 
 Protect[LieD];
 
@@ -1231,6 +1259,9 @@ If[Not@AnyIndicesListQ[IndsNoLI],DefProjectedTensorProperties[Name,IndsNoLI/.Lis
 
 Name/:OrthogonalToVectorQ[n][Name]=True;(* In pricniple this makes sens only for non scalars. But who cares?*)
 Name/:OrthogonalToVectorQ[u][Name]=True;
+Name/:MyOrthogonalToVectorQ[{n,u}][Name]=True;
+Name/:MyOrthogonalToVectorQ[{u,n}][Name]=True;
+
 )]]]
 
 SetNumberOfArguments[DefScreenProjectedTensor,{2,Infinity}]
@@ -1575,7 +1606,7 @@ CheckSTFTensors[expr_,NSS_]:=CheckSTFTensors[expr,NSS,{}];
 (*FullToInducedDerivative[expr_,CD_,cd_]:=FixedPoint[(ToInducedDerivative[#,CD,cd]//ProjectorToMetric//GradNormalToExtrinsicK)&,expr];*)
 
 PutDownCD[expr_,supercd_,cd_,cd2_]:=
-With[{indmetric=MetricOfCovD[cd],indmetric2=MetricOfCovD[cd2]},With[{vector=Last@InducedFrom[indmetric],vector2=Last@InducedFrom[indmetric2]},expr/.supercd[ind_][expr1:(_?xTensorQ[___]|(*cd[_][_]|*)cd2[_][_]|LieD[_][_])]:>IndicesDown[supercd[ind][expr1]]/;OrthogonalToVectorQ[vector][expr1]&&OrthogonalToVectorQ[vector2][expr1]
+With[{indmetric=MetricOfCovD[cd],indmetric2=MetricOfCovD[cd2]},With[{vector=Last@InducedFrom[indmetric],vector2=Last@InducedFrom[indmetric2]},expr/.supercd[ind_][expr1:(_?xTensorQ[___]|(*cd[_][_]|*)cd2[_][_]|LieD[_][_])]:>IndicesDown[supercd[ind][expr1]]/;MyOrthogonalToVectorQ[{vector,vector2}][expr1]
 ]
 ];
 
@@ -1902,7 +1933,7 @@ Join[(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[1],i1
 +u[i2] Bvt[NSS][LI[1],LI[0],LI[0],i1])-(u[i1] cd2[i2]@Bs[NSS][LI[1],LI[0],LI[0]]+u[i2] cd2[i1]@Bs[NSS][LI[1],LI[0],LI[0]])]}]},
 (*And then the rules at order larger that 1*)(*PatternLeft[#,{i1,i2}]&/@*){Rule@@Switch[gauge,"NewtonGauge",{dg[LI[m_?(#>=2&)],i1_,i2_],Identity[-u[i1] u[i2] 2 \[Phi][NSS][LI[m],LI[0],LI[0]]
 +n[i1] n[i2] 2(-\[Psi][NSS][LI[m],LI[0],LI[0]])
--2 \[Psi][NSS][LI[m],LI[0],LI[0]] (NSS[i1,i2])+ 2 (n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]]+Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+2(n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]))- (u[i1]n[i2] Bvp[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
+-2 \[Psi][NSS][LI[m],LI[0],LI[0]] (NSS[i1,i2])+ 2 (n[i1] n[i2]Etpp[NSS][LI[m],LI[0],LI[0]]+Ett[NSS][LI[m],LI[0],LI[0],i1,i2]+(n[i1] Etpt[NSS][LI[m],LI[0],LI[0],i2]+n[i2] Etpt[NSS][LI[m],LI[0],LI[0],i1]))- (u[i1]n[i2] Bvp[NSS][LI[m],LI[0],LI[0]]+u[i2]n[i1] Bvp[NSS][LI[m],LI[0],LI[0]])
 -(u[i1] Bvt[NSS][LI[m],LI[0],LI[0],i2]+u[i2] Bvt[NSS][LI[m],LI[0],LI[0],i1])
 ]},
 
