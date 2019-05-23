@@ -9,13 +9,13 @@ Cell[TextData[{
   FontSize->24]
 }], "Title",
  InitializationCell->True,
- FontSize->48],
+ FontSize->48,ExpressionUUID->"01dbdb5d-42fd-4810-b696-81186ec83073"],
 
 Cell[CellGroupData[{
 
 Cell["Authors", "Subsection",
  InitializationCell->True,
- FontSize->18],
+ FontSize->18,ExpressionUUID->"ae8f5983-22b6-4824-a607-cda31e11de59"],
 
 Cell["\<\
 Obinna Umeh & Cyril Pitrou
@@ -24,22 +24,25 @@ umeobinna@gmail.com
 cyril.pitrou@ens-lyon.org
 
 2014-\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"31f50cf1-343f-4c98-ae27-d6bb98af8eca"],
 
 Cell[CellGroupData[{
 
-Cell["Dates and versions", "Subsubsection"],
+Cell["Dates and versions", \
+"Subsubsection",ExpressionUUID->"16e08c15-3ef1-4745-a8de-3181547ac15b"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Date", "[", "]"}]], "Input"],
+ RowBox[{"Date", "[", 
+  "]"}]], "Input",ExpressionUUID->"7a8e5f18-d6a8-4c36-a0ac-c016bd45d1dc"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
   "2014", ",", "9", ",", "26", ",", "11", ",", "23", ",", 
-   "43.964404`8.395676167486464"}], "}"}]], "Output"]
+   "43.964404`8.395676167486464"}], 
+  "}"}]], "Output",ExpressionUUID->"0580c861-3788-4098-b47a-ee7a0e313d5f"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -50,7 +53,8 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"2014", ",", "09", ",", "29"}], "}"}]}], "}"}]}], 
   ";"}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"20832f7a-af1d-42d7-97cd-3dddb470dbef"],
 
 Cell[BoxData[{
  RowBox[{
@@ -67,9 +71,10 @@ Cell[BoxData[{
      RowBox[{"{", 
       RowBox[{"2014", ",", "9", ",", "28"}], "}"}]}], "}"}]}], 
   ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"6ae23dcc-785a-4743-9bf6-94aaf88e664e"],
 
-Cell["", "Text"]
+Cell["", "Text",ExpressionUUID->"af9dbe0a-89e5-4279-9f2b-b329f02ba7ad"]
 }, Closed]]
 }, Open  ]],
 
@@ -78,11 +83,13 @@ Cell[CellGroupData[{
 Cell["1. Initialization", "Subsection",
  InitializationCell->True,
  FontColor->RGBColor[
-  0.20389105058365758`, 0.38530556191348136`, 0.9685969329365988]],
+  0.20389105058365758`, 0.38530556191348136`, 
+   0.9685969329365988],ExpressionUUID->"8be7cd66-128f-4b3e-9b1d-d1586b929029"],
 
 Cell[CellGroupData[{
 
-Cell["1.1. GPL", "Subsubsection"],
+Cell["1.1. GPL", \
+"Subsubsection",ExpressionUUID->"c0c337ee-92fb-4a47-b60e-2c1996d0a653"],
 
 Cell[BoxData[
  RowBox[{
@@ -148,14 +155,16 @@ Cell[BoxData[
      RowBox[{"MA", " ", "02111"}], "-", "1307"}], ",", "\[IndentingNewLine]", 
     "  ", 
     RowBox[{"USA", "."}]}], " ", "\[IndentingNewLine]", "*)"}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"d635e28e-4562-4cd3-82a8-18f9eca1ccb1"],
 
-Cell["", "Text"]
+Cell["", "Text",ExpressionUUID->"0e3609ab-69a1-45d4-aec6-ede87ad941c5"]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["1.2. Info package", "Subsubsection"],
+Cell["1.2. Info package", \
+"Subsubsection",ExpressionUUID->"e2f300d1-b102-4d87-bdd7-3dadba8888a0"],
 
 Cell["\<\
 (* :Title: xLightCone *)
@@ -178,19 +187,21 @@ Cell["\<\
 \>", "Input",
  PageWidth->PaperWidth,
  CellMargins->{{60, -272}, {Inherited, Inherited}},
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"da3e059e-fe45-46af-a40f-88bb13bd46bb"],
 
-Cell["", "Text"]
+Cell["", "Text",ExpressionUUID->"cd3b50b9-f7b7-4a6e-a7fe-487bcfb63d29"]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["1.3. Begin package", "Subsubsection"],
+Cell["1.3. Begin package", \
+"Subsubsection",ExpressionUUID->"972ba3a9-2421-43d2-86ab-c9c7b43c6563"],
 
 Cell["\<\
 
 Decide what is the last package being read:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"a66819e9-155b-4944-ba6b-8185e2bf1eed"],
 
 Cell[BoxData[
  RowBox[{
@@ -202,19 +213,22 @@ Cell[BoxData[
     RowBox[{
     "xAct`xCore`Private`$LastPackage", "=", "\"\<xAct`xLightCone`\>\""}]}], 
    "]"}], ";"}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"4fa61bde-76f7-40c0-98f2-4852d92551b8"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["xAct`xCore`Private`$LastPackage"], "Input"],
+Cell[BoxData["xAct`xCore`Private`$LastPackage"], \
+"Input",ExpressionUUID->"f6c11504-523a-4289-97fa-10207fe12fda"],
 
-Cell[BoxData["\<\"xAct`xLightCone`\"\>"], "Output"]
+Cell[BoxData["\<\"xAct`xLightCone`\"\>"], \
+"Output",ExpressionUUID->"f9ba9fc1-6cf3-4c71-8f35-4ed1089ec5ff"]
 }, Open  ]],
 
 Cell["\<\
 
 Explicit (not hidden) import of other packages:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"798c65e6-f802-47a9-bb69-758404cde057"],
 
 Cell[CellGroupData[{
 
@@ -234,12 +248,13 @@ Cell[BoxData[{
     "\"\<xAct`xPert`\>\"", ",", "\"\<xAct`xTensor`\>\"", ",", 
      "\"\<xAct`xPerm`\>\"", ",", "\"\<xAct`xCore`\>\"", ",", 
      "\"\<xAct`ExpressionManipulation`\>\""}], "}"}]}], "]"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"681ff3e3-c61c-47f1-b5ff-c613bc656dba"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print"],
+\"\>"], "Print",ExpressionUUID->"8b6174d7-08ca-4894-a5f8-9e14a9cdfa7d"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -250,17 +265,21 @@ Cell[BoxData[
     RowBox[{"2014", ",", "9", ",", "28"}], "}"}]}],
   SequenceForm["Package xAct`xPerm`  version ", "1.2.2", ", ", {2014, 9, 28}],
   
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"16a9c0e7-eb43-4420-89d4-3973c359cb54"],
 
 Cell[BoxData["\<\"CopyRight (C) 2003-2014, Jose M. Martin-Garcia, under the \
-General Public License.\"\>"], "Print"],
+General Public License.\"\>"], \
+"Print",ExpressionUUID->"efdbfe9a-390c-4df9-88a1-0e64d5779e23"],
 
-Cell[BoxData["\<\"Connecting to external linux executable...\"\>"], "Print"],
+Cell[BoxData["\<\"Connecting to external linux executable...\"\>"], \
+"Print",ExpressionUUID->"f2d01199-3b32-4a45-a16c-d7f460e639fb"],
 
-Cell[BoxData["\<\"Connection established.\"\>"], "Print"],
+Cell[BoxData["\<\"Connection established.\"\>"], \
+"Print",ExpressionUUID->"993848e9-8a8f-495b-9d38-a71fe42b8daf"],
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print"],
+\"\>"], "Print",ExpressionUUID->"76b8508b-eb69-4fb0-b165-de8974322494"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -271,13 +290,15 @@ Cell[BoxData[
     RowBox[{"2014", ",", "9", ",", "28"}], "}"}]}],
   SequenceForm[
   "Package xAct`xTensor`  version ", "1.1.1", ", ", {2014, 9, 28}],
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"6bb0f653-4da7-4f3e-862a-19a4cd3f53b5"],
 
 Cell[BoxData["\<\"CopyRight (C) 2002-2014, Jose M. Martin-Garcia, under the \
-General Public License.\"\>"], "Print"],
+General Public License.\"\>"], \
+"Print",ExpressionUUID->"669dc547-7d4d-486f-ad7f-227e7a212f4d"],
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print"],
+\"\>"], "Print",ExpressionUUID->"106e0fc2-4ea9-402d-bc72-28db62d66f6e"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -288,11 +309,13 @@ Cell[BoxData[
     RowBox[{"2014", ",", "9", ",", "28"}], "}"}]}],
   SequenceForm["Package xAct`xPert`  version ", "1.0.5", ", ", {2014, 9, 28}],
   
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"861d9329-0e21-4a8a-8287-e660d3a2f297"],
 
 Cell[BoxData["\<\"CopyRight (C) 2005-2014, David Brizuela, Jose M. \
 Martin-Garcia and Guillermo A. Mena Marugan, under the General Public \
-License.\"\>"], "Print"],
+License.\"\>"], \
+"Print",ExpressionUUID->"6fdd81b3-df92-463e-8363-eb0ea6971355"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -302,7 +325,8 @@ Cell[BoxData[
   SequenceForm[
   "** Variable ", $PrePrint, " assigned value ", 
    xAct`xTensor`ScreenDollarIndices],
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"df5e2ff4-e20e-40ec-81a0-32e6c314b47e"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -313,7 +337,8 @@ Cell[BoxData[
   SequenceForm[
   "** Variable ", xAct`xTensor`$CovDFormat, " changed from ", "Prefix", 
    " to ", "Postfix"],
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"112d8172-fc88-43d2-85c1-ba89a35be15b"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -324,7 +349,8 @@ Cell[BoxData[
   SequenceForm[
   "** Option ", xAct`xTensor`AllowUpperDerivatives, " of ", 
    xAct`xTensor`ContractMetric, " changed from ", False, " to ", True],
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"81b7fe60-8e11-416a-b87a-7020a1efb144"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -335,7 +361,8 @@ Cell[BoxData[
   SequenceForm[
   "** Option ", xAct`xTensor`MetricOn, " of ", xAct`xTensor`MakeRule, 
    " changed from ", None, " to ", All],
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"212bfce9-10fc-4446-ba0b-f02d87111128"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -346,10 +373,12 @@ Cell[BoxData[
   SequenceForm[
   "** Option ", xAct`xTensor`ContractMetrics, " of ", xAct`xTensor`MakeRule, 
    " changed from ", False, " to ", True],
-  Editable->False]], "Print"]
+  Editable->
+   False]], "Print",ExpressionUUID->"4d954d36-cdb5-4c75-a3b2-51c658e09ee3"]
 }, Open  ]],
 
-Cell[BoxData["\<\"xAct`xLightCone`\"\>"], "Output"]
+Cell[BoxData["\<\"xAct`xLightCone`\"\>"], \
+"Output",ExpressionUUID->"adbac559-49ea-4692-96d4-adcf98ca1d67"]
 }, Open  ]],
 
 Cell[TextData[{
@@ -357,7 +386,7 @@ Cell[TextData[{
  StyleBox["xTensor",
   FontSlant->"Italic"],
  ". We simply compare dates:"
-}], "Text"],
+}], "Text",ExpressionUUID->"48b0b904-9749-4327-a113-0b68bb90d0c4"],
 
 Cell[BoxData[{
  RowBox[{
@@ -391,12 +420,13 @@ Cell[BoxData[{
       RowBox[{"General", "::", "versions"}], ",", "\"\<xPert\>\"", ",", 
       "xAct`xPert`$Version", ",", "$xPertVersionExpected"}], "]"}]}]}], 
   "]"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"f98d020e-b579-419b-a015-ae4c83360344"],
 
 Cell["\<\
 
 Welcome message:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"c01b4e97-0021-4c7b-8256-d0245f71a923"],
 
 Cell[CellGroupData[{
 
@@ -416,12 +446,13 @@ Cell[BoxData[{
   "Print", "[", 
    "\"\<CopyRight (C) 2015-, Obinna Umeh under the General Public \
 License.\>\"", "]"}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"d9eabafc-6e0b-4d3f-a16c-58096da25aa7"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print"],
+\"\>"], "Print",ExpressionUUID->"42d9bf69-c323-4315-804b-97bc08c2061d"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -431,10 +462,11 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"2014", ",", "9", ",", "29"}], "}"}]}],
   SequenceForm["Package xAct`xLight`  version ", "0.0.1", ", ", {2014, 9, 29}],
-  Editable->False]], "Print"],
+  Editable->
+   False]], "Print",ExpressionUUID->"66e9c864-6324-4f78-bab0-698fcb424cae"],
 
 Cell[BoxData["\<\"CopyRight (C) 2015-, Obinna Umeh under the General Public \
-License.\"\>"], "Print"]
+License.\"\>"], "Print",ExpressionUUID->"68e39849-1a92-4622-8bdb-c9e4750113fc"]
 }, Open  ]]
 }, Open  ]],
 
@@ -443,7 +475,7 @@ Cell["\<\
 We specify the context xAct`xLightConce` to avoid overriding the Disclaimer \
 of the other packages. However, we need to turn off the message General:shdw \
 temporarily:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"49637b39-1087-4d42-9be8-3a5e4b13fc58"],
 
 Cell[BoxData[{
  RowBox[{"Off", "[", 
@@ -472,12 +504,13 @@ PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE \
 POSSIBILITY OF SUCH DAMAGES.\>\"", "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"On", "[", 
   RowBox[{"General", "::", "shdw"}], "]"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"0ba2edb7-1d51-46f4-aac1-ca2430c2a8fb"],
 
 Cell["\<\
 
 If this is the last package show the GPL short disclaimer:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"7b7cbd3b-29a8-4c58-8603-f6a270e8681b"],
 
 Cell[CellGroupData[{
 
@@ -501,20 +534,22 @@ under certain conditions. See the General Public License for details.\>\"",
       "]"}], ";", "\[IndentingNewLine]", 
      RowBox[{"Print", "[", "xAct`xCore`Private`bars", "]"}]}]}], "]"}], 
   ";"}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"2ba7ed63-6658-457d-96bd-7757decc848e"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print"],
+\"\>"], "Print",ExpressionUUID->"b5bf533f-30f2-4eaf-b643-8bde35bc5e23"],
 
 Cell[BoxData["\<\"These packages come with ABSOLUTELY NO WARRANTY; for \
 details type Disclaimer[]. This is free software, and you are welcome to \
 redistribute it under certain conditions. See the General Public License for \
-details.\"\>"], "Print"],
+details.\"\>"], \
+"Print",ExpressionUUID->"f3bcf8b7-b8ab-45b0-9697-cff0cec6c773"],
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print"]
+\"\>"], "Print",ExpressionUUID->"5e810f1b-70e5-446d-b872-bfa5cd356cd3"]
 }, Open  ]]
 }, Open  ]],
 
@@ -522,36 +557,41 @@ Cell["\<\
 
 Note that symbols in the Global` context cannot be accessed while building \
 the package:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"db9592d3-6227-45bb-8624-8916ef331375"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["$ContextPath"], "Input"],
+Cell[BoxData["$ContextPath"], \
+"Input",ExpressionUUID->"d8509c1d-e324-449e-8b3d-4fe3a1f107fb"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"\<\"xAct`xLightCone`\"\>", ",", "\<\"xAct`xPert`\"\>", 
    ",", "\<\"xAct`xTensor`\"\>", ",", "\<\"xAct`xPerm`\"\>", 
    ",", "\<\"xAct`xCore`\"\>", ",", "\<\"xAct`ExpressionManipulation`\"\>", 
-   ",", "\<\"System`\"\>"}], "}"}]], "Output"]
+   ",", "\<\"System`\"\>"}], 
+  "}"}]], "Output",ExpressionUUID->"e40d3dc8-1a3d-4571-ad02-9868ef58814b"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["$Context"], "Input"],
+Cell[BoxData["$Context"], \
+"Input",ExpressionUUID->"7d25a8f1-617c-49c8-999e-a1aeb0ca57a5"],
 
-Cell[BoxData["\<\"xAct`xLightCone`\"\>"], "Output"]
+Cell[BoxData["\<\"xAct`xLightCone`\"\>"], \
+"Output",ExpressionUUID->"352b737d-adbc-4073-8783-8b27dbb9a4b6"]
 }, Open  ]]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["1.4. Set up", "Subsubsection"],
+Cell["1.4. Set up", \
+"Subsubsection",ExpressionUUID->"2d2d66fb-a045-49c6-a04d-e180b9ee58b1"],
 
 Cell["\<\
 
 Prefix format for derivatives:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"1750be1e-3389-4f8c-b7f0-934cf495de48"],
 
 Cell[BoxData[{
  RowBox[{
@@ -562,17 +602,19 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"General", "::", "nostdvar"}], ",", "\"\<$CovDFormat\>\"", ",", 
     "\"\<Prefix\>\""}], "]"}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"3005771f-833e-4762-b546-072f880ec05d"],
 
 Cell["\<\
 
 We do not modify the option MathLink of CanonicalPerm:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"584a4e8c-0641-47c1-969b-0c59149c56ee"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Options", "[", "CanonicalPerm", "]"}]], "Input"],
+ RowBox[{"Options", "[", "CanonicalPerm", 
+  "]"}]], "Input",ExpressionUUID->"be802b4b-0d25-4330-99aa-fd255cae878c"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -580,27 +622,31 @@ Cell[BoxData[
    RowBox[{"MathLink", "\[RuleDelayed]", "$xpermQ"}], ",", 
    RowBox[{"TimeVerbose", "\[Rule]", "False"}], ",", 
    RowBox[{"xPermVerbose", "\[Rule]", "False"}], ",", 
-   RowBox[{"OrderedBase", "\[Rule]", "True"}]}], "}"}]], "Output"]
+   RowBox[{"OrderedBase", "\[Rule]", "True"}]}], 
+  "}"}]], "Output",ExpressionUUID->"fdaab8e1-8a32-4ff3-be3a-a061f6d76cb4"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["$xpermQ"], "Input"],
+Cell[BoxData["$xpermQ"], \
+"Input",ExpressionUUID->"bad35947-0673-41b5-9efe-eecd718ef7fa"],
 
-Cell[BoxData["True"], "Output"]
+Cell[BoxData["True"], \
+"Output",ExpressionUUID->"4005c7ea-6609-4858-9bad-b8739404797f"]
 }, Open  ]],
 
-Cell["", "Text"]
+Cell["", "Text",ExpressionUUID->"cfc8890a-e7b9-473d-afe8-b43a5682d441"]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["1.5. Usage and error messages", "Subsubsection"],
+Cell["1.5. Usage and error messages", \
+"Subsubsection",ExpressionUUID->"7e4d4877-12cf-477b-81e0-cdc4f0edf187"],
 
 Cell["\<\
 
 Versions:\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"26f47634-f5fb-41a0-8c79-3cb190d38813"],
 
 Cell[BoxData[
  RowBox[{
@@ -627,9 +673,11 @@ the package xLightCone in use.\>\""}], ";"}], "\[IndentingNewLine]",
      "\"\<$xPertVersionExpected is a global variable giving the oldest \
 possible version of the package xPert which is required by the version of the \
 package xLightCone in use.\>\""}], ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"739f0aa6-5650-4cd2-a8d2-1d82c4afc1dd"],
 
-Cell["Usage Messages in Alphabetic order", "Text"],
+Cell["Usage Messages in Alphabetic order", \
+"Text",ExpressionUUID->"f411bbb9-f907-44f4-821f-cc45d1569087"],
 
 Cell[BoxData[{
  RowBox[{
@@ -892,20 +940,24 @@ Cell[BoxData[{
    "\"\<\[Epsilon] is the default perturbation parameter. It is automatically \
 defined when calling either the function DefMetricFields or the function \
 DefMatterFields.\>\""}], ";"}]}], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"773c89f6-a052-47dd-925f-4a509866f7c6"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["1.6. Begin private", "Subsubsection"],
+Cell["1.6. Begin private", \
+"Subsubsection",ExpressionUUID->"902e4780-e548-4083-8882-7600c760e7e7"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Begin", "[", "\"\<xAct`xLightCone`Private`\>\"", "]"}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"03d3ea65-10bc-46fb-9016-d3349e2b8882"],
 
-Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], "Output"]
+Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], \
+"Output",ExpressionUUID->"8defd83b-e862-4496-8048-1550aca23c3e"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -937,7 +989,7 @@ Cell[BoxData[
      " ", "when", " ", "the", " ", "rule", " ", "has", " ", "already", " ", 
      "been", " ", "defined", " ", "and", " ", "the", " ", "lhs", " ", "is", 
      " ", 
-     RowBox[{"zero", "."}]}], "**)"}], "\[IndentingNewLine]", 
+     RowBox[{"zero", "."}]}], "**)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -953,7 +1005,8 @@ Cell[BoxData[
             ")"}]}], ",", "rhs_", ",", "conditions___"}], "}"}], ",", 
         RowBox[{"options", ":", 
          RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
-      RowBox[{"{", "}"}]}], ";"}], "*)"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"{", "}"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1015,10 +1068,12 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{"lhs", ",", "rhs", ",", "conditions"}], "}"}], ",", 
        "options"}], "]"}]}], ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"4fade7e5-aab6-4f3a-8470-0f8689722db0"],
 
 Cell["Extensions of xTensor (* A verifier TODO*)", "Text",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"abcb24a7-2093-4729-bdae-5f4035de2409"],
 
 Cell[BoxData[
  RowBox[{
@@ -1169,9 +1224,11 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"OrthogonalToVectorQ", "[", "vec", "]"}], "[", "expr", "]"}]}], 
     ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"0a8efc88-6e9e-496e-95bd-6b18b09f9bfb"],
 
-Cell["Default options and protected names", "Text"],
+Cell["Default options and protected names", \
+"Text",ExpressionUUID->"5afa1564-0a69-4f96-adb1-80fd18eb2650"],
 
 Cell[BoxData[
  RowBox[{
@@ -1213,17 +1270,20 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"$GeodesicEquation", " ", "=", " ", "False"}], ";"}]}]}]], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"6b11c384-c826-4143-8224-f7505588eef6"]
 }, Closed]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Implementation", "Subsection"],
+Cell["Implementation", \
+"Subsection",ExpressionUUID->"f7484943-534d-4b40-bbca-3982a9d1ad7a"],
 
 Cell[CellGroupData[{
 
-Cell["Miscellaneous tools ", "Subsubsection"],
+Cell["Miscellaneous tools ", \
+"Subsubsection",ExpressionUUID->"5d889129-7bea-4403-8d88-2cc943256e47"],
 
 Cell[BoxData[
  RowBox[{
@@ -1437,9 +1497,10 @@ Cell[BoxData[
                     RowBox[{"j", ",", "1", ",", "r"}], "}"}]}], "]"}]}], 
                 "]"}]}]}], "]"}]}], "}"}], "]"}]}], "\[IndentingNewLine]", 
         RowBox[{"(*", "]", "*)"}], "\[IndentingNewLine]", "]"}]}], 
-      "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+      "\[IndentingNewLine]", "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"xTensorFormStart", "[", "Tensor", "]"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"be2f5313-494f-4776-a62f-9856872ab191"],
 
 Cell[BoxData[
  RowBox[{
@@ -1497,9 +1558,11 @@ Cell[BoxData[
      RowBox[{"expr", ",", 
       RowBox[{"UseMetricOnVBundle", "\[Rule]", "None"}]}], 
      "]"}]}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"da201b82-4c55-4fda-ae4c-8c90670f87f8"],
 
-Cell["Private Boolean function inherited from xPand", "Text"],
+Cell["Private Boolean function inherited from xPand", \
+"Text",ExpressionUUID->"6064cc7c-c695-404f-89d7-9f34ff252a42"],
 
 Cell[BoxData[
  RowBox[{
@@ -1510,7 +1573,7 @@ Cell[BoxData[
    RowBox[{"*", "Miscellaneous"}], "**)"}], 
   RowBox[{
    RowBox[{
-    RowBox[{"$DefInfoQ", "=", "True"}], ";"}], "\n", 
+    RowBox[{"$DefInfoQ", "=", "True"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"If", " ", "set", " ", 
@@ -1523,14 +1586,14 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"*", "Testing", " ", "expressions"}], "**)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"AnyIndicesListQ", "[", "inds_List", "]"}], ":=", 
     RowBox[{
      RowBox[{"Cases", "[", 
       RowBox[{"inds", ",", 
        RowBox[{"AnyIndices", "[", "_", "]"}]}], "]"}], "=!=", 
-     RowBox[{"{", "}"}]}]}], "\n", 
+     RowBox[{"{", "}"}]}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1547,13 +1610,13 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"DefTensorQ", "[", "symb_", "]"}], ":=", 
     RowBox[{
      RowBox[{"Cases", "[", 
       RowBox[{"$Tensors", ",", "symb"}], "]"}], "===", 
-     RowBox[{"{", "symb", "}"}]}]}], "\n", 
+     RowBox[{"{", "symb", "}"}]}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1569,7 +1632,7 @@ Cell[BoxData[
        RowBox[{"returns", "'"}], 
        RowBox[{
         RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"GaugeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -1596,8 +1659,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"returns", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\n", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"InducedMetricQ", "[", "symb_", "]"}], ":=", 
     RowBox[{"If", "[", 
@@ -1634,8 +1697,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"gives", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\n", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"SpaceTimeQ", "[", "strg_", "]"}], ":=", 
     RowBox[{
@@ -1660,8 +1723,8 @@ Cell[BoxData[
       RowBox[{"otherwise", " ", "it", " ", 
        RowBox[{"returns", "'"}], 
        RowBox[{
-        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   "\n", 
+        RowBox[{"False", "'"}], "."}]}]}]}], "*)"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"TensorNullQ", "[", "tens_", "]"}], ":=", 
     RowBox[{"If", "[", 
@@ -1699,9 +1762,10 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
       RowBox[{"otherwise", ".", "This"}], " ", "function", " ", "is", " ", 
       "not", " ", "suited", " ", "to", " ", "test", " ", "tensors", " ", 
       "defined", " ", "with", " ", "label"}], "-", 
-     RowBox[{"indices", "."}]}], "*)"}], "\[IndentingNewLine]", "\n", 
+     RowBox[{"indices", "."}]}], "*)"}], "\n", "\n", 
    RowBox[{"(*", 
-    RowBox[{"*", "Type", " ", "of", " ", "manifolds"}], "**)"}], "\n", 
+    RowBox[{"*", "Type", " ", "of", " ", "manifolds"}], "**)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
     "Will", " ", "probably", " ", "disappear", " ", "since", " ", "we", " ", 
@@ -1718,7 +1782,8 @@ tensors defined without label-indices. \>\"", ",", "tens"}], "]"}], ",",
     RowBox[{"CurvedSpaceBool", "[", "Spacetype_", "]"}], ":=", 
     RowBox[{"(", 
      RowBox[{"Spacetype", "===", "\"\<FLCurved\>\""}], ")"}]}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"fa0569c0-1e34-4911-8dde-ee238993773d"],
 
 Cell[BoxData[
  RowBox[{
@@ -1764,19 +1829,21 @@ Cell[BoxData[
              RowBox[{"#", ",", "_"}], "]"}]}], ")"}], "&"}], "/@", " ", 
          "ElementsToBePatterned"}], ")"}]}], ")"}], "->", 
      "right"}]}]}]}]], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"c1620740-021d-47a6-9f50-29b5d86dd316"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Slicing in 1 + 1 + (n - 2)", "Subsubsection"],
+Cell["Slicing in 1 + 1 + (n - 2)", \
+"Subsubsection",ExpressionUUID->"d715bac9-4138-4ccc-8334-caf32c9f97b2"],
 
 Cell["\<\
 Here is my first implementation of DefScreenSpaceMetric. It assumes that you \
 already define a hypersurface and a vector orthorgonal to that hypersurface\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"1c57ffc3-5051-47d8-bad2-3488217ce445"],
 
-Cell["Tools", "Text"],
+Cell["Tools", "Text",ExpressionUUID->"9c856a76-7ad2-4d3b-85ae-517eb27bab90"],
 
 Cell[BoxData[
  RowBox[{
@@ -1832,7 +1899,8 @@ Cell[BoxData[
        RowBox[{"\"\<Tensor\>\"", ",", 
         RowBox[{"PropertiesList", "[", "tens", "]"}]}], "]"}]}]}], 
     ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"ece90a56-b80a-444e-9498-8e5404ab1017"],
 
 Cell[BoxData[
  RowBox[{
@@ -1931,9 +1999,11 @@ Cell[BoxData[
        RowBox[{"(", 
         RowBox[{"TensDummy", "->", "TTens"}], ")"}]}]}], 
      "\[IndentingNewLine]", "]"}]}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"4036485a-4231-4952-973a-dcde909f699b"],
 
-Cell["Main function", "Text"],
+Cell["Main function", \
+"Text",ExpressionUUID->"7b12cd12-b7cc-4335-b2b0-bc5d2fe3845b"],
 
 Cell[BoxData[
  RowBox[{
@@ -3694,35 +3764,38 @@ expression.\>\""}], "]"}]}], "/;",
 are defined:  metric induced from the super metric, a hypersurface specifying \
  four vector  and a \\\nscreen space specifying vector\>\"", "]"}]}], "]"}]}],
    ";"}]], "Code",
- Background->RGBColor[0.88, 1, 0.88]],
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"5e5f0662-b190-4245-96b3-8955287e4f33"],
 
 Cell["\<\
 This defines additional  properties for the screen space tensor. I will add \
 more\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"52ceba57-465f-497a-8965-c7bc78830347"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
    RowBox[{
     RowBox[{
-    "I", " ", "am", " ", "not", " ", "quite", " ", "sure", " ", "for", " ", 
-     "now", " ", "about", " ", "the", " ", "sign", " ", "of", " ", 
-     "ExtrinsicKSign", " ", "on", " ", 
-     RowBox[{"the", " ", "\\\n", "screeen"}], " ", "space"}], ",", " ", 
-    RowBox[{
-    "so", " ", "i", " ", "have", " ", "defined", " ", "the", " ", "following",
-      " ", "for", " ", "now"}], ",", " ", 
-    RowBox[{"we", " ", "may", " ", "end", " ", 
-     RowBox[{"up", " ", "\\\n", "merging"}], " ", "with", " ", "xTensor"}]}], 
-   "*)"}], "\n", 
+    "I", " ", "think", " ", "the", "  ", "sign", " ", "of", " ", 
+     "ExtrinsicKSign", " ", "on", " ", "the", "  ", "screeen", " ", "space"}],
+     ",", " ", 
+    RowBox[{"should", " ", "be", " ", "opposite", " ", "to", " ", 
+     RowBox[{"that", "\\\n", " ", "of"}], " ", "the", " ", "surface", " ", 
+     "of", " ", "constant", " ", 
+     RowBox[{"time", " ", "\\\n", "merging"}], " ", "with", " ", 
+     "xTensor"}]}], "*)"}], "\n", 
   RowBox[{
    RowBox[{
-    RowBox[{"$ExtrinsicKOnSSSign", " ", "=", " ", "$ExtrinsicKSign"}], ";"}], 
-   "\n", 
+    RowBox[{"$ExtrinsicKOnSSSign", " ", "=", " ", 
+     RowBox[{"-", "$ExtrinsicKSign"}]}], ";"}], "\n", 
    RowBox[{
-    RowBox[{"$AccelerationOfnSign", " ", "=", " ", "$AccelerationSign"}], 
-    ";"}], "\n", "\n", "\n", 
+    RowBox[{"$AccelerationOfnSign", " ", "=", " ", 
+     RowBox[{"-", "$AccelerationSign"}]}], ";"}], "\n", "\n", "  ", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<Testing------------Additional Rules--------------------Checking\>\"",
+     "]"}], " ", "\n", 
    RowBox[{"(*", 
     RowBox[{
     "This", " ", "function", " ", "is", " ", "called", " ", "in", " ", 
@@ -3837,7 +3910,11 @@ Cell[BoxData[
              RowBox[{"xUpSet", "[", 
               RowBox[{
                RowBox[{"VectorOfInducedMetric", "[", "metric", "]"}], ",", 
-               " ", "vector"}], "]"}], ";", "     ", "\n", "\n", "\n", 
+               " ", "vector"}], "]"}], ";", "     ", "\n", "     ", 
+             RowBox[{"$ExtrinsicKOnSSSign", " ", "=", " ", 
+              RowBox[{"-", "$ExtrinsicKSign"}]}], ";", "\n", "    ", 
+             RowBox[{"$AccelerationOfnSign", " ", "=", " ", 
+              RowBox[{"-", "$AccelerationSign"}]}], ";", "\n", "\n", 
              RowBox[{"(*", " ", 
               RowBox[{
               "Definition", " ", "of", " ", "extrinsic", " ", "curvature"}], 
@@ -5282,9 +5359,10 @@ Cell[BoxData[
              RowBox[{
              "extrinsicKname", ",", " ", "accelerationname", ",", " ", 
               "projectorname"}], "]"}]}], "]"}], ";"}]}], "]"}]}], "]"}]}], 
-    ";"}]}]}]], "Code"],
+    ";"}]}]}]], "Code",ExpressionUUID->"0a87d0ec-8a68-4bf0-8053-cd555c10cc5c"],
 
-Cell["Now the SetSlicing function itself", "Text"],
+Cell["Now the SetSlicing function itself", \
+"Text",ExpressionUUID->"17329548-fbef-4949-a6a3-a718663da506"],
 
 Cell[BoxData[{
  RowBox[{
@@ -5378,7 +5456,7 @@ Cell[BoxData[{
            RowBox[{"dummy", " ", "=", " ", 
             RowBox[{"DummyIn", "[", 
              RowBox[{"Tangent", "[", "Manifold", "]"}], "]"}]}]}], "}"}], ",",
-          "\n", "\n", "\n", "    ", 
+          "\n", "       ", "\n", "       ", "\n", "\n", "    ", 
          RowBox[{
           RowBox[{
            RowBox[{"DefTensor", "[", 
@@ -5389,8 +5467,8 @@ Cell[BoxData[{
              RowBox[{"PrintAs", " ", "->", " ", 
               RowBox[{"\"\<\\!\\(\>\"", " ", "<>", " ", 
                RowBox[{"ToString", "[", "u", "]"}], " ", "<>", " ", 
-               "\"\<\\&-\\)\>\""}]}]}], "]"}], "\n", "         ", "\n", 
-           "    ", "\n", "    ", 
+               "\"\<\\&-\\)\>\""}]}]}], "]"}], "\n", "      ", "\n", "    ", 
+           "\n", "    ", 
            RowBox[{"Off", "[", 
             RowBox[{"DefMetric", "::", "old"}], "]"}]}], ";", "\n", "    ", 
           RowBox[{"(*", " ", 
@@ -7464,11 +7542,11 @@ Cell[BoxData[{
          "TODO", " ", "Clean", " ", "abive", " ", "and", " ", "keep", " ", 
           "only", " ", "the", " ", "stuff", " ", "which", " ", "is", " ", 
           "necessary"}], " ", "*)"}], "\n", "\n", "]"}]}]}], "]"}]}], 
-   "]"}]}]}], "Code"],
+   "]"}]}]}], "Code",ExpressionUUID->"ec7280d7-f73a-44c7-b8d5-adf3b098e80d"],
 
 Cell["\<\
 Old implementation. Commented. We shall remove it eventually.\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"b505ef60-ca0a-41e2-84fb-108730f126db"],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -8343,12 +8421,14 @@ Cell[BoxData[
             ";"}]}], "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
        "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
   "*)"}]], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"dc473bee-4d3d-4f10-9e18-86b51cab082b"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Defining twice projected tensors.", "Subsubsection"],
+Cell["Defining twice projected tensors.", \
+"Subsubsection",ExpressionUUID->"6464eaa5-5338-47af-8605-70e868e96148"],
 
 Cell[BoxData[{
  RowBox[{
@@ -8366,7 +8446,7 @@ Cell[BoxData[{
       RowBox[{"SpaceTimesOfDefinition", "\[Rule]", 
        RowBox[{"{", 
         RowBox[{"\"\<Background\>\"", ",", "\"\<Perturbed\>\""}], "}"}]}]}], 
-     "}"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+     "}"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"DefScreenProjectedTensorQ", "[", 
@@ -8382,7 +8462,7 @@ Cell[BoxData[{
     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{"Review", " ", "all", " ", "these", " ", 
-    RowBox[{"properties", "."}]}], "*)"}], "\[IndentingNewLine]"}], "\n", 
+    RowBox[{"properties", "."}]}], "*)"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DefScreenProjectedTensor", "[", 
@@ -8631,7 +8711,7 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
                 RowBox[{"u", ",", "n"}], "}"}], "]"}], "[", "Name", "]"}], 
              "=", "True"}], ";"}], "\[IndentingNewLine]", 
            "\[IndentingNewLine]", ")"}]}], "]"}]}], "]"}]}], "]"}]}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{"SetNumberOfArguments", "[", 
   RowBox[{"DefScreenProjectedTensor", ",", 
    RowBox[{"{", 
@@ -8639,7 +8719,8 @@ hypersurfaces associated with the induced metric \>\"", ",", "N", ",",
  RowBox[{
   RowBox[{"Protect", "[", "DefScreenProjectedTensor", "]"}], ";"}]}], "Input",
  
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"2d0d639f-3870-42ea-adc1-18840f236c90"],
 
 Cell[BoxData[
  RowBox[{
@@ -12323,17 +12404,19 @@ positive integer.\>\"", "]"}], "]"}]}], "]"}]}]}], "]"}]}]}], ";"}]}],
                RowBox[{"Length", "[", 
                 RowBox[{"{", "inds", "}"}], "]"}]}], ")"}]}]}], ";"}]}], 
          "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}]}]}]}]], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"1c9d0059-ec28-4d7e-85bc-6167d0e4f79f"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["SplitPerturbations in 1+1+(n-2)", "Subsubsection"],
+Cell["SplitPerturbations in 1+1+(n-2)", \
+"Subsubsection",ExpressionUUID->"27b3f158-a10f-4f3e-8312-cd8a7e933bf1"],
 
 Cell["\<\
 First we need something to decompose any tensor into its irreducible \
 (projected parts). This is done with ToInducedDerivativeScreenSpace\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"89702d83-656d-47c1-8326-ca24940860a4"],
 
 Cell[BoxData[
  RowBox[{
@@ -12443,7 +12526,8 @@ Cell[BoxData[
             RowBox[{"Projector", "[", "h", "]"}], "\[Rule]", 
             RowBox[{"ProjectWith", "[", "h", "]"}]}]}], "]"}], "]"}]}]}], 
       ")"}]}], ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"8f2f9a30-556a-4d59-bbd0-7586ca7b29a7"],
 
 Cell[BoxData[
  RowBox[{
@@ -12585,12 +12669,13 @@ Cell[BoxData[
         RowBox[{"#", ",", 
          RowBox[{"UseMetricOnVBundle", "\[Rule]", "None"}]}], "]"}], 
        "&"}]}]}], ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"0975fa45-96f1-4158-aecb-962797ac73bc"],
 
 Cell["\<\
 Then we build tools for the SplitPerturbation Function. It is adapted from \
 xPand.\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"736145ff-d183-48e5-8745-d88488ba39c4"],
 
 Cell[BoxData[
  RowBox[{
@@ -12651,7 +12736,8 @@ Cell[BoxData[
           RowBox[{"{", 
            RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
      "\[IndentingNewLine]", "]"}]}], ";"}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"ff5e357a-c7e4-43b9-9ed8-2be76c2f1b36"],
 
 Cell[BoxData[{
  RowBox[{
@@ -12778,7 +12864,8 @@ Cell[BoxData[{
        RowBox[{"Free", ",", "Down"}], "]"}], "[", 
       RowBox[{"RemovePatterns", "[", "expr", "]"}], "]"}]}], "]"}]}], 
   ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"b2d16776-127d-4703-8081-3c6d26c28888"],
 
 Cell["\<\
 This function builds all the replacement rules with CovDs from a given Rule.
@@ -12787,7 +12874,7 @@ This function builds all the replacement rules with CovDs from a given Rule.
   It looks in the expression in which the Rule is to be replaced at the \
 maximum number of CovD (the max number of CovD is stored in the variable \
 CDmax)\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"2a4514b9-b7df-472f-8e45-0454b110033e"],
 
 Cell[BoxData[{
  RowBox[{
@@ -12811,14 +12898,15 @@ Cell[BoxData[{
       RowBox[{"First", "@", "hp"}]}]}], ")"}], "/.", 
    RowBox[{"a_PatternTest", ":>", 
     RowBox[{"First", "@", "a"}]}]}]}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"1023e620-64fb-453a-a11b-78e28a27c1ef"],
 
 Cell["\<\
 A function to safely commute CovDs. Safely means it applies the adhoc rule \
 $CommutecdRules. But currently it is empty... So it is just a \
 canonicalization with SortCovDsStart[cd].
 I could ignore that.\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"7c6eef5a-343c-4a5c-b75a-a121e50679f7"],
 
 Cell[BoxData[
  RowBox[{
@@ -13017,13 +13105,14 @@ behaviour. **\>\"", "]"}], ";"}]}], "]"}], ";", "\[IndentingNewLine]",
         RowBox[{"ToCanonical", "::", "\"\<cmods\>\""}], "]"}], ";"}], "*)"}], 
      "\[IndentingNewLine]", "res"}]}], "\[IndentingNewLine]", 
    "]"}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"fc4fbdae-799c-4dff-a051-45a1b130e450"],
 
 Cell["\<\
 The function which splits an expression, given some rules chosen the user, by \
 splitting essentially all the Covariant derivative which appear in this \
 expression.\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"7604ce95-1eac-48f6-ae17-190a9e76474b"],
 
 Cell[BoxData[{
  RowBox[{
@@ -13089,11 +13178,12 @@ necessary for its splitting were thus not defined. **\>\""}], "]"}], "&"}], "/@"
    RowBox[{"CheckSTFTensors", "[", 
     RowBox[{"expr", ",", "NSS", ",", 
      RowBox[{"{", "}"}]}], "]"}]}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"83a4dbbc-4132-4bd4-8e06-9a15b2e88c9a"],
 
 Cell["\<\
 Some other useful tools to implement the ' SplitPerturbations' function\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"9fbe61f7-1948-4d54-872d-1634c0cc6076"],
 
 Cell[BoxData[
  RowBox[{
@@ -13234,7 +13324,8 @@ Cell[BoxData[
      RowBox[{"ContractMetricOutSideProjector", "[", 
       RowBox[{"rest_", ",", "cd_"}], "]"}], ":=", 
      RowBox[{"ContractMetric", "[", "rest", "]"}]}], ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"21a1d39e-dfbc-4f41-95bd-158b633ac9b6"],
 
 Cell[BoxData[
  RowBox[{
@@ -13294,7 +13385,8 @@ Cell[BoxData[
    RowBox[{"(*", " ", 
     RowBox[{"Written", " ", "by", " ", "Leo", " ", "Stein"}], " ", 
     "*)"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"8dee6cdf-26a5-48e3-b4c4-150f96214df3"],
 
 Cell[BoxData[
  RowBox[{
@@ -14166,19 +14258,22 @@ Cell[BoxData[
       RowBox[{"2", ",", "4"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Protect", "[", "SplitPerturbations", "]"}], ";"}]}]}]], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"0433bfbb-1ed8-452f-8a53-63066fc50d0a"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Defining standard perturbations for metric", "Subsubsection"],
+Cell["Defining standard perturbations for metric", \
+"Subsubsection",ExpressionUUID->"e2172a3d-1058-489d-bf07-d7a16bec7890"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"DefinedPerturbationParameter", "[", "x_", "]"}], ":=", "False"}], 
   ";"}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"9028cd3d-a321-45c0-a98b-855e983b6b55"],
 
 Cell[BoxData[
  RowBox[{
@@ -14224,8 +14319,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"av", "[", "symb_", "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"av", ",", "symb"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+      RowBox[{"av", ",", "symb"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"K", "[", "symb_", "]"}], ":=", 
@@ -14241,8 +14336,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
      RowBox[{"SYMBOLS", ":", 
-      RowBox[{"Fluid", " ", "quantities"}]}]}], "***)"}], 
-   "\[IndentingNewLine]", "\n", 
+      RowBox[{"Fluid", " ", "quantities"}]}]}], "***)"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"\[Rho]", "[", "symb_", "]"}], ":=", 
@@ -14252,7 +14347,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"P", "[", "symb_", "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"P", ",", "symb"}], "]"}]}], ";"}], "\n", 
+      RowBox[{"P", ",", "symb"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -14266,8 +14361,7 @@ Cell[BoxData[
      RowBox[{"SYMBOLS", ":", 
       RowBox[{
        RowBox[{"Perturbed", " ", "fluid", " ", "four"}], "-", 
-       "velocity"}]}]}], "***)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+       "velocity"}]}]}], "***)"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"V0", "[", 
@@ -14320,8 +14414,8 @@ Cell[BoxData[
      RowBox[{"\[Phi]", "[", 
       RowBox[{"N_", "?", "InducedFromInducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"\[Phi]", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+      RowBox[{"\[Phi]", ",", "N"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"Bs", "[", 
@@ -14339,7 +14433,7 @@ Cell[BoxData[
      RowBox[{"Bvt", "[", 
       RowBox[{"N_", "?", "InducedFromInducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Bvt", ",", "N"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"Bvt", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    
    RowBox[{
     RowBox[{
@@ -14384,18 +14478,18 @@ Cell[BoxData[
      RowBox[{"Etpt", "[", 
       RowBox[{"N_", "?", "InducedFromInducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Etpt", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+      RowBox[{"Etpt", ",", "N"}], "]"}]}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Print", "[", "\"\<Definition of Etpt inputform ends\>\"", "]"}],
-      ";"}], "*)"}], "\n", 
+      ";"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"Ett", "[", 
       RowBox[{"N_", "?", "InducedFromInducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Ett", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", "\n", 
+      RowBox[{"Ett", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"**", "BUILDING"}], " ", 
@@ -14407,8 +14501,8 @@ Cell[BoxData[
      RowBox[{"\[Xi]", "[", 
       RowBox[{"N_", "?", "InducedFromInducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"\[Xi]", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+      RowBox[{"\[Xi]", ",", "N"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"T", "[", 
@@ -14432,8 +14526,8 @@ Cell[BoxData[
      RowBox[{"Lvt", "[", 
       RowBox[{"N_", "?", "InducedFromInducedMetricQ"}], "]"}], ":=", 
      RowBox[{"SymbolJoin", "[", 
-      RowBox[{"Lvt", ",", "N"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+      RowBox[{"Lvt", ",", "N"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"$ListFieldsBackgroundOnly", "[", 
@@ -14456,7 +14550,7 @@ Cell[BoxData[
         RowBox[{
          RowBox[{
           RowBox[{"\[Theta]", "[", "NSS", "]"}], "[", "]"}], ",", 
-         "\"\<\[Theta]\>\""}], "}"}]}], "}"}]}], ";"}], "\n", 
+         "\"\<\[Theta]\>\""}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{
@@ -14498,7 +14592,7 @@ Cell[BoxData[
          " ", "whose", " ", "one", " ", "index", " ", "is", " ", "paralllel", 
         " ", "to", " ", "the", " ", "direction", " ", "vector", " ", "and", 
         " ", "the", " ", "order", " ", "is", " ", "transverse", " ", "to", 
-        " ", "it"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+        " ", "it"}]}]}]}], "*)"}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"$ListFieldsPerturbedOnly", "[", 
@@ -14616,7 +14710,7 @@ Cell[BoxData[
                RowBox[{"-", "\[Mu]"}], "]"}], ",", 
               "\"\<\!\(\*SubscriptBox[\(L\), \(\(v\)\(\[UpTee]\)\)]\)\>\""}], 
              "}"}]}], "}"}]}]}], "]"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
    
    RowBox[{
     RowBox[{
@@ -14732,7 +14826,8 @@ Cell[BoxData[
                   RowBox[{"ToString", "[", "velocity", "]"}]}], "}"}], 
                 "]"}]}]}], "}"}]}], "}"}]}]}], "]"}]}], "]"}]}], 
     ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"4f70f6ea-6186-4860-b983-133670103599"],
 
 Cell[BoxData[
  RowBox[{
@@ -14999,7 +15094,8 @@ Thiscannot be redefined without undefining it. **\>\"", "]"}], ";"}]}], "]"}],
    RowBox[{
     RowBox[{"Protect", "[", "DefMetricFields", "]"}], ";"}], 
    "\[IndentingNewLine]"}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"66888781-e208-401e-8792-482fddc234f4"],
 
 Cell[BoxData[
  RowBox[{
@@ -16116,14 +16212,17 @@ of the metric and the fields needed for future splitting **\>\"", "]"}], ";",
     RowBox[{"SplitMetric", ",", "4"}], "]"}], "\n", 
    RowBox[{
     RowBox[{"Protect", "[", "SplitMetric", "]"}], ";"}]}]}]], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"0b5617bf-ef9c-40d5-905d-621baefadbb6"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Defining standard perturbations for matter", "Subsubsection"],
+Cell["Defining standard perturbations for matter", \
+"Subsubsection",ExpressionUUID->"7821a10e-3c72-4b2b-bb4d-f7221cfd0200"],
 
-Cell["Obvious rules taking into account the gauge choice", "Text"],
+Cell["Obvious rules taking into account the gauge choice", \
+"Text",ExpressionUUID->"da1811b5-a066-4b49-b5d3-a5692a228626"],
 
 Cell[BoxData[{
  RowBox[{
@@ -16456,12 +16555,13 @@ Cell[BoxData[{
    RowBox[{
    "TODO", " ", "put", " ", "the", " ", "correct", " ", "matter", " ", 
     "gauge", " ", "above"}], "*)"}]}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"765661f4-a710-4ae4-af0f-854cef7d3a45"],
 
 Cell["\<\
 The function which builds the time component of the vector from normalization\
 \
-\>", "Text"],
+\>", "Text",ExpressionUUID->"bfe80d47-b580-4d33-b82d-6e822e03effe"],
 
 Cell[BoxData[
  RowBox[{
@@ -16638,14 +16738,15 @@ Cell[BoxData[
                 RowBox[{"RuleBoostUpton", "[", "order", "]"}]}], "]"}]}]}], 
             "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], "]"}]}], 
         "]"}]}], "]"}]}], "]"}]}], ";"}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"66112e89-e974-4acf-865a-91093c0b8671"],
 
 Cell["\<\
 We gather all the rules for matter below. This function is used in the \
 function which automatize the whole process. Otherwise the user is free to \
 build himself the rules which he thinks should be used for the splitting of \
 the perturbation of matter feld (essentially the velocity).\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"3070896f-70ac-4b23-b24a-331e970460a8"],
 
 Cell[CellGroupData[{
 
@@ -16860,13 +16961,15 @@ undefining it. **\>\""}], "]"}], ";"}]}], "]"}], ";"}]}],
     RowBox[{"3", ",", "5"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Protect", "[", "DefMatterFields", "]"}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"e3fb3c12-a997-44b9-b7a4-69f5cfd1ce48"],
 
 Cell[BoxData[
  RowBox[{"SetNumberOfArguments", "[", 
   RowBox[{"DefMatterFields", ",", 
    RowBox[{"{", 
-    RowBox[{"4", ",", "5"}], "}"}]}], "]"}]], "Output"]
+    RowBox[{"4", ",", "5"}], "}"}]}], 
+  "]"}]], "Output",ExpressionUUID->"85328e2f-a7c2-48f9-9be7-a857792c31ae"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -16915,12 +17018,14 @@ vector field and the projected fields needed for future splitting **\>\"",
     RowBox[{"SplitMatter", ",", 
      RowBox[{"{", "6", "}"}]}], "]"}], "\[IndentingNewLine]", 
    RowBox[{"Protect", "[", "SplitMatter", "]"}]}]}]], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"c4aa55d5-296a-4ed7-ba8f-84b826965b21"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Conformal Transformation Tools (from xPand)", "Subsubsection"],
+Cell["Conformal Transformation Tools (from xPand)", \
+"Subsubsection",ExpressionUUID->"f44cf02c-9de6-4ba8-a5a7-2e3e0a189aff"],
 
 Cell[BoxData[{
  RowBox[{
@@ -16969,7 +17074,8 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"IndicesUp", "[", "0", "]"}], ":=", "0"}], " ", ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"94646393-142b-44df-99f5-faf3fd1f5ef2"],
 
 Cell[BoxData[{
  RowBox[{
@@ -16985,7 +17091,8 @@ Cell[BoxData[{
      RowBox[{"g_", "?", "MetricQ"}], ",", "conffactor_"}], "]"}], ":=", 
    RowBox[{"SymbolJoin", "[", 
     RowBox[{"g", ",", "conffactor", ",", "2"}], "]"}]}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"34575acf-1828-4321-9ccd-962edd71f35b"],
 
 Cell[BoxData[{
  RowBox[{
@@ -17194,7 +17301,8 @@ Cell[BoxData[{
   RowBox[{"DefConformalMetric", ",", "2"}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Protect", "[", "DefConformalMetric", "]"}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"e3e96dda-ab82-4af7-baa0-5964427ca05e"],
 
 Cell[BoxData[{
  RowBox[{
@@ -17289,7 +17397,8 @@ Cell[BoxData[{
       RowBox[{"ConfHead", "[", 
        RowBox[{"_", ",", "_"}], "]"}], "[", "_", "]"}], ",", "_", ",", 
      "delta"}], "]"}], ":=", "False"}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"08159128-5a01-44f8-a26b-4ce6d87a3a6b"],
 
 Cell[BoxData[{
  RowBox[{
@@ -17355,7 +17464,7 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{"MyChangeChristoffel", "[", 
        RowBox[{"#1", ",", "#2", ",", "cd1"}], "]"}], "&"}], ",", "expr", ",", 
-     "cd2list"}], "]"}]}], "\n"}], "\[IndentingNewLine]", 
+     "cd2list"}], "]"}]}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{"MyChangeChristoffel", "[", 
    RowBox[{"expr_", ",", "cd2_", ",", "cd1_"}], "]"}], ":=", 
@@ -17420,7 +17529,8 @@ Cell[BoxData[{
           RowBox[{"chr21", "[", 
            RowBox[{"i1", ",", "i2", ",", "i3"}], "]"}]}]}]}]}]}], 
      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"25740d1e-4adf-4028-9847-5e529f3e2025"],
 
 Cell[BoxData[{
  RowBox[{
@@ -17731,7 +17841,8 @@ Cell[BoxData[{
            "\[IndentingNewLine]", "}"}]}], ";", "\[IndentingNewLine]", 
          "\[IndentingNewLine]", "res"}]}], "\[IndentingNewLine]", "]"}]}]}], 
     "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ")"}]}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"fbdef8aa-0ff6-4261-8198-5e6b5b86e27d"],
 
 Cell[BoxData[{
  RowBox[{
@@ -17796,7 +17907,7 @@ since we do not know very well how to handle that. **\>\"", "]"}], ";"}]}],
                 "]"}], ";", "\[IndentingNewLine]", "res"}]}], 
              "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
-     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -17955,7 +18066,8 @@ since we do not know very well how to handle that. **\>\"", "]"}], ";"}]}],
     RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Protect", "[", "ToMetric", "]"}], ";"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"1ef25621-6b5d-4649-95d8-d217da0992ce"],
 
 Cell[BoxData[{
  RowBox[{
@@ -17978,7 +18090,8 @@ Cell[BoxData[{
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"InverseMetricQ", "[", "_", "]"}], ":=", "False"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"f03f7f42-f4bb-46b7-8074-09793a79f5d7"],
 
 Cell[BoxData[{
  RowBox[{
@@ -18002,7 +18115,8 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"SeparateIndicesDownOfInverseMetric", "[", "_", "]"}], "[", 
    "expr_", "]"}], ":=", "expr"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"12f07739-3cec-4c78-b0bf-d3c81ea7fbfa"],
 
 Cell[BoxData[{
  RowBox[{
@@ -18286,12 +18400,14 @@ Cell[BoxData[{
      RowBox[{"First", "@", "$Metrics"}], "]"}], "[", 
     RowBox[{"metric1", ",", "metric2"}], "]"}], "[", "expr", 
    "]"}]}]}], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"c4ed130f-29ca-4387-938f-9e4e3725352e"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Automatization of the whole process", "Subsubsection"],
+Cell["Automatization of the whole process", \
+"Subsubsection",ExpressionUUID->"c145878d-a617-448a-bbf3-1a8dc42a9e41"],
 
 Cell[BoxData[{
  RowBox[{
@@ -18536,12 +18652,14 @@ Cell[BoxData[{
      RowBox[{"6", ",", "7"}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Protect", "[", "ToLightCone", "]"}], ";"}]}], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"0a65ccc3-c09d-4513-851f-4daaec31902c"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Vizualization of the results", "Subsubsection"],
+Cell["Vizualization of the results", \
+"Subsubsection",ExpressionUUID->"83092ae0-8dea-4eab-ba63-305a82f7f302"],
 
 Cell[BoxData[
  RowBox[{
@@ -18866,7 +18984,8 @@ equal to the list of free indices\>\""}], "]"}]}]}], "]"}], ";",
    
    RowBox[{
     RowBox[{"Protect", "[", "ExtractComponents", "]"}], ";"}]}]}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"4db760ab-7c32-421e-8001-9ad7add32658"],
 
 Cell[BoxData[{
  RowBox[{
@@ -19014,7 +19133,7 @@ Cell[BoxData[{
      RowBox[{"Length", "@", 
       RowBox[{
        RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===", 
-     "1"}]}]}], "\[IndentingNewLine]"}], "\n", 
+     "1"}]}]}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"VisualizeTensorScreenSpace", "[", 
@@ -19033,49 +19152,55 @@ Cell[BoxData[{
        RowBox[{"Length", "@", 
         RowBox[{
          RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], "===",
-        "1"}], "]"}]}]}]}], "\[IndentingNewLine]"}], "\n", 
+        "1"}], "]"}]}]}]}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"SetNumberOfArguments", "[", 
    RowBox[{"VisualizeTensorScreenSpace", ",", "2"}], "]"}], ";"}], "\n", 
  RowBox[{
   RowBox[{"Protect", "[", "VisualizeTensorScreenSpace", "]"}], 
   ";"}]}], "Input",
- InitializationCell->True]
+ InitializationCell->
+  True,ExpressionUUID->"dac90f7f-ebfd-4db2-a648-a26bb38629a9"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[TextData[StyleBox["End private and package",
- FontColor->RGBColor[0, 0, 1]]], "Subsubsection"],
+ FontColor->RGBColor[
+  0, 0, 1]]], \
+"Subsubsection",ExpressionUUID->"2744382b-656b-451c-a979-39877593403b"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"On", "[", 
    RowBox[{"RuleDelayed", "::", "rhs"}], "]"}], ";"}]], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"44abfe6d-62fb-47f8-84ac-27f373728c6f"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{"End", "[", "]"}], "\[IndentingNewLine]", 
  RowBox[{"EndPackage", "[", "]"}]}], "Input",
- InitializationCell->True],
+ InitializationCell->
+  True,ExpressionUUID->"dfac19de-3948-43b6-827c-31b0fed67c8e"],
 
-Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], "Output"]
+Cell[BoxData["\<\"xAct`xLightCone`Private`\"\>"], \
+"Output",ExpressionUUID->"22be9151-e6ad-480f-a5ee-9a1856c7c9ce"]
 }, Open  ]]
 }, Closed]]
 }, Open  ]]
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1227, 756},
+WindowSize->{964, 887},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1,
-FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
-2012)",
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
+2018)",
 StyleDefinitions->FrontEnd`FileName[{"Creative"}, "PastelColor.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
