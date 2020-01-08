@@ -281,7 +281,7 @@ $OpenConstantsOfStructure=True;
 $PrePrint=ScreenDollarIndices;
 $SortCovDAutomatic=True;
 Off[RuleDelayed::rhs];
-$RadialLieDerivative=False;
+$RadialLieDerivative=True;
 $GeodesicEquation = False;
 
 
@@ -361,7 +361,8 @@ TensorNullQ[tens_]:=If[Cases[SlotsOfTensor[tens],Labels]=!={},Print["** Warning:
 (**Type of manifolds**)
 (* Will probably disappear since we will only do curved and flat FL *)
 
-FlatSpaceBool[Spacetype_]:=(Spacetype==="FLFlat"||Spacetype==="Minkowski")
+FlatSpaceBool[Spacetype_]:=(Spacetype==="FLFlat")
+(*FlatSpaceBool[Spacetype_]:=(Spacetype==="FLFlat"||Spacetype==="Minkowski")*)
 CurvedSpaceBool[Spacetype_]:=(Spacetype==="FLCurved")
 
 
@@ -479,7 +480,8 @@ Protect[OrthogonalToVectorQ];
 (* We also need to say that cd2 applied on the time vector is null*)
 (* I have tried to build this rule with AutomaticRule/MakeRule but it fails...*)
 (* Anyway this is an adhoc patch but if things were done correctly we would never have to put this rule*)
-cd2[ind1_][u[ind2_]]:=0;
+(*OU Commented during test 07/01/2020*)
+(*cd2[ind1_][u[ind2_]]:=0;*)
 
 (* There is also this special definition which ensures tha the g metric can be contracted through cd2...*)
 (*Special definitions suggested by Cyril*)(* This is  patch which had beend added for cd but which is not added for cd2 since it has two master metrics (h and g)*)
@@ -524,8 +526,9 @@ Protect[Evaluate[prot]];
 (* ******* End of Patch *)
 *)
 
-(* Finally we ensure that the covd d2 we have define is the Levi Civita derivative associated woth the screen space metric*)
-AutomaticRules[metric, BuildRule[{cd2[ind3][metric[ind1, ind2] ], 0}]];
+(* Finally we ensure that the covd d2 we have define is the Levi Civita derivative associated with the screen space metric*)
+(*OU: This should work with brute force*)
+(*AutomaticRules[metric, BuildRule[{cd2[ind3][metric[ind1, ind2] ], 0}]];*)
 
 
 (* A series of rules which states taht the derivative cd2 is induced (orthogonality to n of a cd2 applied to a prokected tensor)*)
@@ -603,10 +606,10 @@ screen space specifying vector"]];
 (*I think the  sign of ExtrinsicKSign on the  screeen space, should be opposite to that\
  of the surface of constant time \
 merging with xTensor*)
-$ExtrinsicKOnSSSign = -$ExtrinsicKSign;
-$AccelerationOfnSign = -$AccelerationSign;
+$ExtrinsicKOnSSSign = $ExtrinsicKSign;
+$AccelerationOfnSign = $AccelerationSign;
 
-  Print["Testing------------Additional Rules--------------------Checking"] 
+  Print["Testing------------Additional Rules--------------------Checking Geodesic equation"] 
 (*This function is called in DefScreenSpaceMetric and sets various properties for the screen space metric. It is adapted from xTensor*)
 (* Maybe it is useless to copy everything here.*)
 (* Maybe that would be enough to call DefInducedMetric. To be debated*)
@@ -629,9 +632,10 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
     With[{i1 = indexlist[[1]], i2 = indexlist[[2]], 
       i3 = indexlist[[3]]},(*Register pair metric/vector*)
 
-     xUpSet[VectorOfInducedMetric[metric], vector];     
-     $ExtrinsicKOnSSSign = -$ExtrinsicKSign;
-    $AccelerationOfnSign = -$AccelerationSign;
+     xUpSet[VectorOfInducedMetric[metric], vector];    
+     (*OU Already decalred globally*) 
+    (* $ExtrinsicKOnSSSign = $ExtrinsicKSign;
+    $AccelerationOfnSign = $AccelerationSign;*)
 
 (* Definition of extrinsic curvature *)     
      DefTensor[extrinsicKname[i1, i2], dependencies, 
@@ -753,7 +757,7 @@ PropertiesOfInducedScreenSpaceMetric[metric_[-ind1_, -ind2_],
       (*Cyril suggests removing the MyOrthogonalToVectorQ check to handle the many-supermetrics case*)
       covd[i1_][x_ supermetric[a_?AIndexQ, b_?AIndexQ]] := metric[a, b] covd[i1][x] /; MyOrthogonalToVectorQ[{u,vector}][x];
 
-     (* CP ANd we add the same type of rule for the supersupermetric.*)
+     (* CP And we add the same type of rule for the supersupermetric.*)
      covd[i1_][g[a_?AIndexQ, b_?AIndexQ]] := 0;
      covd[i1_][x_ g[a_?AIndexQ, b_?AIndexQ]] := metric[a, b] covd[i1][x]/; MyOrthogonalToVectorQ[{vector,u}][x];
 
@@ -907,15 +911,16 @@ SetSlicingUpToScreenSpaceObinna[g_?MetricQ, u_, normu_: - 1, h_,
     Protect[prot];
     Protect[prot2];
 
-(* Functions used in the post processing of the SplitPerturbations*)
-$Rulecdh[h1_]:={
-h1[-a_,b_] cd[a_][expr1_]:>cd[b][expr1],
-h1[a_,b_] cd[-a_][expr1_]:>cd[b][expr1],
-h1[b_,-a_] cd[a_][expr1_]:>cd[b][expr1],
-h1[b_,a_] cd[-a_][expr1_]:>cd[b][expr1],
-h1[-a_,b_] cd[c_]@cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@cd[-a_][expr1_]:>cd[c]@cd[b][expr1],
-h1[b_,-a_] cd[c_]@cd[a_][expr1_]:>cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@cd[-a_][expr1_]:>cd[c]@cd[b][expr1]};
+(*These rules no longer needed*)
+(*$Rulecdh[h1_]:={
+h1[-a_,b_] cd[a_][expr1_]\[RuleDelayed]cd[b][expr1],
+h1[a_,b_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],
+h1[b_,-a_] cd[a_][expr1_]\[RuleDelayed]cd[b][expr1],
+h1[b_,a_] cd[-a_][expr1_]\[RuleDelayed]cd[b][expr1],
+h1[-a_,b_] cd[c_]@cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[a_,b_] cd[c_]@cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],
+h1[b_,-a_] cd[c_]@cd[a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1],h1[b_,a_] cd[c_]@cd[-a_][expr1_]\[RuleDelayed]cd[c]@cd[b][expr1]};*)
 
+(* Functions used in the post processing of the SplitPerturbations*)
 $RulecdNSS[NSS1_]:={NSS1[-a_,b_] cd2[a_][expr1_]:>cd2[b][expr1],
 NSS1[a_,b_] cd2[-a_][expr1_]:>cd2[b][expr1],
 NSS1[b_,-a_] cd2[a_][expr1_]:>cd2[b][expr1],
@@ -944,7 +949,7 @@ NSS1[b_,a_] cd2[c_]@cd2[-a_][expr1_]:>cd2[c]@cd2[b][expr1]};
     AutomaticRules[n, MakeRule[{n[ind1] n[-ind1], normn}]];
     AutomaticRules[n, MakeRule[{n[-ind1] g[ind1, ind2], n[ind2]}]];
 
-    (* The acceleration of the background n should vanish as well*)
+    (* The acceleration of the background for homogenous spacetimes should vanish as well*)
     Acceleration[n][ind1_] = 0;
 
    
@@ -1050,12 +1055,16 @@ NSS/:cd2[ind3_]@NSS[ind1_,ind2_]:= 0;
 
 (*This is correct given that there is no extrinsic curvature. This is not index dependent in that case.*)
 (* TODO have a cleaner implementation *)
+(*Now I have forgotten the rational here 07/01/2020)*)
 NSS/:LieD[u[dummy_]][NSS[ind1_,ind2_]]=0;
 
 
 (* CP here we have a dirty switch to distinguish from the geodesic and the geodesic deviation cases.*)
-KNSS/:KNSS[ind1_,ind2_]:=\[Theta]NSS[]/(dim-2)*NSS[ind1,ind2]/;!$GeodesicEquation;
-KNSS/:KNSS[ind1_,ind2_]:=0/;$GeodesicEquation;
+KNSS/:KNSS[ind1_,ind2_]:=\[Theta]NSS[]/(dim-2)*NSS[ind1,ind2];
+
+(*OU I don't we need two different rules, this is likely to be a bug*)
+(*KNSS/:KNSS[ind1_,ind2_]:=\[Theta]NSS[]/(dim-2)*NSS[ind1,ind2]/;!$GeodesicEquation;*)
+(*KNSS/:KNSS[ind1_,ind2_]:=0/;$GeodesicEquation;*)
 (* TODO This is wrong!!!! PUT THE CORRECT EVOLUTION OF THE TRACE OF EXTRINSIC CURVATURE ! TODO TODO !*)
 (*KNSS/:CD[ind3_]@KNSS[ind1_,ind2_]:= 0;
 KNSS/:cd[ind3_]@KNSS[ind1_,ind2_]:= 0;
@@ -1076,9 +1085,6 @@ CurvedSpaceBool[SpaceTimeType],
 
 
 
-(* The extrinsic curvature of n should be spatial. This is enforced*)
-(* Obsolete as now this is part of the DefScreenSpaceMetricProperties function*)
-(*AutomaticRules[KNSS,BuildRule[{KNSS[ind1,ind2]u[-ind2],0}]];*)
 
 ];
 
@@ -1132,29 +1138,31 @@ ContractMetric[LieD[u[ind1]][g[dum,ind2]]cd2[-dum][cd2[-ind2][expr1]]
 ];
 
 LieD[u[ind1_]][cd2[ind2_][expr1_]]:=LieD[u[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&MyOrthogonalToVectorQ[{u,n}][expr1]&&Abs[u[ind1]u[-ind1]]===1;
-
+(*equation 47 draft*)
 LieD[u[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 With[{frees=FindFreeIndices[expr1]},ToCanonical[
-(cd2[ind2][LieD[u[ind1]][expr1]](* Here this should be something else which is by the way zero...+$ExtrinsicKSign *Plus@@(
+(cd2[ind2][LieD[u[ind1]][expr1]] (*OU: Since ExtrinsicK[h] vanisher on conformal background *)(*+$ExtrinsicKSign * Plus@@(
 (-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#\[Rule]-dum]
 +cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#\[Rule]-dum]
 -cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#\[Rule]-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&MyOrthogonalToVectorQ[{u,n}][expr1]&&Abs[u[ind1]u[-ind1]]===1;
 
-(* Obinna has showed that the Directional Lie derivative and the induced derivative should commute. But When indices are down.*)
-LieD[n[ind1_]][cd2[ind2_][expr1_]]:=LieD[n[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&MyOrthogonalToVectorQ[{u,n}][expr1]&&Abs[n[ind1]n[-ind1]]===1;
 
+(*Not sure about this now. I will need to recheck. Directional derivative and angular derivative do not commute but the Lie Derivative commutes with the angular derivative*)
+
+LieD[n[ind1_]][cd2[ind2_][expr1_]]:=LieD[n[ind1]][IndicesDown[cd2[ind2][expr1] ] ]/;Length[IndicesOf[Free,Up][cd2[ind2][expr1]]]=!=0&&MyOrthogonalToVectorQ[{u,n}][expr1]&&Abs[n[ind1]n[-ind1]]===1;
+(*Here this should be something else which is by the way zero...*)
 LieD[n[ind1_]][cd2[ind2_?DownIndexQ][expr1_]]:=Module[{dum},dum=DummyIn[Tangent[Manifold]];
 With[{frees=FindFreeIndices[expr1]},ToCanonical[
-(cd2[ind2][LieD[n[ind1]][expr1]](* Here this should be something else which is by the way zero...+$ExtrinsicKSign *Plus@@(
-(-cd[#][ExtrinsicK[h][ind2,dum]]ReplaceIndex[expr1,#\[Rule]-dum]
-+cd[dum][ExtrinsicK[h][#,ind2]]ReplaceIndex[expr1,#\[Rule]-dum]
--cd[ind2][ExtrinsicK[h][dum,#]]ReplaceIndex[expr1,#\[Rule]-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
+(cd2[ind2][LieD[n[ind1]][expr1]] +(*$ExtrinsicKSign *Plus@@(
+(-cd2[#][ExtrinsicK[NSS][ind2,dum]]ReplaceIndex[expr1,#\[Rule]-dum]
++cd2[dum][ExtrinsicK[NSS][#,ind2]]ReplaceIndex[expr1,#\[Rule]-dum]
+-cd2[ind2][ExtrinsicK[NSS][dum,#]]ReplaceIndex[expr1,#\[Rule]-dum])&/@frees)*)),UseMetricOnVBundle->None]]]
 /;Length[IndicesOf[Free,Up][expr1]]===0&&MyOrthogonalToVectorQ[{n,u}][expr1]&&Abs[n[ind1]n[-ind1]]===1;
 
 Protect[LieD];
 
-(* TODO Clean abive and keep only the stuff which is necessary *)
+(* TODO Clean above and keep only the stuff which is necessary *)
 
 ]]]
 
@@ -1432,10 +1440,10 @@ If[$ConformalTime,1,a[h][]]*Name[LI[p],LI[q+1],LI[r],indices]/;(Length[{indices}
 (* However, the third index is the directional derivative in the direction of n. Unless the option $RadialLieDerivative is set to True and in that case it is the Lie derivative *)
 (* So we define two rules with just a dependence on the Boolea*)
 (* One could even remove the assumptions that the indices are down here.*)
-n/:n[Dum_]cd1[-Dum_][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}])/;(Not@$RadialLieDerivative||(Length[{inds}]===0));
+(*n/:n[Dum_]cd1[-Dum_][Name[LI[p_?((IntegerQ[#]&&#\[GreaterEqual]0)&)],LI[q_?((IntegerQ[#]&&#\[GreaterEqual]0)&)],LI[r_?((IntegerQ[#]&&#\[GreaterEqual]0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}])/;(Not@$RadialLieDerivative||(Length[{inds}]===0));*)
 
 Unprotect[LieD];
-LieD/:LieD[n[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}])/;($RadialLieDerivative||(Length[{inds}]===0));
+LieD/:LieD[n[Dum_]][Name[LI[p_?((IntegerQ[#]&&#>=0)&)],LI[q_?((IntegerQ[#]&&#>=0)&)],LI[r_?((IntegerQ[#]&&#>=0)&)],indices___?DownIndexQ]]:=(Name[LI[p],LI[q],LI[r+1],indices](*+Corrections?No*))/;(Length[{indices}]===Length[{inds}])(*/;($RadialLieDerivative||(Length[{inds}]===0))*);
 Protect[LieD];
 
 (*(*For tensors of rank larger than or equal to 1,*)
@@ -2046,15 +2054,15 @@ Protect[SplitMetric];
 
 
 (* ::Input::Initialization:: *)
-RulesVelocitySpatial[NSS_?InducedMetricQ,uf_,duf_,NormVectorSquare_,gauge_?GaugeQ,order_?IntegerQ(*,TiltedBool_:False*)]:=Module[{q,ord},
+RulesVelocitySpatial[NSS_?InducedMetricQ,uf_,duf_,NormVectorSquare_,gauge_?GaugeQ,order_?IntegerQ,TiltedBool_:False]:=Module[{q,ord},
 With[{h=First@InducedFrom@NSS,n=Last@InducedFrom@NSS},
 With[{M=ManifoldOfCovD@CovDOfMetric@h,cd=CovDOfMetric@h,cd2=CovDOfMetric@NSS,u=Last@InducedFrom[h]},With[{ind1=DummyIn@Tangent@M,ind2=DummyIn@Tangent@M},
 Flatten@Join[
 Flatten@Join[
 If[gauge==="ScalarFieldComovingGauge",{\[CurlyPhi][LI[ord_?(#>=1&)],LI[q_],LI[r_]]:>0},{}],
 If[gauge==="IsoDensityGauge",{\[Rho][uf][LI[ord_?(#>=1&)],LI[q_],LI[r_]]:>0},{}],
-(*If[TiltedBool,{BuildRule[Evaluate[{uf[ind1],(Sqrt[Scalar[Vspat[NSS,uf][LI[0],LI[0],LI[0],ind2]Vspat[NSS,uf][LI[0],LI[0],LI[0],-ind2]]-NormVectorSquare])u[ind1]+Vspat[NSS,uf][LI[0],LI[0],LI[0],ind1]}]]},
-{BuildRule[Evaluate[{uf[ind1],u[ind1]}]]}],*)
+If[TiltedBool,{BuildRule[Evaluate[{uf[ind1],(Sqrt[Scalar[Vspat[NSS,uf][LI[0],LI[0],LI[0],ind2]Vspat[NSS,uf][LI[0],LI[0],LI[0],-ind2]]-NormVectorSquare])u[ind1]+Vspat[NSS,uf][LI[0],LI[0],LI[0],ind1]}]]},
+{BuildRule[Evaluate[{uf[ind1],u[ind1]}]]}],
 
 {BuildRule[Evaluate[{uf[ind1],u[ind1]}]]},
 
@@ -2067,7 +2075,7 @@ V0[NSS,uf][LI[1],LI[0],LI[0]]u[ind1]
 Table[
 BuildRule@Evaluate[{duf[LI[i],ind1],
 Evaluate[V0[NSS,uf][LI[i],LI[0],LI[0]]u[ind1]
-+cd[ind1][If[gauge==="FluidComovingGauge",-Bs[NSS][LI[i],LI[0],LI[0]] ,Vs[NSS,uf][LI[i],LI[0],LI[0]] ]]
++cd2[ind1][If[gauge==="FluidComovingGauge",-Bs[NSS][LI[i],LI[0],LI[0]] ,Vs[NSS,uf][LI[i],LI[0],LI[0]] ]]
 +n[ind1]If[gauge==="FluidComovingGauge",-Bs[NSS][LI[i],LI[0] ,LI[1]],Vs[NSS,uf][LI[i],LI[0],LI[1]] ]
 + (Vvt[NSS,uf][LI[i],LI[0],LI[0],ind1] +n[ind1]Vvp[NSS,uf][LI[i],LI[0],LI[0]]) ]}],{i,2,order}]
 ]
@@ -2430,7 +2438,7 @@ ToLightCone[expr_,dg_,uf_,duf_,NSS_?InducedFromInducedMetricQ,gauge_?GaugeQ,orde
 ToLightCone[expr_,dg_,ufduflist_List,NSS_?InducedFromInducedMetricQ,gauge_?GaugeQ,order_?IntegerQ]:=Module[{ruleslist},
 With[{h=First@InducedFrom@NSS},
 With[{g=First@InducedFrom@h},
-ruleslist=Flatten@Join[SplitMetric[g,dg,h,NSS,gauge],Map[SplitMatter[#[[1]],#[[2]],-1,NSS,gauge,order]&,ufduflist]  ];
+ruleslist=Flatten@Join[SplitMetric[g,dg,NSS,gauge],Map[SplitMatter[#[[1]],#[[2]],-1,NSS,gauge,order]&,ufduflist]  ];
 If[Not[DefTensorQ[Evaluate[ConformalMetricName[g,a[h]]]]]&&SpaceType[h]=!="Minkowski",
 If[$DefInfoQ,
 Print["** Warning: The conformally related metric ",ConformalMetricName[g,a[h]],"  was not previously defined **"];
